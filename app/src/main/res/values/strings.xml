@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">weibo</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!-- Login -->
+    <string name="login">登录</string>
+    <string name="tail">尾巴</string>
+    <string name="username">用户名</string>
+    <string name="passwd">密码</string>
+    <string name="toast_empty_username">请输入用户名</string>
+    <string name="toast_empty_password">请输入密码</string>
+
+
+
+
+    <string-array name="email_auto_complete_tips" translatable="false">
+        <item>\@sina.com</item>
+        <item>\@163.com</item>
+        <item>\@qq.com</item>
+        <item>\@gmail.com</item>
+        <item>\@hotmail.com</item>
+        <item>\@126.com</item>
+        <item>\@sohu.com</item>
+        <item>\@vip.sina.com</item>
+        <item>\@vip.qq.com</item>
+        <item>\@yeah.net</item>
+    </string-array>
+</resources>
