@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package network;
+package com.dudutech.weibo.network;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -30,6 +30,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
+import static com.dudutech.weibo.BuildConfig.DEBUG;
+
 
 
 
@@ -39,7 +41,7 @@ public class HttpUtility
 	
 	public static final String POST = "POST";
 	public static final String GET = "GET";
-    private static final boolean DEBUG = ;
+
 
     public static String doRequest(String url, WeiboParameters params, String method) throws Exception {
 		boolean isGet = false;

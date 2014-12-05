@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.ui.widget;
+package com.dudutech.weibo.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

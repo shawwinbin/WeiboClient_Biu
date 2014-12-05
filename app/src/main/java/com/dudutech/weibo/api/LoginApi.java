@@ -17,17 +17,13 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.ui.api;
+package com.dudutech.weibo.api;
 
 import android.util.Log;
 
 import org.json.JSONObject;
 
-import us.shandian.blacklight.api.BaseApi;
-import us.shandian.blacklight.api.Constants;
-import us.shandian.blacklight.support.http.WeiboParameters;
-
-import static us.shandian.blacklight.BuildConfig.DEBUG;
+i
 
 /* BlackMagic Login Api */
 

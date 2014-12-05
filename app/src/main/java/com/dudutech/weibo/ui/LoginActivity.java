@@ -26,21 +26,18 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.Utils.Utility;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
 /* BlackMagic Login Activity */
@@ -62,7 +59,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 	private String mAppId;
 	private String mAppSecret;
 
-//	private LoginApiCache mLogin;
+	private LoginApiCache mLogin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,68 +159,68 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 //		});
 //	}
 //
-//	private class LoginTask extends AsyncTask<String, Void, Void>
-//	{
-//		private ProgressDialog progDialog;
-//
-//		@Override
-//		protected void onPreExecute() {
-//			super.onPreExecute();
-//			progDialog = new ProgressDialog(LoginActivity.this);
-//			progDialog.setMessage(getResources().getString(R.string.plz_wait));
-//			progDialog.setCancelable(false);
-//			progDialog.show();
-//		}
-//
-//		@Override
-//		protected Void doInBackground(String[] params) {
-//			if (DEBUG) {
-//				Log.d(TAG, "doInBackground...");
-//			}
-//			mLogin.login(params[0], params[1], params[2], params[3]);
-//			return null;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(Void result) {
-//			super.onPostExecute(result);
-//			progDialog.dismiss();
-//
-//			if (mLogin.getAccessToken() != null) {
-//				if (DEBUG) {
-//					Log.d(TAG, "Access Token:" + mLogin.getAccessToken());
-//					Log.d(TAG, "Expires in:" + mLogin.getExpireDate());
-//				}
-//				mLogin.cache();
-//				BaseApi.setAccessToken(mLogin.getAccessToken());
-//
-//				// Expire date
-//				String msg = String.format(getResources().getString(R.string.expires_in), Utility.expireTimeInDays(mLogin.getExpireDate()));
-//				new AlertDialog.Builder(LoginActivity.this)
-//								.setMessage(msg)
-//								.setCancelable(false)
-//								.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//									@Override
-//									public void onClick(DialogInterface dialog, int id) {
-//										dialog.dismiss();
-//										Intent i = new Intent();
-//										i.setAction(Intent.ACTION_MAIN);
-//										i.setClass(LoginActivity.this, MainActivity.class);
-//										startActivity(i);
-//										finish();
-//									}
-//								})
-//								.create()
-//								.show();
-//			} else {
-//				// Wrong username or password
-//				new AlertDialog.Builder(LoginActivity.this)
-//								.setMessage(R.string.login_fail)
-//								.setCancelable(true)
-//								.create()
-//								.show();
-//			}
-//		}
-//
-//	}
+	private class LoginTask extends AsyncTask<String, Void, Void>
+	{
+		private ProgressDialog progDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progDialog = new ProgressDialog(LoginActivity.this);
+			progDialog.setMessage(getResources().getString(R.string.plz_wait));
+			progDialog.setCancelable(false);
+			progDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(String[] params) {
+			if (DEBUG) {
+				Log.d(TAG, "doInBackground...");
+			}
+			mLogin.login(params[0], params[1], params[2], params[3]);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			progDialog.dismiss();
+
+			if (mLogin.getAccessToken() != null) {
+				if (DEBUG) {
+					Log.d(TAG, "Access Token:" + mLogin.getAccessToken());
+					Log.d(TAG, "Expires in:" + mLogin.getExpireDate());
+				}
+				mLogin.cache();
+				BaseApi.setAccessToken(mLogin.getAccessToken());
+
+				// Expire date
+				String msg = String.format(getResources().getString(R.string.expires_in), Utility.expireTimeInDays(mLogin.getExpireDate()));
+				new AlertDialog.Builder(LoginActivity.this)
+								.setMessage(msg)
+								.setCancelable(false)
+								.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int id) {
+										dialog.dismiss();
+										Intent i = new Intent();
+										i.setAction(Intent.ACTION_MAIN);
+										i.setClass(LoginActivity.this, MainActivity.class);
+										startActivity(i);
+										finish();
+									}
+								})
+								.create()
+								.show();
+			} else {
+				// Wrong username or password
+				new AlertDialog.Builder(LoginActivity.this)
+								.setMessage(R.string.login_fail)
+								.setCancelable(true)
+								.create()
+								.show();
+			}
+		}
+
+	}
 }

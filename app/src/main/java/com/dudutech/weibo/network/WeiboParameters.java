@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package network;
+package com.dudutech.weibo.network;
 
 import android.graphics.Bitmap;
 

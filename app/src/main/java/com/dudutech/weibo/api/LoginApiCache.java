@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.ui.api;
+package com.dudutech.weibo.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;

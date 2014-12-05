@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"/>
 
-        <com.dudutech.weibo.ui.widget.EmailAutoCompleteTextView
+        <com.dudutech.weibo.widget.EmailAutoCompleteTextView
             android:layout_height="40dp"
             android:ems="10"
             android:layout_width="wrap_content"
