@@ -21,9 +21,11 @@ package com.dudutech.weibo.api;
 
 import android.util.Log;
 
+import com.dudutech.weibo.network.WeiboParameters;
+import static com.dudutech.weibo.BuildConfig.DEBUG;
 import org.json.JSONObject;
 
-i
+
 
 /* BlackMagic Login Api */
 

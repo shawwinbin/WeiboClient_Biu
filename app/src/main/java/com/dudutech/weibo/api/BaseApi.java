@@ -21,13 +21,14 @@ package com.dudutech.weibo.api;
 
 import android.util.Log;
 
+import com.dudutech.weibo.network.HttpUtility;
+import com.dudutech.weibo.network.WeiboParameters;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import static com.dudutech.weibo.BuildConfig.DEBUG;
 
-import us.shandian.blacklight.support.http.HttpUtility;
-import us.shandian.blacklight.support.http.WeiboParameters;
 
-import static us.shandian.blacklight.BuildConfig.DEBUG;
 
 public abstract class BaseApi
 {

@@ -102,9 +102,9 @@ public class Utility
 //		}
 //	}
 //
-//	public static int expireTimeInDays(long time) {
-//		return (int) TimeUnit.MILLISECONDS.toDays(time - System.currentTimeMillis());
-//	}
+	public static int expireTimeInDays(long time) {
+		return (int) TimeUnit.MILLISECONDS.toDays(time - System.currentTimeMillis());
+	}
 //
 //	public static boolean isTokenExpired(long time) {
 //		return time <= System.currentTimeMillis();

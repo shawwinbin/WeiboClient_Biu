@@ -26,14 +26,21 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
+import com.dudutech.weibo.api.BaseApi;
+import com.dudutech.weibo.api.LoginApiCache;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,15 +48,15 @@ import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
 /* BlackMagic Login Activity */
-public class LoginActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class LoginActivity extends BaseActivity implements AdapterView.OnItemSelectedListener , TextView.OnEditorActionListener {
 	private static final String TAG = LoginActivity.class.getSimpleName();
 
     @InjectView(R.id.tail)
-	private Spinner mTail;
+	 Spinner mTail;
     @InjectView(R.id.username)
-	private TextView mUsername;
+	 TextView mUsername;
     @InjectView(R.id.passwd)
-	private TextView mPasswd;
+	 TextView mPasswd;
 	
 	private MenuItem mMenuItem;
 	
@@ -72,16 +79,16 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 //		mUsername = Utility.findViewById(this, R.id.username);
 //		mPasswd = Utility.findViewById(this, R.id.passwd);
 		mTail.setOnItemSelectedListener(this);
-//		mUsername.setOnEditorActionListener(this);
+		mUsername.setOnEditorActionListener(this);
 		
 		// Create login instance
 		mLogin = new LoginApiCache(this);
 		
 		// Get views
-//		mTailNames = getResources().getStringArray(R.array.bm_tails);
-//		mKeys = getResources().getStringArray(R.array.bm_keys);
+		mTailNames = getResources().getStringArray(R.array.bm_tails);
+		mKeys = getResources().getStringArray(R.array.bm_keys);
 //
-//		mTail.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item_text, mTailNames));
+		mTail.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item_text, mTailNames));
 		
 		onItemSelected(null, null, 0, 0);
 	}
@@ -105,60 +112,56 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 
     }
 
-//	@Override
-//	public void onNothingSelected(AdapterView<?> p1) {
-//
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item)
-//	{
-//		if (item == mMenuItem) {
-//			login();
-//			return true;
-//		} else if (item.getItemId() == android.R.id.home) {
-//			setResult(RESULT_CANCELED);
-//			finish();
-//			return true;
-//		} else {
-//			return super.onOptionsItemSelected(item);
-//		}
-//	}
-//
-//	@Override
-//	public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//		if (actionId == EditorInfo.IME_ACTION_DONE) {
-//			login();
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	private void login() {
-//		if (mUsername.getText().length() < 1) {
-//			Toast.makeText(
-//					getApplicationContext(),
-//					getString(R.string.toast_empty_username),
-//					Toast.LENGTH_SHORT
-//			).show();
-//			return;
-//		}
-//		if (mPasswd.getText().length() < 1) {
-//			Toast.makeText(
-//					getApplicationContext(),
-//					getString(R.string.toast_empty_password),
-//					Toast.LENGTH_SHORT
-//			).show();
-//			return;
-//		}
-//		new LoginTask().execute(new String[]{
-//				mAppId,
-//				mAppSecret,
-//				mUsername.getText().toString(),
-//				mPasswd.getText().toString()
-//		});
-//	}
-//
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		if (item == mMenuItem) {
+			login();
+			return true;
+		} else if (item.getItemId() == android.R.id.home) {
+			setResult(RESULT_CANCELED);
+			finish();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+		if (actionId == EditorInfo.IME_ACTION_DONE) {
+			login();
+			return true;
+		}
+		return false;
+	}
+
+	private void login() {
+		if (mUsername.getText().length() < 1) {
+			Toast.makeText(
+                    getApplicationContext(),
+                    getString(R.string.toast_empty_username),
+                    Toast.LENGTH_SHORT
+            ).show();
+			return;
+		}
+		if (mPasswd.getText().length() < 1) {
+			Toast.makeText(
+					getApplicationContext(),
+					getString(R.string.toast_empty_password),
+					Toast.LENGTH_SHORT
+			).show();
+			return;
+		}
+		new LoginTask().execute(new String[]{
+				mAppId,
+				mAppSecret,
+				mUsername.getText().toString(),
+				mPasswd.getText().toString()
+		});
+	}
+
 	private class LoginTask extends AsyncTask<String, Void, Void>
 	{
 		private ProgressDialog progDialog;

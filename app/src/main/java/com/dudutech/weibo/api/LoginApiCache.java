@@ -23,10 +23,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import us.shandian.blacklight.api.BaseApi;
-import us.shandian.blacklight.api.user.AccountApi;
 
-import static us.shandian.blacklight.BuildConfig.DEBUG;
+
+import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 public class LoginApiCache
 {
