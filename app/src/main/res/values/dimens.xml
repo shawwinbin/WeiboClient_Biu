@@ -3,4 +3,35 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
+
+
+
+    <!-- padding -->
+    <dimen name="MiniPadding">2dp</dimen>
+    <dimen name="HalfPadding">4dp</dimen>
+    <dimen name="SmallPadding">8dp</dimen>
+    <dimen name="MiddlePadding">10dp</dimen>
+    <dimen name="NormalPadding">12dp</dimen>
+    <dimen name="LargePadding">16dp</dimen>
+    <dimen name="profile_addr_pading">2dp</dimen>
+
+
+    <!-- avatar size -->
+    <dimen name="avatar_lst_item_small">32dp</dimen>
+    <dimen name="avatar_lst_item">40dp</dimen>
+    <dimen name="avatar_lst_item_large">58dp</dimen>
+    <dimen name="nearby_avatar_lst_item_large">62dp</dimen>
+
+
+    <!-- margin -->
+    <dimen name="MiniMargin">3dp</dimen>
+    <dimen name="MiniMiddleNargin">5dp</dimen>
+    <dimen name="SmallMargin">8dp</dimen>
+    <dimen name="MiddleMargin">10dp</dimen>
+    <dimen name="NormalMargin">12dp</dimen>
+    <dimen name="LargeMargin">16dp</dimen>
+    <dimen name="normalmargin_regist">20dp</dimen>
+    <dimen name="group_name_txt_margin">16dp</dimen>
+    <dimen name="margin_chat_name">20dp</dimen>
+
 </resources>

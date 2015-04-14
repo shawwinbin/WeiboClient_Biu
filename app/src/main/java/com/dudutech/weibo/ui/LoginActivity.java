@@ -40,7 +40,7 @@ import android.widget.Toast;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.BaseApi;
-import com.dudutech.weibo.api.LoginApiCache;
+import com.dudutech.weibo.cache.LoginApiCache;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

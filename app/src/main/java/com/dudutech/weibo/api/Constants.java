@@ -33,7 +33,7 @@ public class Constants
 	public static final String USER_SHOW = SINA_BASE_URL + "users/show.json";
 	
 	// Statuses
-	public static final String HOME_TIMELINE = SINA_BASE_URL + "statuses/home_timeline.json";
+	public static final String HOME_TIMELINE = SINA_BASE_URL + "statuses/fragment_timeline.json";
 	public static final String USER_TIMELINE = SINA_BASE_URL + "statuses/user_timeline.json";
 	public static final String BILATERAL_TIMELINE = SINA_BASE_URL + "statuses/bilateral_timeline.json";
 	public static final String MENTIONS = SINA_BASE_URL + "statuses/mentions.json";

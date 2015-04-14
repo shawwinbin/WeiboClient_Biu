@@ -22,6 +22,8 @@ import com.dudutech.weibo.R;
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+
+
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -30,15 +32,18 @@ public class MainActivity extends ActionBarActivity implements
 
 	private ActionBarHelper mActionBar;
 
+
+    public static interface Refresher {
+        void doRefresh();
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		mNavigationDrawerFragment = new NavigationDrawerFragment();
 		mActionBar = new ActionBarHelper();
 		mActionBar.init();
-
 		getFragmentManager()
 				.beginTransaction()
 				.replace(R.id.navigation_drawer, mNavigationDrawerFragment)

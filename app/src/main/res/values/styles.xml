@@ -9,4 +9,49 @@
     <style name="AppTheme" parent="AppBaseTheme">
     </style>
 
+
+
+
+    <style name="moment_btn_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:background">@drawable/btn_moment_operater_selector</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+
+    <style name="text_moment_time">
+        <item name="android:textColor">@color/txt_remark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="moment_text_content">
+        <item name="android:textColor">@color/txt_title</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_moment_location">
+        <item name="android:textColor">@color/base_deep</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <style name="text_btn">
+        <item name="android:textColor">@color/txt_remark</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="text_moment_btn">
+        <item name="android:textColor">#9fa1a3</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+
+    <style name="text_user_name">
+        <item name="android:textColor">@color/base_deep</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

@@ -17,13 +17,16 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.api;
+package com.dudutech.weibo.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 
+import com.dudutech.weibo.api.AccountApi;
+import com.dudutech.weibo.api.BaseApi;
+import com.dudutech.weibo.api.LoginApi;
 
 import static com.dudutech.weibo.BuildConfig.DEBUG;
 

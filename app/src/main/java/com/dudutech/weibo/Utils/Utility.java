@@ -424,16 +424,16 @@ public class Utility
 //		return context.getResources().getDisplayMetrics().density * dp + 0.5f;
 //	}
 //
-//	public static int getFontHeight(Context context, float fontSize) {
-//		// Convert Dp To Px
-//		float px = context.getResources().getDisplayMetrics().density * fontSize + 0.5f;
-//
-//		// Use Paint to get font height
-//		Paint p = new Paint();
-//		p.setTextSize(px);
-//		FontMetrics fm = p.getFontMetrics();
-//		return (int) Math.ceil(fm.descent - fm.ascent);
-//	}
+	public static int getFontHeight(Context context, float fontSize) {
+		// Convert Dp To Px
+		float px = context.getResources().getDisplayMetrics().density * fontSize + 0.5f;
+
+		// Use Paint to get font height
+		Paint p = new Paint();
+		p.setTextSize(px);
+		FontMetrics fm = p.getFontMetrics();
+		return (int) Math.ceil(fm.descent - fm.ascent);
+	}
 //
 //	public static Bitmap parseLongPost(Context context, String text, Bitmap pic) {
 //		if (DEBUG) {
