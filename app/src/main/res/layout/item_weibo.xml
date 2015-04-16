@@ -70,7 +70,7 @@
 
 
             <com.dudutech.weibo.widget.FlowLayout
-                android:id="@+id/flow_images"
+                android:id="@+id/fl_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/SmallMargin"
@@ -111,7 +111,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_device"
+                android:id="@+id/tv_from"
                 style="@style/text_moment_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

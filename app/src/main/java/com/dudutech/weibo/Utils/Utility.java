@@ -818,14 +818,14 @@ public class Utility
 //		}
 //	}
 //
-//	public static <T> T findViewById(View v, int id) {
-//		return (T) v.findViewById(id);
-//	}
-//
-//	public static <T> T findViewById(Activity activity, int id) {
-//		return (T) activity.findViewById(id);
-//	}
-//
+	public static <T> T findViewById(View v, int id) {
+		return (T) v.findViewById(id);
+	}
+
+	public static <T> T findViewById(Activity activity, int id) {
+		return (T) activity.findViewById(id);
+	}
+
 	public static void bindOnClick(final Object obj, Object... viewsAndMethod) {
 		final Class<?> clazz = obj.getClass();
 		String method = viewsAndMethod[viewsAndMethod.length - 1].toString();
