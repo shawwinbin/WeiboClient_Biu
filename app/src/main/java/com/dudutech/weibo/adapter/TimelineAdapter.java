@@ -26,7 +26,9 @@ public class TimelineAdapter  extends Adapter<TimelineAdapter.ViewHolder> {
 
     private List<MessageModel> mList;
 
-    public TimelineAdapter(){
+    public TimelineAdapter(Context context,List<MessageModel> list){
+        this.mContext=context;
+        this.mList=list;
 
     }
 
@@ -44,7 +46,7 @@ public class TimelineAdapter  extends Adapter<TimelineAdapter.ViewHolder> {
 
         MessageModel msg=mList.get(position);
 
-        holder.tv_time.setText(msg.);
+//        holder.tv_time.setText(msg.);
 
 
 

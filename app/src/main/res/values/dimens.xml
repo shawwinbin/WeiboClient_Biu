@@ -33,5 +33,7 @@
     <dimen name="normalmargin_regist">20dp</dimen>
     <dimen name="group_name_txt_margin">16dp</dimen>
     <dimen name="margin_chat_name">20dp</dimen>
+    <dimen name="moment_photo_margin">3dp</dimen>
+
 
 </resources>

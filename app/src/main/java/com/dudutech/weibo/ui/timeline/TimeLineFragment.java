@@ -25,6 +25,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -35,8 +36,11 @@ import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Settings;
 import com.dudutech.weibo.adapter.TimelineAdapter;
 import com.dudutech.weibo.cache.HomeTimeLineApiCache;
+import com.dudutech.weibo.model.MessageModel;
 import com.dudutech.weibo.ui.MainActivity;
 import com.dudutech.weibo.ui.ToolbarActivity;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,7 +48,7 @@ import butterknife.InjectView;
 import static com.dudutech.weibo.ui.MainActivity.Refresher;
 
 
-public abstract class TimeLineFragment extends Fragment implements
+public  class TimeLineFragment extends Fragment implements
 		SwipeRefreshLayout.OnRefreshListener, Refresher {
 	
 	private static final String TAG = TimeLineFragment.class.getSimpleName();
@@ -58,8 +62,8 @@ public abstract class TimeLineFragment extends Fragment implements
 
 	private Settings mSettings;
 	
-	protected ActionBar mActionBar = null;
-	protected Toolbar mToolbar = null;
+//	protected ActionBar mActionBar = null;
+//	protected Toolbar mToolbar = null;
 	private int mActionBarHeight = 0;
 	private int mTranslationY = 0;
 	private int mLastY = 0;
@@ -80,8 +84,8 @@ public abstract class TimeLineFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		mActionBar = ((ToolbarActivity) getActivity()).getSupportActionBar();
-		mToolbar = ((ToolbarActivity) getActivity()).getToolbar();
+//		mActionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+//		mToolbar = ((ActionBarActivity) getActivity()).getToolbar();
 		initTitle();
 
 
@@ -112,8 +116,8 @@ public abstract class TimeLineFragment extends Fragment implements
 		}
 		
 		// Adapter
-//		mAdapter = new TimelineAdapter(getActivity(), mList, mCache.mMessages,
-//				   mBindOrig, mShowCommentStatus);
+		mAdapter = new TimelineAdapter(getActivity(),(List<MessageModel>) mCache.mMessages.getList()
+				  );
 
 		// Content Margin
 		if (getActivity() instanceof MainActivity && mAllowHidingActionBar) {
@@ -121,7 +125,7 @@ public abstract class TimeLineFragment extends Fragment implements
 //			RecyclerView.LayoutParams p = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,
 //					Utility.getDecorPaddingTop(getActivity()));
 //			header.setLayoutParams(p);
-			mAdapter.setHeaderView(header);
+//			mAdapter.setHeaderView(header);
 //			mSwipeRefresh.setProgressViewOffset(false, 0, (int) ((p.height + Utility.dp2px(getActivity(), 20)) * 1.2));
 		}
 
@@ -226,7 +230,7 @@ public abstract class TimeLineFragment extends Fragment implements
 	}
 	
 	protected void updateTranslation() {
-		mToolbar.setTranslationY(mTranslationY);
+//		mToolbar.setTranslationY(mTranslationY);
 //		mShadow.setTranslationY(mActionBarHeight + mTranslationY);
 		mSwipeRefresh.setProgressViewOffset(false, 0, (int) ((mActionBarHeight + mTranslationY) * 1.2));
 		mSwipeRefresh.invalidate();
@@ -237,7 +241,7 @@ public abstract class TimeLineFragment extends Fragment implements
 	}
 
 	protected void initTitle() {
-		mActionBar.setTitle(R.string.timeline);
+//		mActionBar.setTitle(R.string.timeline);
 	}
 
 	protected void bindSwipeToRefresh(ViewGroup v) {

@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,8 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 	 TextView mUsername;
     @InjectView(R.id.passwd)
 	 TextView mPasswd;
+	@InjectView(R.id.btn_login)
+	Button btn_login;
 	
 	private MenuItem mMenuItem;
 	
@@ -91,6 +94,14 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 		mTail.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item_text, mTailNames));
 		
 		onItemSelected(null, null, 0, 0);
+
+		btn_login.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				login();
+
+			}
+		});
 	}
 
 	@Override

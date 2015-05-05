@@ -36,5 +36,9 @@ public class Constants
 	
 	// SQL
 	public static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS ";
-	
+	private static final String APP_ID = "211160679";
+	private static final String APP_KEY_HASH = "1e6e33db08f9192306c4afa0a61ad56c";
+	private static final String REDIRECT_URI = "http://oauth.weico.cc";
+	private static final String PACKAGE_NAME = "com.eico.weico";
+	private static final String SCOPE = "email,direct_messages_read,direct_messages_write,friendships_groups_read,friendships_groups_write,statuses_to_me_read,follow_app_official_microblog,invitation_write";
 }

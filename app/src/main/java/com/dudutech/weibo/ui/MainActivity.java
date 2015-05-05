@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.ui.timeline.TimeLineFragment;
 
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -27,6 +28,8 @@ public class MainActivity extends ActionBarActivity implements
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
+
+	private TimeLineFragment mTimelineFragment;
 
 	private CharSequence mTitle;
 
@@ -47,6 +50,13 @@ public class MainActivity extends ActionBarActivity implements
 		getFragmentManager()
 				.beginTransaction()
 				.replace(R.id.navigation_drawer, mNavigationDrawerFragment)
+				.commit();
+
+		mTimelineFragment=new TimeLineFragment() ;
+
+		getFragmentManager()
+				.beginTransaction()
+				.replace(R.id.container, mTimelineFragment)
 				.commit();
 
 		setUpDrawer();
