@@ -191,7 +191,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 			if (DEBUG) {
 				Log.d(TAG, "doInBackground...");
 			}
-			mLogin.login(params[0], params[1], params[2], params[3]);
+//			mLogin.login(params[0], params[1], params[2], params[3]);
 			return null;
 		}
 

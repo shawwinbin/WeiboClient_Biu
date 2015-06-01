@@ -24,7 +24,7 @@
 
         </activity>
         <activity
-            android:name="com.dudutech.weibo.ui.LoginActivity"
+            android:name="com.dudutech.weibo.ui.WebLoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateHidden" >
             <intent-filter>
