@@ -135,7 +135,7 @@
                         android:layout_centerVertical="true"
                         >
                         <ImageView
-                            android:id="@+id/iv_comment"
+                            android:id="@+id/iv_comment_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -152,12 +152,6 @@
                             android:layout_marginLeft="5dp"
                             android:singleLine="true"
                             android:layout_gravity="center_vertical"
-                            
-                          
-                           
-                            
-                           
-                            
                       
                              />
                     </LinearLayout>
@@ -187,7 +181,7 @@
                              />
 
                         <TextView
-                            android:id="@+id/tv_like"
+                            android:id="@+id/tv_like_count"
                             style="@style/text_moment_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -201,7 +195,7 @@
 
 
                     <LinearLayout
-                         android:id="@+id/ll_share"
+                         android:id="@+id/ll_repost"
                          style="@style/moment_btn_layout"
                         android:layout_centerVertical="true">
 
@@ -213,7 +207,7 @@
                             android:src="@drawable/ic_moment_repost_full" />
 
                         <TextView
-                            android:id="@+id/tv_share_count"
+                            android:id="@+id/tv_repost_count"
                             style="@style/text_moment_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

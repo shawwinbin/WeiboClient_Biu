@@ -100,10 +100,10 @@ public  class TimeLineFragment extends Fragment implements
 		mCache = bindApiCache();
 		mCache.loadFromCache();
 
-		mList.setDrawingCacheEnabled(true);
-		mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-		mList.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE
-				| ViewGroup.PERSISTENT_SCROLLING_CACHE);
+//		mList.setDrawingCacheEnabled(true);
+//		mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+//		mList.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE
+//				| ViewGroup.PERSISTENT_SCROLLING_CACHE);
 				
 		mManager = new LinearLayoutManager(getActivity());
 		mList.setLayoutManager(mManager);
@@ -190,6 +190,8 @@ public  class TimeLineFragment extends Fragment implements
 //			}
 //		});
 
+
+
 		return v;
 	}
 
@@ -256,8 +258,8 @@ public  class TimeLineFragment extends Fragment implements
 				ViewGroup.LayoutParams.MATCH_PARENT);
 
 		mSwipeRefresh.setOnRefreshListener(this);
-//		mSwipeRefresh.setColorScheme(R.color.ptr_green, R.color.ptr_orange,
-//				R.color.ptr_red, R.color.ptr_blue);
+		mSwipeRefresh.setColorSchemeColors(R.color.ptr_green, R.color.ptr_orange,
+				R.color.ptr_red, R.color.ptr_blue);
 	}
 
 	public void hideFAB() {
@@ -312,7 +314,7 @@ public  class TimeLineFragment extends Fragment implements
 				mList.smoothScrollToPosition(0);
 			}
 			
-//			mAdapter.notifyDataSetChanged;
+			mAdapter.notifyDataSetChanged();
 			mRefreshing = false;
 			if (mSwipeRefresh != null) {
 				mSwipeRefresh.setRefreshing(false);

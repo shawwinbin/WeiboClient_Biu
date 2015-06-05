@@ -65,6 +65,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -106,9 +107,9 @@ public class Utility
 		return (int) TimeUnit.MILLISECONDS.toDays(time - System.currentTimeMillis());
 	}
 //
-//	public static boolean isTokenExpired(long time) {
-//		return time <= System.currentTimeMillis();
-//	}
+	public static boolean isTokenExpired(long time) {
+		return time <= System.currentTimeMillis();
+	}
 //
 //	public static boolean isCacheAvailable(long createTime, int availableDays) {
 //		return System.currentTimeMillis() <= createTime + TimeUnit.DAYS.toMillis(availableDays);
@@ -1007,4 +1008,26 @@ public class Utility
 		return mediaFile;
 	}
 
+
+	public static String getCountString(int count) {
+		String result = "";
+
+		if (count < 0) {
+			return "0";
+		}
+
+		if (count < 10000) {
+
+			result = count + "";
+
+		} else if (count < 1000000) {
+			result = (count / 1000) + "k";
+
+		}
+		else {
+			result = (count / 1000000) + "M";
+		}
+
+		return result;
+	}
 }

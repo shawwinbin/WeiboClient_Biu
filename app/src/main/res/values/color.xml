@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- general color -->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
@@ -306,7 +305,11 @@
     <!-- browser more function bg -->
     <color name="browser_more_function_bg">#e1e1e1</color>
     <color name="browser_more_bg">#a0000000</color>
-    
-      
+
+    <!-- Pull To Refresh -->
+    <color name="ptr_green">#44aa00</color>
+    <color name="ptr_red">#aa5500</color>
+    <color name="ptr_orange">#ea7800</color>
+    <color name="ptr_blue">#0045aa</color>
 
 </resources>

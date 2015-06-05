@@ -52,12 +52,7 @@ public class MainActivity extends ActionBarActivity implements
 				.replace(R.id.navigation_drawer, mNavigationDrawerFragment)
 				.commit();
 
-		mTimelineFragment=new TimeLineFragment() ;
 
-		getFragmentManager()
-				.beginTransaction()
-				.replace(R.id.container, mTimelineFragment)
-				.commit();
 
 		setUpDrawer();
 	}
@@ -103,11 +98,23 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+
+		if(position==0){
+			mTimelineFragment=new TimeLineFragment() ;
+
+			getFragmentManager()
+					.beginTransaction()
+					.replace(R.id.container, mTimelineFragment)
+					.commit();
+		}
+		else{
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.container,
+							PlaceholderFragment.newInstance(position + 1)).commit();
+		}
+
 		try {
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
 		} catch (NullPointerException e) {
