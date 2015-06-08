@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/material_deep_teal_200</item>
-        <item name="colorPrimaryDark">@color/material_deep_teal_500</item>
+        <item name="colorPrimary">@color/base_actionbar</item>
+        <item name="colorPrimaryDark">@color/base_status_bar</item>
         <item name="colorAccent">@color/material_blue_grey_800</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="CardBackground">@color/white</item>
+        <item name="CardForeground">@color/gray</item>
     </style>
 </resources>

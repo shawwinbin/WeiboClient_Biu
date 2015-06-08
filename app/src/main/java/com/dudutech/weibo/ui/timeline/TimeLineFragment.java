@@ -23,6 +23,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +33,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Settings;
 import com.dudutech.weibo.adapter.TimelineAdapter;
@@ -39,6 +42,7 @@ import com.dudutech.weibo.cache.HomeTimeLineApiCache;
 import com.dudutech.weibo.model.MessageModel;
 import com.dudutech.weibo.ui.MainActivity;
 import com.dudutech.weibo.ui.ToolbarActivity;
+import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 
 import java.util.List;
 
@@ -54,7 +58,7 @@ public  class TimeLineFragment extends Fragment implements
 	private static final String TAG = TimeLineFragment.class.getSimpleName();
 
     @InjectView(R.id.home_timeline)
-	protected RecyclerView mList;
+	protected UltimateRecyclerView mList;
 //	protected View mShadow;
 	private TimelineAdapter mAdapter;
 	private LinearLayoutManager mManager;
@@ -109,7 +113,7 @@ public  class TimeLineFragment extends Fragment implements
 		mList.setLayoutManager(mManager);
 
 		// Swipe To Refresh
-		bindSwipeToRefresh((ViewGroup) v);
+//		bindSwipeToRefresh((ViewGroup) v);
 
 		if (mCache.mMessages.getSize() == 0) {
 			new Refresher().execute(true);
@@ -120,16 +124,33 @@ public  class TimeLineFragment extends Fragment implements
 				  );
 
 		// Content Margin
-		if (getActivity() instanceof MainActivity && mAllowHidingActionBar) {
-			View header = new View(getActivity());
-//			RecyclerView.LayoutParams p = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,
-//					Utility.getDecorPaddingTop(getActivity()));
-//			header.setLayoutParams(p);
-//			mAdapter.setHeaderView(header);
-//			mSwipeRefresh.setProgressViewOffset(false, 0, (int) ((p.height + Utility.dp2px(getActivity(), 20)) * 1.2));
-		}
-
+//		if (getActivity() instanceof MainActivity && mAllowHidingActionBar) {
+//			View header = new View(getActivity());
+////			RecyclerView.LayoutParams p = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,
+////					Utility.getDecorPaddingTop(getActivity()));
+////			header.setLayoutParams(p);
+////			mAdapter.setHeaderView(header);
+////			mSwipeRefresh.setProgressViewOffset(false, 0, (int) ((p.height + Utility.dp2px(getActivity(), 20)) * 1.2));
+//		}
 		mList.setAdapter(mAdapter);
+		mList.enableLoadmore();
+		mAdapter.setCustomLoadMoreView(LayoutInflater.from(getActivity())
+				.inflate(R.layout.custom_bottom_progressbar, null));
+		mList.setDefaultOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				new TimeLineFragment.Refresher().execute(true);
+
+			}
+		});
+		mList.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
+			@Override
+			public void loadMore(int itemsCount, final int maxLastVisiblePosition) {
+				new TimeLineFragment.Refresher().execute(false);
+			}
+		});
+
+
 
 		// Listener
 //		if (getActivity() instanceof MainActivity) {
@@ -192,6 +213,7 @@ public  class TimeLineFragment extends Fragment implements
 
 
 
+
 		return v;
 	}
 
@@ -201,7 +223,7 @@ public  class TimeLineFragment extends Fragment implements
 
 		if (!hidden) {
 			initTitle();
-			showFAB();
+//			showFAB();
 //			if (this instanceof HomeTimeLineFragment) {
 //				((MainActivity) getActivity()).setShowSpinner(true);
 //			} else {
@@ -209,13 +231,13 @@ public  class TimeLineFragment extends Fragment implements
 //			}
 //			updateTranslation();
 		} else {
-			hideFAB();
+//			hideFAB();
 		}
 	}
 
 	@Override
 	public void doRefresh() {
-		mList.smoothScrollToPosition(0);
+		mList.mRecyclerView.smoothScrollToPosition(0);
 		mList.post(new Runnable() {
 			@Override
 			public void run() {
@@ -246,33 +268,7 @@ public  class TimeLineFragment extends Fragment implements
 //		mActionBar.setTitle(R.string.timeline);
 	}
 
-	protected void bindSwipeToRefresh(ViewGroup v) {
-		mSwipeRefresh = new SwipeRefreshLayout(getActivity());
 
-		// Move child to SwipeRefreshLayout, and add SwipeRefreshLayout to root
-		// view
-		v.removeViewInLayout(mList);
-		v.addView(mSwipeRefresh, ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT);
-		mSwipeRefresh.addView(mList, ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT);
-
-		mSwipeRefresh.setOnRefreshListener(this);
-		mSwipeRefresh.setColorSchemeColors(R.color.ptr_green, R.color.ptr_orange,
-				R.color.ptr_red, R.color.ptr_blue);
-	}
-
-	public void hideFAB() {
-		if (getActivity() instanceof MainActivity) {
-//			((MainActivity) getActivity()).hideFAB();
-		}
-	}
-
-	public void showFAB() {
-		if (getActivity() instanceof MainActivity) {
-//			((MainActivity) getActivity()).showFAB();
-		}
-	}
 
 	protected void newPost() {
 		Intent i = new Intent();
@@ -294,10 +290,10 @@ public  class TimeLineFragment extends Fragment implements
 //			Utility.clearOngoingUnreadCount(getActivity());
 			mLastCount = mCache.mMessages.getSize();
 			mRefreshing = true;
-			if (mSwipeRefresh != null) {
-				mSwipeRefresh.setRefreshing(true);
-				mSwipeRefresh.invalidate();
-			}
+//			if (mSwipeRefresh != null) {
+//				mSwipeRefresh.setRefreshing(true);
+//				mSwipeRefresh.invalidate();
+//			}
 		}
 
 		@Override
@@ -311,7 +307,7 @@ public  class TimeLineFragment extends Fragment implements
 			super.onPostExecute(result);
 			
 			if (result) {
-				mList.smoothScrollToPosition(0);
+				mList.mRecyclerView.smoothScrollToPosition(0);
 			}
 			
 			mAdapter.notifyDataSetChanged();

@@ -666,28 +666,28 @@ public class SelectableRoundedImageView extends ImageView {
         }
     }
     
-	@Override
-	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		try {
-			super.onDraw(canvas);
-
-			if (!isDrawTag) {
-				return;
-			}
-			int w = getWidth();
-			int h = getHeight();
-
-			if (gifTag == null || gifTag.isRecycled()) {
-				gifTag = BitmapFactory.decodeResource(getResources(), R.drawable.icon_moment_gif);
-			}
-			canvas.drawBitmap(gifTag, w - gifTag.getWidth(), h - gifTag.getHeight(), null);
-		} catch (OutOfMemoryError e) {
-
-		} catch (Exception e) {
-		}
-
-	}
+//	@Override
+//	protected void onDraw(Canvas canvas) {
+//		// TODO Auto-generated method stub
+//		try {
+//			super.onDraw(canvas);
+//
+//			if (!isDrawTag) {
+//				return;
+//			}
+//			int w = getWidth();
+//			int h = getHeight();
+//
+//			if (gifTag == null || gifTag.isRecycled()) {
+//				gifTag = BitmapFactory.decodeResource(getResources(), R.drawable.icon_moment_gif);
+//			}
+//			canvas.drawBitmap(gifTag, w - gifTag.getWidth(), h - gifTag.getHeight(), null);
+//		} catch (OutOfMemoryError e) {
+//
+//		} catch (Exception e) {
+//		}
+//
+//	}
 
 	public boolean isDrawTag() {
 		return isDrawTag;
