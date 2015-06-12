@@ -58,7 +58,7 @@ public  class TimeLineFragment extends Fragment implements
 	private static final String TAG = TimeLineFragment.class.getSimpleName();
 
     @InjectView(R.id.home_timeline)
-	protected UltimateRecyclerView mList;
+	protected RecyclerView mList;
 //	protected View mShadow;
 	private TimelineAdapter mAdapter;
 	private LinearLayoutManager mManager;
@@ -99,21 +99,19 @@ public  class TimeLineFragment extends Fragment implements
         ButterKnife.inject(this,v);
 		// Initialize views
 
-//		mShadow = Utility.findViewById(v, R.id.action_shadow);
 
 		mCache = bindApiCache();
 		mCache.loadFromCache();
 
-//		mList.setDrawingCacheEnabled(true);
-//		mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-//		mList.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE
-//				| ViewGroup.PERSISTENT_SCROLLING_CACHE);
-				
+		mList.setDrawingCacheEnabled(true);
+		mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+		mList.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE
+				| ViewGroup.PERSISTENT_SCROLLING_CACHE);
 		mManager = new LinearLayoutManager(getActivity());
 		mList.setLayoutManager(mManager);
 
 		// Swipe To Refresh
-//		bindSwipeToRefresh((ViewGroup) v);
+		bindSwipeToRefresh((ViewGroup) v);
 
 		if (mCache.mMessages.getSize() == 0) {
 			new Refresher().execute(true);
@@ -133,23 +131,32 @@ public  class TimeLineFragment extends Fragment implements
 ////			mSwipeRefresh.setProgressViewOffset(false, 0, (int) ((p.height + Utility.dp2px(getActivity(), 20)) * 1.2));
 //		}
 		mList.setAdapter(mAdapter);
-		mList.enableLoadmore();
-		mAdapter.setCustomLoadMoreView(LayoutInflater.from(getActivity())
-				.inflate(R.layout.custom_bottom_progressbar, null));
-		mList.setDefaultOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+
+
+		mList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
 			@Override
-			public void onRefresh() {
-				new TimeLineFragment.Refresher().execute(true);
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+
+				if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+					//获取最后一个完全显示的ItemPosition
+					int lastVisibleItem = mManager.findLastCompletelyVisibleItemPosition();
+					int totalItemCount = mManager.getItemCount();
+
+					// 判断是否滚动到底部，并且是向右滚动
+					if (lastVisibleItem == (totalItemCount -1)) {
+						//加载更多功能的代码
+						new TimeLineFragment.Refresher().execute(false);
+						Toast.makeText(getActivity(),"加载更多",Toast.LENGTH_LONG).show();
+
+					}
+				}
 
 			}
 		});
-		mList.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
-			@Override
-			public void loadMore(int itemsCount, final int maxLastVisiblePosition) {
-				new TimeLineFragment.Refresher().execute(false);
-			}
-		});
-
 
 
 		// Listener
@@ -237,7 +244,7 @@ public  class TimeLineFragment extends Fragment implements
 
 	@Override
 	public void doRefresh() {
-		mList.mRecyclerView.smoothScrollToPosition(0);
+		mList.smoothScrollToPosition(0);
 		mList.post(new Runnable() {
 			@Override
 			public void run() {
@@ -269,6 +276,21 @@ public  class TimeLineFragment extends Fragment implements
 	}
 
 
+	protected void bindSwipeToRefresh(ViewGroup v) {
+		mSwipeRefresh = new SwipeRefreshLayout(getActivity());
+
+		// Move child to SwipeRefreshLayout, and add SwipeRefreshLayout to root
+		// view
+		v.removeViewInLayout(mList);
+		v.addView(mSwipeRefresh, ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT);
+		mSwipeRefresh.addView(mList, ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT);
+
+		mSwipeRefresh.setOnRefreshListener(this);
+		mSwipeRefresh.setColorSchemeColors(R.color.ptr_green, R.color.ptr_orange,
+				R.color.ptr_red, R.color.ptr_blue);
+	}
 
 	protected void newPost() {
 		Intent i = new Intent();
@@ -307,7 +329,7 @@ public  class TimeLineFragment extends Fragment implements
 			super.onPostExecute(result);
 			
 			if (result) {
-				mList.mRecyclerView.smoothScrollToPosition(0);
+				mList.smoothScrollToPosition(0);
 			}
 			
 			mAdapter.notifyDataSetChanged();
