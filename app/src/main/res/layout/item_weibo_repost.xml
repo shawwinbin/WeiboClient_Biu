@@ -83,6 +83,7 @@
                     android:id="@+id/tv_orignal_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     />
 
                 <com.dudutech.weibo.widget.FlowLayout

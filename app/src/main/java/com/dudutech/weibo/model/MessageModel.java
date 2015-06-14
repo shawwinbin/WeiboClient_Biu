@@ -51,6 +51,10 @@ public class MessageModel implements Parcelable
 		public String getLarge() {
 			return thumbnail_pic.replace("thumbnail", "large");
 		}
+
+		public String getMedium() {
+			return thumbnail_pic.replace("thumbnail", "bmiddle");
+		}
 		
 		@Override
 		public int describeContents() {

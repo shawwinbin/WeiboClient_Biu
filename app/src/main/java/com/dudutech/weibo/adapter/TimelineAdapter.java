@@ -38,6 +38,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
     private StatusTimeUtils mTimeUtils;
     private int photoMargin;
     private float imageMaxWidth;
+    private float repostImageMaxWidth;
     public static enum ITEM_TYPE {
         ITEM_TYPE_HEADER,
         ITEM_TYPE_BOTTOM,
@@ -55,6 +56,8 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
         photoMargin = context.getResources().getDimensionPixelSize(R.dimen.moment_photo_margin);
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();;
         imageMaxWidth = metrics.widthPixels - 4 * padding - avatarSize;
+        float smallPadding =context.getResources().getDimension(R.dimen.SmallPadding);
+        repostImageMaxWidth=imageMaxWidth-2*smallPadding;
     }
 
 
@@ -72,15 +75,18 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder  holder, int position) {
 
 
-        MessageModel msg= mList.get(position);
 
-        if(holder instanceof  BaseWeiboViewHolder){
-            onBindBaseWeiboViewHolder((BaseWeiboViewHolder)holder,position);
-            dealImageLayout(msg,((BaseWeiboViewHolder) holder), imageMaxWidth, position);
-        }
-        else if( holder instanceof  RepostWeiboViewHolder){
+
+        if(holder instanceof  RepostWeiboViewHolder){
+            MessageModel msg= mList.get(position);
             onBindRepostWeiboViewHolder((RepostWeiboViewHolder)holder,position);
-            dealImageLayout( msg.retweeted_status,((BaseWeiboViewHolder) holder), imageMaxWidth, position);
+            dealImageLayout( msg.retweeted_status,((BaseWeiboViewHolder) holder), repostImageMaxWidth, position);
+
+        }
+        else if( holder instanceof  BaseWeiboViewHolder){
+            MessageModel msg= mList.get(position);
+            onBindBaseWeiboViewHolder((BaseWeiboViewHolder) holder, position);
+            dealImageLayout(msg,((BaseWeiboViewHolder) holder), imageMaxWidth, position);
         }
 
 
@@ -114,13 +120,16 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
     public void onBindRepostWeiboViewHolder(RepostWeiboViewHolder holder, int position){
         onBindBaseWeiboViewHolder(holder,position);
        MessageModel msg = mList.get(position).retweeted_status;
-        holder.tv_orignal_content.setText(msg.user.name+":"+msg.span);
+        holder.tv_orignal_content.setText(msg.origSpan);
     }
 
 
 
     @Override
     public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
+
+
+
         return null;
     }
 
@@ -145,7 +154,12 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateBottomView(ViewGroup parent) {
-        return null;
+
+
+        View view = mLayoutInflater.inflate(R.layout.bottom_view_loading, parent, false);
+
+        BottomViewHolder bottomViewHolder= new BottomViewHolder(view,mContext);
+        return bottomViewHolder;
     }
 
     @Override
@@ -194,7 +208,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
         @InjectView(R.id.tv_like_count)
         public  TextView tv_like_count;
 
-        public List<SelectableRoundedImageView > listImageView = new ArrayList<SelectableRoundedImageView>();
+        public List<ImageView > listImageView = new ArrayList<ImageView>();
 
         public BaseWeiboViewHolder(View itemView,Context context) {
             super(itemView);
@@ -221,6 +235,14 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
         }
     }
 
+    public static  class  BottomViewHolder extends  RecyclerView.ViewHolder{
+
+        public BottomViewHolder(View view ,Context context){
+            super(view);
+        }
+
+    }
+
 
     /**
      * 图片处理
@@ -236,25 +258,32 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
             int count=medias.size();
 
-        for (int i = 0; i < medias.size(); i++)
+        for (int i = 0; i < count; i++)
             {
-                int size = 0;
                 // 图片超过九张
                 if (i > holder.fl_images.getChildCount() - 1) {
                     break;
                 }
+
                 MessageModel.PictureUrl pictureUrl=medias.get(i);
-                SelectableRoundedImageView imageView = holder.listImageView.get(i);
+                String imgUrl=pictureUrl.getThumbnail();
+                ImageView imageView = holder.listImageView.get(i);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setMinimumHeight(smallSize);
                 imageView.setMinimumWidth(smallSize);
                 FlowLayout.LayoutParams param=new FlowLayout.LayoutParams(smallSize, smallSize); ;
                 switch (count) {
                     case 1:
+                            imgUrl=pictureUrl.getMedium();
                             param = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                             imageView.setMaxHeight((int) maxWidth);
                             imageView.setMaxWidth((int) maxWidth);
                             imageView.setAdjustViewBounds(true);
+                        imageView.setImageDrawable(null);
+                        imageView.setBottom(0);
+                        imageView.setRight(0);
+                        imageView.refreshDrawableState();
+
                         break;
                     case 3:
                     case 6:
@@ -304,12 +333,13 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
 
 
-                if (pictureUrl.getThumbnail()!= null ) {
+                if (imgUrl!= null ) {
                     Glide.with(mContext)
-                            .load(pictureUrl.getThumbnail())
+                            .load(imgUrl)
                             .centerCrop()
                             .crossFade()
                             .into(imageView);
+
                 }
 
             }
@@ -326,10 +356,10 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
 //		holder.tv_like.setText("");
 //		holder.tv_comment_count.setText("");
-        for (SelectableRoundedImageView imageView : holder.listImageView) {
+        for (ImageView imageView : holder.listImageView) {
             imageView.setVisibility(View.GONE);
-            imageView.setDrawTag(false);
-            imageView.setNeedChange(false);
+//            imageView.setDrawTag(false);
+//            imageView.setNeedChange(false);
         }
 //        holder.tv_location.setVisibility(View.GONE);
 //		holder.tv_device.setText("");

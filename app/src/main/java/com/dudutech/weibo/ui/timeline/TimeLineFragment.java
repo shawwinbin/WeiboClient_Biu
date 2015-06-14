@@ -121,6 +121,7 @@ public  class TimeLineFragment extends Fragment implements
 		mAdapter = new TimelineAdapter(getActivity(),(List<MessageModel>) mCache.mMessages.getList()
 				  );
 
+		mAdapter.setBottomCount(1);
 		// Content Margin
 //		if (getActivity() instanceof MainActivity && mAllowHidingActionBar) {
 //			View header = new View(getActivity());
@@ -150,7 +151,6 @@ public  class TimeLineFragment extends Fragment implements
 					if (lastVisibleItem == (totalItemCount -1)) {
 						//加载更多功能的代码
 						new TimeLineFragment.Refresher().execute(false);
-						Toast.makeText(getActivity(),"加载更多",Toast.LENGTH_LONG).show();
 
 					}
 				}
