@@ -279,10 +279,15 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
                             imageView.setMaxHeight((int) maxWidth);
                             imageView.setMaxWidth((int) maxWidth);
                             imageView.setAdjustViewBounds(true);
-                        imageView.setImageDrawable(null);
+//                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+//                        imageView.postInvalidate(0,0,0,0);
                         imageView.setBottom(0);
                         imageView.setRight(0);
-                        imageView.refreshDrawableState();
+                        imageView.setTop(0);
+                        imageView.setLeft(0);
+//                        imageView.setImageDrawable(null);
+//                        imageView.refreshDrawableState();
 
                         break;
                     case 3:
@@ -322,7 +327,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
                 imageView.setVisibility(View.VISIBLE);
                 imageView.setLayoutParams(param);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
                 final int index = i;
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -336,7 +341,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
                 if (imgUrl!= null ) {
                     Glide.with(mContext)
                             .load(imgUrl)
-                            .centerCrop()
+//                            .centerCrop()
                             .crossFade()
                             .into(imageView);
 
