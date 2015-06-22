@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,9 +19,11 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.cache.UserApiCache;
+import com.dudutech.weibo.model.UserModel;
 import com.dudutech.weibo.ui.timeline.TimeLineFragment;
 
-public class MainActivity extends ActionBarActivity implements
+public class MainActivity extends BaseActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 
@@ -35,6 +38,8 @@ public class MainActivity extends ActionBarActivity implements
 
 	private ActionBarHelper mActionBar;
 
+	private UserApiCache mUserCache;
+	private UserModel mUser;
 
     public static interface Refresher {
         void doRefresh();
@@ -45,6 +50,9 @@ public class MainActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mNavigationDrawerFragment = new NavigationDrawerFragment();
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 		mActionBar = new ActionBarHelper();
 		mActionBar.init();
 		getFragmentManager()
@@ -55,6 +63,8 @@ public class MainActivity extends ActionBarActivity implements
 
 
 		setUpDrawer();
+
+		mUserCache = new UserApiCache(this);
 	}
 
 	private void setUpDrawer() {
@@ -260,5 +270,7 @@ public class MainActivity extends ActionBarActivity implements
 			mTitle = title;
 		}
 	}
+
+
 
 }

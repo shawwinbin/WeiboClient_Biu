@@ -1,12 +1,12 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/base_actionbar</item>
-        <item name="colorPrimaryDark">@color/base_status_bar</item>
-        <item name="colorAccent">@color/material_blue_grey_800</item>
+        <item name="colorPrimaryDark">@color/base_status_bar</item>s
         <item name="android:textColorPrimary">@color/white</item>
         <item name="CardBackground">@color/white</item>
         <item name="CardForeground">@color/gray</item>
+
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">

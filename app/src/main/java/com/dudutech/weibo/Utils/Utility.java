@@ -1030,4 +1030,8 @@ public class Utility
 
 		return result;
 	}
+
+	public static boolean isCacheAvailable(long createTime, int availableDays) {
+		return System.currentTimeMillis() <= createTime + TimeUnit.DAYS.toMillis(availableDays);
+	}
 }
