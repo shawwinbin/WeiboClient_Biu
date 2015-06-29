@@ -11,9 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.model.UserModel;
+import com.squareup.picasso.Picasso;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -21,9 +30,19 @@ public class NavigationDrawerFragment extends Fragment {
 
 	private NavigationDrawerCallbacks mCallbacks;
 
-	private ListView mDrawerListView;
+
 
 	private int mCurrentSelectedPosition = 0;
+
+	@InjectView(R.id.tv_name)
+	TextView tv_name;
+	@InjectView(R.id.iv_user_avatar)
+	ImageView iv_user_avatar;
+	@InjectView(R.id.iv_user_bg)
+	ImageView iv_user_bgs;
+	@InjectView(R.id.drawer_list)
+	ListView mDrawerListView;
+
 
 	public NavigationDrawerFragment() {
 	}
@@ -50,7 +69,9 @@ public class NavigationDrawerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_drawer,container, false);
-		mDrawerListView = (ListView) v.findViewById(R.id.drawer_list);
+
+		ButterKnife.inject(this,v);
+
 		mDrawerListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
@@ -108,6 +129,16 @@ public class NavigationDrawerFragment extends Fragment {
 
 	public static interface NavigationDrawerCallbacks {
 		void onNavigationDrawerItemSelected(int position);
+	}
+
+	public void setHeadView(UserModel user){
+		if(user==null){
+			return;
+		}
+		tv_name.setText(user.getName());
+		Picasso.with(getActivity()).load(user.getCover()).fit().into(iv_user_bgs);
+		Picasso.with(getActivity()).load(user.avatar_large).fit().into(iv_user_avatar);
+
 	}
 
 }

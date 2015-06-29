@@ -29,6 +29,7 @@
 	<declare-styleable name="BlackLight">
 		<attr name="CardBackground" format="reference" />
 		<attr name="CardForeground" format="color" />
+		<attr name="fits_windows" format="boolean"/>
 		<attr name="CardOrigBackground" format="color" />
 		<attr name="CardDivider" format="reference" />
 		<attr name="CardSubColor" format="color" />

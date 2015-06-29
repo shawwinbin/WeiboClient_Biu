@@ -1,32 +1,54 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-	android:fitsSystemWindows="true"
 	android:orientation="vertical"
 	>
-	<LinearLayout
+	<RelativeLayout
+		android:id="@+id/rl_header"
 		android:layout_width="match_parent"
 		android:layout_height="192dp"
 		android:background="?attr/colorPrimaryDark"
-		android:padding="16dp"
 		android:theme="@style/ThemeOverlay.AppCompat.Dark"
 		android:orientation="vertical"
-		android:gravity="bottom">
+		>
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/iv_user_bg"
+			android:src="@drawable/ic_launcher"
+
+			/>
+
+		<ImageView
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:id="@+id/iv_user_avatar"
+
+			android:layout_margin="40dp"
+			/>
+
 
 		<TextView
+			android:id="@+id/tv_name"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="Username"
-			android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+			android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+			android:layout_below="@id/iv_user_avatar"
+			android:layout_margin="40dp"
+			/>
 
-	</LinearLayout>
-	<ListView android:id="@+id/drawer_list"
+	</RelativeLayout>
+	<ListView
+		android:id="@+id/drawer_list"
 			  android:layout_width="match_parent"
 	          android:layout_height="match_parent"
 	          android:choiceMode="singleChoice"
 	          android:divider="@android:color/transparent"
-	          android:dividerHeight="0dp" />
+	          android:dividerHeight="0dp"
+		      android:layout_below="@+id/rl_header"
+		/>
 
-</LinearLayout>
+</RelativeLayout>

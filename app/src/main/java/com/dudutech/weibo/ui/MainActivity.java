@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.Utils.SystemBarUtils;
+import com.dudutech.weibo.Utils.Utility;
+import com.dudutech.weibo.cache.LoginApiCache;
 import com.dudutech.weibo.cache.UserApiCache;
 import com.dudutech.weibo.model.UserModel;
 import com.dudutech.weibo.ui.timeline.TimeLineFragment;
@@ -27,6 +35,8 @@ public class MainActivity extends BaseActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 
+
+	public final static  String TAG = "MainActivity";
 
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
@@ -40,6 +50,11 @@ public class MainActivity extends BaseActivity implements
 
 	private UserApiCache mUserCache;
 	private UserModel mUser;
+
+	private LoginApiCache mLoginCache;
+
+
+
 
     public static interface Refresher {
         void doRefresh();
@@ -55,16 +70,39 @@ public class MainActivity extends BaseActivity implements
 		setSupportActionBar(toolbar);
 		mActionBar = new ActionBarHelper();
 		mActionBar.init();
+		initStatusBar();
+
 		getFragmentManager()
 				.beginTransaction()
 				.replace(R.id.navigation_drawer, mNavigationDrawerFragment)
 				.commit();
 
-
-
 		setUpDrawer();
 
 		mUserCache = new UserApiCache(this);
+		mLoginCache = new LoginApiCache(this);
+
+
+		new InitializerTask().execute();
+	}
+
+
+	private void initStatusBar(){
+		if (Build.VERSION.SDK_INT >= 19) {
+			ViewGroup drawerRoot = (ViewGroup) findViewById(R.id.fl_drawer_root);
+			drawerRoot.setPadding(drawerRoot.getPaddingLeft(),
+					SystemBarUtils.getStatusBarHeight(this),
+					drawerRoot.getPaddingRight(),
+					drawerRoot.getBottom());
+		}
+		if (Build.VERSION.SDK_INT == 19) {
+			ViewGroup rootMain = (ViewGroup) findViewById(R.id.rl_main_root);
+			rootMain.setPadding(rootMain.getPaddingLeft(),
+					rootMain.getPaddingTop(),
+					rootMain.getPaddingRight(),
+					rootMain.getBottom() + SystemBarUtils.getNavigationBarHeight(this));
+		}
+
 	}
 
 	private void setUpDrawer() {
@@ -269,6 +307,44 @@ public class MainActivity extends BaseActivity implements
 		public void setTitle(CharSequence title) {
 			mTitle = title;
 		}
+	}
+
+	private class InitializerTask extends AsyncTask<Void, Object, Void> {
+
+		@Override
+		protected void onPreExecute() {
+
+		}
+
+		@Override
+		protected Void doInBackground(Void[] params) {
+			// Username first
+			mUser = mUserCache.getUser(mLoginCache.getUid());
+
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			super.onPostExecute(aVoid);
+
+			if(mUser!=null){
+				Log.i(TAG,mUser.getName());
+				initNavigationFragment();
+			}
+		}
+	}
+
+	private void initNavigationFragment(){
+
+		if(mNavigationDrawerFragment==null){
+			return;
+		}
+		mNavigationDrawerFragment.setHeadView(mUser);
+
+
+
 	}
 
 

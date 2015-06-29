@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-//
+////
 //		setStatusBar();
     }
 
@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 		}
 		tintManager = new SystemBarTintManager(this);
 		tintManager.setStatusBarTintEnabled(true);
-//		tintManager.setStatusBarTintResource(R.color.base_actionbar);
+		tintManager.setStatusBarTintResource(R.color.base_actionbar);
 //		SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
 //		listViewDrawer.setPadding(0, config.getPixelInsetTop(true), 0, config.getPixelInsetBottom());
 
