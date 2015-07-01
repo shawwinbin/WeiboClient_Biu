@@ -34,6 +34,7 @@ import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
 import butterknife.InjectView;
+import uk.co.senab.photoview.PhotoView;
 
 
 /**
