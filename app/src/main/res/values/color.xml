@@ -250,8 +250,8 @@
 
     <color name="safe_talk_orange">#e36c55</color>
     <color name="pink_light">#fff1ee</color>
-    <color name="base_actionbar">#6a77e2</color>
-    <color name="base_status_bar">#555fb5</color>
+    <color name="base_actionbar">#2f5a81</color>
+    <color name="base_status_bar">#1c364d</color>
     <color name="base_blue_light">#c0c7ff</color>
     <color name="base_status_orange_bar">#b65644</color>
     <color name="base_warning_color">#fdf1c7</color>

@@ -32,6 +32,8 @@ dependencies {
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.4'
     compile  'com.jakewharton:butterknife:6.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile project(':libraries:photoview')
 
 }

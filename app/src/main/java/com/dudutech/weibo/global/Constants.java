@@ -19,6 +19,12 @@
 
 package com.dudutech.weibo.global;
 
+import android.graphics.Bitmap;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+
 public class Constants
 {
 	public static final int DB_CACHE_DAYS = 10;
@@ -41,4 +47,36 @@ public class Constants
 	private static final String REDIRECT_URI = "http://oauth.weico.cc";
 	private static final String PACKAGE_NAME = "com.eico.weico";
 	private static final String SCOPE = "email,direct_messages_read,direct_messages_write,friendships_groups_read,friendships_groups_write,statuses_to_me_read,follow_app_official_microblog,invitation_write";
+
+    //imageloader  display options
+
+	public static  DisplayImageOptions options = new DisplayImageOptions.Builder()
+//			.showImageOnLoading(R.drawable.ic_stub) // resource or bitmap
+//			.showImageForEmptyUri(R.drawable.ic_empty) // resource or bitmap
+//			.showImageOnFail(R.drawable.ic_error) // resource or bitmap
+			.resetViewBeforeLoading(false)  // default
+			.delayBeforeLoading(1000)
+			.cacheInMemory(false) // default
+			.cacheOnDisk(true) // default
+//			.preProcessor(...)
+//			.postProcessor(...)
+//	        .extraForDownloader(...)
+			.imageScaleType(ImageScaleType.NONE) // default
+			.bitmapConfig(Bitmap.Config.ARGB_8888) // default
+//	       .decodingOptions(...)
+			.displayer(new SimpleBitmapDisplayer()) // default
+//			.handler(new Handler()) // default
+			.build();
+
+	public static  DisplayImageOptions timelineListOptions = new DisplayImageOptions.Builder()
+			.resetViewBeforeLoading(true)  // default
+			.delayBeforeLoading(1000)
+			.cacheInMemory(true) // default
+			.cacheOnDisk(true) // default
+			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+			.bitmapConfig(Bitmap.Config.ARGB_8888) // default
+			.displayer(new SimpleBitmapDisplayer()) // default
+			.build();
+
+
 }

@@ -1,10 +1,12 @@
 package com.dudutech.weibo.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,15 +16,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.Utils.DeviceUtil;
 import com.dudutech.weibo.Utils.StatusTimeUtils;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.global.LruMemoryCache;
+import com.dudutech.weibo.cache.LruMemoryCache;
+import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.MessageListModel;
 import com.dudutech.weibo.model.MessageModel;
 import com.dudutech.weibo.model.PicSize;
+import com.dudutech.weibo.ui.picture.PicsActivity;
 import com.dudutech.weibo.widget.FlowLayout;
 import com.dudutech.weibo.widget.SelectableRoundedImageView;
+import com.dudutech.weibo.widget.TagImageVIew;
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -49,6 +58,8 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
     private float imageMaxWidth;
     private float repostImageMaxWidth;
     float avatarSize;
+    private DeviceUtil.NetWorkType netWorkType ;
+
     public static enum ITEM_TYPE {
         ITEM_TYPE_HEADER,
         ITEM_TYPE_BOTTOM,
@@ -75,6 +86,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
         imageMaxWidth = metrics.widthPixels - 4 * padding - avatarSize;
         float smallPadding =context.getResources().getDimension(R.dimen.SmallPadding);
         repostImageMaxWidth=imageMaxWidth-2*smallPadding;
+        netWorkType=DeviceUtil.getNetworkType(mContext);
     }
 
 
@@ -225,13 +237,13 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
         @InjectView(R.id.tv_like_count)
         public  TextView tv_like_count;
 
-        public List<ImageView> listImageView = new ArrayList<ImageView>();
+        public List<TagImageVIew> listImageView = new ArrayList<TagImageVIew>();
 
         public BaseWeiboViewHolder(View itemView,Context context) {
             super(itemView);
             ButterKnife.inject(this, itemView);
             for (int i = 0; i < 9; i++) {
-                ImageView imageView = new ImageView(context);
+                TagImageVIew imageView = new TagImageVIew(context);
 //                imageView.setCornerRadiiDP(5, 5, 5, 5);
                 imageView.setBackgroundColor(context.getResources().getColor(R.color.bg_list_press));
                 imageView.setVisibility(View.GONE);
@@ -264,7 +276,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
     /**
      * 图片处理
      */
-    private void dealImageLayout(MessageModel msg,BaseWeiboViewHolder holder ,float maxWidth ,int position){
+    private void dealImageLayout(final MessageModel msg,BaseWeiboViewHolder holder ,float maxWidth ,int position){
 
 
         List<MessageModel.PictureUrl> medias = msg.pic_urls;
@@ -281,12 +293,13 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
                 if (i > holder.fl_images.getChildCount() - 1) {
                     break;
                 }
-                MessageModel.PictureUrl pictureUrl=medias.get(i);
+                final MessageModel.PictureUrl pictureUrl=medias.get(i);
                 String imgUrl=pictureUrl.getThumbnail();
-                ImageView imageView = holder.listImageView.get(i);
+                TagImageVIew imageView = holder.listImageView.get(i);
                 imageView.setMinimumHeight(smallSize);
                 imageView.setMinimumWidth(smallSize);
                 FlowLayout.LayoutParams param=new FlowLayout.LayoutParams(smallSize, smallSize);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 boolean isSizeSaved=false;
                 PicSize picSize=null;
                 switch (count) {
@@ -299,7 +312,7 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
                         picSize= picSizeCache.get(imgUrl);
                         if(picSize!=null){
                             param = new FlowLayout.LayoutParams(picSize.getWidth(), picSize.getHeight());
-                            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//                            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                             isSizeSaved=true;
                         }
                         else{
@@ -312,13 +325,6 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 //                         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
-//                        imageView.postInvalidate(0,0,0,0);
-//                        imageView.setBottom(0);
-//                        imageView.setRight(0);
-//                        imageView.setTop(0);
-//                        imageView.setLeft(0);
-//                        imageView.setImageDrawable(null);
-//                        imageView.refreshDrawableState();
 
                         break;
                     case 3:
@@ -359,52 +365,87 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
                 imageView.setVisibility(View.VISIBLE);
                 imageView.setLayoutParams(param);
 
+                if(pictureUrl.isGif()){
+                    imageView.setDrawTag(true);
+                }
+
                 final int index = i;
+
+                if(netWorkType== DeviceUtil.NetWorkType.wifi&&!pictureUrl.isGif()){
+                    imgUrl= pictureUrl.getMedium();
+                }
+
+
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
+                        PicsActivity.launch((Activity) mContext, msg, index);
                     }
                 });
 
 
+                if(!TextUtils.isEmpty(imgUrl)&&!imgUrl.equals(imageView.getTag())){
 
-                if (imgUrl!= null ) {
+                    ImageLoadingListener imageLoadingListener=null;
 
-                    if(count==1){
+                    if(count==1&&picSize==null){
+                        imageLoadingListener = new ImageLoadingListener() {
+                            @Override
+                            public void onLoadingStarted(String imageUri, View view) {
 
-                        if(picSize==null) {
-                            CustomTarget target=new CustomTarget(imageView, imgUrl);
-                            imageView.setTag(target);
-                            Picasso.with(mContext)
-                                    .load(imgUrl)
+                            }
 
-                                    .into((CustomTarget)imageView.getTag());
-                        }
-                        else{
-                            Picasso.with(mContext)
-                                    .load(imgUrl)
-                                    .resize(picSize.getWidth(),picSize.getHeight())
-                                    .centerCrop()
-                                    .into(imageView);
-                        }
+                            @Override
+                            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                            }
+
+                            @Override
+                            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                                Log.i("bitmap loaded", "bitmap loaded");
+                                int width = loadedImage.getWidth();
+                                int height = loadedImage.getHeight();
+
+                                ImageView imageView=(ImageView)view;
+
+
+                                if(height>imageMaxWidth) {
+                                    height=(int)imageMaxWidth;
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                else {
+//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                                FlowLayout.LayoutParams    param = new FlowLayout.LayoutParams(width, height);
+                                imageView.setLayoutParams(param);
+                                imageView.setImageBitmap(loadedImage);
+                                PicSize    picSize = new PicSize();
+                                picSize.setKey(imageUri);
+                                picSize.setWidth(width);
+                                picSize.setHeight(height);
+
+                                // 放入内存
+                                picSizeCache.put(picSize.getKey(), picSize);
+                            }
+
+                            @Override
+                            public void onLoadingCancelled(String imageUri, View view) {
+
+                            }
+                        };
                     }
-                    else {
 
-                        Picasso.with(mContext)
-                                .load(imgUrl)
-                                .fit().
-                                centerCrop()
-                                .into(imageView);
-                    }
-//                    Picasso.with(mContext)
-//                            .load(imgUrl)
-//                            .fit().
-//                            centerCrop()
-//                            .into(imageView);
+                    ImageLoader.getInstance().displayImage(imgUrl,imageView, Constants.timelineListOptions,imageLoadingListener);
+                    imageView.setTag(imgUrl);
 
 
                 }
+
+
+
 
             }
             holder.fl_images.setVisibility(View.VISIBLE);
@@ -420,71 +461,16 @@ public class TimelineAdapter  extends BaseMultipleItemAdapter {
 
 //		holder.tv_like.setText("");
 //		holder.tv_comment_count.setText("");
-        for (ImageView imageView : holder.listImageView) {
+        for (TagImageVIew imageView : holder.listImageView) {
             imageView.setVisibility(View.GONE);
-//            imageView.setDrawTag(false);
+            imageView.setDrawTag(false);
 //            imageView.setNeedChange(false);
         }
 //        holder.tv_location.setVisibility(View.GONE);
 //		holder.tv_device.setText("");
 //		holder.tv_content.setText("");
     }
-    public class CustomTarget implements Target {
-        public ImageView imageView;
-        public String url;
-
-
-        public CustomTarget(ImageView imageView,String url) {
-            this.imageView = imageView;
-            this.url=url;
-
-        }
-
-        @Override
-        public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-            Log.i("bitmap loaded", "bitmap loaded");
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
 
 
 
-            if(height>imageMaxWidth) {
-                height=(int)imageMaxWidth;
-//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            }
-            else {
-//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            }
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            FlowLayout.LayoutParams    param = new FlowLayout.LayoutParams(width, height);
-            imageView.setLayoutParams(param);
-            imageView.setImageBitmap(bitmap);
-            PicSize    picSize = new PicSize();
-            picSize.setKey(url);
-            picSize.setWidth(width);
-            picSize.setHeight(height);
-
-            // 放入内存
-            picSizeCache.put(picSize.getKey(), picSize);
-
-//            imageView.setAdjustViewBounds(true);
-
-
-        }
-
-        @Override
-        public void onBitmapFailed(Drawable errorDrawable) {
-
-        }
-
-        @Override
-        public void onPrepareLoad(Drawable placeHolderDrawable) {
-            imageView.setImageDrawable(null);
-
-        }
-
-
-
-    }
 }

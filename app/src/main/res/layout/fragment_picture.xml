@@ -11,21 +11,41 @@
         android:id="@+id/webview" android:layout_width="match_parent" android:layout_height="match_parent"
         android:layout_centerInParent="true"  android:visibility="invisible"/>
 
+
+     <RelativeLayout
+         android:id="@+id/view_progress"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:visibility="gone"
+
+         >
+         <ProgressBar
+             android:id="@+id/progressbar"
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             style="@style/Widget.AppCompat.ProgressBar"
+             android:layout_centerInParent="true"
+             />
+         <TextView
+             android:id="@+id/tv_progress"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+
+             />"
+
+
+
+     </RelativeLayout>
+
+
     <TextView
         android:id="@+id/txtFailure" android:layout_width="match_parent" android:layout_height="match_parent"
         android:gravity="center" android:lineSpacingExtra="10dip"  android:textColor="@color/white"
         android:textSize="14sp" android:visibility="gone"/>
 
-    <org.aisen.weibo.sina.ui.widget.PictureProgressView
-        android:id="@+id/viewProgress" android:layout_width="match_parent" android:layout_height="match_parent"
-        android:visibility="invisible"/>
 
-    <RelativeLayout
-        android:id="@+id/layProgress"
-        android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-            android:id="@+id/progress" style="@style/GNowProgressBar" android:layout_width="match_parent"
-            android:layout_height="10dip" android:indeterminate="true" android:visibility="gone" app:cpb_colors="@array/gplus_colors"/>
-    </RelativeLayout>
+
 </RelativeLayout>

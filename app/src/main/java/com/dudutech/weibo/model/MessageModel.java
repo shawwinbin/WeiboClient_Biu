@@ -55,6 +55,12 @@ public class MessageModel implements Parcelable
 		public String getMedium() {
 			return thumbnail_pic.replace("thumbnail", "bmiddle");
 		}
+
+		public boolean isGif(){
+
+			return thumbnail_pic.endsWith(".gif");
+		}
+
 		
 		@Override
 		public int describeContents() {

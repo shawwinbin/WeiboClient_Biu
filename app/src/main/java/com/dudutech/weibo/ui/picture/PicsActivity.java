@@ -19,6 +19,7 @@ import com.dudutech.weibo.ui.BaseActivity;
 
 import javax.crypto.KeyGenerator;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
@@ -33,8 +34,8 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 	
 	@InjectView(R.id.viewPager)
     ViewPager viewPager;
-    @InjectView( R.id.layToolbar)
-    ViewGroup layToolbar;
+//    @InjectView( R.id.layToolbar)
+//    ViewGroup layToolbar;
 	
 	private MessageModel mBean;
 	private int index;
@@ -46,32 +47,33 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 //        AisenUtils.setPicStatusBar(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pics);
+		ButterKnife.inject(this);
 		
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		mBean = savedInstanceState == null ? (MessageModel) getIntent().getSerializableExtra("bean")
-										   : (MessageModel) savedInstanceState.getSerializable("bean");
+		mBean = savedInstanceState == null ? (MessageModel) getIntent().getParcelableExtra("bean")
+										   : (MessageModel) savedInstanceState.getParcelable("bean");
 		index = savedInstanceState == null ? getIntent().getIntExtra("index", 0)
 										: savedInstanceState.getInt("index", 0);
 
         myViewPagerAdapter = new MyViewPagerAdapter(getFragmentManager());
 		viewPager.setAdapter(myViewPagerAdapter);
-		viewPager.setOnPageChangeListener(this);
+		viewPager.addOnPageChangeListener(this);
 		viewPager.setCurrentItem(index);
-		if (size() > 1 && getSupportActionBar() != null)
-            getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
-		else if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(String.format("%d/%d", 1, 1));
+//		if (size() > 1 && getSupportActionBar() != null)
+//            getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
+//		else if (getSupportActionBar() != null)
+//            getSupportActionBar().setTitle(String.format("%d/%d", 1, 1));
 
 //		getSupportActionBar()().setBackgroundColor(Color.TRANSPARENT);
 
-        if (Build.VERSION.SDK_INT >= 19) {
-            layToolbar.setPadding(layToolbar.getPaddingLeft(),
-                                        layToolbar.getPaddingTop() + SystemBarUtils.getStatusBarHeight(this),
-                                        layToolbar.getPaddingRight(),
-                                        layToolbar.getPaddingBottom());
-        }
+//        if (Build.VERSION.SDK_INT >= 19) {
+//            layToolbar.setPadding(layToolbar.getPaddingLeft(),
+//                                        layToolbar.getPaddingTop() + SystemBarUtils.getStatusBarHeight(this),
+//                                        layToolbar.getPaddingRight(),
+//                                        layToolbar.getPaddingBottom());
+//        }
 	}
 	
 	@Override
@@ -136,10 +138,11 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 //				mCurTransaction.remove(fragment);
 		}
 
-//		@Override
-//		protected String makeFragmentName(int position) {
+
+		protected String makeFragmentName(int position) {
+			return getPicture(position).getThumbnail();
 //			return KeyGenerator.generateMD5(getPicture(position).getThumbnail_pic());
-//		}
+		}
 
 	}
 
@@ -157,11 +160,11 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 	public void onPageSelected(int index) {
 		this.index = index;
 		
-        getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
+//        getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
 
         PictureFragment fragment = (PictureFragment) myViewPagerAdapter.getItem(index);
-        if (fragment != null)
-            fragment.onStripTabRequestData();
+//        if (fragment != null)
+//            fragment.onStripTabRequestData();
 	}
 
 //    @Override

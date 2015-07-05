@@ -10,6 +10,7 @@
         <item name="CardForeground">@color/gray</item>
 
 
+
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
@@ -17,8 +18,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowTranslucentStatus">true</item>
+
+
 
     </style>
 </resources>
