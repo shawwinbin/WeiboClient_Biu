@@ -2,14 +2,10 @@ package com.dudutech.weibo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.cache.LoginApiCache;
+import com.dudutech.weibo.dao.login.LoginDao;
 
 public class LoadingActivity extends Activity {
 
@@ -17,7 +13,7 @@ public class LoadingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginApiCache login = new LoginApiCache(this);
+        LoginDao login = new LoginDao(this);
         if (needsLogin(login)) {
             login.logout();
             Intent i = new Intent();
@@ -36,7 +32,7 @@ public class LoadingActivity extends Activity {
 
     }
 
-    private boolean needsLogin(LoginApiCache login) {
+    private boolean needsLogin(LoginDao login) {
         return login.getAccessToken() == null || Utility.isTokenExpired(login.getExpireDate());
     }
 

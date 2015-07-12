@@ -3,14 +3,13 @@ package com.dudutech.weibo.ui;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,15 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.SystemBarUtils;
-import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.cache.LoginApiCache;
-import com.dudutech.weibo.cache.UserApiCache;
+
+import com.dudutech.weibo.dao.login.LoginDao;
+import com.dudutech.weibo.dao.user.UserDao;
 import com.dudutech.weibo.model.UserModel;
-import com.dudutech.weibo.ui.timeline.TimeLineFragment;
+import com.dudutech.weibo.ui.timeline.HomeTimelineFragment;
 
 public class MainActivity extends BaseActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -42,16 +40,16 @@ public class MainActivity extends BaseActivity implements
 	private DrawerLayout mDrawerLayout;
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 
-	private TimeLineFragment mTimelineFragment;
+	private HomeTimelineFragment mTimelineFragment;
 
 	private CharSequence mTitle;
 
 	private ActionBarHelper mActionBar;
 
-	private UserApiCache mUserCache;
+	private UserDao mUserCache;
 	private UserModel mUser;
 
-	private LoginApiCache mLoginCache;
+	private LoginDao mLoginCache;
 
 
 
@@ -79,8 +77,8 @@ public class MainActivity extends BaseActivity implements
 
 		setUpDrawer();
 
-		mUserCache = new UserApiCache(this);
-		mLoginCache = new LoginApiCache(this);
+		mUserCache = new UserDao(this);
+		mLoginCache = new LoginDao(this);
 
 
 		new InitializerTask().execute();
@@ -148,9 +146,9 @@ public class MainActivity extends BaseActivity implements
 	public void onNavigationDrawerItemSelected(int position) {
 
 		if(position==0){
-			mTimelineFragment=new TimeLineFragment() ;
+			mTimelineFragment=new HomeTimelineFragment() ;
 
-			getFragmentManager()
+			getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.container, mTimelineFragment)
 					.commit();
@@ -343,10 +341,14 @@ public class MainActivity extends BaseActivity implements
 		}
 		mNavigationDrawerFragment.setHeadView(mUser);
 
-
-
 	}
 
+	protected void newPost() {
+		Intent i = new Intent();
+		i.setAction(Intent.ACTION_MAIN);
+//		i.setClass(getActivity(), NewPostActivity.class);
+		startActivity(i);
+	}
 
 
 }

@@ -125,7 +125,6 @@
     <orderEntry type="library" exported="" name="play-services-appinvite-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-panorama-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-drive-7.5.0" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="ultra-ptr-1.0.9" level="project" />
     <orderEntry type="library" exported="" name="play-services-gcm-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appindexing-7.5.0" level="project" />
@@ -138,8 +137,8 @@
     <orderEntry type="library" exported="" name="play-services-plus-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-7.5.0" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-7.5.0" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="mediarouter-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="library-0.3.4" level="project" />

@@ -108,6 +108,8 @@ public class MessageListModel extends BaseListModel<MessageModel, MessageListMod
 			total_number = values.total_number;
 		}
 	}
+
+
 	
 	@Override
 	public int describeContents() {

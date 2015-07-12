@@ -41,7 +41,7 @@ import android.widget.Toast;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.BaseApi;
-import com.dudutech.weibo.cache.LoginApiCache;
+import com.dudutech.weibo.dao.login.LoginDao;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 	private String mAppId;
 	private String mAppSecret;
 
-	private LoginApiCache mLogin;
+	private LoginDao mLogin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 		mUsername.setOnEditorActionListener(this);
 		
 		// Create login instance
-		mLogin = new LoginApiCache(this);
+		mLogin = new LoginDao(this);
 		
 		// Get views
 		mTailNames = getResources().getStringArray(R.array.bm_tails);

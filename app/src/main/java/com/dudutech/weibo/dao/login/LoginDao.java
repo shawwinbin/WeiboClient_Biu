@@ -1,4 +1,4 @@
-package com.dudutech.weibo.cache;/*
+package com.dudutech.weibo.dao.login;/*
  * Copyright (C) 2015 Peter Cai
  *
  * This file is part of BlackLight
@@ -21,22 +21,17 @@ package com.dudutech.weibo.cache;/*
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.dudutech.weibo.api.AccountApi;
 import com.dudutech.weibo.api.BaseApi;
-import com.dudutech.weibo.model.UserModel;
 
 import java.util.Arrays;
 import java.util.ArrayList;
-import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
-
-
-public class LoginApiCache
+public class LoginDao
 {
-	private static final String TAG = LoginApiCache.class.getSimpleName();
+	private static final String TAG = LoginDao.class.getSimpleName();
 
 	private Context mContext;
 
@@ -49,7 +44,7 @@ public class LoginApiCache
 	private ArrayList<String> mTokens = new ArrayList<String>();
 	private ArrayList<Long> mExpireDates = new ArrayList<Long>();
 
-	public LoginApiCache(Context context) {
+	public LoginDao(Context context) {
 		mContext = context;
 		mPrefs = context.getSharedPreferences("access_token", Context.MODE_PRIVATE);
 		mAccessToken = mPrefs.getString("access_token", null);
@@ -173,7 +168,7 @@ public class LoginApiCache
 //		BaseApi.setAccessToken(token);
 //
 //		// Fetch the new user info
-//		UserModel user = new UserApiCache(mContext).getUser(AccountApi.getUid());
+//		UserModel user = new UserDao(mContext).getUser(AccountApi.getUid());
 //
 //		long exp = System.currentTimeMillis() + Long.valueOf(expire) * 1000;
 //		if (user != null && !mNames.contains(user.getNameNoRemark())) {
@@ -192,7 +187,7 @@ public class LoginApiCache
 //	}
 //
 //	public void switchToUser(int position) {
-//		UserApiCache c = new UserApiCache(mContext);
+//		UserDao c = new UserDao(mContext);
 //		UserModel current = c.getUser(mUid);
 //		if (current == null)
 //			return;

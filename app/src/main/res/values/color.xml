@@ -190,12 +190,11 @@
     <color name="top_column_line">#636edc</color>
 
     <!-- base -->
-    <color name="base">#4d54b6</color>
+    <color name="base">#2f5a81</color>
     <!-- 基本色， 产品的主配色，，可用于可点击的按钮配色等 -->
-    <color name="base_deep">#474c96</color>
+    <color name="base_deep">#1c364d</color>
     <!-- 基本色的加强色，作为前景色使用时，用于表示加强的文字颜色（浅色底色）；作为背景色使用时，用于正常按钮的背景色（如非默认选项的按钮） -->
-    <color name="base_fade">#929aff</color>
-    <!-- 基本色的减弱色，用于次要的按钮。如一个和正常按钮并列出现时的、使用频率很低的按钮配色，作为前景色使用时，用于表示减弱的文字颜色。 -->
+
 
 
     <!-- base word color -->

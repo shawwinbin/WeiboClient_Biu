@@ -5,10 +5,20 @@
     android:padding="10dp"
     >
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/progressbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_centerInParent="true"
         />
+
+    <TextView
+        android:id="@+id/tv_loading_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/txt_remark"
+        android:layout_centerInParent="true"
+        />
+
 
 </RelativeLayout>

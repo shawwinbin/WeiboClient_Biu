@@ -18,8 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.UserModel;
-import com.squareup.picasso.Picasso;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -136,8 +137,10 @@ public class NavigationDrawerFragment extends Fragment {
 			return;
 		}
 		tv_name.setText(user.getName());
-		Picasso.with(getActivity()).load(user.getCover()).fit().into(iv_user_bgs);
-		Picasso.with(getActivity()).load(user.avatar_large).fit().into(iv_user_avatar);
+
+		ImageLoader.getInstance().displayImage(user.avatar_large, iv_user_avatar,Constants.avatarOptions);
+		ImageLoader.getInstance().displayImage(user.cover_image_phone, iv_user_bgs,Constants.timelineListOptions);
+
 
 	}
 

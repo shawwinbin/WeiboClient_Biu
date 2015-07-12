@@ -1,23 +1,12 @@
-/* 
- * Copyright (C) 2014 Peter Cai
- *
- * This file is part of BlackLight
- *
- * BlackLight is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * BlackLight is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
+/*
+ * Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.dudutech.weibo.cache;
+package com.dudutech.weibo.dao.user;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,6 +20,7 @@ import android.util.Log;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.UserApi;
+import com.dudutech.weibo.cache.FileCacheManager;
 import com.dudutech.weibo.db.DataBaseHelper;
 import com.dudutech.weibo.db.tables.UsersTable;
 import com.dudutech.weibo.global.Constants;
@@ -41,15 +31,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+
 import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
-
-
-
-public class UserApiCache
+public class UserDao
 {
-	private static String TAG = UserApiCache.class.getSimpleName();
+	private static String TAG = UserDao.class.getSimpleName();
 	
 	private static BitmapDrawable[] mVipDrawable;
 	
@@ -58,7 +46,7 @@ public class UserApiCache
 	private DataBaseHelper mHelper;
 	private FileCacheManager mManager;
 	
-	public UserApiCache(Context context) {
+	public UserDao(Context context) {
 		mHelper = DataBaseHelper.instance(context);
 		mManager = FileCacheManager.instance(context);
 		

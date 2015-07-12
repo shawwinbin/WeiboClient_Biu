@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <ImageView
+        <com.dudutech.weibo.widget.LetterImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/avatar_lst_item"
             android:layout_height="@dimen/avatar_lst_item"
@@ -60,11 +60,11 @@
 
             <TextView
                 android:id="@+id/tv_content"
-                style="@style/moment_text_content"
+                style="@style/txt_main_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/lst_default_null_item_selector"
-                android:lineSpacingMultiplier="1.2"
+                android:lineSpacingMultiplier="1.3"
                 android:paddingTop="@dimen/SmallMargin"
                 />
 
@@ -83,7 +83,8 @@
                     android:id="@+id/tv_orignal_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/moment_text_content"
+                    android:lineSpacingMultiplier="1.3"
+                    style="@style/txt_main_content"
 
                     />
 
@@ -119,7 +120,7 @@
                  >
                 <TextView
                     android:id="@+id/tv_time"
-                    style="@style/text_moment_time"
+                    style="@style/txt_remark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -137,7 +138,7 @@
 
             <TextView
                 android:id="@+id/tv_from"
-                style="@style/text_moment_time"
+                style="@style/txt_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/MiddleMargin"

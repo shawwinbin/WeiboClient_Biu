@@ -28,6 +28,7 @@ import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.Log;
 
+import com.dudutech.weibo.model.CommentModel;
 import com.dudutech.weibo.model.Emoticons;
 import com.dudutech.weibo.model.MessageModel;
 
@@ -116,4 +117,26 @@ public class SpannableStringUtils
 
 		return orig.origSpan;
 	}
+
+	public static SpannableString getCommentSpan(Context context, CommentModel orig) {
+		if (orig.span == null) {
+
+			if (DEBUG) {
+				Log.d(TAG, orig.id + " origSpan is null");
+			}
+
+			String username = "";
+
+			if (orig.user != null) {
+				username = orig.user.getName();
+				username = "@" + username + ":";
+			}
+
+			orig.span = span(context, username + orig.text);
+		}
+
+		return orig.span;
+	}
+
+
 }

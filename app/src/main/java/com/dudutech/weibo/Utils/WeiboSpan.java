@@ -27,6 +27,11 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+
+import com.dudutech.weibo.R;
+import com.dudutech.weibo.global.MyApplication;
+import com.dudutech.weibo.ui.MainActivity;
+
 import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
@@ -80,7 +85,7 @@ public class WeiboSpan extends ClickableSpan
 
 	@Override
 	public void updateDrawState(TextPaint ds) {
-		ds.setColor(ds.linkColor);
+		ds.setColor(MyApplication.mContext.getResources().getColor(R.color.base_actionbar));
 		ds.setUnderlineText(false);
 	}
 	
@@ -90,7 +95,7 @@ public class WeiboSpan extends ClickableSpan
 		protected Object[] doInBackground(Object... params) {
 			// Detect user info in background
 //			return new Object[]{params[0],
-//				new UserApiCache((Context) params[0]).getUserByName((String) params[1])};
+//				new UserDao((Context) params[0]).getUserByName((String) params[1])};
 			return null;
 		}
 

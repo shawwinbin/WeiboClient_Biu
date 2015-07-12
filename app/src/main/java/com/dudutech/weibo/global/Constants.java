@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 public class Constants
@@ -47,6 +48,14 @@ public class Constants
 	private static final String REDIRECT_URI = "http://oauth.weico.cc";
 	private static final String PACKAGE_NAME = "com.eico.weico";
 	private static final String SCOPE = "email,direct_messages_read,direct_messages_write,friendships_groups_read,friendships_groups_write,statuses_to_me_read,follow_app_official_microblog,invitation_write";
+
+
+	//loading status
+	public static enum LOADING_STATUS {
+		NORMAL,
+		FINISH,
+		FAIL
+	}
 
     //imageloader  display options
 
@@ -78,5 +87,13 @@ public class Constants
 			.displayer(new SimpleBitmapDisplayer()) // default
 			.build();
 
+	public static  DisplayImageOptions avatarOptions = new DisplayImageOptions.Builder()
+			.resetViewBeforeLoading(true)  // default
+			.cacheInMemory(true) // default
+			.cacheOnDisk(true) // default
+			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+			.bitmapConfig(Bitmap.Config.ARGB_8888) // default
+			.displayer(new RoundedBitmapDisplayer(1000)) // default
+			.build();
 
 }

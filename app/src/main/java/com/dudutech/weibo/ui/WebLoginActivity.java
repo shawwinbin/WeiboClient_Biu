@@ -27,26 +27,16 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.BaseApi;
 import com.dudutech.weibo.api.LoginApi;
-import com.dudutech.weibo.cache.LoginApiCache;
+import com.dudutech.weibo.dao.login.LoginDao;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -69,7 +59,7 @@ public class WebLoginActivity extends BaseActivity {
 	private String mAppId;
 	private String mAppSecret;
 
-	private LoginApiCache mLogin;
+	private LoginDao mLogin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +69,7 @@ public class WebLoginActivity extends BaseActivity {
         ButterKnife.inject(this);
 
 		// Create login instance
-		mLogin = new LoginApiCache(this);
+		mLogin = new LoginDao(this);
 
 
 		// Login page

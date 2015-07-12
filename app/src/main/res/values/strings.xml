@@ -82,6 +82,9 @@
     </string-array>
     <string name="multiple_pictures">Add multiple pictures</string>
 
+    <string name="loading_finish">已加载完</string>
+    <string name="loading_fail">加载失败 </string>
+
     <!-- Units -->
     <string name="ten_thousand">null</string>
     <string name="million">M</string>
@@ -118,4 +121,7 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="the_day_before_yesterday">2 days ago</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_user_home">UserHomeActivity</string>
+    <string name="title_activity_weibo_detail">WeiboDetailActivity</string>
 </resources>

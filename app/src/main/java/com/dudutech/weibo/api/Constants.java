@@ -38,7 +38,7 @@ public class Constants
 	public static final String USER_TIMELINE = SINA_BASE_URL + "statuses/user_timeline.json";
 	public static final String BILATERAL_TIMELINE = SINA_BASE_URL + "statuses/bilateral_timeline.json";
 	public static final String MENTIONS = SINA_BASE_URL + "statuses/mentions.json";
-	public static final String REPOST_TIMELINE = SINA_BASE_URL + "statuses/repost_timeline.json";
+
 	public static final String UPDATE = SINA_BASE_URL + "statuses/update.json";
 	public static final String UPLOAD = SINA_BASE_URL + "statuses/upload.json";
 	public static final String REPOST = SINA_BASE_URL + "statuses/repost.json";
@@ -49,7 +49,10 @@ public class Constants
 	// Comments
 	public static final String COMMENTS_TIMELINE = SINA_BASE_URL + "comments/timeline.json";
 	public static final String COMMENTS_MENTIONS = SINA_BASE_URL + "comments/mentions.json";
+
 	public static final String COMMENTS_SHOW = SINA_BASE_URL + "comments/show.json";
+	public static final String REPOST_TIMELINE = SINA_BASE_URL + "statuses/repost_timeline.json";
+
 	public static final String COMMENTS_CREATE = SINA_BASE_URL + "comments/create.json";
 	public static final String COMMENTS_REPLY = SINA_BASE_URL + "comments/reply.json";
 	public static final String COMMENTS_DESTROY = SINA_BASE_URL + "comments/destroy.json";

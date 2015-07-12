@@ -23,8 +23,11 @@
   <style name="AppTheme.Main">
       <item name="android:windowIsTranslucent">false</item>
       <item name="fits_windows">false</item>
-
    </style>
-    
-    
+    <style name="AppTheme.UserHome">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="fits_windows">false</item>
+    </style>
+
+
 </resources>

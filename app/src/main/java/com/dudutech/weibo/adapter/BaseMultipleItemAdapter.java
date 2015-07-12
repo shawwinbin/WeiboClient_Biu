@@ -6,14 +6,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 /**
- * Author:    ZhuWenWu
+ * Author:    shaw
  * Version    V1.0
  * Date:      2015/2/25  15:23.
  * Description:
  * Modification  History:
  * Date         	Author        		Version        	Description
  * -----------------------------------------------------------------------------------
- * 2015/2/25        ZhuWenWu            1.0                    1.0
+ * 2015/2/25        shaw            1.0                    1.0
  * Why & What is modified:
  */
 public abstract class BaseMultipleItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

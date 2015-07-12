@@ -17,10 +17,12 @@ import java.io.File;
  * Created by shaw on 2015/7/2.
  */
 public class MyApplication  extends Application{
+
+    public static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
-
+        mContext=getApplicationContext();
         initImageLoaderConfig(this);
     }
 
