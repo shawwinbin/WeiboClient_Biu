@@ -11,13 +11,28 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
-        release {
+    signingConfigs {
+        debug {
+            // No debug config
+        }
 
+        release {
+            storeFile file("weibiu.keystore")
+            storePassword "biu123"
+            keyAlias "biu.keystore"
+            keyPassword "biu123"
+        }
+    }
+    buildTypes{
+        release {
+            signingConfig  signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
+
+
 
 dependencies {
 

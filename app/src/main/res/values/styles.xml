@@ -3,7 +3,7 @@
     <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/base_actionbar</item>
         <item name="colorPrimaryDark">@color/base_status_bar</item>
-        <item name="colorAccent">#FF5722</item>
+        <item name="colorAccent">@color/transparent_1</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="CardBackground">@color/white</item>
         <item name="CardForeground">@color/gray</item>
@@ -13,7 +13,14 @@
 
     <style name="AppTheme" parent="AppBaseTheme">
 
+    </style>
+    <style name="AppTheme.Main">
 
+        <item name="android:windowIsTranslucent">false</item>
+
+    </style>
+    <style name="AppTheme.UserHome">
+        <item name="fits_windows">true</item>
     </style>
 
 
