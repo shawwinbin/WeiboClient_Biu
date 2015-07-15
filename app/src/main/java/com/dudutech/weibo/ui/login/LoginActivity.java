@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.login;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -42,6 +42,8 @@ import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.BaseApi;
 import com.dudutech.weibo.dao.login.LoginDao;
+import com.dudutech.weibo.ui.common.BaseActivity;
+import com.dudutech.weibo.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

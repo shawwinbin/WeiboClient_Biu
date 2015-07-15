@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,11 +11,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.ViewGroup;
 
 import com.dudutech.weibo.R;
-import com.dudutech.weibo.Utils.SystemBarUtils;
 import com.dudutech.weibo.model.MessageModel;
-import com.dudutech.weibo.ui.BaseActivity;
-
-import javax.crypto.KeyGenerator;
+import com.dudutech.weibo.ui.common.BaseActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

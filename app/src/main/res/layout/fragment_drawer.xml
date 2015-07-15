@@ -18,6 +18,7 @@
 			android:layout_height="match_parent"
 			android:id="@+id/iv_user_bg"
 			android:src="@drawable/ic_launcher"
+			android:scaleType="centerCrop"
 
 			/>
 

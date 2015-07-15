@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -103,6 +104,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         resetViewHolder(holder);
         final MessageModel msg = mListModel.getList().get(position);
         holder.tv_content.setText(msg.span);
+        holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.name);
         String url = msg.user.avatar_large;
         holder.iv_avatar.setOval(true);
@@ -137,6 +139,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         onBindBaseWeiboViewHolder(holder, position);
         MessageModel msg = mListModel.getList().get(position).retweeted_status;
         holder.tv_orignal_content.setText(msg.origSpan);
+        holder.tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

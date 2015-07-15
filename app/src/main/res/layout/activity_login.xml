@@ -5,7 +5,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dudutech.weibo.ui.LoginActivity">
+    tools:context="com.dudutech.weibo.ui.login.LoginActivity">
 
     <GridLayout
         android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.main;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,10 +28,15 @@ import com.dudutech.weibo.Utils.SystemBarUtils;
 import com.dudutech.weibo.dao.login.LoginDao;
 import com.dudutech.weibo.dao.user.UserDao;
 import com.dudutech.weibo.model.UserModel;
+import com.dudutech.weibo.ui.common.BaseActivity;
+import com.dudutech.weibo.ui.post.NewPostActivity;
 import com.dudutech.weibo.ui.timeline.HomeTimelineFragment;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class MainActivity extends BaseActivity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+		NavigationDrawerFragment.NavigationDrawerCallbacks ,View.OnClickListener{
 
 
 
@@ -51,10 +57,26 @@ public class MainActivity extends BaseActivity implements
 
 	private LoginDao mLoginCache;
 
+	@InjectView(R.id.toolbar)
+	Toolbar toolbar;
+	@InjectView(R.id.fab)
+	FloatingActionButton  fab;
 
+	@Override
+	public void onClick(View v) {
+		int id=v.getId();
+		switch (id){
+			case R.id.fab:
+				if(mTimelineFragment!=null){
+					mTimelineFragment.doRefresh();
+				}
 
+				break;
+		}
 
-    public static interface Refresher {
+	}
+
+	public static interface Refresher {
         void doRefresh();
     }
 
@@ -62,9 +84,9 @@ public class MainActivity extends BaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ButterKnife.inject(this);
 		mNavigationDrawerFragment = new NavigationDrawerFragment();
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		mActionBar = new ActionBarHelper();
 		mActionBar.init();
@@ -82,6 +104,8 @@ public class MainActivity extends BaseActivity implements
 
 
 		new InitializerTask().execute();
+
+		fab.setOnClickListener(this);
 	}
 
 
@@ -93,7 +117,7 @@ public class MainActivity extends BaseActivity implements
 					drawerRoot.getPaddingRight(),
 					drawerRoot.getBottom());
 		}
-		if (Build.VERSION.SDK_INT == 19) {
+		if (Build.VERSION.SDK_INT >= 19) {
 			ViewGroup rootMain = (ViewGroup) findViewById(R.id.rl_main_root);
 			rootMain.setPadding(rootMain.getPaddingLeft(),
 					rootMain.getPaddingTop(),
@@ -211,9 +235,17 @@ public class MainActivity extends BaseActivity implements
 		}
 
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (id ){
+			case R.id.action_settings :
+				return true;
+			case R.id.action_new_post :
+
+				NewPostActivity.start(this,null,null,NewPostActivity.FLAG_POST);
+
+				return true;
 		}
+
+
 
 		return super.onOptionsItemSelected(item);
 	}

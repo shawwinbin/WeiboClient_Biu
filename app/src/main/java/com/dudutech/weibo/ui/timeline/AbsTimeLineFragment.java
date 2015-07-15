@@ -28,7 +28,7 @@ import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import static com.dudutech.weibo.ui.MainActivity.Refresher;
+import static com.dudutech.weibo.ui.main.MainActivity.Refresher;
 
 
 public abstract class AbsTimeLineFragment extends Fragment implements
@@ -124,6 +124,9 @@ public abstract class AbsTimeLineFragment extends Fragment implements
     @Override
     public void onRefresh() {
         if (!mRefreshing) {
+            if (mSwipeRefresh != null) {
+                mSwipeRefresh.setRefreshing(true);
+            }
             new Refresher().execute(true);
         }
     }

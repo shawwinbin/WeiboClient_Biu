@@ -42,7 +42,7 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 	private static final String BILATERAL = "bilateral";
 	protected DataBaseHelper mHelper;
 	private Context mContext;
-	protected int mCurrentPage = 0;
+
 	public Constants.LOADING_STATUS mStatus;
 	public StatusTimeLineDao(Context context) {
 		mHelper = DataBaseHelper.instance(context);

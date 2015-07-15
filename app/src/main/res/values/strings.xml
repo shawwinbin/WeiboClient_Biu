@@ -85,6 +85,9 @@
     <string name="loading_finish">已加载完</string>
     <string name="loading_fail">加载失败 </string>
 
+
+
+
     <!-- Units -->
     <string name="ten_thousand">null</string>
     <string name="million">M</string>
@@ -124,4 +127,5 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_user_home">UserHomeActivity</string>
     <string name="title_activity_weibo_detail">WeiboDetailActivity</string>
+    <string name="title_activity_new_post">NewPostActivity</string>
 </resources>

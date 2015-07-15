@@ -1,4 +1,4 @@
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.dao.login.LoginDao;
+import com.dudutech.weibo.ui.main.MainActivity;
 
 public class LoadingActivity extends Activity {
 

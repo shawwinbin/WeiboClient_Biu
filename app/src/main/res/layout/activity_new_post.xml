@@ -1,0 +1,101 @@
+<!--
+  ~ Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dudutech.weibo.ui.post.NewPostActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:fitsSystemWindows="true"
+        />
+  <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:layout_below="@id/toolbar"
+     >
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_above="@+id/rl_tool"
+          android:gravity="start"
+          android:background="@color/white"
+          android:textColor="@color/txt_remark"
+          android:padding="10dp"
+          android:textSize="14sp"
+
+          />
+
+
+      <RelativeLayout
+          android:id="@+id/rl_tool"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:padding="@dimen/MiddlePadding"
+          android:background="@color/bg_gray"
+          >
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              >
+              <ImageButton
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_edit_image"
+                  android:id="@+id/btn_inser_img"
+                  android:background="@null"
+                  android:layout_marginRight="10dp"
+                  android:padding="5dp"
+                  />
+              <ImageButton
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_editor_at"
+                  android:id="@+id/btn_inser_friend"
+                  android:background="@null"
+                  android:layout_marginRight="10dp"
+                  android:padding="5dp"
+                  />
+              <ImageButton
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:src="@drawable/ic_edit_emoticon"
+                  android:id="@+id/btn_inser_emoji"
+                  android:background="@null"
+                  android:padding="5dp"
+                  />
+
+
+          </LinearLayout>
+          <ImageButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:src="@drawable/ic_edit_send"
+              android:id="@+id/btn_send"
+              android:background="@null"
+              android:layout_alignParentRight="true"
+              android:padding="5dp"
+              />
+
+      </RelativeLayout>
+
+
+ </RelativeLayout>
+
+</RelativeLayout>

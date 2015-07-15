@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.common;
 
 import android.os.Build;
 import android.os.Bundle;

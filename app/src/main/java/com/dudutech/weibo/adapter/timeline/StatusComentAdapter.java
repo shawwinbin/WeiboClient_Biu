@@ -10,6 +10,7 @@ package com.dudutech.weibo.adapter.timeline;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,8 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 
             CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
 
-            commentViewHolder.tv_content.setText(commentModel.text);
+            commentViewHolder.tv_content.setText(commentModel.span);
+            commentViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
 //            commentViewHolder.tv_time.setText(commentModel.created_at);
             commentViewHolder.tv_time.setText(mTimeUtils.buildTimeString(commentModel.created_at));
             commentViewHolder.tv_username.setText(commentModel.user.getName());

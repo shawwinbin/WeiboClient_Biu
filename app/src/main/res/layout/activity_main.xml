@@ -20,10 +20,7 @@
     android:background="?attr/colorPrimary"
 
     >
-<FrameLayout
-    android:id="@+id/fl_drawer_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
     <!--
          As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions.
@@ -31,14 +28,18 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fl_drawer_root"
+
     >
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_scrollFlags="scroll|enterAlways" />
+       />
 
     <FrameLayout
         android:id="@+id/container"
@@ -46,8 +47,20 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_refresh_white_24dp"
+
+        />
+
 </RelativeLayout>
-</FrameLayout>
+
 
     <!--
          android:layout_gravity="start" tells DrawerLayout to treat

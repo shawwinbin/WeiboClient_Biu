@@ -1,4 +1,4 @@
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.common;
 
 
 import android.os.Bundle;

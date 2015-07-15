@@ -93,11 +93,9 @@ public class WeiboDetailActivity extends AppCompatActivity implements AppBarLayo
 
 
     public  static  void start(Context context ,MessageModel  messageModel){
-
         Intent  intent= new Intent(context,WeiboDetailActivity.class);
         intent.putExtra(EXT_WEIBO,messageModel);
         context.startActivity(intent);
-
     }
 
 

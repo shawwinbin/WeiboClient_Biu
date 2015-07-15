@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,7 +19,7 @@ import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.SystemBarUtils;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.UserModel;
-import com.dudutech.weibo.ui.BaseActivity;
+import com.dudutech.weibo.ui.common.BaseActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -77,7 +74,7 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         setContentView(R.layout.activity_user_home);
         ButterKnife.inject(this);
 //        initStatusBar();
-
+        mUser=getIntent().getParcelableExtra(ETA_USER);
         initUserinfo();
         mUserTimelineFragment = UserTimelineFragment.newInstance(mUser.id);
 

@@ -1,4 +1,4 @@
-package com.dudutech.weibo.ui;
+package com.dudutech.weibo.ui.main;
 
 import android.app.Activity;
 import android.app.Fragment;
