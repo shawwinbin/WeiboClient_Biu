@@ -17,18 +17,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:id="@+id/iv_user_bg"
-			android:src="@drawable/ic_launcher"
 			android:scaleType="centerCrop"
-
 			/>
 
-		<ImageView
-			android:layout_width="50dp"
-			android:layout_height="50dp"
-			android:id="@+id/iv_user_avatar"
-
-			android:layout_margin="40dp"
-			/>
 
 
 		<TextView
@@ -37,11 +28,78 @@
 			android:layout_height="wrap_content"
 			android:text="Username"
 			android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-			android:layout_below="@id/iv_user_avatar"
-			android:layout_margin="40dp"
+			android:layout_margin="20dp"
+			android:layout_alignParentBottom="true"
+			android:textSize="18sp"
+
 			/>
 
+		<ImageView
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+			android:id="@+id/iv_user_avatar"
+            android:layout_above="@id/tv_name"
+			android:layout_margin="20dp"
+			/>
+
+
 	</RelativeLayout>
+
+	<LinearLayout
+		android:id="@+id/ll_menu"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_below="@+id/rl_header"
+		>
+		<LinearLayout
+			android:id="@+id/menu_mention"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:padding="16dp"
+			>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_dashboard"
+				android:layout_gravity="center_vertical"
+				/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/mention_me"
+				android:layout_gravity="center_vertical"
+				style="@style/txt_menu"
+				android:layout_marginLeft="25dp"
+				/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/menu_comment"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:padding="16dp"
+			>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_forum"
+				android:layout_gravity="center_vertical"
+				/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/comment"
+				android:layout_gravity="center_vertical"
+				style="@style/txt_menu"
+				android:layout_marginLeft="25dp"
+				/>
+		</LinearLayout>
+
+	</LinearLayout>
+
 	<ListView
 		android:id="@+id/drawer_list"
 			  android:layout_width="match_parent"
@@ -49,7 +107,7 @@
 	          android:choiceMode="singleChoice"
 	          android:divider="@android:color/transparent"
 	          android:dividerHeight="0dp"
-		      android:layout_below="@+id/rl_header"
+		      android:layout_below="@+id/ll_menu"
 		/>
 
 </RelativeLayout>
