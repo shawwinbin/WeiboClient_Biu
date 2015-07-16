@@ -52,7 +52,7 @@ public class StatusCommentFragment extends AbsTimeLineFragment {
     }
 
     @Override
-    protected ITimelineBaseDao bindApiCache() {
+    protected ITimelineBaseDao bindDao() {
         return new StatusCommentDao(getActivity(),mId);
     }
 

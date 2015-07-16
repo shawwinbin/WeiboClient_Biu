@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.adapter;
+package com.dudutech.weibo.adapter.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * An Adapter which adds HeaderView
+ * An MyFragmentPagerAdapter which adds HeaderView
  */
 public abstract class HeaderViewAdapter<VH extends HeaderViewAdapter.ViewHolder> extends Adapter<VH> {
 	private View mHeader = null;

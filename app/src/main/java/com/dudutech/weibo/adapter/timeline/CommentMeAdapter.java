@@ -10,6 +10,7 @@ package com.dudutech.weibo.adapter.timeline;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.StatusTimeUtils;
+import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.CommentListModel;
 import com.dudutech.weibo.model.CommentModel;
@@ -27,42 +29,35 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by shaw on 2015/7/11.
+ * Created by Administrator on 2015-7-16.
  */
-public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
-
+public class CommentMeAdapter  extends  BaseTimelinAdapter<CommentListModel>  {
     private StatusTimeUtils mTimeUtils;
-    public StatusComentAdapter(Context context, CommentListModel listModel) {
-        super(context, listModel);
+    public CommentMeAdapter(Context context, CommentListModel commentListModel) {
+        super(context, commentListModel);
         mTimeUtils = StatusTimeUtils.instance(context);
     }
 
 
     @Override
     public RecyclerView.ViewHolder onCreateContentView(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.item_weibo_comment, parent, false);
-        CommentViewHolder holder = new CommentViewHolder(view, mContext);
+        View view = mLayoutInflater.inflate(R.layout.item_comment_me, parent, false);
+        CommentMeViewHolder holder = new CommentMeViewHolder(view, mContext);
         return holder;
-
-
     }
-
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         super.onBindViewHolder(holder,position);
-        if(holder instanceof  CommentViewHolder) {
-
-
+        if(holder instanceof  CommentMeViewHolder) {
             CommentModel commentModel = mListModel.getList().get(position);
-
-            CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
-
+            CommentMeViewHolder commentViewHolder = (CommentMeViewHolder) holder;
             commentViewHolder.tv_content.setText(commentModel.span);
             commentViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
 //            commentViewHolder.tv_time.setText(commentModel.created_at);
-            commentViewHolder.tv_time.setText(mTimeUtils.buildTimeString(commentModel.created_at));
+            String  source =   TextUtils.isEmpty(commentModel.source)?"": Utility.dealSourceString(commentModel.source);
+            commentViewHolder.tv_time_source.setText(mTimeUtils.buildTimeString(commentModel.created_at)+" | "+source);
             commentViewHolder.tv_username.setText(commentModel.user.getName());
             commentViewHolder.tv_username.setText(commentModel.user.getName());
             String url = commentModel.user.avatar_large;
@@ -75,9 +70,11 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
     }
 
 
-    public class CommentViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tv_time)
-        public TextView tv_time;
+
+
+    public class CommentMeViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.tv_time_source)
+        public TextView tv_time_source;
         @InjectView(R.id.tv_username)
         public TextView tv_username;
         @InjectView(R.id.tv_content)
@@ -85,7 +82,7 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
         @InjectView(R.id.iv_avatar)
         public ImageView iv_avatar;
 
-        public CommentViewHolder(View itemView, Context context) {
+        public CommentMeViewHolder(View itemView, Context context) {
             super(itemView);
             ButterKnife.inject(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +94,6 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 //                    }
                 }
             });
-
-
         }
-
-
     }
 }

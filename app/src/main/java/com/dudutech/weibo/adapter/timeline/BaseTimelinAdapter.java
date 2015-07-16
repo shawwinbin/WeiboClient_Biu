@@ -17,8 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dudutech.weibo.R;
-import com.dudutech.weibo.adapter.BaseMultipleItemAdapter;
-import com.dudutech.weibo.global.Constants;
+import com.dudutech.weibo.adapter.common.BaseMultipleItemAdapter;
 import com.dudutech.weibo.model.BaseListModel;
 
 import butterknife.ButterKnife;
@@ -26,7 +25,6 @@ import butterknife.InjectView;
 
 import static com.dudutech.weibo.global.Constants.*;
 import static com.dudutech.weibo.global.Constants.LOADING_STATUS.*;
-import static com.dudutech.weibo.global.Constants.LOADING_STATUS.FINISH;
 
 
 /**
@@ -39,8 +37,6 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
     protected T  mListModel ;
 
     protected LOADING_STATUS mBottomStatus;
-
-
 
 
 
@@ -62,6 +58,11 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
 
 
     }
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
+        return null;
+    }
+
 
     protected  void onBindBottomViewHolder(BottomViewHolder holder){
         switch (mBottomStatus){
@@ -120,5 +121,14 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
             ButterKnife.inject(this, itemView);
         }
     }
+    @Override
+    public int getContentItemCount() {
+        return mListModel.getList().size();
+    }
+    @Override
+    public int getContentItemViewType(int position) {
+        return ITEM_TYPE.values().length+1;
+    }
+
 
 }

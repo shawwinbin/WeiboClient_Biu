@@ -50,7 +50,7 @@ public class StatusRepostFragment extends AbsTimeLineFragment {
     }
 
     @Override
-    protected ITimelineBaseDao bindApiCache() {
+    protected ITimelineBaseDao bindDao() {
         return new StatusRepostDao(getActivity(),mId);
     }
 

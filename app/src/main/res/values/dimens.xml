@@ -22,6 +22,7 @@
     <dimen name="avatar_lst_item_large">58dp</dimen>
     <dimen name="nearby_avatar_lst_item_large">62dp</dimen>
 
+    <dimen name="img_large">80dp</dimen>
 
     <!-- margin -->
     <dimen name="MiniMargin">3dp</dimen>

@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,7 +18,6 @@ import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.DeviceUtil;
 import com.dudutech.weibo.Utils.StatusTimeUtils;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.adapter.BaseMultipleItemAdapter;
 import com.dudutech.weibo.cache.LruMemoryCache;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.MessageListModel;
@@ -29,7 +26,6 @@ import com.dudutech.weibo.model.PicSize;
 import com.dudutech.weibo.ui.picture.PicsActivity;
 import com.dudutech.weibo.ui.timeline.UserHomeActivity;
 import com.dudutech.weibo.widget.FlowLayout;
-import com.dudutech.weibo.widget.LetterImageView;
 import com.dudutech.weibo.widget.TagImageVIew;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -107,8 +103,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.name);
         String url = msg.user.avatar_large;
-        holder.iv_avatar.setOval(true);
-        holder.iv_avatar.setLetter(msg.user.name.charAt(0));
+//        holder.iv_avatar.setOval(true);
+//        holder.iv_avatar.setLetter(msg.user.name.charAt(0));
         if (!url.equals(holder.iv_avatar.getTag())) {
             holder.iv_avatar.setTag(url);
             ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.avatarOptions);
@@ -123,11 +119,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         });
 
 
-        if (!msg.source.isEmpty()) {
-            holder.tv_from.setText(Html.fromHtml(msg.source));
-        }
-
-        holder.tv_time.setText(mTimeUtils.buildTimeString(msg.created_at));
+        String  source =   TextUtils.isEmpty(msg.source)?"": Utility.dealSourceString(msg.source);
+        holder.tv_time_source.setText(mTimeUtils.buildTimeString(msg.created_at)+" | "+source);
         holder.tv_comment_count.setText(Utility.getCountString(msg.comments_count));
         holder.tv_like_count.setText("  " + Utility.getCountString(msg.attitudes_count));
         holder.tv_repost_count.setText(Utility.getCountString(msg.reposts_count));
@@ -143,10 +136,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
     }
 
 
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
-        return null;
-    }
+
+
 
     @Override
     public RecyclerView.ViewHolder onCreateContentView(ViewGroup parent, int viewType) {
@@ -344,9 +335,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
                     ImageLoader.getInstance().displayImage(imgUrl, imageView, Constants.timelineListOptions, imageLoadingListener);
                     imageView.setTag(imgUrl);
 
-
                 }
-
 
             }
             holder.fl_images.setVisibility(View.VISIBLE);
@@ -373,15 +362,13 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
     }
 
     public class BaseWeiboViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tv_time)
-        public TextView tv_time;
+        @InjectView(R.id.tv_time_source)
+        public TextView tv_time_source;
         @InjectView(R.id.tv_username)
         public TextView tv_username;
-        @InjectView(R.id.tv_from)
-        public TextView tv_from;
         @InjectView(R.id.tv_content)
         public TextView tv_content;
-        //        public View v;
+
         @InjectView(R.id.ll_comment)
         public LinearLayout ll_comment;
         @InjectView(R.id.ll_like)
@@ -391,8 +378,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         @InjectView(R.id.fl_images)
         public FlowLayout fl_images;
         @InjectView(R.id.iv_avatar)
-        public LetterImageView iv_avatar;
-
+        public ImageView iv_avatar;
         @InjectView(R.id.tv_comment_count)
         public TextView tv_comment_count;
         @InjectView(R.id.tv_repost_count)

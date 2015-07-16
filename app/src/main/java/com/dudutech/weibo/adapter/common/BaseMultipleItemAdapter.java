@@ -1,4 +1,4 @@
-package com.dudutech.weibo.adapter;
+package com.dudutech.weibo.adapter.common;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -58,6 +58,7 @@
     <string name="attitudes">赞</string>
     <string name="retweet">转发</string>
     <string name="comment">评论</string>
+    <string name="weibo">微博</string>
     <string name="status_mention_me">提到我的微博</string>
     <string name="comment_mention_me">提到我的评论</string>
     <string name="mention_me">提到我的</string>

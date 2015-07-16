@@ -38,6 +38,8 @@
     <color name="nearby_name">#4F4E66</color>
     <color name="nearby_purpose">#A4A4A4</color>
 
+
+
     <!-- background -->
     <color name="tab_bar_bg">#F5F5F7</color>
     <color name="title_bg_gray">#F6F6F6</color>
@@ -57,27 +59,8 @@
     <color name="btn_click_black">#a4a4a4</color>
     <color name="btn_click_orange_dark">#b65644</color>
 
-    <!-- text color -->
-    <color name="txt_deepest">#4f4e66</color>
-    <color name="txt_gray">#a4a4a4</color>
-    <color name="login_ver_nbotice">#ff524b</color>
-    <color name="chat_setting_txt_notice">#9c9ca4</color>
-    <color name="chat_txt_send_time">#666666</color>
-    <color name="slide_menu_txt_normal">#8D8AA5</color>
-    <color name="slide_menu_txt_select">#6C92FF</color>
-    <color name="tab_bar_ic_text_normal">#9C9CA4</color>
-    <color name="tab_bar_ic_text_press">#4E56CA</color>
-    <color name="new_msg_btn_text">#4D54B6</color>
-    <color name="lst_chat_item_user_name">#4F4E66</color>
-    <color name="lst_chat_item_content">#9A96B1</color>
-    <color name="lst_item_title_gray">#A4A4A4</color>
-    <color name="txt_orange">#ff9141</color>
-    <color name="txt_chat_red">#FF564E</color>
-    <color name="chat_txt_timer">#8b8b8b</color>
 
-    <!-- other -->
-    <color name="main_app_bg">#FF171717</color>
-    <color name="tab_bar_divider_dark">#9C9CA4</color>
+
 
     <!-- login -->
     <color name="login_txt_forgot_pwd">#626adb</color>
@@ -313,6 +296,8 @@
 
 
     <color name="yellow">#FFF7D23E</color>
+
+    <color name="ic_tint_nor">#595959</color>
 
 
 </resources>

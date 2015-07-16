@@ -143,11 +143,11 @@ public class Utility
 //		return array[0] != 0 ? array[0] : 2048;
 //	}
 //
-//	public static String truncateSourceString(String from) {
-//		int start = from.indexOf(">") + 1;
-//		int end = from.lastIndexOf("<");
-//		return from.substring(start, end);
-//	}
+	public static String dealSourceString(String from) {
+		int start = from.indexOf(">") + 1;
+		int end = from.lastIndexOf("<");
+		return from.substring(start, end);
+	}
 //
 //	public static void clearOngoingUnreadCount(Context context) {
 //		Settings s = Settings.getInstance(context);

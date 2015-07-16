@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Switch;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.SystemBarUtils;
@@ -31,6 +32,7 @@ import com.dudutech.weibo.model.UserModel;
 import com.dudutech.weibo.ui.common.BaseActivity;
 import com.dudutech.weibo.ui.post.NewPostActivity;
 import com.dudutech.weibo.ui.timeline.HomeTimelineFragment;
+import com.dudutech.weibo.ui.timeline.MentionMeFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -47,6 +49,8 @@ public class MainActivity extends BaseActivity implements
 	private NavigationDrawerFragment mNavigationDrawerFragment;
 
 	private HomeTimelineFragment mTimelineFragment;
+
+	private MentionMeFragment mMentionMeFragment;
 
 	private CharSequence mTitle;
 
@@ -86,22 +90,17 @@ public class MainActivity extends BaseActivity implements
 		setContentView(R.layout.activity_main);
 		ButterKnife.inject(this);
 		mNavigationDrawerFragment = new NavigationDrawerFragment();
-
 		setSupportActionBar(toolbar);
 		mActionBar = new ActionBarHelper();
 		mActionBar.init();
 		initStatusBar();
-
 		getFragmentManager()
 				.beginTransaction()
 				.replace(R.id.navigation_drawer, mNavigationDrawerFragment)
 				.commit();
-
 		setUpDrawer();
-
 		mUserCache = new UserDao(this);
 		mLoginCache = new LoginDao(this);
-
 
 		new InitializerTask().execute();
 
@@ -167,22 +166,34 @@ public class MainActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(int position) {
+	public void onNavigationDrawerItemSelected(int position ,String groupId) {
 
-		if(position==0){
-			mTimelineFragment=new HomeTimelineFragment() ;
+		switch (position){
+			case NavigationDrawerFragment.MENU_WEIBO :
+				if(mTimelineFragment==null){
+					mTimelineFragment=new HomeTimelineFragment() ;
+					getSupportFragmentManager()
+							.beginTransaction()
+							.add(R.id.container, mTimelineFragment,"weibo" )
+							.commit();
+				}
+				getSupportFragmentManager().beginTransaction().show(mTimelineFragment)
+						.commit();
+				break;
+			case NavigationDrawerFragment.MENU_MOMENTION :
+				if(mMentionMeFragment==null){
+					mMentionMeFragment=MentionMeFragment.newInstance() ;
+					getSupportFragmentManager()
+							.beginTransaction()
+							.add(R.id.container, mMentionMeFragment,"mention" )
+							.commit();
+				}
 
-			getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.container, mTimelineFragment)
-					.commit();
-		}
-		else{
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							PlaceholderFragment.newInstance(position + 1)).commit();
+				getSupportFragmentManager().beginTransaction().show(mMentionMeFragment).hide(mTimelineFragment)
+						.commit();
+				break;
+
+
 		}
 
 		try {

@@ -78,7 +78,7 @@ public class UserTimelineFragment extends HomeTimelineFragment {
 //    }
 
     @Override
-    protected StatusTimeLineDao bindApiCache() {
+    protected StatusTimeLineDao bindDao() {
 
       return new FriendTimeLineDao(getActivity(),mUid);
     }

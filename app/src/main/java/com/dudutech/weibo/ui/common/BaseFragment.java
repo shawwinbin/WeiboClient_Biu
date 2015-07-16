@@ -1,14 +1,8 @@
 package com.dudutech.weibo.ui.common;
 
 
-import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.dudutech.weibo.R;
+import android.support.v4.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -56,7 +56,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         mSettings = Settings.getInstance(getActivity().getApplicationContext());
         final View v = inflater.inflate(R.layout.fragment_timeline, null);
         ButterKnife.inject(this, v);
-        mCache = bindApiCache();
+        mCache = bindDao();
         mCache.loadFromCache();
         mList.setDrawingCacheEnabled(true);
         mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -71,7 +71,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         if (mCache.getList().getSize() == 0) {
             new Refresher().execute(true);
         }
-        // Adapter
+        // MyFragmentPagerAdapter
 //        mAdapter = new TimelineAdapter(getActivity(), (List<MessageModel>) mCache.mMessages.getList()
 //        );
 //        mAdapter.setBottomCount(1);
@@ -132,7 +132,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
     }
 
 
-//    protected StatusTimeLineDao bindApiCache() {
+//    protected StatusTimeLineDao bindDao() {
 //        return new StatusTimeLineDao(getActivity());
 //    }
 
@@ -199,7 +199,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
 
     }
 
-    protected abstract ITimelineBaseDao bindApiCache();
+    protected abstract ITimelineBaseDao bindDao();
 //    protected abstract TimelineAdapter bindAdapter();
 
     protected abstract BaseTimelinAdapter  bindListAdapter();

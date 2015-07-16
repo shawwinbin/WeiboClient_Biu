@@ -24,16 +24,18 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements View.OnClickListener {
 
 	private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
 	private NavigationDrawerCallbacks mCallbacks;
 
-
-
-	private int mCurrentSelectedPosition = 0;
+	public static final int MENU_MOMENTION = 0;
+	public static final int MENU_COMMENT = 1;
+	public static final int MENU_WEIBO = 2;
+	public int mCurrentSelectedPosition = MENU_WEIBO;
 
 	@InjectView(R.id.tv_name)
 	TextView tv_name;
@@ -43,6 +45,8 @@ public class NavigationDrawerFragment extends Fragment {
 	ImageView iv_user_bgs;
 	@InjectView(R.id.drawer_list)
 	ListView mDrawerListView;
+	@InjectView(R.id.menu_mention)
+	View menu_mention;
 
 
 	public NavigationDrawerFragment() {
@@ -57,7 +61,7 @@ public class NavigationDrawerFragment extends Fragment {
 					.getInt(STATE_SELECTED_POSITION);
 		}
 
-		selectItem(mCurrentSelectedPosition);
+		selectItem(mCurrentSelectedPosition,"");
 	}
 
 	@Override
@@ -77,28 +81,31 @@ public class NavigationDrawerFragment extends Fragment {
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						selectItem(position);
+											int position, long id) {
+						selectItem(position, "");
 					}
 				});
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(),
 				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, new String[] {
-						getString(R.string.title_section1),
-						getString(R.string.title_section2),
-						getString(R.string.title_section3), }));
+				android.R.id.text1, new String[]{
+				getString(R.string.title_section1),
+				getString(R.string.title_section2),
+				getString(R.string.title_section3),}));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+		menu_mention.setOnClickListener(this);
+
 		return v;
 	}
 
-	private void selectItem(int position) {
+	private void selectItem(int position ,String groupId) {
 		mCurrentSelectedPosition = position;
-		if (mDrawerListView != null) {
-			mDrawerListView.setItemChecked(position, true);
-		}
+//		if (mDrawerListView != null) {
+//			mDrawerListView.setItemChecked(position, true);
+//		}
 		if (mCallbacks != null) {
-			mCallbacks.onNavigationDrawerItemSelected(position);
+			mCallbacks.onNavigationDrawerItemSelected(position,groupId);
 		}
 	}
 
@@ -128,8 +135,24 @@ public class NavigationDrawerFragment extends Fragment {
 		return ((AppCompatActivity) getActivity()).getSupportActionBar();
 	}
 
+	@Override
+	public void onClick(View v) {
+		int id = v.getId();
+		switch (id){
+			case R.id.menu_mention :
+				selectItem(MENU_MOMENTION,"");
+				break;
+			case R.id.menu_comment:
+				selectItem(MENU_COMMENT,"");
+				break;
+
+
+		}
+
+	}
+
 	public static interface NavigationDrawerCallbacks {
-		void onNavigationDrawerItemSelected(int position);
+		void onNavigationDrawerItemSelected(int position,String groupId);
 	}
 
 	public void setHeadView(UserModel user){

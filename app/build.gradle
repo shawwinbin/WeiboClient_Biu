@@ -13,19 +13,20 @@ android {
     }
     signingConfigs {
         debug {
-            // No debug config
-        }
 
-        release {
             storeFile file("weibiu.keystore")
             storePassword "biu123"
             keyAlias "biu.keystore"
             keyPassword "biu123"
         }
+
+        release {
+
+        }
     }
     buildTypes{
         release {
-            signingConfig  signingConfigs.release
+            signingConfig  signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
