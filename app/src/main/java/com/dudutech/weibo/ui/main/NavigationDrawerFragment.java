@@ -2,10 +2,12 @@ package com.dudutech.weibo.ui.main;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dudutech.weibo.R;
+import com.dudutech.weibo.adapter.common.GroupAdapter;
+import com.dudutech.weibo.dao.relationship.GroupDao;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.UserModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -37,6 +41,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	public static final int MENU_WEIBO = 2;
 	public int mCurrentSelectedPosition = MENU_WEIBO;
 
+
+
 	@InjectView(R.id.tv_name)
 	TextView tv_name;
 	@InjectView(R.id.iv_user_avatar)
@@ -48,6 +54,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	@InjectView(R.id.menu_mention)
 	View menu_mention;
 
+	GroupDao mGroupDao;
+
+	public GroupAdapter mGroupAdapter;
 
 	public NavigationDrawerFragment() {
 	}
@@ -76,6 +85,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		View v = inflater.inflate(R.layout.fragment_drawer,container, false);
 
 		ButterKnife.inject(this,v);
+		mGroupDao=new GroupDao();
 
 		mDrawerListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,16 +95,22 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 						selectItem(position, "");
 					}
 				});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
-				.getThemedContext(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, new String[]{
-				getString(R.string.title_section1),
-				getString(R.string.title_section2),
-				getString(R.string.title_section3),}));
-		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+
+		mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mModel);
+
+//		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
+//				.getThemedContext(),
+//				android.R.layout.simple_list_item_activated_1,
+//				android.R.id.text1, new String[]{
+//				getString(R.string.title_section1),
+//				getString(R.string.title_section2),
+//				getString(R.string.title_section3),}));
+//		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
 		menu_mention.setOnClickListener(this);
+
+		new InitGroupsInTask().execute();
 
 		return v;
 	}
@@ -140,6 +156,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		int id = v.getId();
 		switch (id){
 			case R.id.menu_mention :
+				menu_mention.setSelected(true);
 				selectItem(MENU_MOMENTION,"");
 				break;
 			case R.id.menu_comment:
@@ -164,7 +181,36 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		ImageLoader.getInstance().displayImage(user.avatar_large, iv_user_avatar,Constants.avatarOptions);
 		ImageLoader.getInstance().displayImage(user.cover_image_phone, iv_user_bgs,Constants.timelineListOptions);
 
+	}
 
+	private class InitGroupsInTask extends AsyncTask<Void, Object, Void> {
+
+		@Override
+		protected void onPreExecute() {
+
+		}
+
+		@Override
+		protected Void doInBackground(Void[] params) {
+			// Username first
+			mGroupDao.getGroups();
+
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+
+			mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mModel);
+
+			mDrawerListView.setAdapter(mGroupAdapter);
+			mGroupAdapter.notifyDataSetChanged();
+
+			super.onPostExecute(aVoid);
+
+
+		}
 	}
 
 }

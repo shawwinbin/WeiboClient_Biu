@@ -26,7 +26,7 @@
 
 
 	<!-- Theme -->
-	<declare-styleable name="BlackLight">
+	<declare-styleable name="biu">
 		<attr name="CardBackground" format="reference" />
 		<attr name="CardForeground" format="color" />
 		<attr name="fits_windows" format="boolean"/>
@@ -57,8 +57,10 @@
 		<attr name="NewPostDivider" format="color" />
 		<attr name="NewPostBottom" format="color" />
 		<attr name="UserInfoBackground" format="color" />
+		<attr name="MenuIconTint" format="color" />
 		<attr name="UserInfoText" format="color" />
 		<attr name="UserInfoDivider" format="reference" />
+
 	</declare-styleable>
 
 	<declare-styleable name="SelectableRoundedImageView">

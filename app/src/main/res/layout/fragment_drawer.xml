@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -50,21 +50,28 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:layout_below="@+id/rl_header"
+
 		>
 		<LinearLayout
 			android:id="@+id/menu_mention"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:padding="16dp"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:paddingLeft="15dp"
+			android:paddingRight="15dp"
+			android:clickable="true"
+			android:addStatesFromChildren="true"
+			android:background="?android:attr/selectableItemBackground"
+
 			>
 			<ImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:src="@drawable/ic_dashboard"
 				android:layout_gravity="center_vertical"
-				android:tint="@color/ic_tint_nor"
+				android:tint="?attr/MenuIconTint"
 				/>
 			<TextView
 				android:layout_width="match_parent"
@@ -72,7 +79,7 @@
 				android:text="@string/mention_me"
 				android:layout_gravity="center_vertical"
 				style="@style/txt_menu"
-				android:layout_marginLeft="25dp"
+				android:layout_marginLeft="30dp"
 
 				/>
 		</LinearLayout>
@@ -82,14 +89,19 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:padding="16dp"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:paddingLeft="15dp"
+			android:paddingRight="15dp"
+			android:background="@drawable/bg_menu_selector"
 			>
 			<ImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:src="@drawable/ic_forum"
 				android:layout_gravity="center_vertical"
-				android:tint="@color/ic_tint_nor"
+				android:tint="?attr/MenuIconTint"
+
 		/>
 			<TextView
 				android:layout_width="match_parent"
@@ -97,11 +109,30 @@
 				android:text="@string/comment"
 				android:layout_gravity="center_vertical"
 				style="@style/txt_menu"
-				android:layout_marginLeft="25dp"
-				/>
+				android:layout_marginLeft="30dp"
+				 />
 		</LinearLayout>
 
 	</LinearLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="#dcdcdc"
+
+		/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:text="@string/group"
+		android:textSize="15sp"
+		android:textColor="@color/ic_tint_nor"
+		android:paddingLeft="15dp"
+		android:paddingRight="15dp"
+		android:paddingTop="15dp"
+		android:paddingBottom="5dp"
+		 />
 
 	<ListView
 		android:id="@+id/drawer_list"
@@ -110,7 +141,7 @@
 	          android:choiceMode="singleChoice"
 	          android:divider="@android:color/transparent"
 	          android:dividerHeight="0dp"
-		      android:layout_below="@+id/ll_menu"
+
 		/>
 
-</RelativeLayout>
+</LinearLayout>

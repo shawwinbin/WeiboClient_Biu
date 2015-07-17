@@ -2,8 +2,8 @@
 <resources>
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/base_actionbar</item>
-        <item name="colorPrimaryDark">@color/base_status_bar</item>
+        <item name="colorPrimary">#2f5a81</item>
+        <item name="colorPrimaryDark">#1c364d</item>
         <item name="colorAccent">@color/material_blue_grey_800</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="CardBackground">@color/white</item>
@@ -23,6 +23,7 @@
   <style name="AppTheme.Main">
       <item name="android:windowIsTranslucent">false</item>
       <item name="fits_windows">false</item>
+      <item name="MenuIconTint">@color/ic_tint_nor</item>
    </style>
     <style name="AppTheme.UserHome">
         <item name="android:windowIsTranslucent">false</item>

@@ -297,7 +297,7 @@
 
     <color name="yellow">#FFF7D23E</color>
 
-    <color name="ic_tint_nor">#595959</color>
-
+    <color name="ic_tint_nor">#707070</color>
+    <color name="selected_bg">#d7d7d7</color>
 
 </resources>
