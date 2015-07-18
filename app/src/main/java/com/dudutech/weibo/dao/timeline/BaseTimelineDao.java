@@ -12,6 +12,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.dudutech.weibo.api.WeiboCommentApi;
+import com.dudutech.weibo.db.tables.HomeTimeLineTable;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.BaseListModel;
 import com.dudutech.weibo.model.CommentListModel;
@@ -38,7 +39,7 @@ public abstract class BaseTimelineDao< T extends BaseListModel> implements ITime
         Cursor cursor = query();
         if (cursor.getCount() == 1) {
             cursor.moveToFirst();
-            mListModel = (T) new Gson().fromJson(cursor.getString(1),getListClass());
+            mListModel = (T) new Gson().fromJson(cursor.getString(cursor.getColumnIndex(HomeTimeLineTable.JSON)),getListClass());
             mCurrentPage = mListModel.getSize() / Constants.HOME_TIMELINE_PAGE_SIZE;
             spanAll(mListModel);
         } else {

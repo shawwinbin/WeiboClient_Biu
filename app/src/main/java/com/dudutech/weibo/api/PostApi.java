@@ -30,7 +30,7 @@ public class PostApi extends BaseApi
 //		params.put("annotations", parseAnnotation(version));
 		
 		try {
-			JSONObject json = request(Constants.UPDATE, params, HTTP_POST);
+			JSONObject json = request(UrlConstants.UPDATE, params, HTTP_POST);
 			MessageModel msg = new Gson().fromJson(json.toString(), MessageModel.class);
 			
 			if (msg == null || msg.idstr == null || msg.idstr.trim().equals("")) {
@@ -50,7 +50,7 @@ public class PostApi extends BaseApi
 		params.put("pic", pic);
 
 		try {
-			JSONObject json = request(Constants.UPLOAD, params, HTTP_POST);
+			JSONObject json = request(UrlConstants.UPLOAD, params, HTTP_POST);
 			MessageModel msg = new Gson().fromJson(json.toString(), MessageModel.class);
 
 			if (msg == null || msg.idstr == null || msg.idstr.trim().equals("")) {
@@ -71,7 +71,7 @@ public class PostApi extends BaseApi
 //		params.put("annotations", parseAnnotation(version));
 
 		try {
-			JSONObject json = request(Constants.REPOST, params, HTTP_POST);
+			JSONObject json = request(UrlConstants.REPOST, params, HTTP_POST);
 			MessageModel msg = new Gson().fromJson(json.toString(), MessageModel.class);
 
 			if (msg == null || msg.idstr == null || msg.idstr.trim().equals("")) {
@@ -90,7 +90,7 @@ public class PostApi extends BaseApi
 		params.put("id", id);
 		
 		try {
-			request(Constants.DESTROY, params, HTTP_POST);
+			request(UrlConstants.DESTROY, params, HTTP_POST);
 		} catch (Exception e) {
 			// Nothing can be done
 		}
@@ -102,7 +102,7 @@ public class PostApi extends BaseApi
 		params.put("id", id);
 		
 		try {
-			request(Constants.FAVORITES_CREATE, params, HTTP_POST);
+			request(UrlConstants.FAVORITES_CREATE, params, HTTP_POST);
 		} catch (Exception e) {
 			
 		}
@@ -114,7 +114,7 @@ public class PostApi extends BaseApi
 		params.put("id", id);
 		
 		try {
-			request(Constants.FAVORITES_DESTROY, params, HTTP_POST);
+			request(UrlConstants.FAVORITES_DESTROY, params, HTTP_POST);
 		} catch (Exception e) {
 			
 		}
@@ -126,7 +126,7 @@ public class PostApi extends BaseApi
 		params.put("pic", picture);
 
 		try {
-			JSONObject json = request(Constants.UPLOAD_PIC, params, HTTP_POST);
+			JSONObject json = request(UrlConstants.UPLOAD_PIC, params, HTTP_POST);
 			return json.optString("pic_id");
 		} catch (Exception e) {
 			return null;
@@ -142,7 +142,7 @@ public class PostApi extends BaseApi
 //		params.put("annotations", parseAnnotation(version));
 
 		try {
-			JSONObject json = request(Constants.UPLOAD_URL_TEXT, params, HTTP_POST);
+			JSONObject json = request(UrlConstants.UPLOAD_URL_TEXT, params, HTTP_POST);
 			MessageModel msg = new Gson().fromJson(json.toString(), MessageModel.class);
 			if (msg == null || msg.idstr == null || msg.idstr.trim().equals("")) {
 				return false;

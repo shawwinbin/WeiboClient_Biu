@@ -30,7 +30,7 @@ public class RepostTimeLineApi extends BaseApi
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.REPOST_TIMELINE, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.REPOST_TIMELINE, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), RepostListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {

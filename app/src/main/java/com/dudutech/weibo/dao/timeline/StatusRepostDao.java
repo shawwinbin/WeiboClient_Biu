@@ -30,7 +30,7 @@ public class StatusRepostDao extends  StatusTimeLineDao{
 
     private long mId;
     public StatusRepostDao(Context context, long id) {
-        super(context);
+        super(context,"");
         mId=id;
     }
 

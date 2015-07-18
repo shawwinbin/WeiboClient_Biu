@@ -78,7 +78,7 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         initUserinfo();
         mUserTimelineFragment = UserTimelineFragment.newInstance(mUser.id);
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fl_content, mUserTimelineFragment)
                 .commit();

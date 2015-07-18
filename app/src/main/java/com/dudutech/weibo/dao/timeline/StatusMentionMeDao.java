@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 public class StatusMentionMeDao extends  StatusTimeLineDao{
 
     public  StatusMentionMeDao(Context context){
-        super(context);
+        super(context,"");
     }
     @Override
     public void cache() {

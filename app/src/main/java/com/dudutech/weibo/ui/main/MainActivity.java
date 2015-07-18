@@ -3,6 +3,7 @@ package com.dudutech.weibo.ui.main;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
@@ -44,36 +45,34 @@ public class MainActivity extends BaseActivity implements
 
 	public final static  String TAG = "MainActivity";
 
-	private ActionBarDrawerToggle mDrawerToggle;
-	private DrawerLayout mDrawerLayout;
-	private NavigationDrawerFragment mNavigationDrawerFragment;
-
-	private HomeTimelineFragment mTimelineFragment;
-
-	private MentionMeFragment mMentionMeFragment;
-
-	private CharSequence mTitle;
-
-	private ActionBarHelper mActionBar;
-
-	private UserDao mUserCache;
-	private UserModel mUser;
-
-	private LoginDao mLoginCache;
 
 	@InjectView(R.id.toolbar)
 	Toolbar toolbar;
 	@InjectView(R.id.fab)
 	FloatingActionButton  fab;
 
+	private ActionBarDrawerToggle mDrawerToggle;
+	private DrawerLayout mDrawerLayout;
+	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private CharSequence mTitle;
+	private ActionBarHelper mActionBar;
+	private UserDao mUserCache;
+	private UserModel mUser;
+	private LoginDao mLoginCache;
+
+	public final static  String FRG_TAG_PRE_SUFIX = "main_frg_";
+
+	public final static  String FRG_TAG_MENTION_ME = FRG_TAG_PRE_SUFIX+"mention_me";
+
+	public final static  String FRG_TAG_COMMENT = FRG_TAG_PRE_SUFIX+"comment";
+	public   String mCurrentPositon = "";
+
+
 	@Override
 	public void onClick(View v) {
 		int id=v.getId();
 		switch (id){
 			case R.id.fab:
-				if(mTimelineFragment!=null){
-					mTimelineFragment.doRefresh();
-				}
 
 				break;
 		}
@@ -168,33 +167,50 @@ public class MainActivity extends BaseActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position ,String groupId) {
 
+		FragmentTransaction ft= getFragmentManager()
+				.beginTransaction();
+		Fragment lastFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+		Fragment currentFragment=null;
+
 		switch (position){
 			case NavigationDrawerFragment.MENU_WEIBO :
-				if(mTimelineFragment==null){
-					mTimelineFragment=new HomeTimelineFragment() ;
-					getSupportFragmentManager()
-							.beginTransaction()
-							.add(R.id.container, mTimelineFragment,"weibo" )
-							.commit();
+				mCurrentPositon=FRG_TAG_PRE_SUFIX+groupId;
+				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				if(currentFragment==null){
+					currentFragment=HomeTimelineFragment.newInstance(groupId);
+					ft.add(R.id.container, currentFragment, mCurrentPositon);
+
 				}
-				getSupportFragmentManager().beginTransaction().show(mTimelineFragment)
-						.commit();
 				break;
 			case NavigationDrawerFragment.MENU_MOMENTION :
-				if(mMentionMeFragment==null){
-					mMentionMeFragment=MentionMeFragment.newInstance() ;
-					getSupportFragmentManager()
-							.beginTransaction()
-							.add(R.id.container, mMentionMeFragment,"mention" )
-							.commit();
+				mCurrentPositon=FRG_TAG_MENTION_ME;
+				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				if(currentFragment==null){
+					currentFragment=MentionMeFragment.newInstance() ;
+					ft.add(R.id.container, currentFragment, mCurrentPositon);
+
 				}
 
-				getSupportFragmentManager().beginTransaction().show(mMentionMeFragment).hide(mTimelineFragment)
-						.commit();
 				break;
+			case NavigationDrawerFragment.MENU_COMMENT :
+				mCurrentPositon=FRG_TAG_MENTION_ME;
+				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				if(currentFragment==null){
+					currentFragment=MentionMeFragment.newInstance() ;
+					ft.add(R.id.container, currentFragment, mCurrentPositon);
 
-
+				}
+				break;
 		}
+
+		if(lastFragment!=null){
+			ft.hide(lastFragment);
+		}
+		if(currentFragment!=null) {
+			ft.show(currentFragment);
+			ft.commit();
+		}
+
 
 		try {
 			mDrawerLayout.closeDrawer(Gravity.LEFT);

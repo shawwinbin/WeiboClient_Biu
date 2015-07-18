@@ -28,7 +28,7 @@ public class CommentMentionMeApi extends BaseApi
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.COMMENTS_MENTIONS, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.COMMENTS_MENTIONS, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), CommentListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.adapter.common.GroupAdapter;
 import com.dudutech.weibo.dao.relationship.GroupDao;
+import com.dudutech.weibo.dao.timeline.StatusTimeLineDao;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.UserModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -69,8 +70,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 			mCurrentSelectedPosition = savedInstanceState
 					.getInt(STATE_SELECTED_POSITION);
 		}
+		selectItem(mCurrentSelectedPosition, StatusTimeLineDao.GROUP_ALL);
 
-		selectItem(mCurrentSelectedPosition,"");
 	}
 
 	@Override
@@ -84,35 +85,29 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_drawer,container, false);
 
-		ButterKnife.inject(this,v);
-		mGroupDao=new GroupDao();
-
+		ButterKnife.inject(this, v);
+		mGroupDao=new GroupDao(getActivity());
 		mDrawerListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 											int position, long id) {
-						selectItem(position, "");
+						selectItem(MENU_WEIBO, mGroupDao.mListModel.getList().get(position).idstr);
 					}
 				});
 
 
-		mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mModel);
-
-//		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
-//				.getThemedContext(),
-//				android.R.layout.simple_list_item_activated_1,
-//				android.R.id.text1, new String[]{
-//				getString(R.string.title_section1),
-//				getString(R.string.title_section2),
-//				getString(R.string.title_section3),}));
-//		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-
+		mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mListModel);
+		mDrawerListView.setAdapter(mGroupAdapter);
 		menu_mention.setOnClickListener(this);
-
 		new InitGroupsInTask().execute();
-
 		return v;
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
 	}
 
 	private void selectItem(int position ,String groupId) {
@@ -133,6 +128,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		} catch (ClassCastException e) {
 			throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
 		}
+
+
+
 	}
 
 	@Override
@@ -193,7 +191,14 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		@Override
 		protected Void doInBackground(Void[] params) {
 			// Username first
-			mGroupDao.getGroups();
+			mGroupDao.loadFromCache();
+
+			if(mGroupDao.mListModel.getList().size()<3) {
+				mGroupDao.load(false);
+				mGroupDao.cache();
+				mGroupDao.mListModel.addDefaultGroupsToTop();
+			}
+
 
 
 			return null;
@@ -202,9 +207,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		@Override
 		protected void onPostExecute(Void aVoid) {
 
-			mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mModel);
 
-			mDrawerListView.setAdapter(mGroupAdapter);
 			mGroupAdapter.notifyDataSetChanged();
 
 			super.onPostExecute(aVoid);

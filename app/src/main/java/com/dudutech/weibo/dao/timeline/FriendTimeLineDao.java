@@ -28,7 +28,7 @@ public class FriendTimeLineDao extends StatusTimeLineDao
 	private String mUid;
 	
 	public FriendTimeLineDao(Context context, String uid) {
-		super(context);
+		super(context,"");
 		mUid = uid;
 	}
 

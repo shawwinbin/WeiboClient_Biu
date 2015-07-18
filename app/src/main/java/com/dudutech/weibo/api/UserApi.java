@@ -41,7 +41,7 @@ public class UserApi extends BaseApi
 		params.put("uid", uid);
 		
 		try {
-			JSONObject json = request(Constants.USER_SHOW, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.USER_SHOW, params, HTTP_GET);
 			UserModel user = new Gson().fromJson(json.toString().replaceAll("-Weibo", ""), UserModel.class);
 			return user;
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public class UserApi extends BaseApi
 		params.put("screen_name", name);
 
 		try {
-			JSONObject json = request(Constants.USER_SHOW, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.USER_SHOW, params, HTTP_GET);
 			UserModel user = new Gson().fromJson(json.toString().replaceAll("-Weibo", ""), UserModel.class);
 			return user;
 		} catch (Exception e) {

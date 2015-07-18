@@ -29,7 +29,7 @@ public class AccountApi extends BaseApi
 {
 	public static String getUid() {
 		try {
-			JSONObject json = request(Constants.GET_UID, new WeiboParameters(), HTTP_GET);
+			JSONObject json = request(UrlConstants.GET_UID, new WeiboParameters(), HTTP_GET);
 			return json.optString("uid");
 		} catch (Exception e) {
 			return null;

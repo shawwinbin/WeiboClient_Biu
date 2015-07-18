@@ -36,7 +36,7 @@ public class BilateralTimeLineApi extends BaseApi {
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.BILATERAL_TIMELINE, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.BILATERAL_TIMELINE, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), MessageListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {

@@ -39,7 +39,7 @@ public class HomeTimeLineApi extends BaseApi
 		params.put("page", page);
 		
 		try {
-			JSONObject json = request(Constants.HOME_TIMELINE, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.HOME_TIMELINE, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), MessageListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {

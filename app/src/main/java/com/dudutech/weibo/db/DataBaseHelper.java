@@ -27,6 +27,7 @@ import com.dudutech.weibo.db.tables.CommentMentionsTimeLineTable;
 import com.dudutech.weibo.db.tables.CommentTimeLineTable;
 import com.dudutech.weibo.db.tables.DirectMessageUserTable;
 import com.dudutech.weibo.db.tables.FavListTable;
+import com.dudutech.weibo.db.tables.GroupTable;
 import com.dudutech.weibo.db.tables.HomeTimeLineTable;
 import com.dudutech.weibo.db.tables.MentionsTimeLineTable;
 import com.dudutech.weibo.db.tables.RepostTimeLineTable;
@@ -38,7 +39,7 @@ import com.dudutech.weibo.db.tables.UsersTable;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
 	private static String DB_NAME = "weibo_data";
-	private static int DB_VER = 14;
+	private static int DB_VER = 1;
 	
 	private static DataBaseHelper instance;
 	
@@ -57,14 +58,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		db.execSQL(StatusCommentTable.CREATE);
 		db.execSQL(RepostTimeLineTable.CREATE);
 		db.execSQL(FavListTable.CREATE);
-		db.execSQL(DirectMessageUserTable.CREATE);
+		db.execSQL(GroupTable.CREATE);
+
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int from, int to) {
-		if (from == 13) {
-			db.execSQL(DirectMessageUserTable.CREATE);
-		}
+
 	}
 	
 	public static synchronized DataBaseHelper instance(Context context) {

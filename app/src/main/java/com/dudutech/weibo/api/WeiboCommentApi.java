@@ -11,17 +11,11 @@ package com.dudutech.weibo.api;
 import android.util.Log;
 
 import com.dudutech.weibo.model.CommentListModel;
-import com.dudutech.weibo.model.CommentModel;
 import com.dudutech.weibo.network.WeiboParameters;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import static com.dudutech.weibo.BuildConfig.DEBUG;
 import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class WeiboCommentApi extends BaseApi
@@ -35,7 +29,7 @@ public class WeiboCommentApi extends BaseApi
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.COMMENTS_SHOW, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.COMMENTS_SHOW, params, HTTP_GET);
 
 			return new Gson().fromJson(json.toString(), CommentListModel.class);
 		} catch (Exception e) {

@@ -1,8 +1,7 @@
 package com.dudutech.weibo.ui.common;
 
 
-
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.

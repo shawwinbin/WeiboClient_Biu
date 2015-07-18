@@ -27,7 +27,7 @@ public class StatusMentiomMeApi extends BaseApi
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.MENTIONS, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.MENTIONS, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), MessageListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {
@@ -42,7 +42,7 @@ public class StatusMentiomMeApi extends BaseApi
 		params.put("since_id", id);
 
 		try {
-			JSONObject json = request(Constants.MENTIONS, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.MENTIONS, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), MessageListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {

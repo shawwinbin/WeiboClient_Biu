@@ -51,7 +51,7 @@ public class LoginApi extends BaseApi
 
 		
 		try {
-			JSONObject json = requestWithoutAccessToken(Constants.OAUTH2_ACCESS_TOKEN, params, HTTP_POST);
+			JSONObject json = requestWithoutAccessToken(UrlConstants.OAUTH2_ACCESS_TOKEN, params, HTTP_POST);
 			return new String[]{json.optString("access_token"), json.optString("expires_in")};
 		} catch (Exception e) {
 			if (DEBUG) {
@@ -62,7 +62,7 @@ public class LoginApi extends BaseApi
 	}
 
 	public static String getOauthLoginPage() {
-		return Constants.OAUTH2_ACCESS_AUTHORIZE + "?" + "client_id=" + WEICO_CLIENT_ID
+		return UrlConstants.OAUTH2_ACCESS_AUTHORIZE + "?" + "client_id=" + WEICO_CLIENT_ID
 				+ "&response_type=token&redirect_uri=" + WEICO_REDIRCT_URL
 				+ "&key_hash=" + WEICO_APP_KEY + (TextUtils.isEmpty(WEICO_PACKNAME) ? "" : "&packagename=" + WEICO_PACKNAME)
 				+ "&display=mobile" + "&scope=" + WEICO_SCOPE;

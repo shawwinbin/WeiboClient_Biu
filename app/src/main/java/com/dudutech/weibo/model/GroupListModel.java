@@ -21,6 +21,11 @@ package com.dudutech.weibo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.dudutech.weibo.R;
+import com.dudutech.weibo.dao.relationship.GroupDao;
+import com.dudutech.weibo.dao.timeline.StatusTimeLineDao;
+import com.dudutech.weibo.global.MyApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +47,26 @@ public class GroupListModel extends BaseListModel<GroupModel, GroupListModel> {
 		return lists;
 	}
 
+	public void addDefaultGroupsToTop(){
+		GroupModel groupModelBilateral= new GroupModel();
+		groupModelBilateral.name= MyApplication.mContext.getString(R.string.groups_bilateral);
+		groupModelBilateral.idstr= StatusTimeLineDao.GROUP_BILATERAL;
+		lists.add(0,groupModelBilateral);
+		GroupModel groupModelAll= new GroupModel();
+		groupModelAll.name= MyApplication.mContext.getString(R.string.groups_all);
+		groupModelAll.idstr= StatusTimeLineDao.GROUP_ALL;
+		lists.add(0,groupModelAll);
+	}
+
 	@Override
 	public void addAll(boolean toTop, GroupListModel values) {
-		// dummy
+		if (values != null && values.getSize() > 0) {
+			lists.clear();
+			for (GroupModel msg : values.getList()) {
+					lists.add( msg);
+			}
+			total_number = values.total_number;
+		}
 	}
 
 	@Override

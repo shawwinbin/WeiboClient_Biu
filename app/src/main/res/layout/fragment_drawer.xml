@@ -63,7 +63,7 @@
 			android:paddingRight="15dp"
 			android:clickable="true"
 			android:addStatesFromChildren="true"
-			android:background="?android:attr/selectableItemBackground"
+			android:background="@drawable/bg_context_menu"
 
 			>
 			<ImageView
@@ -93,7 +93,7 @@
 			android:paddingBottom="10dp"
 			android:paddingLeft="15dp"
 			android:paddingRight="15dp"
-			android:background="@drawable/bg_menu_selector"
+			android:background="@drawable/bg_context_menu"
 			>
 			<ImageView
 				android:layout_width="wrap_content"

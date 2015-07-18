@@ -36,7 +36,7 @@ public class GroupsApi extends BaseApi {
 		WeiboParameters params = new WeiboParameters();
 		
 		try {
-			JSONObject json = request(Constants.FRIENDSHIPS_GROUPS, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.FRIENDSHIPS_GROUPS, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), GroupListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {
@@ -54,7 +54,7 @@ public class GroupsApi extends BaseApi {
 		params.put("list_id", groupId);
 		
 		try {
-			JSONObject json = request(Constants.FRIENDSHIPS_GROUPS_IS_MEMBER, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.FRIENDSHIPS_GROUPS_IS_MEMBER, params, HTTP_GET);
 			return json.optBoolean("lists");
 		} catch (Exception e) {
 			if (DEBUG) {
@@ -73,7 +73,7 @@ public class GroupsApi extends BaseApi {
 		params.put("page", page);
 
 		try {
-			JSONObject json = request(Constants.FRIENDSHIPS_GROUPS_TIMELINE, params, HTTP_GET);
+			JSONObject json = request(UrlConstants.FRIENDSHIPS_GROUPS_TIMELINE, params, HTTP_GET);
 			return new Gson().fromJson(json.toString(), MessageListModel.class);
 		} catch (Exception e) {
 			if (DEBUG) {
@@ -91,7 +91,7 @@ public class GroupsApi extends BaseApi {
 		params.put("list_id", groupId);
 
 		try {
-			request(Constants.FRIENDSHIPS_GROUPS_MEMBERS_ADD, params, HTTP_POST);
+			request(UrlConstants.FRIENDSHIPS_GROUPS_MEMBERS_ADD, params, HTTP_POST);
 		} catch (Exception e) {
 			if (DEBUG) {
 				Log.e(TAG, "Cannot add user to group");
@@ -106,7 +106,7 @@ public class GroupsApi extends BaseApi {
 		params.put("list_id", groupId);
 
 		try {
-			request(Constants.FRIENDSHIPS_GROUPS_MEMBERS_DESTROY, params, HTTP_POST);
+			request(UrlConstants.FRIENDSHIPS_GROUPS_MEMBERS_DESTROY, params, HTTP_POST);
 		} catch (Exception e) {
 			if (DEBUG) {
 				Log.e(TAG, "Cannot remove user from group");
@@ -120,7 +120,7 @@ public class GroupsApi extends BaseApi {
 		params.put("name", name);
 
 		try {
-			request(Constants.FRIENDSHIPS_GROUPS_CREATE, params, HTTP_POST);
+			request(UrlConstants.FRIENDSHIPS_GROUPS_CREATE, params, HTTP_POST);
 		} catch (Exception e) {
 			if (DEBUG) {
 				Log.e(TAG, "Cannot create group");
@@ -134,7 +134,7 @@ public class GroupsApi extends BaseApi {
 		params.put("list_id", groupId);
 
 		try {
-			request(Constants.FRIENDSHIPS_GROUPS_DESTROY, params, HTTP_POST);
+			request(UrlConstants.FRIENDSHIPS_GROUPS_DESTROY, params, HTTP_POST);
 		} catch (Exception e) {
 			if (DEBUG) {
 				Log.e(TAG, "Cannot destroy group");

@@ -8,13 +8,14 @@
 
 package com.dudutech.weibo.ui.timeline;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -130,7 +131,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements AppBarLayo
 
     }
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
+        Adapter adapter = new Adapter(getFragmentManager());
          mStatusCommentFragment= StatusCommentFragment.newInstance(mWeibo.id);
          mStatusRepostFragment= StatusRepostFragment.newInstance(mWeibo.id);
         adapter.addFragment( mStatusCommentFragment, "comment");

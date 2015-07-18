@@ -19,9 +19,9 @@
 
 package com.dudutech.weibo.api;
 
-/* Constants for weibo api */
+/* UrlConstants for weibo api */
 
-public class Constants
+public class UrlConstants
 {
 	public static final String SINA_BASE_URL = "https://api.weibo.com/2/";
 	

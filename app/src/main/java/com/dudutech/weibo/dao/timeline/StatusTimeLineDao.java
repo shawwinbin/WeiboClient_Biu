@@ -25,9 +25,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.dudutech.weibo.api.BilateralTimeLineApi;
+import com.dudutech.weibo.api.GroupsApi;
 import com.dudutech.weibo.api.HomeTimeLineApi;
+import com.dudutech.weibo.api.UrlConstants;
 import com.dudutech.weibo.db.DataBaseHelper;
 import com.dudutech.weibo.db.tables.HomeTimeLineTable;
+import com.dudutech.weibo.db.tables.StatusCommentTable;
 import com.dudutech.weibo.model.BaseListModel;
 import com.dudutech.weibo.model.MessageListModel;
 import com.google.gson.Gson;
@@ -39,25 +42,27 @@ import com.dudutech.weibo.global.Constants;
 /* Time Line of me and my friends */
 public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 {
-	private static final String BILATERAL = "bilateral";
+	public static final String GROUP_BILATERAL = "groups_bilateral";
+	public static final String GROUP_ALL = "groups_all";
 	protected DataBaseHelper mHelper;
 	private Context mContext;
+	public String mGroupId;
 
 	public Constants.LOADING_STATUS mStatus;
-	public StatusTimeLineDao(Context context) {
+	public StatusTimeLineDao(Context context,String groupId) {
 		mHelper = DataBaseHelper.instance(context);
 		mContext = context;
 		mStatus= Constants.LOADING_STATUS.NORMAL;
+		mGroupId=groupId;
 	}
 
 	@Override
 	public void cache() {
 		SQLiteDatabase db = mHelper.getWritableDatabase();
 		db.beginTransaction();
-		db.execSQL(Constants.SQL_DROP_TABLE + HomeTimeLineTable.NAME);
-		db.execSQL(HomeTimeLineTable.CREATE);
+		db.delete(HomeTimeLineTable.NAME, HomeTimeLineTable.ID + "=?", new String[]{mGroupId});
 		ContentValues values = new ContentValues();
-		values.put(HomeTimeLineTable.ID, 1);
+		values.put(HomeTimeLineTable.GROUP_ID, mGroupId);
 		values.put(HomeTimeLineTable.JSON, new Gson().toJson(mListModel));
 		db.insert(HomeTimeLineTable.NAME, null, values);
 		db.setTransactionSuccessful();
@@ -66,7 +71,7 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 
 	@Override
 	public Cursor query() {
-		return mHelper.getReadableDatabase().query(HomeTimeLineTable.NAME, null, null, null, null, null, null);
+		return mHelper.getReadableDatabase().query(HomeTimeLineTable.NAME, null, HomeTimeLineTable.GROUP_ID+ "=?", new String[]{mGroupId}, null, null, null);
 	}
 
 
@@ -74,20 +79,20 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 	public void spanAll(MessageListModel messageListModel) {
 		messageListModel.spanAll(mContext);
 	}
-	protected MessageListModel load(String groupId) {
-		if (groupId == null) {
-			return load();
-		} else if (groupId == BILATERAL) {
-			return BilateralTimeLineApi.fetchBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
-		}
-        else {
-//			return GroupsApi.fetchGroupTimeLine(groupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
-            return null;
-		}
-	}
+
      @Override
 	public MessageListModel load() {
-		MessageListModel model=HomeTimeLineApi.fetchHomeTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+		 MessageListModel model;
+		 if(mGroupId.equals(GROUP_ALL)){
+			 model =HomeTimeLineApi.fetchHomeTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+		 }
+		 else if(mGroupId.equals(GROUP_BILATERAL)){
+			 model= BilateralTimeLineApi.fetchBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+		 }
+		 else{
+			 model= GroupsApi.fetchGroupTimeLine(mGroupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+		 }
+
 		return model;
 	}
 

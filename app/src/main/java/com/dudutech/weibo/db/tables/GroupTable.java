@@ -19,18 +19,17 @@
 
 package com.dudutech.weibo.db.tables;
 
-public class HomeTimeLineTable
+public class GroupTable
 {
-	public static final String NAME = "home_timeline";
+	public static final String NAME = "groups";
 
 	public static final String ID = "id";
-	public static final String GROUP_ID = "groud_id";
+
 	public static final String JSON = "json";
 
 	public static final String CREATE = "create table " + NAME
 						+ "("
 						+ ID + " integer primary key autoincrement,"
-			            + GROUP_ID  + " varchar ,"
 						+ JSON + " text"
 						+ ");";
 }
