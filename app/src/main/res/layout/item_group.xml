@@ -2,9 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/MiddlePadding"
-    >
 
+    >
+<LinearLayout
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/MiddlePadding"
+    android:background="@drawable/bg_context_menu"
+    android:addStatesFromChildren="true"
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/tv_group"
         android:layout_width="wrap_content"
@@ -12,5 +20,5 @@
         style="@style/txt_menu"
         android:layout_marginLeft="30dp"
         />
-
+</LinearLayout>
 </LinearLayout>

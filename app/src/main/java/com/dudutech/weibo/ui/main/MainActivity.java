@@ -78,11 +78,9 @@ public class MainActivity extends BaseActivity implements
 		}
 
 	}
-
 	public static interface Refresher {
         void doRefresh();
     }
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -165,7 +163,13 @@ public class MainActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(int position ,String groupId) {
+	public void onNavigationDrawerItemSelected(int position ,String groupId ,String title) {
+
+		try {
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
+		} catch (NullPointerException e) {
+
+		}
 
 		FragmentTransaction ft= getFragmentManager()
 				.beginTransaction();
@@ -176,11 +180,11 @@ public class MainActivity extends BaseActivity implements
 			case NavigationDrawerFragment.MENU_WEIBO :
 				mCurrentPositon=FRG_TAG_PRE_SUFIX+groupId;
 				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
-				if(currentFragment==null){
-					currentFragment=HomeTimelineFragment.newInstance(groupId);
+				if(currentFragment==null) {
+					currentFragment = HomeTimelineFragment.newInstance(groupId);
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
-
 				}
+
 				break;
 			case NavigationDrawerFragment.MENU_MOMENTION :
 				mCurrentPositon=FRG_TAG_MENTION_ME;
@@ -203,6 +207,7 @@ public class MainActivity extends BaseActivity implements
 				break;
 		}
 
+
 		if(lastFragment!=null){
 			ft.hide(lastFragment);
 		}
@@ -210,28 +215,13 @@ public class MainActivity extends BaseActivity implements
 			ft.show(currentFragment);
 			ft.commit();
 		}
+		mTitle=title;
+		restoreActionBar();
 
 
-		try {
-			mDrawerLayout.closeDrawer(Gravity.LEFT);
-		} catch (NullPointerException e) {
-
-		}
 	}
 
-	public void onSectionAttached(int number) {
-		switch (number) {
-		case 1:
-			mTitle = getString(R.string.title_section1);
-			break;
-		case 2:
-			mTitle = getString(R.string.title_section2);
-			break;
-		case 3:
-			mTitle = getString(R.string.title_section3);
-			break;
-		}
-	}
+
 
 	public void restoreActionBar() {
 		mActionBar.setTitle(mTitle);
@@ -283,36 +273,7 @@ public class MainActivity extends BaseActivity implements
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	public static class PlaceholderFragment extends Fragment {
 
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			((MainActivity) activity).onSectionAttached(getArguments().getInt(
-					ARG_SECTION_NUMBER));
-		}
-	}
 
 	private class MyDrawerListener implements DrawerLayout.DrawerListener {
 		@Override
@@ -363,6 +324,7 @@ public class MainActivity extends BaseActivity implements
 
 		public void setTitle(CharSequence title) {
 			mTitle = title;
+			mActionBar.setTitle(mTitle);
 		}
 	}
 

@@ -18,6 +18,7 @@ public class GroupAdapter extends BaseAdapter{
 
     private Context mContext ;
     private GroupListModel mListModel;
+    public int mPositon=0;
 
     public GroupAdapter(Context context , GroupListModel listModel){
         mContext=context;
@@ -45,9 +46,15 @@ public class GroupAdapter extends BaseAdapter{
         if(convertView==null){
             convertView= LayoutInflater.from(mContext).inflate(R.layout.item_group,null);
         }
+
+//        convertView.setSelected(mPositon==position);
+        convertView.findViewById(R.id.list_item).setSelected(mPositon==position);
         TextView tv_group= (TextView) convertView.findViewById(R.id.tv_group);
         tv_group.setText(mListModel.get(position).name);
 
         return convertView;
+    }
+    public void  setCurrentPosition(int position){
+        mPositon=position;
     }
 }

@@ -24,8 +24,12 @@ import com.dudutech.weibo.adapter.common.GroupAdapter;
 import com.dudutech.weibo.dao.relationship.GroupDao;
 import com.dudutech.weibo.dao.timeline.StatusTimeLineDao;
 import com.dudutech.weibo.global.Constants;
+import com.dudutech.weibo.model.GroupModel;
 import com.dudutech.weibo.model.UserModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -55,7 +59,15 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	@InjectView(R.id.menu_mention)
 	View menu_mention;
 
+	@InjectView(R.id.menu_comment)
+	View menu_comment;
+
 	GroupDao mGroupDao;
+
+	public String mTitleMentionMe;
+	public String mTitleCommnet;
+
+	public Vector<View> mMenuList ;
 
 	public GroupAdapter mGroupAdapter;
 
@@ -70,7 +82,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 			mCurrentSelectedPosition = savedInstanceState
 					.getInt(STATE_SELECTED_POSITION);
 		}
-		selectItem(mCurrentSelectedPosition, StatusTimeLineDao.GROUP_ALL);
+		mTitleMentionMe=getString(R.string.mention_me);
+		mTitleCommnet=getString(R.string.comment);
+		mMenuList=new Vector<View>();
+		selectItem(mCurrentSelectedPosition, StatusTimeLineDao.GROUP_ALL,getString(R.string.groups_all),0,0);
 
 	}
 
@@ -92,7 +107,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 											int position, long id) {
-						selectItem(MENU_WEIBO, mGroupDao.mListModel.getList().get(position).idstr);
+						GroupModel group=mGroupDao.mListModel.get(position);
+						selectItem(MENU_WEIBO,group.idstr,group.name,0,position);
 					}
 				});
 
@@ -100,6 +116,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mListModel);
 		mDrawerListView.setAdapter(mGroupAdapter);
 		menu_mention.setOnClickListener(this);
+		menu_comment.setOnClickListener(this);
+		mMenuList.add(menu_mention);
+		mMenuList.add(menu_comment);
 		new InitGroupsInTask().execute();
 		return v;
 	}
@@ -110,19 +129,38 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
 	}
 
-	private void selectItem(int position ,String groupId) {
+	private void selectItem(int position ,String groupId,String title,int viewId ,int secondPosition) {
 		mCurrentSelectedPosition = position;
-//		if (mDrawerListView != null) {
-//			mDrawerListView.setItemChecked(position, true);
-//		}
+
+
+		if (mGroupAdapter != null) {
+				mGroupAdapter.setCurrentPosition(secondPosition);
+			    mGroupAdapter.notifyDataSetChanged();
+			}
+		toggle(viewId);
+
 		if (mCallbacks != null) {
-			mCallbacks.onNavigationDrawerItemSelected(position,groupId);
+			mCallbacks.onNavigationDrawerItemSelected(position,groupId, title);
+		}
+	}
+
+	private void toggle(int viewId){
+		for(View view : mMenuList){
+			if(view.getId()==viewId){
+				view.setSelected(true);
+			}
+			else{
+				view.setSelected(false);
+			}
+
 		}
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+
+
 		try {
 			mCallbacks = (NavigationDrawerCallbacks) activity;
 		} catch (ClassCastException e) {
@@ -145,9 +183,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
-	private ActionBar getActionBar() {
-		return ((AppCompatActivity) getActivity()).getSupportActionBar();
-	}
+
 
 	@Override
 	public void onClick(View v) {
@@ -155,10 +191,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		switch (id){
 			case R.id.menu_mention :
 				menu_mention.setSelected(true);
-				selectItem(MENU_MOMENTION,"");
+				selectItem(MENU_MOMENTION,"",mTitleMentionMe,id,-1);
 				break;
 			case R.id.menu_comment:
-				selectItem(MENU_COMMENT,"");
+				selectItem(MENU_COMMENT,"",mTitleCommnet,id,-1);
 				break;
 
 
@@ -167,7 +203,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	}
 
 	public static interface NavigationDrawerCallbacks {
-		void onNavigationDrawerItemSelected(int position,String groupId);
+		void onNavigationDrawerItemSelected(int position,String groupId,String title);
 	}
 
 	public void setHeadView(UserModel user){
