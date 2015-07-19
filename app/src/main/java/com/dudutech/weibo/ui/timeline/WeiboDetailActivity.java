@@ -13,7 +13,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -31,9 +30,9 @@ import android.widget.TextView;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.StatusTimeUtils;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.adapter.timeline.StatusComentAdapter;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.MessageModel;
+import com.dudutech.weibo.ui.comments.StatusCommentFragment;
 import com.dudutech.weibo.widget.FlowLayout;
 import com.dudutech.weibo.widget.LetterImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;

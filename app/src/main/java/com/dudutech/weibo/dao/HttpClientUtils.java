@@ -14,23 +14,23 @@ import static com.dudutech.weibo.BuildConfig.DEBUG;
 /**
  * Created by Administrator on 2015-7-17.
  */
-public class BaseDao {
-    private static final String TAG = BaseDao.class.getSimpleName();
+public class HttpClientUtils {
+    private static final String TAG = HttpClientUtils.class.getSimpleName();
     private final static  OkHttpClient client = new OkHttpClient();
     // Access Token
     private static String mAccessToken;
-    protected String doGetRequstWithAceesToken(String url ,WeiboParameters params) throws IOException {
+    public static String doGetRequstWithAceesToken(String url, WeiboParameters params) throws IOException {
         params.put("access_token", mAccessToken);
         return doGetRequst(url,params);
     }
 
-    protected String doGetRequst(String url ,WeiboParameters param) throws IOException {
+    public  static String doGetRequst(String url ,WeiboParameters param) throws IOException {
         String send=param.encode();
          url=url+"?"+send;
-        return doGetRequst(url);
+        return  doGetRequst(url);
     }
 
-    protected String doGetRequst(String url) throws IOException {
+    public static String doGetRequst(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();

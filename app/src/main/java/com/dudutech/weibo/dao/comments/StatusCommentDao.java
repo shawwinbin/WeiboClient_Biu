@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.dudutech.weibo.dao.timeline;
+package com.dudutech.weibo.dao.comments;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.dudutech.weibo.api.WeiboCommentApi;
+import com.dudutech.weibo.dao.timeline.BaseTimelineDao;
 import com.dudutech.weibo.db.DataBaseHelper;
 import com.dudutech.weibo.db.tables.StatusCommentTable;
 import com.dudutech.weibo.global.Constants;
@@ -25,7 +26,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class StatusCommentDao extends   BaseTimelineDao<CommentListModel>
+public class StatusCommentDao extends BaseTimelineDao<CommentListModel>
 {
 	private long mId;
 	private Context mContext;

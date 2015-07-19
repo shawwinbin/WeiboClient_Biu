@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import com.dudutech.weibo.api.UrlConstants;
-import com.dudutech.weibo.dao.BaseDao;
+import com.dudutech.weibo.dao.HttpClientUtils;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
 import com.dudutech.weibo.db.DataBaseHelper;
 import com.dudutech.weibo.db.tables.GroupTable;
@@ -23,7 +22,7 @@ import static com.dudutech.weibo.BuildConfig.DEBUG;
 /**
  * Created by Administrator on 2015-7-17.
  */
-public class GroupDao extends BaseDao implements ITimelineBaseDao{
+public class GroupDao  implements ITimelineBaseDao{
 
     public GroupListModel mListModel=new GroupListModel();
     protected DataBaseHelper mHelper;
@@ -41,7 +40,7 @@ public class GroupDao extends BaseDao implements ITimelineBaseDao{
         WeiboParameters params = new WeiboParameters();
 
         try {
-            String result = doGetRequstWithAceesToken(UrlConstants.FRIENDSHIPS_GROUPS, params);
+            String result = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.FRIENDSHIPS_GROUPS, params);
             GroupListModel  groups=new Gson().fromJson(result.toString(), GroupListModel.class);
             return groups;
         } catch (Exception e) {

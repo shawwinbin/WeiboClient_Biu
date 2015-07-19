@@ -62,6 +62,10 @@
     <string name="status_mention_me">提到我的微博</string>
     <string name="comment_mention_me">提到我的评论</string>
     <string name="mention_me">提到我的</string>
+
+    <string name="comments_about_me">关于我的评论</string>
+    <string name="comments_to_me">我收到的</string>
+    <string name="comments_by_me">我发出的</string>
     <string name="loading_more">Loading more……</string>
     <string name="new_post">发微博</string>
     <string name="comment_on">评论微博</string>

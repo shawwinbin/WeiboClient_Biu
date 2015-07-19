@@ -24,7 +24,8 @@ import android.content.SharedPreferences;
 
 import com.dudutech.weibo.api.AccountApi;
 import com.dudutech.weibo.api.BaseApi;
-import com.dudutech.weibo.dao.BaseDao;
+import com.dudutech.weibo.dao.HttpClientUtils;
+
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class LoginDao
 
 		if (mAccessToken != null) {
 			BaseApi.setAccessToken(mAccessToken);
-			BaseDao.setAccessToken(mAccessToken);
+			HttpClientUtils.setAccessToken(mAccessToken);
 		}
 		parseMultiUser();
 	}

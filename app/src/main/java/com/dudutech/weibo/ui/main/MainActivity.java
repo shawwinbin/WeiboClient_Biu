@@ -30,6 +30,7 @@ import com.dudutech.weibo.Utils.SystemBarUtils;
 import com.dudutech.weibo.dao.login.LoginDao;
 import com.dudutech.weibo.dao.user.UserDao;
 import com.dudutech.weibo.model.UserModel;
+import com.dudutech.weibo.ui.comments.CommentMeFragment;
 import com.dudutech.weibo.ui.common.BaseActivity;
 import com.dudutech.weibo.ui.post.NewPostActivity;
 import com.dudutech.weibo.ui.timeline.HomeTimelineFragment;
@@ -197,10 +198,10 @@ public class MainActivity extends BaseActivity implements
 
 				break;
 			case NavigationDrawerFragment.MENU_COMMENT :
-				mCurrentPositon=FRG_TAG_MENTION_ME;
+				mCurrentPositon=FRG_TAG_COMMENT;
 				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null){
-					currentFragment=MentionMeFragment.newInstance() ;
+					currentFragment= CommentMeFragment.newInstance() ;
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
 
 				}

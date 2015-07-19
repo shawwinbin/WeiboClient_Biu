@@ -6,12 +6,11 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.dudutech.weibo.ui.timeline;
+package com.dudutech.weibo.ui.comments;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -20,8 +19,11 @@ import android.view.ViewGroup;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.adapter.common.MyFragmentPagerAdapter;
-import com.dudutech.weibo.ui.comments.CommentMentionMeFragment;
+import com.dudutech.weibo.dao.comments.CommentsByMeDao;
+import com.dudutech.weibo.dao.comments.CommentsToMeDao;
+import com.dudutech.weibo.db.tables.CommentsToMeTable;
 import com.dudutech.weibo.ui.common.BaseFragment;
+import com.dudutech.weibo.ui.timeline.StatusMentionMeFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,7 +33,7 @@ import butterknife.InjectView;
  *  mention me in status and mention me in comments
  *
  */
-public class MentionMeFragment extends BaseFragment {
+public class CommentMeFragment extends BaseFragment {
 
 
     @InjectView(R.id.tabs)
@@ -39,15 +41,15 @@ public class MentionMeFragment extends BaseFragment {
     @InjectView(R.id.viewpager)
     ViewPager mViewPager ;
 //    private OnFragmentInteractionListener mListener;
-    StatusMentionMeFragment mStatusMetionMefragment;
-    CommentMentionMeFragment mCommentMentionMeFragment;
+    CommentToMeFragment mCommentToMeFragment;
+    CommentByMeFragment mCommentByMeFragment;
 
     // TODO: Rename and change types and number of parameters
-    public static MentionMeFragment newInstance() {
-        MentionMeFragment fragment = new MentionMeFragment();
+    public static CommentMeFragment newInstance() {
+        CommentMeFragment fragment = new CommentMeFragment();
         return fragment;
     }
-    public MentionMeFragment() {
+    public CommentMeFragment() {
         // Required empty public constructor
     }
     @Override
@@ -76,10 +78,10 @@ public class MentionMeFragment extends BaseFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getFragmentManager());
-        mStatusMetionMefragment= StatusMentionMeFragment.newInstance();
-        mCommentMentionMeFragment= CommentMentionMeFragment.newInstance();
-        adapter.addFragment( mStatusMetionMefragment, getString(R.string.weibo));
-        adapter.addFragment(mCommentMentionMeFragment, getString(R.string.comment));
+        mCommentToMeFragment= CommentToMeFragment.newInstance();
+        mCommentByMeFragment= CommentByMeFragment.newInstance();
+        adapter.addFragment( mCommentToMeFragment, getString(R.string.comments_to_me));
+        adapter.addFragment(mCommentByMeFragment, getString(R.string.comments_by_me));
         viewPager.setAdapter(adapter);
     }
 

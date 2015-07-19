@@ -6,20 +6,16 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.dudutech.weibo.ui.timeline;
+package com.dudutech.weibo.ui.comments;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.weibo.adapter.timeline.StatusComentAdapter;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
-import com.dudutech.weibo.dao.timeline.StatusCommentDao;
-import com.dudutech.weibo.dao.timeline.StatusTimeLineDao;
+import com.dudutech.weibo.dao.comments.StatusCommentDao;
 import com.dudutech.weibo.model.CommentListModel;
+import com.dudutech.weibo.ui.timeline.AbsTimeLineFragment;
 
 /**
  *  weibo detail comments

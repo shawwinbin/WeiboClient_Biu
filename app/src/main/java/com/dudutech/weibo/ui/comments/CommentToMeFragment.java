@@ -6,38 +6,29 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.dudutech.weibo.ui.timeline;
+package com.dudutech.weibo.ui.comments;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 
-import com.dudutech.weibo.R;
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.weibo.adapter.timeline.CommentMeAdapter;
-import com.dudutech.weibo.adapter.timeline.TimelineAdapter;
-import com.dudutech.weibo.dao.timeline.CommentsMentionMeDao;
+import com.dudutech.weibo.dao.comments.CommentsMentionMeDao;
+import com.dudutech.weibo.dao.comments.CommentsToMeDao;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
-import com.dudutech.weibo.dao.timeline.StatusMentionMeDao;
 import com.dudutech.weibo.model.CommentListModel;
-import com.dudutech.weibo.model.MessageListModel;
-
-import butterknife.InjectView;
+import com.dudutech.weibo.ui.timeline.AbsTimeLineFragment;
 
 
-public class CommentMentionMeFragment extends AbsTimeLineFragment {
+public class CommentToMeFragment extends AbsTimeLineFragment {
 //    private OnFragmentInteractionListener mListener;
 
 
-    public static CommentMentionMeFragment newInstance() {
-        CommentMentionMeFragment fragment = new CommentMentionMeFragment();
+    public static CommentToMeFragment newInstance() {
+        CommentToMeFragment fragment = new CommentToMeFragment();
         return fragment;
     }
 
-    public CommentMentionMeFragment() {
+    public CommentToMeFragment() {
 
     }
 
@@ -49,7 +40,7 @@ public class CommentMentionMeFragment extends AbsTimeLineFragment {
 
     @Override
     protected ITimelineBaseDao bindDao() {
-        return new CommentsMentionMeDao(getActivity());
+        return new CommentsToMeDao(getActivity());
     }
 
     @Override

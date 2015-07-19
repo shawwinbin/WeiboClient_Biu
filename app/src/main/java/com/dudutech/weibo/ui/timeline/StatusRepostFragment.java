@@ -11,12 +11,9 @@ package com.dudutech.weibo.ui.timeline;
 import android.os.Bundle;
 
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
-import com.dudutech.weibo.adapter.timeline.StatusComentAdapter;
 import com.dudutech.weibo.adapter.timeline.StatusRepostAdapter;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
-import com.dudutech.weibo.dao.timeline.StatusCommentDao;
 import com.dudutech.weibo.dao.timeline.StatusRepostDao;
-import com.dudutech.weibo.model.CommentListModel;
 import com.dudutech.weibo.model.RepostListModel;
 
 /**
