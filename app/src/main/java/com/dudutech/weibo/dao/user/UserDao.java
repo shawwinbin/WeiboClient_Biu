@@ -12,15 +12,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
-
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.api.UserApi;
-import com.dudutech.weibo.cache.FileCacheManager;
 import com.dudutech.weibo.db.DataBaseHelper;
 import com.dudutech.weibo.db.tables.UsersTable;
 import com.dudutech.weibo.global.Constants;
@@ -40,24 +36,22 @@ public class UserDao
 	private static String TAG = UserDao.class.getSimpleName();
 	
 	private static BitmapDrawable[] mVipDrawable;
-	
-	private static HashMap<String, WeakReference<Bitmap>> mSmallAvatarCache = new HashMap<String, WeakReference<Bitmap>>();
-	
-	private DataBaseHelper mHelper;
-	private FileCacheManager mManager;
-	
+
+
+
+
 	public UserDao(Context context) {
 		mHelper = DataBaseHelper.instance(context);
-		mManager = FileCacheManager.instance(context);
-		
+
 		if (mVipDrawable == null) {
 			mVipDrawable = new BitmapDrawable[]{
-				(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_personal_vip),
-				(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_enterprise_vip)
+					(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_personal_vip),
+					(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_enterprise_vip)
 			};
 		}
 	}
-	
+
+	private DataBaseHelper mHelper;
 	public UserModel getUser(String uid) {
 		UserModel model;
 		
@@ -101,17 +95,15 @@ public class UserDao
 			db.insert(UsersTable.NAME, null, values);
 			db.setTransactionSuccessful();
 			db.endTransaction();
-		
+
 		}
-		
+
 		return model;
 	}
-	
+
 	public UserModel getUserByName(String name) {
 		UserModel model;
-		
 		model = UserApi.getUserByName(name);
-
 		if (model == null) {
 			Cursor cursor = mHelper.getReadableDatabase().query(UsersTable.NAME, new String[] {
 				UsersTable.UID,
@@ -155,117 +147,6 @@ public class UserDao
 		
 		return model;
 	}
-	
-	public Bitmap getSmallAvatar(UserModel model) {
-		String cacheName = model.id + model.profile_image_url.replaceAll("/", ".").replaceAll(":", "");
-		InputStream cache;
-		try {
-			cache = mManager.getCache(Constants.FILE_CACHE_AVATAR_SMALL, cacheName);
-		} catch (Exception e) {
-			cache = null;
-		}
-		
-		if (cache == null) {
-			try {
-				cache = mManager.createCacheFromNetwork(Constants.FILE_CACHE_AVATAR_SMALL, cacheName, model.profile_image_url);
-			} catch (Exception e) {
-				cache = null;
-			}
-		}
-		
-		if (cache == null) {
-			return null;
-		} else {
-			Bitmap bmp = BitmapFactory.decodeStream(cache);
-			mSmallAvatarCache.put(model.id, new WeakReference<Bitmap>(bmp));
 
-			try {
-				cache.close();
-			} catch (IOException e) {
-
-			}
-
-			return bmp;
-		}
-	}
-	
-	public Bitmap getCachedSmallAvatar(UserModel model) {
-		WeakReference<Bitmap> ref = mSmallAvatarCache.get(model.id);
-		return ref == null ? null : ref.get();
-	}
-	
-	public Bitmap getLargeAvatar(UserModel model) {
-		String cacheName = model.id + model.avatar_large.replaceAll("/", ".").replaceAll(":", "");
-		InputStream cache;
-		try {
-			cache = mManager.getCache(Constants.FILE_CACHE_AVATAR_LARGE, cacheName);
-		} catch (Exception e) {
-			cache = null;
-		}
-
-		if (cache == null) {
-			try {
-				cache = mManager.createCacheFromNetwork(Constants.FILE_CACHE_AVATAR_LARGE, cacheName, model.avatar_large);
-			} catch (Exception e) {
-				cache = null;
-			}
-		}
-
-		if (cache != null) {
-			Bitmap ret = BitmapFactory.decodeStream(cache);
-
-			try {
-				cache.close();
-			} catch (IOException e) {
-
-			}
-
-			return ret;
-		} else {
-			return null;
-		}
-	}
-	
-	public Bitmap getCover(UserModel model) {
-		String url = model.getCover();
-		if (url.trim().equals("")) {
-			return null;
-		}
-
-		if (DEBUG) {
-			Log.d(TAG, "url = " + url);
-		}
-
-		String cacheName = model.id + url.substring(url.lastIndexOf("/") + 1, url.length());
-		
-		InputStream cache;
-		try {
-			cache = mManager.getCache(Constants.FILE_CACHE_COVER, cacheName);
-		} catch (Exception e) {
-			cache = null;
-		}
-
-		if (cache == null) {
-			try {
-				cache = mManager.createCacheFromNetwork(Constants.FILE_CACHE_COVER, cacheName, url);
-			} catch (Exception e) {
-				cache = null;
-			}
-		}
-
-		if (cache != null) {
-			Bitmap ret = BitmapFactory.decodeStream(cache);
-
-			try {
-				cache.close();
-			} catch (IOException e) {
-
-			}
-
-			return ret;
-		} else {
-			return null;
-		}
-	}
 	
 }

@@ -48,8 +48,8 @@ public class CommentsToMeDao   extends BaseTimelineDao<CommentListModel> {
     @Override
     public CommentListModel load() {
         WeiboParameters params = new WeiboParameters();
-        params.put("count", ++mCurrentPage);
-        params.put("page", Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("count",Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("page", ++mCurrentPage);
         try {
             String result= HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.COMMENTS_TO_ME_TIMELINE,params);
             CommentListModel model=new Gson().fromJson(result, CommentListModel.class);

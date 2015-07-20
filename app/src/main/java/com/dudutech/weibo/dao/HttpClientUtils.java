@@ -31,6 +31,10 @@ public class HttpClientUtils {
     }
 
     public static String doGetRequst(String url) throws IOException {
+
+        if (DEBUG) {
+            Log.i(TAG, url);
+        }
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -41,7 +45,7 @@ public class HttpClientUtils {
 
             String result=response.body().string();
             if (DEBUG) {
-                Log.e(TAG, result);
+                Log.i(TAG, result);
             }
             return result;
         } else {

@@ -38,7 +38,7 @@ public class CommentMeFragment extends BaseFragment {
 
     @InjectView(R.id.tabs)
     public TabLayout tabLayout;
-    @InjectView(R.id.viewpager)
+    @InjectView(R.id.viewpager_comments)
     ViewPager mViewPager ;
 //    private OnFragmentInteractionListener mListener;
     CommentToMeFragment mCommentToMeFragment;
@@ -62,7 +62,7 @@ public class CommentMeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mention_me, container, false);
+        return inflater.inflate(R.layout.fragment_comment_me, container, false);
     }
 
     @Override

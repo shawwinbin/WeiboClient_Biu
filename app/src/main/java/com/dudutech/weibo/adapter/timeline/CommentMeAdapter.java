@@ -36,12 +36,13 @@ public class CommentMeAdapter  extends  BaseTimelinAdapter<CommentListModel>  {
     public CommentMeAdapter(Context context, CommentListModel commentListModel) {
         super(context, commentListModel);
         mTimeUtils = StatusTimeUtils.instance(context);
+        setBottomCount(1);
     }
 
 
     @Override
     public RecyclerView.ViewHolder onCreateContentView(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.item_comment_me, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.card_comment_me, parent, false);
         CommentMeViewHolder holder = new CommentMeViewHolder(view, mContext);
         return holder;
     }
@@ -65,6 +66,19 @@ public class CommentMeAdapter  extends  BaseTimelinAdapter<CommentListModel>  {
                 commentViewHolder.iv_avatar.setTag(url);
                 ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.avatarOptions);
             }
+            String statusImgUrl= commentModel.status.thumbnail_pic;
+            if(TextUtils.isEmpty(statusImgUrl)&&commentModel.status.retweeted_status!=null){
+                statusImgUrl=commentModel.status.retweeted_status.thumbnail_pic;
+            }
+            if(TextUtils.isEmpty(statusImgUrl)){
+                statusImgUrl=commentModel.status.user.avatar_large;
+            }
+            if (!statusImgUrl.equals(commentViewHolder.iv_status.getTag())) {
+                commentViewHolder.iv_status.setTag(statusImgUrl);
+                ImageLoader.getInstance().displayImage(statusImgUrl, commentViewHolder.iv_status, Constants.timelineListOptions);
+            }
+            commentViewHolder.tv_status_author.setText(commentModel.status.user.getName());
+            commentViewHolder.tv_status_content.setText(commentModel.status.text);
         }
 
     }
@@ -81,6 +95,12 @@ public class CommentMeAdapter  extends  BaseTimelinAdapter<CommentListModel>  {
         public TextView tv_content;
         @InjectView(R.id.iv_avatar)
         public ImageView iv_avatar;
+        @InjectView(R.id.iv_source)
+        public ImageView iv_status;
+        @InjectView(R.id.tv_status_author)
+        public TextView tv_status_author;
+        @InjectView(R.id.tv_status_content)
+        public TextView tv_status_content;
 
         public CommentMeViewHolder(View itemView, Context context) {
             super(itemView);

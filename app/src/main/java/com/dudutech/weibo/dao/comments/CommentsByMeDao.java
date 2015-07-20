@@ -45,8 +45,8 @@ public class CommentsByMeDao  extends BaseTimelineDao<CommentListModel> {
     @Override
     public CommentListModel load() {
         WeiboParameters params = new WeiboParameters();
-        params.put("count", ++mCurrentPage);
-        params.put("page", Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("count",  Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("page",++mCurrentPage);
         try {
             String result= HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.COMMENTS_BY_ME_TIMELINE,params);
             CommentListModel model=new Gson().fromJson(result, CommentListModel.class);
@@ -66,19 +66,19 @@ public class CommentsByMeDao  extends BaseTimelineDao<CommentListModel> {
     public void cache() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.beginTransaction();
-        db.execSQL(Constants.SQL_DROP_TABLE + CommentsToMeTable.NAME);
-        db.execSQL(CommentsToMeTable.CREATE);
-        db.delete(CommentsToMeTable.NAME,null,null);
+        db.execSQL(Constants.SQL_DROP_TABLE + CommentsByMeTable.NAME);
+        db.execSQL(CommentsByMeTable.CREATE);
+        db.delete(CommentsByMeTable.NAME,null,null);
         ContentValues values = new ContentValues();
-        values.put(CommentsToMeTable.JSON, new Gson().toJson( mListModel));
-        db.insert(CommentsToMeTable.NAME, null, values);
+        values.put(CommentsByMeTable.JSON, new Gson().toJson( mListModel));
+        db.insert(CommentsByMeTable.NAME, null, values);
         db.setTransactionSuccessful();
         db.endTransaction();
     }
 
     @Override
     public Cursor query() {
-        return mHelper.getReadableDatabase().query(CommentsToMeTable.NAME, null, null, null, null, null, null);
+        return mHelper.getReadableDatabase().query(CommentsByMeTable.NAME, null, null, null, null, null, null);
     }
 
 

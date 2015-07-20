@@ -217,7 +217,6 @@ public class MainActivity extends BaseActivity implements
 			ft.commit();
 		}
 		mTitle=title;
-		restoreActionBar();
 
 
 	}
