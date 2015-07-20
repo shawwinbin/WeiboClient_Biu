@@ -2,7 +2,6 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/CommentMentionMeApi.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/FriendsApi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/GroupsApi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/PostApi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/RepostTimeLineApi.java" charset="GBK" />
@@ -11,8 +10,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/UserTimeLineApi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/api/WeiboCommentApi.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/cache/FileCacheManager.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/dao/comments/StatusCommentDao.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/dao/timeline/FriendTimeLineDao.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/dao/timeline/StatusCommentDao.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/dao/user/UserDao.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/model/CommentListModel.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/dudutech/weibo/model/CommentModel.java" charset="GBK" />
