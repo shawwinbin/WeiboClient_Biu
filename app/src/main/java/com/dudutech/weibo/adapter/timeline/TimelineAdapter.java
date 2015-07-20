@@ -18,12 +18,14 @@ import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.DeviceUtil;
 import com.dudutech.weibo.Utils.StatusTimeUtils;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.cache.LruMemoryCache;
 import com.dudutech.weibo.global.Constants;
+import com.dudutech.weibo.global.LruMemoryCache;
 import com.dudutech.weibo.model.MessageListModel;
 import com.dudutech.weibo.model.MessageModel;
 import com.dudutech.weibo.model.PicSize;
 import com.dudutech.weibo.ui.picture.PicsActivity;
+import com.dudutech.weibo.ui.post.PostNewCommentActivity;
+import com.dudutech.weibo.ui.post.PostNewRepostActivity;
 import com.dudutech.weibo.ui.timeline.UserHomeActivity;
 import com.dudutech.weibo.widget.FlowLayout;
 import com.dudutech.weibo.widget.TagImageVIew;
@@ -40,7 +42,7 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2014.12.29.
  */
-public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
+public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implements View.OnClickListener{
 
     private StatusTimeUtils mTimeUtils;
     private int photoMargin;
@@ -62,6 +64,26 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         repostImageMaxWidth = imageMaxWidth - 2 * smallPadding;
         netWorkType = DeviceUtil.getNetworkType(mContext);
     }
+
+    @Override
+    public void onClick(View v) {
+
+        int viewId=v.getId();
+        int postion = (int) v.getTag();
+        MessageModel msg=mListModel.get(postion);
+        switch (viewId){
+            case R.id.ll_comment:
+                PostNewCommentActivity.start(mContext, msg);
+                break;
+            case R.id.ll_repost:
+                PostNewRepostActivity.start(mContext,msg);
+                break;
+
+
+        }
+
+    }
+
 
     public static enum ITEM_TYPE {
         ITEM_TYPE_HEADER,
@@ -98,7 +120,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
 
     public void onBindBaseWeiboViewHolder(BaseWeiboViewHolder holder, int position) {
         resetViewHolder(holder);
-        final MessageModel msg = mListModel.getList().get(position);
+        final MessageModel msg = mListModel.get(position);
         holder.tv_content.setText(msg.span);
         holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.name);
@@ -113,10 +135,14 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> {
         holder.iv_avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 UserHomeActivity.startUserHomeActivity(mContext, msg.user);
             }
         });
+
+        holder.ll_comment.setOnClickListener(this);
+        holder.ll_comment.setTag(position);
+        holder.ll_repost.setOnClickListener(this);
+        holder.ll_repost.setTag(position);
 
 
         String  source =   TextUtils.isEmpty(msg.source)?"": Utility.dealSourceString(msg.source);

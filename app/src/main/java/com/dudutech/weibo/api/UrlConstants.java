@@ -54,9 +54,9 @@ public class UrlConstants
 	public static final String COMMENTS_TO_ME_TIMELINE = SINA_BASE_URL + "comments/to_me.json";
 	public static final String COMMENTS_BY_ME_TIMELINE = SINA_BASE_URL + "comments/by_me.json";
 
-	public static final String COMMENTS_CREATE = SINA_BASE_URL + "comments/create.json";
-	public static final String COMMENTS_REPLY = SINA_BASE_URL + "comments/reply.json";
-	public static final String COMMENTS_DESTROY = SINA_BASE_URL + "comments/destroy.json";
+	public static final String COMMENT_CREATE = SINA_BASE_URL + "comments/create.json";
+	public static final String COMMENT_REPLY = SINA_BASE_URL + "comments/reply.json";
+	public static final String COMMENT_DESTROY = SINA_BASE_URL + "comments/destroy.json";
 	
 	// Favorites
 	public static final String FAVORITES_CREATE = SINA_BASE_URL + "favorites/create.json";

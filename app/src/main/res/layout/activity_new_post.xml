@@ -35,9 +35,9 @@
           android:layout_above="@+id/rl_tool"
           android:gravity="start"
           android:background="@color/white"
-          android:textColor="@color/txt_remark"
           android:padding="10dp"
-          android:textSize="14sp"
+          style="@style/txt_main_content"
+
 
           />
 

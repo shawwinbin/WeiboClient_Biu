@@ -15,104 +15,31 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.dudutech.weibo.R;
-import com.dudutech.weibo.api.PostApi;
-import com.dudutech.weibo.model.CommentModel;
-import com.dudutech.weibo.model.MessageModel;
-import com.dudutech.weibo.ui.common.BaseActivity;
+import com.dudutech.weibo.dao.post.PostDao;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
-public class NewPostActivity extends BaseActivity {
-    public static  final  String EXT_WEIBO = "eta_weibo";
-    public static  final  String EXT_COMMENT = "eta_comment";
-    public static  final  String EXT_POST_FLAG = "eta_post_flag";
-    public static  final  int FLAG_POST = 0;
-    public static  final  int FLAG_COMMENT = 1;
-    public static  final  int FLAG_REPOST = 2;
-    public static  final  int FLAG_REPLY = 3;
-
-    private MessageModel mWeibo;
-
-    private CommentModel mComment;
-
-    private int mFlag;
-
+public class NewPostActivity extends AbPostActivity {
     private ArrayList<String> mPics=new ArrayList<String>();
 
 
-    @InjectView(R.id.toolbar)
-    Toolbar toolbar;
-    @InjectView(R.id.edit)
-    EditText editText;
-//    @InjectView(R.id.btn_send)
-    @OnClick(R.id.btn_send)
-    public  void  sumbit(){
-        new Uploader().execute();
-    }
-
-//    ImageButton btn_send;
-
-
-    public  static  void start(Context context ,MessageModel messageModel ,CommentModel commentModel,int flag){
+    protected ProgressDialog prog;
+    public  static  void start(Context context){
         Intent intent= new Intent(context,NewPostActivity.class);
-        intent.putExtra(EXT_WEIBO, messageModel);
-        intent.putExtra(EXT_COMMENT, messageModel);
-        intent.putExtra(EXT_POST_FLAG, flag);
+
         context.startActivity(intent);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
-        ButterKnife.inject(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mFlag= getIntent().getIntExtra(EXT_POST_FLAG, FLAG_POST);
-        mWeibo=getIntent().getParcelableExtra(EXT_WEIBO);
-        mComment= getIntent().getParcelableExtra(EXT_COMMENT);
-
-
-        initUI();
-
+        setActionbarTitle(R.string.new_post);
     }
 
 
-    private  void initUI(){
-        switch (mFlag){
-            case   FLAG_POST :
-                getSupportActionBar().setTitle(R.string.new_post);
-
-                break;
-            case   FLAG_COMMENT :
-                getSupportActionBar().setTitle(R.string.comment_on);
-                break;
-            case   FLAG_REPOST :
-                getSupportActionBar().setTitle(R.string.repost_weibo);
-                break;
-            case   FLAG_REPLY :
-                getSupportActionBar().setTitle(R.string.reply_to);
-                break;
-
-        }
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,26 +50,6 @@ public class NewPostActivity extends BaseActivity {
 
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-
-        switch (id ){
-            case R.id.action_settings :
-                return true;
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     private boolean postPics(String status) {
         // Upload pictures first
         String pics = "";
@@ -157,7 +64,7 @@ public class NewPostActivity extends BaseActivity {
                     continue;
                 }
             }
-            String id = PostApi.uploadPicture(bmp);
+            String id = PostDao.uploadPicture(bmp);
             bmp.recycle();
             if (id == null || id.trim().equals("")) return false;
 
@@ -168,60 +75,45 @@ public class NewPostActivity extends BaseActivity {
         }
 
         // Upload text
-        return PostApi.newPostWithMultiPics(status, pics, "");
+        return PostDao.newPostWithMultiPics(status, pics);
     }
 
     protected boolean post() {
 
         if (mPics.size() == 0) {
-            return PostApi.newPost(editText.getText().toString(), "");
+            return PostDao.newPost(editText.getText().toString());
         } else {
             return postPics(editText.getText().toString());
         }
     }
 
-
-
-    private class Uploader extends AsyncTask<Void, Void, Boolean> {
-        private ProgressDialog prog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            prog = new ProgressDialog(NewPostActivity.this);
-            prog.setMessage(getResources().getString(R.string.plz_wait));
-            prog.setCancelable(false);
-            prog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return post();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-
-            prog.dismiss();
-
-            if (result) {
-                finish();
-            } else {
-                new AlertDialog.Builder(NewPostActivity.this)
-                        .setMessage(R.string.send_fail)
-                        .setCancelable(true)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int index) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-        }
-
+    @Override
+    protected void onPrePost() {
+        prog = new ProgressDialog(NewPostActivity.this);
+        prog.setMessage(getResources().getString(R.string.plz_wait));
+        prog.setCancelable(false);
+        prog.show();
     }
+
+    @Override
+    protected void onPostResult(boolean result) {
+        if (result) {
+            finish();
+        } else {
+            new AlertDialog.Builder(NewPostActivity.this)
+                    .setMessage(R.string.send_fail)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create()
+                    .show();
+        }
+    }
+
+
+
 }

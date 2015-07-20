@@ -61,30 +61,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 	}
 
 
-	@SuppressLint("ResourceAsColor")
-	protected void setStatusBar() {
-		if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-			setTranslucentStatus(true);
-		}
-		tintManager = new SystemBarTintManager(this);
-		tintManager.setStatusBarTintEnabled(true);
-		tintManager.setStatusBarTintResource(R.color.base_actionbar);
-//		SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
-//		listViewDrawer.setPadding(0, config.getPixelInsetTop(true), 0, config.getPixelInsetBottom());
-
-	}
-	@TargetApi(19)
-
-	private void setTranslucentStatus(boolean on) {
-		Window win = getWindow();
-		WindowManager.LayoutParams winParams = win.getAttributes();
-		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-		if (on) {
-			winParams.flags |= bits;
-		} else {
-			winParams.flags &= ~bits;
-		}
-		win.setAttributes(winParams);
-	}
 
 }

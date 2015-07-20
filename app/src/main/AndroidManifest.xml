@@ -57,6 +57,20 @@
             android:windowSoftInputMode="adjustResize"
             >
         </activity>
+
+        <activity
+            android:name=".ui.post.PostNewCommentActivity"
+            android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
+
+        <activity
+            android:name=".ui.post.PostNewRepostActivity"
+            android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
+
+
     </application>
 
 </manifest>

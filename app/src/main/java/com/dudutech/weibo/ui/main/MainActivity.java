@@ -257,7 +257,7 @@ public class MainActivity extends BaseActivity implements
 				return true;
 			case R.id.action_new_post :
 
-				NewPostActivity.start(this,null,null,NewPostActivity.FLAG_POST);
+				NewPostActivity.start(this);
 
 				return true;
 		}

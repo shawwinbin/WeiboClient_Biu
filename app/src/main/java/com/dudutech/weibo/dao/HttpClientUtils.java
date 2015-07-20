@@ -53,6 +53,32 @@ public class HttpClientUtils {
         }
     }
 
+
+    public static String doPostRequst(String url,WeiboParameters params) throws IOException {
+
+        if (DEBUG) {
+            Log.i(TAG, url);
+        }
+        String send=params.encode();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+
+
+        if (response.isSuccessful()) {
+
+            String result=response.body().string();
+            if (DEBUG) {
+                Log.i(TAG, result);
+            }
+            return result;
+        } else {
+            throw new IOException("Unexpected code " + response);
+        }
+    }
+
+
     public static String getAccessToken() {
         return mAccessToken;
     }
