@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 		mUsername.setOnEditorActionListener(this);
 		
 		// Create login instance
-		mLogin = new LoginDao(this);
+		mLogin =LoginDao.getInstance(this);
 		
 		// Get views
 		mTailNames = getResources().getStringArray(R.array.bm_tails);

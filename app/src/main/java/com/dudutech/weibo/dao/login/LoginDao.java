@@ -45,8 +45,17 @@ public class LoginDao
 	private ArrayList<String> mNames = new ArrayList<String>();
 	private ArrayList<String> mTokens = new ArrayList<String>();
 	private ArrayList<Long> mExpireDates = new ArrayList<Long>();
+	private static LoginDao mInstance;
 
-	public LoginDao(Context context) {
+
+	public  static LoginDao getInstance(Context context){
+		if(mInstance==null){
+			mInstance =new LoginDao(context);
+		}
+		return  mInstance;
+	}
+
+	private LoginDao(Context context) {
 		mContext = context;
 		mPrefs = context.getSharedPreferences("access_token", Context.MODE_PRIVATE);
 		mAccessToken = mPrefs.getString("access_token", null);

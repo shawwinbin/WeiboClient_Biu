@@ -40,7 +40,6 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
 
 
 
-
     public  BaseTimelinAdapter(Context context ,T t){
         mContext=context;
         mListModel=t;

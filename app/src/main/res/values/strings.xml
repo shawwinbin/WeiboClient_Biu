@@ -125,4 +125,6 @@
     <string name="title_activity_user_home">UserHomeActivity</string>
     <string name="title_activity_weibo_detail">WeiboDetailActivity</string>
     <string name="title_activity_new_post">NewPostActivity</string>
+    <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_friends_at">FriendsAtActivity</string>
 </resources>

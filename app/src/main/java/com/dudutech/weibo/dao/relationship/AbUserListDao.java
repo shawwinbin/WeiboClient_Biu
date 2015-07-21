@@ -1,31 +1,29 @@
-/*
- * Copyright (c) 2015. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
+package com.dudutech.weibo.dao.relationship;
 
-package com.dudutech.weibo.dao.timeline;
-
-import android.content.Context;
 import android.database.Cursor;
+import android.text.TextUtils;
 
-import com.dudutech.weibo.api.WeiboCommentApi;
+import com.dudutech.weibo.api.UrlConstants;
+import com.dudutech.weibo.dao.HttpClientUtils;
+import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
 import com.dudutech.weibo.db.tables.HomeTimeLineTable;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.BaseListModel;
-import com.dudutech.weibo.model.CommentListModel;
-import com.dudutech.weibo.model.MessageListModel;
+import com.dudutech.weibo.model.UserListModel;
+import com.dudutech.weibo.network.WeiboParameters;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+
 /**
- * Created by shaw on 2015/7/13.
+ * Created by Administrator on 2015-7-21.
  */
-public abstract class BaseTimelineDao< T extends BaseListModel> implements ITimelineBaseDao {
+public abstract class AbUserListDao<T extends BaseListModel>   implements ITimelineBaseDao  {
     public Constants.LOADING_STATUS mStatus;
-    protected int mCurrentPage = 0;
+    protected long cursor;
     protected  T mListModel;
+
+
     @Override
     public Constants.LOADING_STATUS getStatus() {
         return mStatus;
@@ -38,13 +36,9 @@ public abstract class BaseTimelineDao< T extends BaseListModel> implements ITime
     public void loadFromCache() {
         Cursor cursor = query();
 
-
-
-        if (cursor.getCount() == 1) {
+        if (cursor!=null&&cursor.getCount() == 1) {
             cursor.moveToFirst();
             mListModel = (T) new Gson().fromJson(cursor.getString(cursor.getColumnIndex(HomeTimeLineTable.JSON)),getListClass());
-            mCurrentPage = mListModel.getSize() / Constants.HOME_TIMELINE_PAGE_SIZE;
-            spanAll(mListModel);
         } else {
             try {
                 mListModel = (T) getListClass().newInstance();
@@ -54,23 +48,35 @@ public abstract class BaseTimelineDao< T extends BaseListModel> implements ITime
         }
     }
 
-    public abstract void spanAll(T t);
 
     @Override
     public void load(boolean isRefresh) {
-        if (isRefresh) {
-            mCurrentPage = 0;
+
+        if(mStatus== Constants.LOADING_STATUS.FINISH){
+            return;
         }
+        if (isRefresh) {
+            cursor = 0;
+        }
+
         BaseListModel list = load();
         dealStatus(list);
-        if(list==null){
+        if(list==null ){
             return;
         }
         if (isRefresh) {
             mListModel.getList().clear();
         }
+        if(list.next_cursor!=0){
+                cursor=list.next_cursor;
+        }
+        else {
+            mStatus= Constants.LOADING_STATUS.FINISH;
+        }
+
+
         mListModel.addAll(false, list);
-        spanAll(mListModel);
+
 
     }
 

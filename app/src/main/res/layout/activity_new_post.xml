@@ -38,7 +38,6 @@
           android:padding="10dp"
           style="@style/txt_main_content"
 
-
           />
 
 
@@ -68,7 +67,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:src="@drawable/ic_editor_at"
-                  android:id="@+id/btn_inser_friend"
+                  android:id="@+id/btn_at_friend"
                   android:background="@null"
                   android:layout_marginRight="10dp"
                   android:padding="5dp"

@@ -28,15 +28,12 @@ import com.dudutech.weibo.Utils.SpannableStringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-/*
+/**
   List of messages
   From timelines
-  
-  credits to: qii
-  author: PeterCxy
-*/
+  credits to: qii, PeterCxy
+  author: shaw
+**/
 public class MessageListModel extends BaseListModel<MessageModel, MessageListModel>
 {
 	private class AD {
@@ -119,8 +116,8 @@ public class MessageListModel extends BaseListModel<MessageModel, MessageListMod
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(total_number);
-		dest.writeString(previous_cursor);
-		dest.writeString(next_cursor);
+		dest.writeLong(previous_cursor);
+		dest.writeLong(next_cursor);
 		dest.writeTypedList(statuses);
 	}
 	
@@ -130,8 +127,8 @@ public class MessageListModel extends BaseListModel<MessageModel, MessageListMod
 		public MessageListModel createFromParcel(Parcel in) {
 			MessageListModel ret = new MessageListModel();
 			ret.total_number = in.readInt();
-			ret.previous_cursor = in.readString();
-			ret.next_cursor = in.readString();
+			ret.previous_cursor = in.readLong();
+			ret.next_cursor = in.readLong();
 			in.readTypedList(ret.statuses, MessageModel.CREATOR);
 			
 			return ret;

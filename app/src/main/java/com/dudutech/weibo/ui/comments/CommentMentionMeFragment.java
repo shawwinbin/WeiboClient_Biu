@@ -11,7 +11,7 @@ package com.dudutech.weibo.ui.comments;
 import android.os.Bundle;
 
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
-import com.dudutech.weibo.adapter.timeline.CommentMeAdapter;
+import com.dudutech.weibo.adapter.comments.CommentMeAdapter;
 import com.dudutech.weibo.dao.comments.CommentsMentionMeDao;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
 import com.dudutech.weibo.model.CommentListModel;
@@ -44,7 +44,7 @@ public class CommentMentionMeFragment extends AbsTimeLineFragment {
 
     @Override
     protected BaseTimelinAdapter bindListAdapter() {
-        return new CommentMeAdapter(getActivity(), (CommentListModel) mCache.getList());
+        return new CommentMeAdapter(getActivity(), (CommentListModel) mDao.getList());
     }
 }
 

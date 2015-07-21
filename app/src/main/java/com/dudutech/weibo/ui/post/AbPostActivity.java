@@ -8,14 +8,17 @@
 
 package com.dudutech.weibo.ui.post;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.ui.common.BaseActivity;
+import com.dudutech.weibo.ui.friendship.FriendsAtActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,6 +31,13 @@ public abstract class AbPostActivity extends BaseActivity {
     Toolbar toolbar;
     @InjectView(R.id.edit)
     EditText editText;
+    public static final int AT_FRIEND = 1;
+    @OnClick(R.id.btn_at_friend)
+    public void atFriends() {
+      Intent intent= new Intent(AbPostActivity.this, FriendsAtActivity.class);
+        this.startActivityForResult(intent,AT_FRIEND);
+    }
+
     @OnClick(R.id.btn_send)
     public void sumbit() {
         new Uploader().execute();
@@ -100,5 +110,24 @@ public abstract class AbPostActivity extends BaseActivity {
 
         }
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case AT_FRIEND:
+                    String name = intent.getStringExtra("name");
+                    String ori = editText.getText().toString();
+                    int index = editText.getSelectionStart();
+                    StringBuilder stringBuilder = new StringBuilder(ori);
+                    stringBuilder.insert(index, name);
+                    editText.setText(stringBuilder.toString());
+                    editText.setSelection(index + name.length());
+                    break;
+            }
+
+        }
     }
 }

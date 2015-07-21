@@ -11,7 +11,7 @@ package com.dudutech.weibo.ui.comments;
 import android.os.Bundle;
 
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
-import com.dudutech.weibo.adapter.timeline.StatusComentAdapter;
+import com.dudutech.weibo.adapter.comments.StatusComentAdapter;
 import com.dudutech.weibo.dao.timeline.ITimelineBaseDao;
 import com.dudutech.weibo.dao.comments.StatusCommentDao;
 import com.dudutech.weibo.model.CommentListModel;
@@ -55,8 +55,14 @@ public class StatusCommentFragment extends AbsTimeLineFragment {
 
     @Override
     protected BaseTimelinAdapter bindListAdapter() {
-        StatusComentAdapter adapter=new StatusComentAdapter(getActivity(),(CommentListModel)mCache.getList());
+        StatusComentAdapter adapter=new StatusComentAdapter(getActivity(),(CommentListModel) mDao.getList());
         adapter.setBottomCount(1);
         return adapter;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(ARG_STATUS_ID,mId);
     }
 }

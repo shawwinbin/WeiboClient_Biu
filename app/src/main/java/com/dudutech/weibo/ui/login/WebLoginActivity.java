@@ -71,7 +71,7 @@ public class WebLoginActivity extends BaseActivity {
         ButterKnife.inject(this);
 
 		// Create login instance
-		mLogin = new LoginDao(this);
+		mLogin = LoginDao.getInstance(this);
 
 
 		// Login page

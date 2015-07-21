@@ -39,14 +39,13 @@ public abstract class AbsTimeLineFragment extends Fragment implements
     protected RecyclerView mList;
     private BaseTimelinAdapter mAdapter;
     private LinearLayoutManager mManager;
-    protected ITimelineBaseDao mCache;
+    protected ITimelineBaseDao mDao;
     private Settings mSettings;
     // Pull To Refresh
     protected SwipeRefreshLayout mSwipeRefresh;
 
     private boolean mRefreshing = false;
 
-    private int mLastCount = 0;
 
 
 
@@ -56,8 +55,8 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         mSettings = Settings.getInstance(getActivity().getApplicationContext());
         final View v = inflater.inflate(R.layout.fragment_timeline, null);
         ButterKnife.inject(this, v);
-        mCache = bindDao();
-        mCache.loadFromCache();
+        mDao = bindDao();
+        mDao.loadFromCache();
         mList.setDrawingCacheEnabled(true);
         mList.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mList.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE
@@ -68,11 +67,11 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         // Swipe To Refresh
         bindSwipeToRefresh(getActivity(),(ViewGroup) v);
 
-        if (mCache.getList().getSize() == 0) {
+        if (mDao.getList().getSize() == 0) {
             new Refresher().execute(true);
         }
         // MyFragmentPagerAdapter
-//        mAdapter = new TimelineAdapter(getActivity(), (List<MessageModel>) mCache.mMessages.getList()
+//        mAdapter = new TimelineAdapter(getActivity(), (List<MessageModel>) mDao.mMessages.getList()
 //        );
 //        mAdapter.setBottomCount(1);
 //        mAdapter.setOnClickListenner(this);
@@ -112,7 +111,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
 
     @Override
     public void doRefresh() {
-        mList.smoothScrollToPosition(0);
+        mList.scrollToPosition(0);
         mList.post(new Runnable() {
             @Override
             public void run() {
@@ -132,9 +131,6 @@ public abstract class AbsTimeLineFragment extends Fragment implements
     }
 
 
-//    protected StatusTimeLineDao bindDao() {
-//        return new StatusTimeLineDao(getActivity());
-//    }
 
 
     protected void bindSwipeToRefresh(Context context,ViewGroup v) {
@@ -155,8 +151,8 @@ public abstract class AbsTimeLineFragment extends Fragment implements
 
 
     protected void load(boolean param) {
-        mCache.load(param);
-        mCache.cache();
+        mDao.load(param);
+        mDao.cache();
     }
 
     private class Refresher extends AsyncTask<Boolean, Void, Boolean> {
@@ -164,7 +160,6 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mLastCount = mCache.getList().getSize();
             mRefreshing = true;
         }
 
@@ -178,10 +173,10 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
 
-            if (result) {
-                mList.smoothScrollToPosition(0);
-            }
-            mAdapter.setBottomStatus(mCache.getStatus());
+//            if (result) {
+//                mList.smoothScrollToPosition(0);
+//            }
+            mAdapter.setBottomStatus(mDao.getStatus());
             mAdapter.notifyDataSetChanged();
             mRefreshing = false;
             if (mSwipeRefresh != null) {
@@ -200,11 +195,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
     }
 
     protected abstract ITimelineBaseDao bindDao();
-//    protected abstract TimelineAdapter bindAdapter();
 
     protected abstract BaseTimelinAdapter  bindListAdapter();
-//    @Override
-//    public void onTtemClick(View view, int position) {
-//        WeiboDetailActivity.start(getActivity(), mCache.get.getList().get(position));
-//    }
+
 }

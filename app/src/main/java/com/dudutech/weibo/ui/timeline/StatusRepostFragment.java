@@ -54,7 +54,7 @@ public class StatusRepostFragment extends AbsTimeLineFragment {
 
     @Override
     protected BaseTimelinAdapter bindListAdapter() {
-        StatusRepostAdapter adapter=new StatusRepostAdapter(getActivity(),(RepostListModel)mCache.getList());
+        StatusRepostAdapter adapter=new StatusRepostAdapter(getActivity(),(RepostListModel) mDao.getList());
         adapter.setBottomCount(1);
         return adapter;
     }

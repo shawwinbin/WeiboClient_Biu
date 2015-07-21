@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.dudutech.weibo.adapter.timeline.BaseTimelinAdapter;
@@ -66,7 +65,7 @@ public class HomeTimelineFragment extends AbsTimeLineFragment  implements Timeli
 
     @Override
     protected BaseTimelinAdapter bindListAdapter() {
-        TimelineAdapter adapter = new TimelineAdapter(getActivity(), (MessageListModel) mCache.getList()
+        TimelineAdapter adapter = new TimelineAdapter(getActivity(), (MessageListModel) mDao.getList()
         );
         adapter.setBottomCount(1);
         adapter.setOnClickListenner(this);
@@ -100,7 +99,7 @@ public class HomeTimelineFragment extends AbsTimeLineFragment  implements Timeli
 
     @Override
     public void onTtemClick(View view, int position) {
-        WeiboDetailActivity.start(getActivity(), ((MessageListModel) mCache.getList()).get(position));
+        WeiboDetailActivity.start(getActivity(), ((MessageListModel) mDao.getList()).get(position));
     }
 
     /**

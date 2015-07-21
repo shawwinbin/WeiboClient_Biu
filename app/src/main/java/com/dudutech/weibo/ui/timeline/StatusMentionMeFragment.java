@@ -55,7 +55,7 @@ public class StatusMentionMeFragment extends AbsTimeLineFragment {
 
     @Override
     protected BaseTimelinAdapter bindListAdapter() {
-        return new TimelineAdapter(getActivity(), (MessageListModel) mCache.getList());
+        return new TimelineAdapter(getActivity(), (MessageListModel) mDao.getList());
     }
 
     // TODO: Rename method, update argument and hook method into UI event

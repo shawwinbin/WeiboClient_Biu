@@ -57,8 +57,8 @@ public class RepostListModel extends MessageListModel
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(total_number);
-		dest.writeString(previous_cursor);
-		dest.writeString(next_cursor);
+		dest.writeLong(previous_cursor);
+		dest.writeLong(next_cursor);
 		dest.writeTypedList(reposts);
 	}
 
@@ -68,8 +68,8 @@ public class RepostListModel extends MessageListModel
 		public RepostListModel createFromParcel(Parcel in) {
 			RepostListModel ret = new RepostListModel();
 			ret.total_number = in.readInt();
-			ret.previous_cursor = in.readString();
-			ret.next_cursor = in.readString();
+			ret.previous_cursor = in.readLong();
+			ret.next_cursor = in.readLong();
 			in.readTypedList(ret.reposts, MessageModel.CREATOR);
 
 			return ret;

@@ -94,8 +94,8 @@ public class CommentListModel extends BaseListModel<CommentModel, CommentListMod
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(total_number);
-		dest.writeString(previous_cursor);
-		dest.writeString(next_cursor);
+		dest.writeLong(previous_cursor);
+		dest.writeLong(next_cursor);
 		dest.writeTypedList(comments);
 	}
 
@@ -105,8 +105,8 @@ public class CommentListModel extends BaseListModel<CommentModel, CommentListMod
 		public CommentListModel createFromParcel(Parcel in) {
 			CommentListModel ret = new CommentListModel();
 			ret.total_number = in.readInt();
-			ret.previous_cursor = in.readString();
-			ret.next_cursor = in.readString();
+			ret.previous_cursor = in.readLong();
+			ret.next_cursor = in.readLong();
 			in.readTypedList(ret.comments, CommentModel.CREATOR);
 
 			return ret;

@@ -27,7 +27,7 @@ import java.util.List;
 public abstract class BaseListModel<I, L> implements Parcelable
 {
 	public int total_number = 0;
-	public String previous_cursor = "0", next_cursor = "0";
+	public long previous_cursor = 0, next_cursor = 0;
 	
 	public abstract int getSize();
 	public abstract I get(int position);

@@ -14,7 +14,7 @@ public class LoadingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoginDao login = new LoginDao(this);
+        LoginDao login = LoginDao.getInstance(this);
         if (needsLogin(login)) {
             login.logout();
             Intent i = new Intent();

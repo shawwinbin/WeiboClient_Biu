@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity implements
 				.commit();
 		setUpDrawer();
 		mUserCache = new UserDao(this);
-		mLoginCache = new LoginDao(this);
+		mLoginCache = LoginDao.getInstance(this);
 
 		new InitializerTask().execute();
 
