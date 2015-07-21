@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dudutech.weibo.Utils.Utility;
+import com.dudutech.weibo.dao.emoticons.EmoticonsDao;
 import com.dudutech.weibo.dao.login.LoginDao;
 import com.dudutech.weibo.ui.main.MainActivity;
 
@@ -15,6 +16,7 @@ public class LoadingActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         LoginDao login = LoginDao.getInstance(this);
+        EmoticonsDao.newInstance();
         if (needsLogin(login)) {
             login.logout();
             Intent i = new Intent();

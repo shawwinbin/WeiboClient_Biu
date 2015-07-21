@@ -27,10 +27,10 @@ import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.Log;
-
+import com.dudutech.weibo.dao.emoticons.EmoticonsDao;
 import com.dudutech.weibo.model.CommentModel;
-import com.dudutech.weibo.model.Emoticons;
 import com.dudutech.weibo.model.MessageModel;
+import com.dudutech.weibo.widget.StickerImageSpan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,8 +48,8 @@ public class SpannableStringUtils
 	private static final Pattern PATTERN_EMOTICON = Pattern.compile("\\[(\\S+?)\\]");
 	
 	private static final String HTTP_SCHEME = "http://";
-	private static final String TOPIC_SCHEME = "us.shandian.blacklight.topic://";
-	private static final String MENTION_SCHEME = "us.shandian.blacklight.user://";
+	private static final String TOPIC_SCHEME = "topic://";
+	private static final String MENTION_SCHEME = "user://";
 	
 	public static SpannableString span(Context context, String text) {
 		SpannableString ss = SpannableString.valueOf(text);
@@ -73,10 +73,10 @@ public class SpannableStringUtils
 			// Don't be too long
 			if (matcher.end() - matcher.start() < 8) {
 				String iconName = matcher.group(0);
-				Bitmap bitmap = Emoticons.EMOTICON_BITMAPS_SCALED.get(iconName);
+				Bitmap bitmap = EmoticonsDao.newInstance().bitmaps.get(iconName);
 				
 				if (bitmap != null) {
-					ImageSpan span = new ImageSpan(context, bitmap, ImageSpan.ALIGN_BASELINE);
+					StickerImageSpan span = new StickerImageSpan(context, bitmap);
 					ss.setSpan(span, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
@@ -97,10 +97,7 @@ public class SpannableStringUtils
 
 	public static SpannableString getOrigSpan(Context context, MessageModel orig) {
 		if (orig.origSpan == null) {
-			
-			if (DEBUG) {
-				Log.d(TAG, orig.id + " origSpan is null");
-			}
+
 			
 			String username = "";
 
@@ -118,9 +115,6 @@ public class SpannableStringUtils
 	public static SpannableString getCommentSpan(Context context, CommentModel orig) {
 		if (orig.span == null) {
 
-			if (DEBUG) {
-				Log.d(TAG, orig.id + " origSpan is null");
-			}
 
 			String username = "";
 

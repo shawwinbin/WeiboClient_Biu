@@ -49,11 +49,11 @@ public class GroupListModel extends BaseListModel<GroupModel, GroupListModel> {
 
 	public void addDefaultGroupsToTop(){
 		GroupModel groupModelBilateral= new GroupModel();
-		groupModelBilateral.name= MyApplication.mContext.getString(R.string.groups_bilateral);
+		groupModelBilateral.name= MyApplication.getInstance().getString(R.string.groups_bilateral);
 		groupModelBilateral.idstr= StatusTimeLineDao.GROUP_BILATERAL;
 		lists.add(0,groupModelBilateral);
 		GroupModel groupModelAll= new GroupModel();
-		groupModelAll.name= MyApplication.mContext.getString(R.string.groups_all);
+		groupModelAll.name= MyApplication.getInstance().getString(R.string.groups_all);
 		groupModelAll.idstr= StatusTimeLineDao.GROUP_ALL;
 		lists.add(0,groupModelAll);
 	}

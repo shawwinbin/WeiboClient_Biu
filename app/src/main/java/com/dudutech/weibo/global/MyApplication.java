@@ -18,18 +18,20 @@ import java.io.File;
  */
 public class MyApplication  extends Application{
 
-    public static Context mContext;
+    private static MyApplication mContext;
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext=getApplicationContext();
+        mContext=this;
         initImageLoaderConfig(this);
     }
 
 
+    public static MyApplication getInstance() {
+        return mContext;
+    }
 
-
-private void initImageLoaderConfig(Context context){
+   private void initImageLoaderConfig(Context context){
 
     // Create global configuration and initialize ImageLoader with this configuration
     File cacheDir = StorageUtils.getCacheDirectory(context);

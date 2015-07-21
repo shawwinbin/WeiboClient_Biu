@@ -24,6 +24,8 @@
 
     <dimen name="img_large">70dp</dimen>
 
+    <dimen name="emoction_size">18dp</dimen>
+
     <!-- margin -->
     <dimen name="MiniMargin">3dp</dimen>
     <dimen name="MiniMiddleNargin">5dp</dimen>

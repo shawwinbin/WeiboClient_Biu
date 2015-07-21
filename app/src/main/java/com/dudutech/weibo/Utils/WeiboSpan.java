@@ -86,7 +86,7 @@ public class WeiboSpan extends ClickableSpan {
 
 	@Override
 	public void updateDrawState(TextPaint ds) {
-		ds.setColor(MyApplication.mContext.getResources().getColor(R.color.base_actionbar));
+		ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.base_actionbar));
 		ds.setUnderlineText(false);
 	}
 

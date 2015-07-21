@@ -29,7 +29,7 @@ import android.widget.ImageView;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
-import com.dudutech.weibo.model.Emoticons;
+
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -74,13 +74,13 @@ public class EmoticonAdapter extends BaseAdapter
 		}
 	}
 	
-	public static void init() {
-		for (Entry<String, Bitmap> entry : Emoticons.EMOTICON_BITMAPS.entrySet()) {
-			if (!mNames.contains(entry.getKey()) && !mBitmaps.contains(entry.getValue())) {
-				mNames.add(entry.getKey());
-				mBitmaps.add(entry.getValue());
-			}
-		}
-	}
+//	public static void init() {
+//		for (Entry<String, Bitmap> entry : Emoticons.EMOTICON_BITMAPS.entrySet()) {
+//			if (!mNames.contains(entry.getKey()) && !mBitmaps.contains(entry.getValue())) {
+//				mNames.add(entry.getKey());
+//				mBitmaps.add(entry.getValue());
+//			}
+//		}
+//	}
 
 }
