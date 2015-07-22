@@ -25,7 +25,7 @@ public class EmoticonsDao {
     private static EmoticonsDao mInstance;
 
 
-    public static EmoticonsDao newInstance(){
+    public static EmoticonsDao getInstance(){
 
         if(mInstance==null){
             mInstance=new EmoticonsDao();

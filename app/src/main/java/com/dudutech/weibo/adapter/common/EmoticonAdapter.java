@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.weibo.adapter;
+package com.dudutech.weibo.adapter.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -29,6 +29,7 @@ import android.widget.ImageView;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.Utility;
+import com.dudutech.weibo.dao.emoticons.EmoticonsDao;
 
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class EmoticonAdapter extends BaseAdapter
 	
 	public EmoticonAdapter(Context context) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		init();
 	}
 	
 	@Override
@@ -64,23 +66,24 @@ public class EmoticonAdapter extends BaseAdapter
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if (position >= mNames.size()){
-			return convertView;
-		} else {
-			View v = convertView != null ? convertView : mInflater.inflate(R.layout.emoticon_view, null);
-			ImageView iv = (ImageView)convertView.findViewById(R.id.emoticon_image);
-			iv.setImageBitmap(mBitmaps.get(position));
-			return v;
+
+		if(convertView==null){
+			convertView=mInflater.inflate(R.layout.emoticon_view, null);
 		}
+
+		ImageView iv = (ImageView)convertView.findViewById(R.id.emoticon_image);
+		iv.setImageBitmap(mBitmaps.get(position));
+		return convertView;
+
 	}
 	
-//	public static void init() {
-//		for (Entry<String, Bitmap> entry : Emoticons.EMOTICON_BITMAPS.entrySet()) {
-//			if (!mNames.contains(entry.getKey()) && !mBitmaps.contains(entry.getValue())) {
-//				mNames.add(entry.getKey());
-//				mBitmaps.add(entry.getValue());
-//			}
-//		}
-//	}
+	public static void init() {
+		for (Entry<String, Bitmap> entry : EmoticonsDao.getInstance().bitmaps.entrySet()) {
+			if (!mNames.contains(entry.getKey()) && !mBitmaps.contains(entry.getValue())) {
+				mNames.add(entry.getKey());
+				mBitmaps.add(entry.getValue());
+			}
+		}
+	}
 
 }

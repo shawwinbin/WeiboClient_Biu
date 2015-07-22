@@ -120,7 +120,7 @@ public class WeiboDetailActivity extends AppCompatActivity implements AppBarLayo
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        StatusCommentFragment mStatusCommentFragment= StatusCommentFragment.newInstance(mWeibo.id);
+//        StatusCommentFragment mStatusCommentFragment= StatusCommentFragment.getInstance(mWeibo.id);
 //        getFragmentManager()
 //                .beginTransaction()
 //                .replace(R.id.fl_content, mStatusCommentFragment)

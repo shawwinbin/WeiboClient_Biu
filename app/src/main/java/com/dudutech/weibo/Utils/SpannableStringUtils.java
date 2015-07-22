@@ -23,10 +23,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
-import android.util.Log;
+
 import com.dudutech.weibo.dao.emoticons.EmoticonsDao;
 import com.dudutech.weibo.model.CommentModel;
 import com.dudutech.weibo.model.MessageModel;
@@ -34,7 +33,6 @@ import com.dudutech.weibo.widget.StickerImageSpan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static com.dudutech.weibo.BuildConfig.DEBUG;
 
 
 /* This class is modified from qii/weiciyuan */
@@ -73,7 +71,7 @@ public class SpannableStringUtils
 			// Don't be too long
 			if (matcher.end() - matcher.start() < 8) {
 				String iconName = matcher.group(0);
-				Bitmap bitmap = EmoticonsDao.newInstance().bitmaps.get(iconName);
+				Bitmap bitmap = EmoticonsDao.getInstance().bitmaps.get(iconName);
 				
 				if (bitmap != null) {
 					StickerImageSpan span = new StickerImageSpan(context, bitmap);

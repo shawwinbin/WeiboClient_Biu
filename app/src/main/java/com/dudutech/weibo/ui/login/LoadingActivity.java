@@ -16,7 +16,7 @@ public class LoadingActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         LoginDao login = LoginDao.getInstance(this);
-        EmoticonsDao.newInstance();
+        EmoticonsDao.getInstance();
         if (needsLogin(login)) {
             login.logout();
             Intent i = new Intent();

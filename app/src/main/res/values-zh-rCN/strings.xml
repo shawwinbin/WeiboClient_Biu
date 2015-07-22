@@ -103,6 +103,10 @@
     <string name="groups_all">全部</string>
     <string name="groups_bilateral">相互关注</string>
 
+    <string name="weibo_length_error">微博不能超过140字</string>
+
+
+
 
 
     <!-- Units -->
@@ -132,17 +136,14 @@
 
 
     <!-- Time -->
-    <string name="just_now">Just now</string>
-    <string name="min">&#160;minutes ago</string>
-    <string name="hour">&#160;hours ago</string>
-    <string name="day">&#160;days ago</string>
-    <string name="month">&#160;months ago</string>
-    <string name="year">&#160;year ago</string>
-    <string name="today">Today</string>
-    <string name="yesterday">Yesterday</string>
-    <string name="the_day_before_yesterday">2 days ago</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_user_home">UserHomeActivity</string>
-    <string name="title_activity_weibo_detail">WeiboDetailActivity</string>
-    <string name="title_activity_new_post">NewPostActivity</string>
+    <string name="just_now">刚刚</string>
+    <string name="min">&#160;分钟前</string>
+    <string name="hour">&#160;小时前</string>
+    <string name="day">&#160;天前</string>
+    <string name="month">&#160;月前</string>
+    <string name="year">&#160; 年前</string>
+    <string name="today">今天</string>
+    <string name="yesterday">昨天</string>
+    <string name="the_day_before_yesterday">2天前</string>
+
 </resources>

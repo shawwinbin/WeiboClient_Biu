@@ -3,6 +3,9 @@ package com.dudutech.weibo.adapter.timeline;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -330,13 +333,12 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
                                 ImageView imageView = (ImageView) view;
 
+                                int singleImgMaxHeight= (int) (imageMaxWidth*2/3);
 
-                                if (height > imageMaxWidth) {
-                                    height = (int) imageMaxWidth;
-//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                                } else {
-//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                                if (height > singleImgMaxHeight) {
+                                    height = (int) singleImgMaxHeight;
+//
                                 }
                                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                 FlowLayout.LayoutParams param = new FlowLayout.LayoutParams(width, height);
@@ -375,16 +377,12 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
         holder.fl_images.setVisibility(View.GONE);
 
-//		holder.tv_like.setText("");
-//		holder.tv_comment_count.setText("");
+
         for (TagImageVIew imageView : holder.listImageView) {
             imageView.setVisibility(View.GONE);
             imageView.setDrawTag(false);
-//            imageView.setNeedChange(false);
         }
-//        holder.tv_location.setVisibility(View.GONE);
-//		holder.tv_device.setText("");
-//		holder.tv_content.setText("");
+
     }
 
     public class BaseWeiboViewHolder extends RecyclerView.ViewHolder {
@@ -431,7 +429,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
             for (int i = 0; i < 9; i++) {
                 TagImageVIew imageView = new TagImageVIew(context);
-//                imageView.setCornerRadiiDP(5, 5, 5, 5);
                 imageView.setBackgroundColor(context.getResources().getColor(R.color.bg_list_press));
                 imageView.setVisibility(View.GONE);
                 imageView.setAdjustViewBounds(true);

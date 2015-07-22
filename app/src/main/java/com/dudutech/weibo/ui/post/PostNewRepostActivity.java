@@ -39,7 +39,7 @@ public class PostNewRepostActivity extends AbPostActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionbarTitle(R.string.comment_on);
+        setActionbarTitle(R.string.repost_weibo);
         mWeibo=getIntent().getParcelableExtra(EXT_WEIBO);
         mWeibo.span = SpannableStringUtils.getOrigSpan(this,mWeibo);
         if(mWeibo.retweeted_status!=null) {

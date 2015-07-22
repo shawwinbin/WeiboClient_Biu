@@ -12,6 +12,7 @@
     tools:context="com.dudutech.weibo.ui.post.NewPostActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
+    android:id="@+id/rl_root"
 
     >
 
@@ -40,12 +41,18 @@
 
           />
 
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_alignParentBottom="true"
+          >
 
       <RelativeLayout
           android:id="@+id/rl_tool"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
+
           android:padding="@dimen/MiddlePadding"
           android:background="@color/bg_gray"
           >
@@ -95,6 +102,14 @@
 
       </RelativeLayout>
 
+      <FrameLayout
+          android:id="@+id/fl_bottom"
+          android:layout_width="match_parent"
+          android:layout_height="245dp"
+          android:layout_below="@+id/rl_tool"
+          android:visibility="gone"
+          ></FrameLayout>
+      </LinearLayout>
 
  </RelativeLayout>
 
