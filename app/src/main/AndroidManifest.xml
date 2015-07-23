@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dudutech.weibo" >
+    package="com.dudutech.biu" >
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,28 +14,28 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".global.MyApplication"
+        android:name="com.dudutech.biu.global.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.dudutech.biu.ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Main" >
         </activity>
         <activity
-            android:name=".ui.login.WebLoginActivity"
+            android:name="com.dudutech.biu.ui.login.WebLoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
-        <activity android:name=".ui.picture.PicsActivity" >
+        <activity android:name="com.dudutech.biu.ui.picture.PicsActivity" >
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ui.login.LoadingActivity" >
+        <activity android:name="com.dudutech.biu.ui.login.LoadingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,32 +43,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.timeline.UserHomeActivity"
+            android:name="com.dudutech.biu.ui.timeline.UserHomeActivity"
 
             android:theme="@style/AppTheme.UserHome" >
         </activity>
         <activity
-            android:name=".ui.timeline.WeiboDetailActivity"
+            android:name="com.dudutech.biu.ui.timeline.WeiboDetailActivity"
            >
         </activity>
         <activity
-            android:name=".ui.post.NewPostActivity"
+            android:name="com.dudutech.biu.ui.post.NewPostActivity"
 
             android:windowSoftInputMode="adjustResize"
 
             >
         </activity>
         <activity
-            android:name=".ui.post.PostNewCommentActivity"
+            android:name="com.dudutech.biu.ui.post.PostNewCommentActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".ui.post.PostNewRepostActivity"
+            android:name="com.dudutech.biu.ui.post.PostNewRepostActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
 
         <activity
-            android:name=".ui.friendship.FriendsAtActivity"
+            android:name="com.dudutech.biu.ui.friendship.FriendsAtActivity"
            >
         </activity>
     </application>

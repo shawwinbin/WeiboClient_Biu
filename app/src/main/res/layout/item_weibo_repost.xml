@@ -47,7 +47,7 @@
 
                 />
 
-            <com.dudutech.weibo.widget.FlowLayout
+            <com.dudutech.biu.widget.FlowLayout
                 android:id="@+id/fl_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
                 >
 
-            </com.dudutech.weibo.widget.FlowLayout>
+            </com.dudutech.biu.widget.FlowLayout>
 
 
 

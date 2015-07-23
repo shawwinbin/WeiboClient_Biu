@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <com.dudutech.weibo.widget.LetterImageView
+        <com.dudutech.biu.widget.LetterImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/avatar_lst_item"
             android:layout_height="@dimen/avatar_lst_item"
@@ -79,7 +79,7 @@
                 />
 
 
-            <com.dudutech.weibo.widget.FlowLayout
+            <com.dudutech.biu.widget.FlowLayout
                 android:id="@+id/fl_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                 app:orientation="horizontal"
                 app:verticalSpacing="@dimen/moment_photo_margin" >
          
-            </com.dudutech.weibo.widget.FlowLayout>
+            </com.dudutech.biu.widget.FlowLayout>
             
 
             

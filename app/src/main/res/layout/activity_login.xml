@@ -5,7 +5,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dudutech.weibo.ui.login.LoginActivity">
+    tools:context="com.dudutech.biu.ui.login.LoginActivity">
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"/>
 
-        <com.dudutech.weibo.widget.EmailAutoCompleteTextView
+        <com.dudutech.biu.widget.EmailAutoCompleteTextView
             android:layout_height="40dp"
             android:ems="10"
             android:layout_width="wrap_content"
