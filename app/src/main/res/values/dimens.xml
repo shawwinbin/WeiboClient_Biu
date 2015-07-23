@@ -22,8 +22,8 @@
     <dimen name="avatar_lst_item_large">58dp</dimen>
     <dimen name="nearby_avatar_lst_item_large">62dp</dimen>
 
-    <dimen name="img_large">70dp</dimen>
-
+    <dimen name="img_large">60dp</dimen>
+    <dimen name="img_medium">60dp</dimen>
     <dimen name="emoction_size">18dp</dimen>
 
     <!-- margin -->

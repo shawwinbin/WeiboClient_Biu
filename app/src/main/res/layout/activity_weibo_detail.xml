@@ -44,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    app:theme="@style/ThemeToolbar"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 
                     />

@@ -15,13 +15,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.SpannableStringUtils;
 import com.dudutech.weibo.dao.post.CommentStatusDao;
 import com.dudutech.weibo.dao.post.PostDao;
+import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.CommentModel;
 import com.dudutech.weibo.model.MessageModel;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class PostNewRepostActivity extends AbPostActivity {
     public static  final  String EXT_WEIBO = "eta_weibo";
@@ -41,11 +44,30 @@ public class PostNewRepostActivity extends AbPostActivity {
         super.onCreate(savedInstanceState);
         setActionbarTitle(R.string.repost_weibo);
         mWeibo=getIntent().getParcelableExtra(EXT_WEIBO);
-        mWeibo.span = SpannableStringUtils.getOrigSpan(this,mWeibo);
+        mWeibo.origSpan = SpannableStringUtils.getOrigSpan(this,mWeibo);
         if(mWeibo.retweeted_status!=null) {
-            editText.setText("//" + mWeibo.span);
+            editText.setText("//" + mWeibo.origSpan);
             editText.setSelection(0);
         }
+        initUI();
+    }
+
+    private void initUI(){
+
+        rl_stauts_info.setVisibility(View.VISIBLE);
+        ck_extra.setVisibility(View.VISIBLE);
+
+        ck_extra.setText(R.string.comment_meanwhile);
+        String statusImgUrl= mWeibo.thumbnail_pic;
+        if(TextUtils.isEmpty(statusImgUrl)&&mWeibo.retweeted_status!=null){
+            statusImgUrl=mWeibo.retweeted_status.thumbnail_pic;
+        }
+        if(TextUtils.isEmpty(statusImgUrl)){
+            statusImgUrl=mWeibo.user.avatar_large;
+        }
+        ImageLoader.getInstance().displayImage(statusImgUrl, iv_source, Constants.timelineListOptions);
+
+        tv_status_content.setText(mWeibo.origSpan);
 
     }
 

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#2f5a81</item>
         <item name="colorPrimaryDark">#1c364d</item>
         <item name="colorAccent">@color/transparent_1</item>
@@ -8,7 +8,14 @@
         <item name="CardBackground">@color/white</item>
         <item name="CardForeground">@color/gray</item>
         <item name="fits_windows">false</item>
+    </style>
 
+    <style name="ThemeToolbar" parent="ThemeOverlay.AppCompat.Dark">
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">@color/white</item>
+        <!-- color of the menu overflow icon -->
+        <!-- Used to color the overflow menu icon -->
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
@@ -22,9 +29,6 @@
     <style name="AppTheme.UserHome">
         <item name="fits_windows">true</item>
     </style>
-
-
-
 
 
 

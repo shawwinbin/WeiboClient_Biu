@@ -8,30 +8,45 @@
 
 package com.dudutech.weibo.ui.post;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.DeviceUtil;
+import com.dudutech.weibo.Utils.Utility;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.ui.common.BaseActivity;
 import com.dudutech.weibo.ui.friendship.FriendsAtActivity;
 
+
+import org.w3c.dom.Text;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -40,8 +55,27 @@ import butterknife.OnClick;
 public abstract class AbPostActivity extends BaseActivity implements EmoticonFragment.OnEmoticonOnClinckListener {
 
 
+    public static final int AT_FRIEND = 1;
+
+
+
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
+    @InjectView(R.id.tv_text_left)
+    TextView tv_text_left;
+
+    @InjectView(R.id.ck_extra)
+    CheckBox ck_extra;
+
+    @InjectView(R.id.rl_status_info)
+    RelativeLayout rl_stauts_info;
+
+    @InjectView(R.id.iv_source)
+    public ImageView iv_source;
+
+    @InjectView(R.id.tv_status_content)
+    public TextView tv_status_content;
+
     @InjectView(R.id.edit)
     EditText editText;
     @OnClick(R.id.edit)
@@ -51,11 +85,18 @@ public abstract class AbPostActivity extends BaseActivity implements EmoticonFra
         }
     }
 
+    @InjectView(R.id.iv_img_to_send)
+    ImageView iv_image_to_send;
+
+    @InjectView(R.id.btn_inser_img)
+    ImageButton btn_inser_img;
+
+
 
     @InjectView(R.id.fl_bottom)
     FrameLayout fl_bottom;
 
-    public static final int AT_FRIEND = 1;
+
 
     @OnClick(R.id.btn_at_friend)
     public void atFriends() {
@@ -65,7 +106,26 @@ public abstract class AbPostActivity extends BaseActivity implements EmoticonFra
 
     @OnClick(R.id.btn_send)
     public void sumbit() {
-        new Uploader().execute();
+
+        int left=Constants.MAX_WEIBO_LENGTH- editText.getText().toString().length();
+        if(left<0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+             builder.setMessage(R.string.weibo_length_error);
+             builder.setPositiveButton(R.string.btn_commfire, new DialogInterface.OnClickListener() {
+                  @Override public void onClick(DialogInterface dialog, int which) {
+                      dialog.dismiss();
+
+                  }
+             });
+
+            builder.create().show();
+        }
+        else{
+            new Uploader().execute();
+        }
+
+
+
     }
 
 
@@ -79,20 +139,16 @@ public abstract class AbPostActivity extends BaseActivity implements EmoticonFra
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         } else {
-          hideBottom();
+            hideBottom();
             DeviceUtil.showSoftInput(this, editText);
         }
 
 
     }
 
-
     private EmoticonFragment mEmoticonFragment;
-
-    private Handler  mHandler;
-
     private final String TAG_EMOTICON = "tag_emotiocn";
-    private int heightDiff;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,22 +160,38 @@ public abstract class AbPostActivity extends BaseActivity implements EmoticonFra
         mEmoticonFragment = (EmoticonFragment) getFragmentManager().findFragmentByTag(TAG_EMOTICON);
         if (mEmoticonFragment == null) {
             mEmoticonFragment = new EmoticonFragment();
-
         }
         getFragmentManager().beginTransaction().replace(R.id.fl_bottom, mEmoticonFragment, TAG_EMOTICON).commit();
-        mHandler =new Handler();
 
+        tv_text_left.setText(String.valueOf(Constants.MAX_WEIBO_LENGTH));
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                int left=Constants.MAX_WEIBO_LENGTH- s.toString().length();
+                tv_text_left.setText(String.valueOf(left));
+            }
+        });
 
     }
 
 
     protected void setActionbarTitle(int ResId) {
-
         getSupportActionBar().setTitle(ResId);
-
     }
 
-    private void hideBottom(){
+    private void hideBottom() {
         fl_bottom.setVisibility(View.GONE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
@@ -133,12 +205,46 @@ public abstract class AbPostActivity extends BaseActivity implements EmoticonFra
             case R.id.action_settings:
                 return true;
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+
+        if (fl_bottom.getVisibility()==View.VISIBLE) {
+           hideBottom();
+        } else if (!TextUtils.isEmpty(editText.getText().toString()) ) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.exit_comfire);
+//            builder.setTitle("提示");
+            builder.setPositiveButton(R.string.btn_commfire, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    AbPostActivity.this.finish();
+                }
+            });
+            builder.setNegativeButton(R.string.btn_cancle, new DialogInterface.OnClickListener() {
+                @Override
+
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+
+            });
+            builder.create().show();
+        } else {
+            super.onBackPressed();
+        }
+
+
+
+    }
+
 
 
     protected abstract boolean post();

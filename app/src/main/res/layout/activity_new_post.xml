@@ -14,6 +14,8 @@
     android:fitsSystemWindows="true"
     android:id="@+id/rl_root"
 
+
+
     >
 
     <android.support.v7.widget.Toolbar
@@ -21,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeToolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:fitsSystemWindows="true"
         />
@@ -28,12 +31,13 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_below="@id/toolbar"
+      android:background="@color/white"
      >
       <EditText
           android:id="@+id/edit"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_above="@+id/rl_tool"
+          android:layout_above="@+id/ll_tool"
           android:gravity="start"
           android:background="@color/white"
           android:padding="10dp"
@@ -42,17 +46,99 @@
           />
 
       <LinearLayout
+          android:id="@+id/ll_tool"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical"
           android:layout_alignParentBottom="true"
           >
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="20dp"
+              android:paddingRight="20dp"
+              >
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/text_btn"
+                  android:layout_centerVertical="true"
+                  android:layout_alignParentLeft="true"
+                  android:layout_alignParentStart="true"
+                  android:id="@+id/tv_text_left" />
+              <CheckBox
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+
+                  android:layout_alignParentRight="true"
+                  android:textSize="15sp"
+                  android:textColor="@color/txt_remark"
+                  android:layout_centerVertical="true"
+                  style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                  android:checked="false"
+                  android:id="@+id/ck_extra"
+                  android:visibility="gone"
+                  />
+          </RelativeLayout>
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/line_moment"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:layout_marginBottom="10dp"
+              ></View>
+
+          <ImageView
+              android:id="@+id/iv_img_to_send"
+              android:layout_width="@dimen/img_medium"
+              android:layout_height="@dimen/img_medium"
+              android:layout_marginLeft="20dp"
+              android:scaleType="centerCrop"
+              android:visibility="gone"
+              />
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_fade"
+
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:padding="2dp"
+              android:id="@+id/rl_status_info"
+              android:visibility="gone"
+              >
+              <ImageView
+                  android:id="@+id/iv_source"
+                  android:layout_width="@dimen/img_medium"
+                  android:layout_height="@dimen/img_medium"
+                  android:scaleType="centerCrop"
+                  />
+
+              <TextView
+                  android:id="@+id/tv_status_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_toRightOf="@id/iv_source"
+                  android:maxLines="2"
+                  android:layout_marginTop="@dimen/MiddleMargin"
+                  android:layout_marginLeft="@dimen/MiniMiddleNargin"
+                  android:layout_marginBottom="@dimen/MiniMiddleNargin"
+                  style="@style/txt_main_content"
+                  />
+
+
+
+          </RelativeLayout>
+
 
       <RelativeLayout
-          android:id="@+id/rl_tool"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-
+          android:layout_marginTop="10dp"
           android:padding="@dimen/MiddlePadding"
           android:background="@color/bg_gray"
           >

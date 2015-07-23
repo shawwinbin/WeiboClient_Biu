@@ -44,17 +44,19 @@
         </activity>
         <activity
             android:name=".ui.timeline.UserHomeActivity"
-            android:label="@string/title_activity_user_home"
+
             android:theme="@style/AppTheme.UserHome" >
         </activity>
         <activity
             android:name=".ui.timeline.WeiboDetailActivity"
-            android:label="@string/title_activity_weibo_detail" >
+           >
         </activity>
         <activity
             android:name=".ui.post.NewPostActivity"
-            android:label="@string/title_activity_new_post"
-            android:windowSoftInputMode="adjustResize" >
+
+            android:windowSoftInputMode="adjustResize"
+
+            >
         </activity>
         <activity
             android:name=".ui.post.PostNewCommentActivity"
@@ -67,7 +69,7 @@
 
         <activity
             android:name=".ui.friendship.FriendsAtActivity"
-            android:label="@string/title_activity_friends_at" >
+           >
         </activity>
     </application>
 

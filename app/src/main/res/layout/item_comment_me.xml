@@ -30,27 +30,27 @@
             android:background="@drawable/lst_default_null_item_selector"
             android:lineSpacingMultiplier="1.2"
            />
-        <RelativeLayout
+              <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bg_fade"
             android:layout_marginTop="10dp"
             >
             <ImageView
-            android:id="@+id/iv_source"
-            android:layout_width="@dimen/img_large"
-            android:layout_height="@dimen/img_large"
-               android:scaleType="centerCrop"
+                android:id="@+id/iv_source"
+                android:layout_width="@dimen/img_large"
+                android:layout_height="@dimen/img_large"
+                android:scaleType="centerCrop"
                 />
 
-           <TextView
-               android:id="@+id/tv_status_author"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_toRightOf="@+id/iv_source"
-               android:layout_margin="@dimen/MiniMiddleNargin"
-               style="@style/text_user_name"
-               />
+            <TextView
+                android:id="@+id/tv_status_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_source"
+                android:layout_margin="@dimen/MiniMiddleNargin"
+                style="@style/text_user_name"
+                />
             <TextView
                 android:id="@+id/tv_status_content"
                 android:layout_width="match_parent"

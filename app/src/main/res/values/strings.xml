@@ -121,10 +121,5 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="the_day_before_yesterday">2 days ago</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_user_home">UserHomeActivity</string>
-    <string name="title_activity_weibo_detail">WeiboDetailActivity</string>
-    <string name="title_activity_new_post">NewPostActivity</string>
-    <string name="title_activity_friends">FriendsActivity</string>
-    <string name="title_activity_friends_at">FriendsAtActivity</string>
+
 </resources>
