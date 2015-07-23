@@ -20,6 +20,7 @@ import android.view.View;
 import com.dudutech.weibo.R;
 import com.dudutech.weibo.Utils.SpannableStringUtils;
 import com.dudutech.weibo.dao.post.CommentStatusDao;
+import com.dudutech.weibo.dao.post.PostDao;
 import com.dudutech.weibo.global.Constants;
 import com.dudutech.weibo.model.CommentModel;
 import com.dudutech.weibo.model.MessageModel;
@@ -82,7 +83,10 @@ public class PostNewCommentActivity extends AbPostActivity {
         }
 
         CommentStatusDao dao =new CommentStatusDao(mWeibo.idstr,comment);
-
+//        dao.enableComment_ori(ck_extra.isChecked());
+        if(ck_extra.isChecked()) {
+            PostDao.newRepost(mWeibo.id, comment, 0);
+        }
 
         boolean result= dao.sendComment()!=null;
 
@@ -92,7 +96,7 @@ public class PostNewCommentActivity extends AbPostActivity {
     @Override
     protected void onPrePost() {
         prog=new ProgressDialog(PostNewCommentActivity.this);
-        prog.setMessage(getResources().getString(R.string.plz_wait));
+        prog.setMessage(getResources().getString(R.string.sending));
         prog.setCancelable(false);
         prog.show();
 

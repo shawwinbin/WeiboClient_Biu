@@ -115,7 +115,7 @@ public class MessageModel implements Parcelable
 	public int reposts_count;
 	public int comments_count;
 	public int attitudes_count;
-	public ArrayList<AnnotationModel> annotations = new ArrayList<AnnotationModel>();
+
 
 	public transient SpannableString span, origSpan;
 	public transient long millis;
@@ -171,7 +171,7 @@ public class MessageModel implements Parcelable
 		dest.writeInt(attitudes_count);
 		dest.writeTypedList(pic_urls);
 		dest.writeLong(millis);
-		dest.writeTypedList(annotations);
+
 	}
 
 	public static final Creator<MessageModel> CREATOR = new Creator<MessageModel>() {
@@ -210,7 +210,7 @@ public class MessageModel implements Parcelable
 
 			ret.millis = in.readLong();
 
-			in.readTypedList(ret.annotations, AnnotationModel.CREATOR);
+
 			
 			return ret;
 		}

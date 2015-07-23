@@ -41,6 +41,9 @@
     <string name="retweet">转发</string>
     <string name="comment">评论</string>
     <string name="weibo">微博</string>
+
+    <string name="favo">收藏</string>
+
     <string name="status_mention_me">提到我的微博</string>
     <string name="comment_mention_me">提到我的评论</string>
     <string name="mention_me">提到我的</string>
@@ -60,6 +63,9 @@
     <string name="reply">回复</string>
     <string name="remove_attitude">取消赞</string>
     <string name="repost_and_comment">同时评论</string>
+
+    <string name="sending">发送中……</string>
+    <string name="send_fail">发送失败</string>
 
     <string name="group">分组</string>
 

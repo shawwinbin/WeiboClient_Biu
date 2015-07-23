@@ -79,7 +79,9 @@ public class PostNewRepostActivity extends AbPostActivity {
         if(mWeibo==null|| TextUtils.isEmpty(text)){
             return false;
         }
-        return PostDao.newRepost(mWeibo.id,text,0);
+
+
+        return PostDao.newRepost(mWeibo.id,text,ck_extra.isChecked()?1:0);
 
 //        CommentStatusDao dao =new CommentStatusDao(mWeibo.idstr,comment);
 
@@ -89,7 +91,7 @@ public class PostNewRepostActivity extends AbPostActivity {
     @Override
     protected void onPrePost() {
         prog=new ProgressDialog(PostNewRepostActivity.this);
-        prog.setMessage(getResources().getString(R.string.plz_wait));
+        prog.setMessage(getResources().getString(R.string.sending));
         prog.setCancelable(false);
         prog.show();
 

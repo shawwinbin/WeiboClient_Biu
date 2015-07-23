@@ -33,6 +33,7 @@ import com.dudutech.weibo.model.UserModel;
 import com.dudutech.weibo.ui.comments.CommentMeFragment;
 import com.dudutech.weibo.ui.common.BaseActivity;
 import com.dudutech.weibo.ui.post.NewPostActivity;
+import com.dudutech.weibo.ui.timeline.FavoTimelineFragment;
 import com.dudutech.weibo.ui.timeline.HomeTimelineFragment;
 import com.dudutech.weibo.ui.timeline.MentionMeFragment;
 
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity implements
 	public final static  String FRG_TAG_MENTION_ME = FRG_TAG_PRE_SUFIX+"mention_me";
 
 	public final static  String FRG_TAG_COMMENT = FRG_TAG_PRE_SUFIX+"comment";
+	public final static  String FRG_TAG_FAVO = FRG_TAG_PRE_SUFIX+"favo";
 	public   String mCurrentPositon = "";
 
 
@@ -202,6 +204,15 @@ public class MainActivity extends BaseActivity implements
 				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null){
 					currentFragment= CommentMeFragment.newInstance() ;
+					ft.add(R.id.container, currentFragment, mCurrentPositon);
+
+				}
+				break;
+			case NavigationDrawerFragment.MENU_FAVO :
+				mCurrentPositon=FRG_TAG_FAVO;
+				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				if(currentFragment==null){
+					currentFragment= FavoTimelineFragment.newInstance() ;
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
 
 				}

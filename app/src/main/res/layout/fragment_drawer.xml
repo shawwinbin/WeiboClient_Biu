@@ -113,6 +113,37 @@
 				 />
 		</LinearLayout>
 
+		<LinearLayout
+			android:id="@+id/menu_favo"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:paddingLeft="15dp"
+			android:paddingRight="15dp"
+			android:background="@drawable/bg_context_menu"
+			>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/ic_star"
+				android:layout_gravity="center_vertical"
+				android:tint="?attr/MenuIconTint"
+
+				/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/favo"
+				android:layout_gravity="center_vertical"
+				style="@style/txt_menu"
+				android:layout_marginLeft="30dp"
+				/>
+		</LinearLayout>
+
+
+
 	</LinearLayout>
 	<View
 		android:layout_width="match_parent"

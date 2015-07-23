@@ -152,7 +152,7 @@ public class NewPostActivity extends AbPostActivity {
     @Override
     protected void onPrePost() {
         prog = new ProgressDialog(NewPostActivity.this);
-        prog.setMessage(getResources().getString(R.string.plz_wait));
+        prog.setMessage(getResources().getString(R.string.sending));
         prog.setCancelable(false);
         prog.show();
     }

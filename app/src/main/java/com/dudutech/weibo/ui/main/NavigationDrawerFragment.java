@@ -44,6 +44,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	public static final int MENU_MOMENTION = 0;
 	public static final int MENU_COMMENT = 1;
 	public static final int MENU_WEIBO = 2;
+	public static final int MENU_FAVO= 3;
 	public int mCurrentSelectedPosition = MENU_WEIBO;
 
 
@@ -58,6 +59,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 	ListView mDrawerListView;
 	@InjectView(R.id.menu_mention)
 	View menu_mention;
+
+	@InjectView(R.id.menu_favo)
+	View menu_favo;
 
 	@InjectView(R.id.menu_comment)
 	View menu_comment;
@@ -117,8 +121,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 		mDrawerListView.setAdapter(mGroupAdapter);
 		menu_mention.setOnClickListener(this);
 		menu_comment.setOnClickListener(this);
+		menu_favo.setOnClickListener(this);
 		mMenuList.add(menu_mention);
 		mMenuList.add(menu_comment);
+		mMenuList.add(menu_favo);
 		new InitGroupsInTask().execute();
 		return v;
 	}
@@ -137,7 +143,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 				mGroupAdapter.setCurrentPosition(secondPosition);
 			    mGroupAdapter.notifyDataSetChanged();
 			}
-		toggle(viewId);
+		 toggle(viewId);
 
 		if (mCallbacks != null) {
 			mCallbacks.onNavigationDrawerItemSelected(position,groupId, title);
@@ -196,7 +202,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 			case R.id.menu_comment:
 				selectItem(MENU_COMMENT,"",mTitleCommnet,id,-1);
 				break;
-
+			case R.id.menu_favo:
+				selectItem(MENU_FAVO,"",getString(R.string.favo),id,-1);
+				break;
 
 		}
 
