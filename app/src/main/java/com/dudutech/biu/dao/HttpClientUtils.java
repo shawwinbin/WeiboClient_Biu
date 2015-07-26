@@ -3,8 +3,10 @@ package com.dudutech.biu.dao;
 import android.util.Log;
 
 import com.dudutech.biu.network.WeiboParameters;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
@@ -53,16 +55,23 @@ public class HttpClientUtils {
         }
     }
 
+    public static String doPostRequstWithWithAceesToken(String url,WeiboParameters params)throws IOException{
+        params.put("access_token", mAccessToken);
+        return doPostRequst(url, params);
+    }
 
     public static String doPostRequst(String url,WeiboParameters params) throws IOException {
 
         if (DEBUG) {
             Log.i(TAG, url);
         }
-        String send=params.encode();
+        RequestBody body =params.convertToRequestBody();
+
         Request request = new Request.Builder()
                 .url(url)
+                .post(body)
                 .build();
+
         Response response = client.newCall(request).execute();
 
 

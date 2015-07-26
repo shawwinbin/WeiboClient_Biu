@@ -21,6 +21,8 @@ package com.dudutech.biu.global;
 
 import android.graphics.Bitmap;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -54,6 +56,7 @@ public class Constants
 		FAIL
 	}
 
+	public static ColorGenerator generator = ColorGenerator.DEFAULT;
     //imageloader  display options
 
 	public static  DisplayImageOptions options = new DisplayImageOptions.Builder()
@@ -85,12 +88,32 @@ public class Constants
 			.build();
 
 	public static  DisplayImageOptions avatarOptions = new DisplayImageOptions.Builder()
-			.resetViewBeforeLoading(true)  // default
-			.cacheInMemory(true) // default
-			.cacheOnDisk(true) // default
-			.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
-			.bitmapConfig(Bitmap.Config.ARGB_8888) // default
-			.displayer(new RoundedBitmapDisplayer(1000)) // default
-			.build();
+		.resetViewBeforeLoading(true)  // default
+		.cacheInMemory(true) // default
+		.cacheOnDisk(true) // default
+		.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+		.bitmapConfig(Bitmap.Config.ARGB_8888) // default
+		.displayer(new RoundedBitmapDisplayer(1000)) // default
+		.build();
+
+	public static  DisplayImageOptions getAvatarOptions(String s){
+
+
+		TextDrawable drawable = TextDrawable.builder()
+				.buildRound(s,generator.getRandomColor());
+		DisplayImageOptions avatarOptions = new DisplayImageOptions.Builder()
+				.resetViewBeforeLoading(true)  // default
+				.cacheInMemory(true) // default
+				.cacheOnDisk(true) // default
+				.showImageOnLoading(drawable)
+				.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+				.bitmapConfig(Bitmap.Config.ARGB_8888) // default
+				.displayer(new RoundedBitmapDisplayer(1000)) // default
+				.build();
+
+		return  avatarOptions;
+
+	}
+
 
 }

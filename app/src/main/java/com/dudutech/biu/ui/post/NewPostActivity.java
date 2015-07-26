@@ -87,7 +87,6 @@ public class NewPostActivity extends AbPostActivity {
     protected ProgressDialog prog;
     public  static  void start(Context context){
         Intent intent= new Intent(context,NewPostActivity.class);
-
         context.startActivity(intent);
     }
     @Override
@@ -95,7 +94,6 @@ public class NewPostActivity extends AbPostActivity {
         super.onCreate(savedInstanceState);
         setActionbarTitle(R.string.new_post);
     }
-
 
 
     @Override
@@ -113,25 +111,6 @@ public class NewPostActivity extends AbPostActivity {
         // Upload pictures first
         String pics = "";
 
-//        for (int i = 0; i < mPics.size(); i++) {
-//            Bitmap bmp=null;
-//            String path = mPics.get(i);
-//            if (path != null) {
-//                try {
-//                    bmp = BitmapFactory.decodeFile(path);
-//                } catch (OutOfMemoryError e) {
-//                    continue;
-//                }
-//            }
-//            String id = PostDao.uploadPicture(bmp);
-//            bmp.recycle();
-//            if (id == null || id.trim().equals("")) return false;
-//
-//            pics += id;
-//            if (i < mPics.size() - 1) {
-//                pics += ",";
-//            }
-//        }
         pics = PostDao.uploadPicture(mBitmap);
 
         // Upload text

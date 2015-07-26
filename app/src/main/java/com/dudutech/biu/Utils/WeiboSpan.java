@@ -56,14 +56,14 @@ public class WeiboSpan extends ClickableSpan {
 	public void onClick(View v) {
 		Context context = v.getContext();
 
-		if (mUri.getScheme().startsWith("http")) {
+		if (mUri.getScheme().startsWith(SpannableStringUtils.HTTP_SCHEME)) {
 			// TODO View some weibo pages inside app
 			Intent i = new Intent();
 			i.setAction(Intent.ACTION_VIEW);
 			i.setData(mUri);
 			context.startActivity(i);
 		} else {
-			if (mUri.getScheme().startsWith("us.shandian.blacklight.user")) {
+			if (mUri.getScheme().startsWith(SpannableStringUtils.MENTION_SCHEME)) {
 				String name = mUrl.substring(mUrl.lastIndexOf("@") + 1, mUrl.length());
 
 				if (DEBUG) {
@@ -71,7 +71,7 @@ public class WeiboSpan extends ClickableSpan {
 				}
 
 				new UserInfoTask().execute(context, name);
-			} else if (mUri.getScheme().startsWith("us.shandian.blacklight.topic")) {
+			} else if (mUri.getScheme().startsWith(SpannableStringUtils.TOPIC_SCHEME)) {
 				String name = mUrl.substring(mUrl.indexOf("#") + 1, mUrl.lastIndexOf("#"));
 
 				// Start Activity

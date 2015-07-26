@@ -21,6 +21,9 @@ package com.dudutech.biu.network;
 
 import android.graphics.Bitmap;
 
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.RequestBody;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -61,6 +64,28 @@ public class WeiboParameters extends HashMap<String, Object>
 		}
 		
 		return str.toString();
+	}
+
+	public RequestBody convertToRequestBody(){
+
+
+		Set<String> keys = keySet();
+		FormEncodingBuilder builder = new FormEncodingBuilder();
+
+
+		for (String key : keys) {
+			Object value = get(key);
+
+			try {
+					builder.add(key,URLEncoder.encode(value.toString(), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+
+			}
+		}
+		return builder.build();
+
 	}
 	
 	public Object[] toBoundaryMsg() {

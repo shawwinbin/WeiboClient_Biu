@@ -3,6 +3,7 @@ package com.dudutech.biu.adapter.timeline;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.DeviceUtil;
 import com.dudutech.biu.Utils.StatusTimeUtils;
@@ -51,7 +54,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     float avatarSize;
     private DeviceUtil.NetWorkType netWorkType;
     public OnClickListener mListenner;
-
+    ColorGenerator generator = ColorGenerator.DEFAULT;
     public TimelineAdapter(Context context, MessageListModel messageListModel) {
         super(context, messageListModel);
         mTimeUtils = StatusTimeUtils.instance(context);
@@ -126,10 +129,14 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.tv_username.setText(msg.user.name);
         String url = msg.user.avatar_large;
 //        holder.iv_avatar.setOval(true);
-//        holder.iv_avatar.setLetter(msg.user.name.charAt(0));
+//        holder.iv_avatar.setLetter();
+
+//        TextDrawable drawable = TextDrawable.builder()
+//                .buildRound(msg.user.name.substring(0,1), generator.getRandomColor());
+//        holder.iv_avatar.setImageDrawable(drawable);
         if (!url.equals(holder.iv_avatar.getTag())) {
             holder.iv_avatar.setTag(url);
-            ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.avatarOptions);
+            ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.getAvatarOptions(msg.user.name.substring(0,1)));
         }
 
         holder.iv_avatar.setOnClickListener(new View.OnClickListener() {

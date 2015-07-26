@@ -1,2 +1,3 @@
 include ':app'
 include ':libraries:photoview'
+include ':libraries:textdrawable'

@@ -44,10 +44,10 @@ public class SpannableStringUtils
 	private static final Pattern PATTERN_TOPIC = Pattern.compile("#[\\p{Print}\\p{InCJKUnifiedIdeographs}&&[^#]]+#");
 	private static final Pattern PATTERN_MENTION = Pattern.compile("@[\\w\\p{InCJKUnifiedIdeographs}-]{1,26}");
 	private static final Pattern PATTERN_EMOTICON = Pattern.compile("\\[(\\S+?)\\]");
-	
-	private static final String HTTP_SCHEME = "http://";
-	private static final String TOPIC_SCHEME = "topic://";
-	private static final String MENTION_SCHEME = "user://";
+
+	public static final String HTTP_SCHEME = "http://";
+	public static final String TOPIC_SCHEME = "topic://";
+	public static final String MENTION_SCHEME = "user://";
 	
 	public static SpannableString span(Context context, String text) {
 		SpannableString ss = SpannableString.valueOf(text);

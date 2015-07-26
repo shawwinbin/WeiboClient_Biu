@@ -21,8 +21,10 @@
     <string name="btn_commfire">确认</string>
     <string name="btn_cancle">取消</string>
     <string name="exit_comfire">确认退出吗？</string>
+    <string name="tips">提示</string>
 
-
+    <string name="success">成功</string>
+    <string name="fail">失败</string>
     <!-- Login -->
     <string name="login">登录</string>
     <string name="tail">尾巴</string>
@@ -89,6 +91,9 @@
     <string name="weibo_length_error">微博不能超过140字</string>
 
 
+    <!-- user home-->
+    <string name="follow_user_comfire">确定关注他？</string>
+    <string name="unfollow_user_comfire">确定取消对他的关注？</string>
 
 
 
