@@ -14,28 +14,28 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name="com.dudutech.biu.global.MyApplication"
+        android:name=".global.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.dudutech.biu.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Main" >
         </activity>
         <activity
-            android:name="com.dudutech.biu.ui.login.WebLoginActivity"
+            android:name=".ui.login.WebLoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
-        <activity android:name="com.dudutech.biu.ui.picture.PicsActivity" >
+        <activity android:name=".ui.picture.PicsActivity" >
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.dudutech.biu.ui.login.LoadingActivity" >
+        <activity android:name=".ui.login.LoadingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,33 +43,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dudutech.biu.ui.timeline.UserHomeActivity"
-
+            android:name=".ui.timeline.UserHomeActivity"
             android:theme="@style/UserHome" >
         </activity>
-        <activity
-            android:name="com.dudutech.biu.ui.timeline.WeiboDetailActivity"
-           >
+        <activity android:name=".ui.timeline.WeiboDetailActivity" >
         </activity>
         <activity
-            android:name="com.dudutech.biu.ui.post.NewPostActivity"
-
-            android:windowSoftInputMode="adjustResize"
-
-            >
-        </activity>
-        <activity
-            android:name="com.dudutech.biu.ui.post.PostNewCommentActivity"
+            android:name=".ui.post.NewPostActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="com.dudutech.biu.ui.post.PostNewRepostActivity"
+            android:name=".ui.post.PostNewCommentActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-
         <activity
-            android:name="com.dudutech.biu.ui.friendship.FriendsAtActivity"
-           >
+            android:name=".ui.post.PostNewRepostActivity"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity android:name=".ui.friendship.FriendsAtActivity" >
+        </activity>
+        <activity
+            android:name=".ui.friendship.FriendActivity"
+            android:label="@string/title_activity_friend" >
         </activity>
     </application>
 

@@ -29,7 +29,7 @@
     </style>
 
     <style name="UserHome" parent="AppTheme.Main">
-        <item name="fits_windows">false</item>
+        <item name="fits_windows">true</item>
         <item name="colorAccent">@color/material_blue_grey_800</item>
     </style>
 

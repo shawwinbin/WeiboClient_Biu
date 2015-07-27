@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.PersistableBundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.dudutech.biu.dao.relationship.FanDao;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.UserModel;
 import com.dudutech.biu.ui.common.BaseActivity;
+import com.dudutech.biu.ui.friendship.FriendActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -63,7 +65,6 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
     TextView tv_user_infos;
     @InjectView(R.id.tv_user_sign)
     TextView tv_user_sign;
-
     @InjectView(R.id.tv_user_friends)
     TextView tv_user_friends;
 
@@ -82,16 +83,12 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
     public void followUser() {
 
-
         String comfirmTitle = "";
-
-
         if (mUser.following) {
             comfirmTitle = getString(R.string.unfollow_user_comfire);
         } else {
             comfirmTitle = getString(R.string.follow_user_comfire);
         }
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(comfirmTitle);
@@ -117,6 +114,11 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
     }
 
+    @OnClick(R.id.tv_user_friends)
+    public void goToFriends(){
+        FriendActivity.start(this,mUser);
+    }
+
 
     FanDao mFanDao;
 
@@ -131,7 +133,14 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         ButterKnife.inject(this);
 //        initStatusBar();
 
-        mUser = getIntent().getParcelableExtra(ETA_USER);
+        if(savedInstanceState==null){
+            mUser = getIntent().getParcelableExtra(ETA_USER);
+        }
+        else{
+            mUser=savedInstanceState.getParcelable(ETA_USER);
+        }
+
+
         initUserinfo();
         mUserTimelineFragment = UserTimelineFragment.newInstance(mUser.id);
 
@@ -148,25 +157,20 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putParcelable(ETA_USER,mUser);
+
+    }
 
     private void initUI() {
 
         if (mUser.following) {
-            if (Build.VERSION.SDK_INT >= 21) {
-                fab_star.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.star_color)));
-            } else {
-                fab_star.setColorFilter(R.color.star_color);
-            }
-//
+            fab_star.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.star_color)));
         } else {
-            if (Build.VERSION.SDK_INT >= 21) {
-                fab_star.setImageTintList(ColorStateList.valueOf(Color.WHITE));
-            } else {
-                fab_star.setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
-            }
 
-
-//            fab_star.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
+            fab_star.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_blue_grey_800)));
         }
 
     }
@@ -203,10 +207,13 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
         }
+
 
         return super.onOptionsItemSelected(item);
     }

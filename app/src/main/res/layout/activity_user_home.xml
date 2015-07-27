@@ -20,7 +20,7 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="?attr/fits_windows"
+
     >
 
     <android.support.design.widget.AppBarLayout
@@ -159,6 +159,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         app:borderWidth="0dp"
+        android:tint="@color/white"
 
         />
 
