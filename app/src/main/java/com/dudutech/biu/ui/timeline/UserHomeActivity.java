@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.SystemBarUtils;
+import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.dao.relationship.FanDao;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.UserModel;
@@ -36,17 +38,16 @@ import butterknife.OnClick;
 public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOffsetChangedListener {
 
 
-
     private static final String ETA_USER = "eta_user";
 
     private UserModel mUser;
 
 
-    public static void  startUserHomeActivity(Context context,UserModel userModel){
+    public static void startUserHomeActivity(Context context, UserModel userModel) {
 
-        Intent  intent =new Intent(context,UserHomeActivity.class);
-        intent.putExtra(ETA_USER,userModel);
-       context.startActivity(intent);
+        Intent intent = new Intent(context, UserHomeActivity.class);
+        intent.putExtra(ETA_USER, userModel);
+        context.startActivity(intent);
 
     }
 
@@ -56,12 +57,16 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
     @InjectView(R.id.iv_avatar)
     ImageView iv_user_avatar;
-//    @InjectView(R.id.tv_username)
+    //    @InjectView(R.id.tv_username)
 //    TextView tv_username;
     @InjectView(R.id.tv_user_infos)
     TextView tv_user_infos;
     @InjectView(R.id.tv_user_sign)
     TextView tv_user_sign;
+
+    @InjectView(R.id.tv_user_friends)
+    TextView tv_user_friends;
+
     @InjectView(R.id.fl_content)
     FrameLayout fl_content;
     @InjectView(R.id.collapsing_toolbar)
@@ -72,19 +77,19 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
     AppBarLayout appbar;
     @InjectView(R.id.fab_star)
     FloatingActionButton fab_star;
+
     @OnClick(R.id.fab_star)
 
-    public  void  followUser(){
+    public void followUser() {
 
 
-        String comfirmTitle= "";
+        String comfirmTitle = "";
 
 
-        if(mUser.following){
-            comfirmTitle=getString(R.string.unfollow_user_comfire);
-        }
-        else {
-            comfirmTitle=getString(R.string.follow_user_comfire);
+        if (mUser.following) {
+            comfirmTitle = getString(R.string.unfollow_user_comfire);
+        } else {
+            comfirmTitle = getString(R.string.follow_user_comfire);
         }
 
 
@@ -112,8 +117,8 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
     }
 
-    FanDao mFanDao;
 
+    FanDao mFanDao;
 
 
     private UserTimelineFragment mUserTimelineFragment;
@@ -125,7 +130,8 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         setContentView(R.layout.activity_user_home);
         ButterKnife.inject(this);
 //        initStatusBar();
-        mUser=getIntent().getParcelableExtra(ETA_USER);
+
+        mUser = getIntent().getParcelableExtra(ETA_USER);
         initUserinfo();
         mUserTimelineFragment = UserTimelineFragment.newInstance(mUser.id);
 
@@ -136,34 +142,49 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
 
         appbar.addOnOffsetChangedListener(this);
 
-        mFanDao =new FanDao(mUser.id);
+        mFanDao = new FanDao(mUser.id);
         initUI();
 
 
-
     }
 
 
-    private void initUI(){
+    private void initUI() {
 
-        if(mUser.following){
+        if (mUser.following) {
+            if (Build.VERSION.SDK_INT >= 21) {
+                fab_star.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.star_color)));
+            } else {
+                fab_star.setColorFilter(R.color.star_color);
+            }
+//
+        } else {
+            if (Build.VERSION.SDK_INT >= 21) {
+                fab_star.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+            } else {
+                fab_star.setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
+            }
 
-            fab_star.setColorFilter(getResources().getColor(R.color.red), android.graphics.PorterDuff.Mode.MULTIPLY);
-        }
-        else {
-            fab_star.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+//            fab_star.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
         }
 
     }
 
-    private void initUserinfo(){
+    private void initUserinfo() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbar.setTitle(mUser.getName());
 //        tv_username.setText(mUser.getName());
-        tv_user_infos.setText(mUser.location+" / "+mUser.gender);
-        tv_user_sign.setText(!TextUtils.isEmpty(mUser.verified_reason)?mUser.verified_reason:mUser.description);
-        ImageLoader.getInstance().displayImage(mUser.cover_image_phone,iv_user_cover, Constants.timelineListOptions);
+        tv_user_infos.setText(mUser.location + " | " + (mUser.gender.equals("m") ? getString(R.string.male) : getString(R.string.female)));
+        tv_user_sign.setText(!TextUtils.isEmpty(mUser.verified_reason) ? mUser.verified_reason : mUser.description);
+
+        String friends = getString(R.string.following) + ":" + Utility.getCountString(mUser.friends_count) +
+                " | " + getString(R.string.followers) + ":" + Utility.getCountString(mUser.followers_count);
+
+        tv_user_friends.setText(friends);
+
+        ImageLoader.getInstance().displayImage(mUser.cover_image_phone, iv_user_cover, Constants.timelineListOptions);
         ImageLoader.getInstance().displayImage(mUser.avatar_large, iv_user_avatar, Constants.avatarOptions);
 
     }
@@ -190,7 +211,7 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
         return super.onOptionsItemSelected(item);
     }
 
-    private void initStatusBar(){
+    private void initStatusBar() {
         if (Build.VERSION.SDK_INT == 19) {
 
             ViewGroup drawerRoot2 = (ViewGroup) findViewById(R.id.toolbar);
@@ -218,32 +239,29 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
             super.onPreExecute();
 
 
-
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            UserModel user=null;
-            if(mUser.following){
-                user= mFanDao.unFllowUser();
-            }
-            else {
-                user= mFanDao.followUser();
+            UserModel user = null;
+            if (mUser.following) {
+                user = mFanDao.unFllowUser();
+            } else {
+                user = mFanDao.followUser();
             }
 
-            return  user!=null;
+            return user != null;
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
 
-            if(result){
-                Toast.makeText(UserHomeActivity.this,R.string.success,Toast.LENGTH_LONG).show();
-            }
-            else {
-                Toast.makeText(UserHomeActivity.this,R.string.fail,Toast.LENGTH_LONG).show();
+            if (result) {
+                Toast.makeText(UserHomeActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(UserHomeActivity.this, R.string.fail, Toast.LENGTH_LONG).show();
             }
 
         }

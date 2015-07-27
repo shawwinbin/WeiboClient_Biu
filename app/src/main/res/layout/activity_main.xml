@@ -57,7 +57,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_refresh_white_24dp"
-
+        app:borderWidth="0dp"
+        app:elevation="0dp"
         />
 
 </RelativeLayout>

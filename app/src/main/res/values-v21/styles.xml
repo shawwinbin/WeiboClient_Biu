@@ -28,8 +28,9 @@
         <item name="MenuIconTint">@color/bg_menu_icon_selector</item>
     </style>
 
-    <style name="AppTheme.UserHome">
-        <item name="fits_windows">true</item>
+    <style name="UserHome" parent="AppTheme.Main">
+        <item name="fits_windows">false</item>
+        <item name="colorAccent">@color/material_blue_grey_800</item>
     </style>
 
 </resources>

@@ -56,14 +56,16 @@ public class WeiboSpan extends ClickableSpan {
 	public void onClick(View v) {
 		Context context = v.getContext();
 
-		if (mUri.getScheme().startsWith(SpannableStringUtils.HTTP_SCHEME)) {
+
+
+		if (mUrl.startsWith(SpannableStringUtils.HTTP_SCHEME)) {
 			// TODO View some weibo pages inside app
 			Intent i = new Intent();
 			i.setAction(Intent.ACTION_VIEW);
 			i.setData(mUri);
 			context.startActivity(i);
 		} else {
-			if (mUri.getScheme().startsWith(SpannableStringUtils.MENTION_SCHEME)) {
+			if (mUrl.startsWith(SpannableStringUtils.MENTION_SCHEME)) {
 				String name = mUrl.substring(mUrl.lastIndexOf("@") + 1, mUrl.length());
 
 				if (DEBUG) {
@@ -71,7 +73,7 @@ public class WeiboSpan extends ClickableSpan {
 				}
 
 				new UserInfoTask().execute(context, name);
-			} else if (mUri.getScheme().startsWith(SpannableStringUtils.TOPIC_SCHEME)) {
+			} else if (mUrl.startsWith(SpannableStringUtils.TOPIC_SCHEME)) {
 				String name = mUrl.substring(mUrl.indexOf("#") + 1, mUrl.lastIndexOf("#"));
 
 				// Start Activity
@@ -108,11 +110,7 @@ public class WeiboSpan extends ClickableSpan {
 			UserModel usr = (UserModel) result[1];
 
 			if (usr != null && usr.id != null & !usr.id.trim().equals("")) {
-//				Intent i = new Intent();
-//				i.setAction(Intent.ACTION_MAIN);
-//				i.setClass(context, UserTimeLineActivity.class);
-//				i.putExtra("user", usr);
-//				context.startActivity(i);
+
 				UserHomeActivity.startUserHomeActivity(context, usr);
 			}
 		}

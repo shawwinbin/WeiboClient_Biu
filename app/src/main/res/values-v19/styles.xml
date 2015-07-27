@@ -4,7 +4,7 @@
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#2f5a81</item>
         <item name="colorPrimaryDark">#1c364d</item>
-        <item name="colorAccent">@color/material_blue_grey_800</item>
+        <item name="colorAccent">@color/transparent_1</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="CardBackground">@color/white</item>
         <item name="CardForeground">@color/gray</item>
@@ -25,9 +25,10 @@
       <item name="fits_windows">false</item>
       <item name="MenuIconTint">@color/ic_tint_nor</item>
    </style>
-    <style name="AppTheme.UserHome">
+    <style name="UserHome" parent="AppTheme.Main">
         <item name="android:windowIsTranslucent">false</item>
         <item name="fits_windows">false</item>
+        <item name="colorAccent">@color/material_blue_grey_800</item>
     </style>
 
 

@@ -30,6 +30,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+
+import com.dudutech.biu.R;
+import com.dudutech.biu.global.MyApplication;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -531,9 +535,13 @@ public class Utility
 		return mediaFile;
 	}
 
-
+	public static String  countUinit ;
 	public static String getCountString(int count) {
 		String result = "";
+
+		if(TextUtils.isEmpty(countUinit)){
+			countUinit= MyApplication.getInstance().getString(R.string.ten_thousand);
+		}
 
 		if (count < 0) {
 			return "0";
@@ -543,13 +551,11 @@ public class Utility
 
 			result = count + "";
 
-		} else if (count < 1000000) {
-			result = (count / 1000) + "k";
+		} else  {
+			result = (count / 10000) + countUinit;
 
 		}
-		else {
-			result = (count / 1000000) + "M";
-		}
+
 
 		return result;
 	}

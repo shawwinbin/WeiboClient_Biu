@@ -45,7 +45,7 @@
         <activity
             android:name="com.dudutech.biu.ui.timeline.UserHomeActivity"
 
-            android:theme="@style/AppTheme.UserHome" >
+            android:theme="@style/UserHome" >
         </activity>
         <activity
             android:name="com.dudutech.biu.ui.timeline.WeiboDetailActivity"

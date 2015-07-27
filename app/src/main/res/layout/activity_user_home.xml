@@ -78,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_avatar"
                    android:layout_alignTop="@id/iv_avatar"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
                     android:orientation="vertical"
                     >
@@ -87,17 +86,30 @@
                         android:layout_height="wrap_content"
                         style="@style/txt_user_info"
                         android:id="@+id/tv_user_infos"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="2dp"
                         />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/txt_user_info"
+                        android:id="@+id/tv_user_friends"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:layout_marginRight="40dp"
+
+                        />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/txt_user_info"
                         android:id="@+id/tv_user_sign"
-                        android:layout_marginTop="10dp"
-                        android:maxLines="3"
-                        android:layout_marginRight="48dp"
-
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="5dp"
                         />
 
 
@@ -140,11 +152,14 @@
         android:id="@+id/fab_star"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:layout_anchor="@id/appbar"
+        app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_star"
-        android:tint="@color/white"
+        app:elevation="0dp"
         android:layout_margin="16dp"
-        android:clickable="true"/>
+        android:clickable="true"
+        app:borderWidth="0dp"
+
+        />
 
 </android.support.design.widget.CoordinatorLayout>

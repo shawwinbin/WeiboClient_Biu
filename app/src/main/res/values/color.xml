@@ -301,4 +301,6 @@
     <color name="selected_bg">#d7d7d7</color>
     <color name="btn_context_menu_normal">#ffffff</color>
     <color name="btn_context_menu_pressed">#40000000</color>
+
+    <color name="star_color">#FF5252</color>
 </resources>
