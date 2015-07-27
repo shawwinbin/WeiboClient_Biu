@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.timeline.TimelineAdapter;
-import com.dudutech.biu.dao.timeline.FavoTimeLineDao;
+import com.dudutech.biu.dao.favo.FavoTimeLineDao;
 import com.dudutech.biu.dao.timeline.StatusTimeLineDao;
 import com.dudutech.biu.model.MessageListModel;
 
@@ -29,7 +29,6 @@ import com.dudutech.biu.model.MessageListModel;
  * create an instance of this fragment.
  */
 public class FavoTimelineFragment extends AbsTimeLineFragment  implements TimelineAdapter.OnClickListener {
-
 
     private OnFragmentInteractionListener mListener;
 

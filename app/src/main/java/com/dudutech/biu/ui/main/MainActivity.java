@@ -72,14 +72,13 @@ public class MainActivity extends BaseActivity implements
 		int id=v.getId();
 		switch (id){
 			case R.id.fab:
-
+				MainRefresh mainRefresh= (MainRefresh) getFragmentManager().findFragmentByTag(mCurrentPositon);
+				mainRefresh.doRefresh();
 				break;
 		}
 
 	}
-	public static interface Refresher {
-        void doRefresh();
-    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -263,9 +262,7 @@ public class MainActivity extends BaseActivity implements
 			case R.id.action_settings :
 				return true;
 			case R.id.action_new_post :
-
 				NewPostActivity.start(this);
-
 				return true;
 		}
 
@@ -371,12 +368,9 @@ public class MainActivity extends BaseActivity implements
 
 	}
 
-	protected void newPost() {
-		Intent i = new Intent();
-		i.setAction(Intent.ACTION_MAIN);
-//		i.setClass(getActivity(), NewPostActivity.class);
-		startActivity(i);
-	}
 
+	public interface  MainRefresh{
+		public void doRefresh();
+	}
 
 }

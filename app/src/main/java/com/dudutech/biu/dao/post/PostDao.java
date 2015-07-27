@@ -93,29 +93,7 @@ public class PostDao extends BaseApi
 		}
 	}
 	
-	// Add to favorite
-	public static void fav(long id) {
-		WeiboParameters params = new WeiboParameters();
-		params.put("id", id);
-		
-		try {
-			request(UrlConstants.FAVORITES_CREATE, params, HTTP_POST);
-		} catch (Exception e) {
-			
-		}
-	}
-	
-	// Remove from favorite
-	public static void unfav(long id) {
-		WeiboParameters params = new WeiboParameters();
-		params.put("id", id);
-		
-		try {
-			request(UrlConstants.FAVORITES_DESTROY, params, HTTP_POST);
-		} catch (Exception e) {
-			
-		}
-	}
+
 
 	// Upload pictures
 	public static String uploadPicture(Bitmap picture) {

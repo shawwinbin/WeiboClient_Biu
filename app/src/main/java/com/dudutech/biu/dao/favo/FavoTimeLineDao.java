@@ -1,4 +1,4 @@
-package com.dudutech.biu.dao.timeline;
+package com.dudutech.biu.dao.favo;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.dudutech.biu.api.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
+import com.dudutech.biu.dao.timeline.StatusTimeLineDao;
 import com.dudutech.biu.db.tables.FavListTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.FavoListModel;
@@ -19,7 +20,7 @@ import java.io.IOException;
 /**
  * Created by shaw on 2015/7/23.
  */
-public class FavoTimeLineDao extends  StatusTimeLineDao {
+public class FavoTimeLineDao extends StatusTimeLineDao {
     public FavoTimeLineDao(Context context) {
         super(context, "");
     }

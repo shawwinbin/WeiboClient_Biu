@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import com.dudutech.biu.R;
 import com.dudutech.biu.adapter.common.MyFragmentPagerAdapter;
 import com.dudutech.biu.ui.common.BaseFragment;
+import com.dudutech.biu.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,7 +30,7 @@ import butterknife.InjectView;
  *  mention me in status and mention me in comments
  *
  */
-public class CommentMeFragment extends BaseFragment {
+public class CommentMeFragment extends BaseFragment implements MainActivity.MainRefresh{
 
 
     @InjectView(R.id.tabs)
@@ -76,49 +77,22 @@ public class CommentMeFragment extends BaseFragment {
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getFragmentManager());
         mCommentToMeFragment= CommentToMeFragment.newInstance();
         mCommentByMeFragment= CommentByMeFragment.newInstance();
-        adapter.addFragment( mCommentToMeFragment, getString(R.string.comments_to_me));
+        adapter.addFragment(mCommentToMeFragment, getString(R.string.comments_to_me));
         adapter.addFragment(mCommentByMeFragment, getString(R.string.comments_by_me));
         viewPager.setAdapter(adapter);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-    }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public void doRefresh() {
+        if(mViewPager.getCurrentItem()==0){
+            mCommentToMeFragment.doRefresh();
+        }
+        else{
+            mCommentByMeFragment.doRefresh();
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-//        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
 
 
 }

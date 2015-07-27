@@ -10,17 +10,19 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.dao.relationship.AbUserListDao;
 import com.dudutech.biu.dao.relationship.FriendListDao;
 import com.dudutech.biu.model.UserListModel;
+import com.dudutech.biu.model.UserModel;
+import com.dudutech.biu.ui.timeline.UserHomeActivity;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FriendListFragment extends AbUserListFragment implements UserAdapter.OnItemClickListener {
+public class FriendsFragment extends AbUserListFragment implements UserAdapter.OnItemClickListener {
 
 
     private static final String ARG_USER_ID = "arg_user_id";
     private String mUid;
-    public static FriendListFragment newInstance( String  uid) {
-        FriendListFragment fragment = new FriendListFragment();
+    public static FriendsFragment newInstance( String  uid) {
+        FriendsFragment fragment = new FriendsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_USER_ID, uid);
         fragment.setArguments(args);
@@ -66,9 +68,7 @@ public class FriendListFragment extends AbUserListFragment implements UserAdapte
 
     @Override
     public void onTtemClick(View view, int position) {
-        Intent intent = new Intent();
-        intent.putExtra("name", "@" + ((UserListModel)mDao.getList()).get(position).getName() + " ");
-        getActivity().setResult(Activity.RESULT_OK, intent);
-        getActivity().finish();
+        UserHomeActivity.startUserHomeActivity(getActivity(), (UserModel) mDao.getList().get(position));
     }
+
 }

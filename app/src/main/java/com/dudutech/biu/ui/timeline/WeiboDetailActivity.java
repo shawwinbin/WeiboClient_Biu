@@ -12,6 +12,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.AppBarLayout;
 
 import android.support.v13.app.FragmentPagerAdapter;
@@ -26,12 +27,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.support.design.widget.TabLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.StatusTimeUtils;
 import com.dudutech.biu.Utils.Utility;
+import com.dudutech.biu.dao.favo.FavoDao;
 import com.dudutech.biu.global.Constants;
+import com.dudutech.biu.model.FavoModel;
 import com.dudutech.biu.model.MessageModel;
+import com.dudutech.biu.model.UserModel;
 import com.dudutech.biu.ui.comments.StatusCommentFragment;
 import com.dudutech.biu.widget.FlowLayout;
 import com.dudutech.biu.widget.LetterImageView;
@@ -184,10 +189,24 @@ public class WeiboDetailActivity extends AppCompatActivity implements AppBarLayo
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_favo:
+
+                new FavoTask().execute();
+
+                break;
+
+            case R.id.action_copy:
+
+                break;
+            case android.R.id.home:
+
+                onBackPressed();
+
+                break;
+
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -233,4 +252,39 @@ public class WeiboDetailActivity extends AppCompatActivity implements AppBarLayo
         return mFragmentTitles.get(position);
     }
 }
+
+    private class FavoTask extends AsyncTask<Void, Void, Boolean> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+
+
+            FavoDao dao=new FavoDao(mWeibo.id);
+           FavoModel model= dao.favo();
+
+            return model != null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            if (result) {
+                Toast.makeText(WeiboDetailActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(WeiboDetailActivity.this, R.string.fail, Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+    }
 }

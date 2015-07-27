@@ -16,7 +16,7 @@ public class FriendsAtActivity extends BaseActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
-    FriendListFragment friendListFragment;
+    FriendAtFragment friendListFragment;
     private final String  TAG_AT_FRIEND="at_friends";
 
 
@@ -28,7 +28,7 @@ public class FriendsAtActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        friendListFragment=FriendListFragment.newInstance(LoginDao.getInstance(this).getUid());
+        friendListFragment= FriendAtFragment.newInstance(LoginDao.getInstance(this).getUid());
         getFragmentManager().beginTransaction().replace(R.id.fl_content,friendListFragment,TAG_AT_FRIEND).commit();
     }
 

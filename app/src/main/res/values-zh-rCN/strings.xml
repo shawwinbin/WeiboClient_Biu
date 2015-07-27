@@ -48,7 +48,7 @@
     <string name="weibo">微博</string>
 
     <string name="favo">收藏</string>
-
+    <string name="copy">复制</string>
     <string name="status_mention_me">提到我的微博</string>
     <string name="comment_mention_me">提到我的评论</string>
     <string name="mention_me">提到我的</string>
@@ -140,5 +140,7 @@
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
     <string name="the_day_before_yesterday">2天前</string>
+
+    <string name="title_activity_friend">好友</string>
 
 </resources>

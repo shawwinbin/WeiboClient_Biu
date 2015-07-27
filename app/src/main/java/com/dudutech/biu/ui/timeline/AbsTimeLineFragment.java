@@ -24,15 +24,15 @@ import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.Settings;
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
+import com.dudutech.biu.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import static com.dudutech.biu.ui.main.MainActivity.Refresher;
 
 
 public abstract class AbsTimeLineFragment extends Fragment implements
-        SwipeRefreshLayout.OnRefreshListener, Refresher  {
+        SwipeRefreshLayout.OnRefreshListener, MainActivity.MainRefresh {
     private static final String TAG = AbsTimeLineFragment.class.getSimpleName();
 
     @InjectView(R.id.home_timeline)
@@ -63,18 +63,12 @@ public abstract class AbsTimeLineFragment extends Fragment implements
                 | ViewGroup.PERSISTENT_SCROLLING_CACHE);
         mManager = new LinearLayoutManager(getActivity());
         mList.setLayoutManager(mManager);
-
         // Swipe To Refresh
         bindSwipeToRefresh(getActivity(),(ViewGroup) v);
-
         if (mDao.getList().getSize() == 0) {
             new Refresher().execute(true);
         }
-        // MyFragmentPagerAdapter
-//        mAdapter = new TimelineAdapter(getActivity(), (List<MessageModel>) mDao.mMessages.getList()
-//        );
-//        mAdapter.setBottomCount(1);
-//        mAdapter.setOnClickListenner(this);
+
 
         mAdapter= bindListAdapter();
         mList.setAdapter(mAdapter);

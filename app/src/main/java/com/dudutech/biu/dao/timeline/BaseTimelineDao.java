@@ -22,6 +22,9 @@ public abstract class BaseTimelineDao< T extends BaseListModel> implements ITime
     public Constants.LOADING_STATUS mStatus;
     protected int mCurrentPage = 0;
     protected  T mListModel;
+
+
+
     @Override
     public Constants.LOADING_STATUS getStatus() {
         return mStatus;

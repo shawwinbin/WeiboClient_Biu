@@ -18,6 +18,7 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.timeline.TimelineAdapter;
 import com.dudutech.biu.dao.timeline.StatusTimeLineDao;
 import com.dudutech.biu.model.MessageListModel;
+import com.dudutech.biu.ui.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +28,7 @@ import com.dudutech.biu.model.MessageListModel;
  * Use the {@link HomeTimelineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeTimelineFragment extends AbsTimeLineFragment  implements TimelineAdapter.OnClickListener {
+public class HomeTimelineFragment extends AbsTimeLineFragment  implements TimelineAdapter.OnClickListener  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_GROUP_Id = "arg_group_id";
@@ -83,12 +84,7 @@ public class HomeTimelineFragment extends AbsTimeLineFragment  implements Timeli
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+
     }
 
     @Override
