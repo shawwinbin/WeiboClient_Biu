@@ -24,6 +24,7 @@ import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.Settings;
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
+import com.dudutech.biu.ui.common.BaseFragment;
 import com.dudutech.biu.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ import butterknife.InjectView;
 
 
 
-public abstract class AbsTimeLineFragment extends Fragment implements
+public abstract class AbsTimeLineFragment extends BaseFragment implements
         SwipeRefreshLayout.OnRefreshListener, MainActivity.MainRefresh {
     private static final String TAG = AbsTimeLineFragment.class.getSimpleName();
 
@@ -65,7 +66,7 @@ public abstract class AbsTimeLineFragment extends Fragment implements
         mList.setLayoutManager(mManager);
         // Swipe To Refresh
         bindSwipeToRefresh(getActivity(),(ViewGroup) v);
-        if (mDao.getList().getSize() == 0) {
+        if (isFirstCreate) {
             new Refresher().execute(true);
         }
 

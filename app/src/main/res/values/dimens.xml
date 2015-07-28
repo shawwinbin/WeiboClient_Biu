@@ -39,4 +39,11 @@
     <dimen name="moment_photo_margin">3dp</dimen>
 
     <dimen name="detail_backdrop_height">256dp</dimen>
+
+    <dimen name="flexible_space_image_height">240dp</dimen>
+
+    <dimen name="margin_standard">16dp</dimen>
+
+    <dimen name="tab_height">48dp</dimen>
+
 </resources>

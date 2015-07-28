@@ -44,9 +44,12 @@
         </activity>
         <activity
             android:name=".ui.timeline.UserHomeActivity"
-            android:theme="@style/UserHome" >
+            android:theme="@style/UserHome"
+            >
         </activity>
-        <activity android:name=".ui.timeline.WeiboDetailActivity" >
+        <activity android:name=".ui.timeline.WeiboDetailActivity"
+
+            >
         </activity>
         <activity
             android:name=".ui.post.NewPostActivity"

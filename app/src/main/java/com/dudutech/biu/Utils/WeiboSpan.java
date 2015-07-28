@@ -42,12 +42,19 @@ public class WeiboSpan extends ClickableSpan {
 
 	private String mUrl;
 	private Uri mUri;
+	private boolean isLight;
 
 	public WeiboSpan(String url) {
 		mUrl = url;
 		mUri = Uri.parse(mUrl);
+		isLight=false;
 	}
 
+	public WeiboSpan(String url,boolean isLight) {
+		mUrl = url;
+		mUri = Uri.parse(mUrl);
+		this.isLight=isLight;
+	}
 	public String getURL() {
 		return mUrl;
 	}
@@ -88,7 +95,13 @@ public class WeiboSpan extends ClickableSpan {
 
 	@Override
 	public void updateDrawState(TextPaint ds) {
-		ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.base_actionbar));
+		if (isLight){
+			ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.white));
+		}
+		else {
+			ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.base_actionbar));
+		}
+
 		ds.setUnderlineText(false);
 	}
 

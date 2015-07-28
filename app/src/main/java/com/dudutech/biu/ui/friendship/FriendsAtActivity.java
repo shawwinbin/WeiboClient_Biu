@@ -29,7 +29,7 @@ public class FriendsAtActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         friendListFragment= FriendAtFragment.newInstance(LoginDao.getInstance(this).getUid());
-        getFragmentManager().beginTransaction().replace(R.id.fl_content,friendListFragment,TAG_AT_FRIEND).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content,friendListFragment,TAG_AT_FRIEND).commit();
     }
 
 

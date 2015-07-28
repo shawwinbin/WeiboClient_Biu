@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 用户头部 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/avatar_lst_item"
+        android:layout_height="@dimen/avatar_lst_item"
+        android:layout_marginRight="@dimen/MiddleMargin" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_avatar"
+        android:focusable="false"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+         />
+    <TextView
+        android:id="@+id/tv_time_source"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_username"
+        android:layout_below="@+id/tv_username"
+        android:layout_marginTop="@dimen/MiniMargin"
+        android:singleLine="true"
+        />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:src="@drawable/btn_moment_delete_selector"
+        android:visibility="gone" />
+</RelativeLayout>

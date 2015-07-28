@@ -3,6 +3,7 @@ package com.dudutech.biu.global;
 import android.app.Application;
 import android.content.Context;
 
+import com.dudutech.biu.model.PicSize;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -17,6 +18,12 @@ import java.io.File;
  * Created by shaw on 2015/7/2.
  */
 public class MyApplication  extends Application{
+
+    public static com.dudutech.biu.global.LruMemoryCache<String, PicSize> picSizeCache  = new com.dudutech.biu.global.LruMemoryCache<String, PicSize>(100) {
+
+    };
+
+
 
     private static MyApplication mContext;
     @Override

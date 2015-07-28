@@ -23,6 +23,7 @@ import com.dudutech.biu.Utils.StatusTimeUtils;
 import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.global.LruMemoryCache;
+import com.dudutech.biu.global.MyApplication;
 import com.dudutech.biu.model.MessageListModel;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.model.PicSize;
@@ -45,7 +46,7 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2014.12.29.
  */
-public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implements View.OnClickListener{
+public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implements View.OnClickListener {
 
     private StatusTimeUtils mTimeUtils;
     private int photoMargin;
@@ -54,7 +55,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     float avatarSize;
     private DeviceUtil.NetWorkType netWorkType;
     public OnClickListener mListenner;
-    ColorGenerator generator = ColorGenerator.DEFAULT;
+
     public TimelineAdapter(Context context, MessageListModel messageListModel) {
         super(context, messageListModel);
         mTimeUtils = StatusTimeUtils.instance(context);
@@ -71,15 +72,15 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     @Override
     public void onClick(View v) {
 
-        int viewId=v.getId();
+        int viewId = v.getId();
         int postion = (int) v.getTag();
-        MessageModel msg=mListModel.get(postion);
-        switch (viewId){
+        MessageModel msg = mListModel.get(postion);
+        switch (viewId) {
             case R.id.ll_comment:
                 PostNewCommentActivity.start(mContext, msg);
                 break;
             case R.id.ll_repost:
-                PostNewRepostActivity.start(mContext,msg);
+                PostNewRepostActivity.start(mContext, msg);
                 break;
 
 
@@ -95,15 +96,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         ITEM_TYPE_CONTENT_REPOST,
 
     }
-
-    private static LruMemoryCache<String, PicSize> picSizeCache;
-
-    static {
-        picSizeCache = new LruMemoryCache<String, PicSize>(100) {
-
-        };
-    }
-
 
 
     @Override
@@ -128,15 +120,10 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.name);
         String url = msg.user.avatar_large;
-//        holder.iv_avatar.setOval(true);
-//        holder.iv_avatar.setLetter();
 
-//        TextDrawable drawable = TextDrawable.builder()
-//                .buildRound(msg.user.name.substring(0,1), generator.getRandomColor());
-//        holder.iv_avatar.setImageDrawable(drawable);
         if (!url.equals(holder.iv_avatar.getTag())) {
             holder.iv_avatar.setTag(url);
-            ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.getAvatarOptions(msg.user.name.substring(0,1)));
+            ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.getAvatarOptions(msg.user.name.substring(0, 1)));
         }
 
         holder.iv_avatar.setOnClickListener(new View.OnClickListener() {
@@ -152,8 +139,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.ll_repost.setTag(position);
 
 
-        String  source =   TextUtils.isEmpty(msg.source)?"": Utility.dealSourceString(msg.source);
-        holder.tv_time_source.setText(mTimeUtils.buildTimeString(msg.created_at)+" | "+source);
+        String source = TextUtils.isEmpty(msg.source) ? "" : Utility.dealSourceString(msg.source);
+        holder.tv_time_source.setText(mTimeUtils.buildTimeString(msg.created_at) + " | " + source);
         holder.tv_comment_count.setText(Utility.getCountString(msg.comments_count));
         holder.tv_like_count.setText("  " + Utility.getCountString(msg.attitudes_count));
         holder.tv_repost_count.setText(Utility.getCountString(msg.reposts_count));
@@ -167,9 +154,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.tv_orignal_content.setText(msg.origSpan);
         holder.tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
     }
-
-
-
 
 
     @Override
@@ -187,8 +171,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         }
     }
 
-    public void setOnClickListenner(OnClickListener onClickListenner){
-        this.mListenner=onClickListenner;
+    public void setOnClickListenner(OnClickListener onClickListenner) {
+        this.mListenner = onClickListenner;
     }
 
     @Override
@@ -240,23 +224,16 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                     case 1:
                         imgUrl = pictureUrl.getMedium();
 
-//                        Bitmap image = Picasso.with(mContext).load(imgUrl).;
-//                        int width = image.getWidth();
-//                        int height = image.getHeight();
-                        picSize = picSizeCache.get(imgUrl);
+                        picSize = MyApplication.picSizeCache.get(imgUrl);
                         if (picSize != null) {
                             param = new FlowLayout.LayoutParams(picSize.getWidth(), picSize.getHeight());
-//                            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                            isSizeSaved = true;
+
                         } else {
                             param = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                         }
 
                         imageView.setMaxHeight((int) maxWidth);
                         imageView.setMaxWidth((int) maxWidth);
-//                        imageView.setAdjustViewBounds(true);
-//                         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
 
                         break;
                     case 3:
@@ -331,18 +308,12 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
                             @Override
                             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                                Log.i("bitmap loaded", "bitmap loaded");
                                 int width = loadedImage.getWidth();
                                 int height = loadedImage.getHeight();
-
                                 ImageView imageView = (ImageView) view;
-
-                                int singleImgMaxHeight= (int) (imageMaxWidth*2/3);
-
-
+                                int singleImgMaxHeight = (int) (imageMaxWidth * 2 / 3);
                                 if (height > singleImgMaxHeight) {
                                     height = (int) singleImgMaxHeight;
-//
                                 }
                                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                 FlowLayout.LayoutParams param = new FlowLayout.LayoutParams(width, height);
@@ -352,9 +323,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                                 picSize.setKey(imageUri);
                                 picSize.setWidth(width);
                                 picSize.setHeight(height);
-
                                 // 放入内存
-                                picSizeCache.put(picSize.getKey(), picSize);
+                                MyApplication.picSizeCache.put(picSize.getKey(), picSize);
                             }
 
                             @Override

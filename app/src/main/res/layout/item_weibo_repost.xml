@@ -66,13 +66,7 @@
         </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/tv_location"
-            style="@style/text_moment_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lst_default_null_item_selector"
-            android:singleLine="true" />
+
 
         <RelativeLayout
             android:id="@+id/rl_buttons"

@@ -48,8 +48,12 @@ public class SpannableStringUtils
 	public static final String HTTP_SCHEME = "http://";
 	public static final String TOPIC_SCHEME = "topic://";
 	public static final String MENTION_SCHEME = "user://";
-	
-	public static SpannableString span(Context context, String text) {
+
+	public static SpannableString span(Context context, String text ){
+		return span(context,text,false);
+	}
+
+	public static SpannableString span(Context context, String text ,boolean isLight) {
 		SpannableString ss = SpannableString.valueOf(text);
 		Linkify.addLinks(ss, PATTERN_WEB, HTTP_SCHEME);
 		Linkify.addLinks(ss, PATTERN_TOPIC, TOPIC_SCHEME);
@@ -58,7 +62,7 @@ public class SpannableStringUtils
 		// Convert to our own span
 		URLSpan[] spans = ss.getSpans(0, ss.length(), URLSpan.class);
 		for (URLSpan span : spans) {
-			WeiboSpan s = new WeiboSpan(span.getURL());
+			WeiboSpan s = new WeiboSpan(span.getURL(),isLight);
 			int start = ss.getSpanStart(span);
 			int end = ss.getSpanEnd(span);
 			ss.removeSpan(span);
@@ -82,21 +86,29 @@ public class SpannableStringUtils
 		
 		return ss;
 	}
-	
-	public static SpannableString getSpan(Context context, MessageModel msg) {
-		if (msg.span == null) {
 
-			
-			msg.span = span(context, msg.text);
+	public static SpannableString getSpan(Context context, MessageModel msg) {
+
+		return getSpan(context,msg,false);
+	}
+
+
+
+	public static SpannableString getSpan(Context context, MessageModel msg,boolean isLight) {
+		if (msg.span == null) {
+			msg.span = span(context, msg.text,isLight);
 		}
 
 		return msg.span;
 	}
 
 	public static SpannableString getOrigSpan(Context context, MessageModel orig) {
+		return getOrigSpan(context,orig,false);
+	}
+
+	public static SpannableString getOrigSpan(Context context, MessageModel orig,boolean isLight) {
 		if (orig.origSpan == null) {
 
-			
 			String username = "";
 
 			if (orig.user != null) {
@@ -104,7 +116,7 @@ public class SpannableStringUtils
 				username = "@" + username + ":";
 			}
 
-			orig.origSpan = span(context, username + orig.text);
+			orig.origSpan = span(context, username + orig.text,isLight);
 		}
 
 		return orig.origSpan;

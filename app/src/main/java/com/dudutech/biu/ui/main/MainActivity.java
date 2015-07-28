@@ -1,13 +1,16 @@
 package com.dudutech.biu.ui.main;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
+
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -72,7 +75,7 @@ public class MainActivity extends BaseActivity implements
 		int id=v.getId();
 		switch (id){
 			case R.id.fab:
-				MainRefresh mainRefresh= (MainRefresh) getFragmentManager().findFragmentByTag(mCurrentPositon);
+				MainRefresh mainRefresh= (MainRefresh) getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 				mainRefresh.doRefresh();
 				break;
 		}
@@ -169,15 +172,15 @@ public class MainActivity extends BaseActivity implements
 
 		}
 
-		FragmentTransaction ft= getFragmentManager()
+		FragmentTransaction ft= getSupportFragmentManager()
 				.beginTransaction();
-		Fragment lastFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+		Fragment lastFragment=getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 		Fragment currentFragment=null;
 
 		switch (position){
 			case NavigationDrawerFragment.MENU_WEIBO :
 				mCurrentPositon=FRG_TAG_PRE_SUFIX+groupId;
-				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				currentFragment=getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null) {
 					currentFragment = HomeTimelineFragment.newInstance(groupId);
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
@@ -186,7 +189,7 @@ public class MainActivity extends BaseActivity implements
 				break;
 			case NavigationDrawerFragment.MENU_MOMENTION :
 				mCurrentPositon=FRG_TAG_MENTION_ME;
-				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				currentFragment=getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null){
 					currentFragment=MentionMeFragment.newInstance() ;
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
@@ -196,7 +199,7 @@ public class MainActivity extends BaseActivity implements
 				break;
 			case NavigationDrawerFragment.MENU_COMMENT :
 				mCurrentPositon=FRG_TAG_COMMENT;
-				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				currentFragment=getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null){
 					currentFragment= CommentMeFragment.newInstance() ;
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
@@ -205,7 +208,7 @@ public class MainActivity extends BaseActivity implements
 				break;
 			case NavigationDrawerFragment.MENU_FAVO :
 				mCurrentPositon=FRG_TAG_FAVO;
-				currentFragment=getFragmentManager().findFragmentByTag(mCurrentPositon);
+				currentFragment=getSupportFragmentManager().findFragmentByTag(mCurrentPositon);
 				if(currentFragment==null){
 					currentFragment= FavoTimelineFragment.newInstance() ;
 					ft.add(R.id.container, currentFragment, mCurrentPositon);
