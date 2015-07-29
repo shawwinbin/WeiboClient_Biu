@@ -16,12 +16,14 @@
 
 package com.dudutech.biu.ui.timeline;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
@@ -39,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +61,8 @@ import com.dudutech.biu.ui.comments.StatusCommentFragment;
 import com.dudutech.biu.ui.common.BaseActivity;
 import com.dudutech.biu.ui.common.ViewPagerTabRecyclerViewFragment;
 import com.dudutech.biu.ui.picture.PicsActivity;
+import com.dudutech.biu.ui.post.PostNewCommentActivity;
+import com.dudutech.biu.ui.post.PostNewRepostActivity;
 import com.dudutech.biu.widget.FlowLayout;
 import com.dudutech.biu.widget.SlidingTabLayout;
 import com.dudutech.biu.widget.TagImageVIew;
@@ -121,12 +126,11 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     Toolbar toolbar;
 
     @InjectView(R.id.sliding_tabs)
-    SlidingTabLayout mSlidingTabLayout;
+    TabLayout mSlidingTabLayout;
 
     @InjectView(R.id.tv_orignal_content)
     public TextView tv_orignal_content;
 
-    private int mBaseTranslationY;
     private NavigationAdapter mPagerAdapter;
     public MessageModel mWeibo;
     private int photoMargin;
@@ -151,9 +155,8 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
         } else {
             mWeibo = getIntent().getParcelableExtra(EXT_WEIBO);
         }
-//        mFlexibleSpaceHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -162,37 +165,20 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float padding = getResources().getDimension(R.dimen.LargePadding);
         imageMaxWidth = metrics.widthPixels - 2* padding;
-        float smallPadding = getResources().getDimension(R.dimen.SmallPadding);
 
         initWeibo();
 
-//        ViewCompat.setElevation(mHeaderView, getResources().getDimension(R.dimen.toolbar_elevation));
 
 
-        // When the page is selected, other fragments' scrollY should be adjusted
-        // according to the toolbar status(shown/hidden)
-        mSlidingTabLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.i("DETAIL","SLIDING TONCH");
+        String[] titles=new String[]{getString(R.string.comment) + " ( " + Utility.getCountString(mWeibo.comments_count) + " ) ",
+                getString(R.string.repost) + " ( " + Utility.getCountString(mWeibo.reposts_count) + " ) "
+        };
 
-                return false;
-            }
-        });
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        },500);
-        mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), mWeibo);
+        mPagerAdapter = new NavigationAdapter(getSupportFragmentManager(), mWeibo,titles);
 
         mPager.setAdapter(mPagerAdapter);
 
-        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.white));
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(mPager);
+        mSlidingTabLayout.setupWithViewPager(mPager);
         // Initialize the first Fragment's state when layout is completed.
         ScrollUtils.addOnGlobalLayoutListener(mSlidingTabLayout, new Runnable() {
             @Override
@@ -286,6 +272,14 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
                 new FavoTask().execute();
                 break;
             case R.id.action_copy:
+                ClipboardManager c= (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                c.setText(tv_content.getText());
+                break;
+            case R.id.action_comment:
+                PostNewCommentActivity.start(this, mWeibo);
+                break;
+            case R.id.action_repost:
+                PostNewRepostActivity.start(this, mWeibo);
                 break;
             case android.R.id.home:
                 onBackPressed();
@@ -421,15 +415,17 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
      */
     private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
-        private static final String[] TITLES = new String[]{"comments", "repost"};
+        private  String[] TITLES ;
+
 
         private int mScrollY;
 
         private MessageModel msg;
 
-        public NavigationAdapter(FragmentManager fm,MessageModel msg) {
+        public NavigationAdapter(FragmentManager fm,MessageModel msg ,String[] titles) {
             super(fm);
             this.msg=msg;
+            TITLES=titles;
         }
 
         public void setScrollY(int scrollY) {

@@ -37,7 +37,6 @@
             app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
             app:theme="@style/ThemeToolbar">
 
-
             </android.support.v7.widget.Toolbar>
 
         <include
@@ -72,10 +71,12 @@
         android:background="?attr/colorPrimary" />
 
 
-
-    <com.dudutech.biu.widget.SlidingTabLayout
+    <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
-        android:background="?attr/colorPrimary" />
+        android:background="?attr/colorPrimary"
+        style="@style/CustomTabLayout"
+        />
+
 </FrameLayout>

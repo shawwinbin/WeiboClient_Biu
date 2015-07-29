@@ -11,6 +11,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.dudutech.biu.ui.timeline.WeiboDetailActivity">
     <item android:id="@+id/action_favo" android:title="@string/favo"
+    android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_comment" android:title="@string/comment"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_repost" android:title="@string/repost"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_copy" android:title="@string/copy"
         android:orderInCategory="100" app:showAsAction="never" />

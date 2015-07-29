@@ -10,6 +10,7 @@ package com.dudutech.biu.adapter.comments;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.StatusTimeUtils;
+import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.CommentListModel;
@@ -74,14 +76,15 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 
             commentViewHolder.tv_content.setText(commentModel.span);
             commentViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
-            commentViewHolder.tv_time.setText(mTimeUtils.buildTimeString(commentModel.created_at));
+            String  source =   TextUtils.isEmpty(commentModel.source)?"": Utility.dealSourceString(commentModel.source);
+            commentViewHolder.tv_time_source.setText(mTimeUtils.buildTimeString(commentModel.created_at) + " | " + source);
             commentViewHolder.tv_username.setText(commentModel.user.getName());
-            commentViewHolder.tv_username.setText(commentModel.user.getName());
+
             String url = commentModel.user.avatar_large;
             if (!url.equals(commentViewHolder.iv_avatar.getTag())) {
                 commentViewHolder.iv_avatar.setTag(url);
-                ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.avatarOptions);
-            }
+                ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.getAvatarOptions(commentModel.user.getName().substring(0,1)));
+        }
         }
 
     }
@@ -93,8 +96,8 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tv_time)
-        public TextView tv_time;
+        @InjectView(R.id.tv_time_source)
+        public TextView tv_time_source;
         @InjectView(R.id.tv_username)
         public TextView tv_username;
         @InjectView(R.id.tv_content)

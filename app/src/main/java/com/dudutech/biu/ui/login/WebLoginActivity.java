@@ -26,16 +26,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.api.BaseApi;
 import com.dudutech.biu.api.LoginApi;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.dao.login.LoginDao;
 import com.dudutech.biu.ui.common.BaseActivity;
 import com.dudutech.biu.ui.main.MainActivity;
@@ -53,13 +56,17 @@ public class WebLoginActivity extends BaseActivity {
     @InjectView(R.id.wb_login)
 	WebView webView;
 
-
+	@InjectView(R.id.toolbar)
+	Toolbar toolbar;
 	
 	private MenuItem mMenuItem;
 	
 
 	private String mAppId;
 	private String mAppSecret;
+
+
+	private boolean isDoingLogin=false;
 
 	private LoginDao mLogin;
 
@@ -73,6 +80,7 @@ public class WebLoginActivity extends BaseActivity {
 		// Create login instance
 		mLogin = LoginDao.getInstance(this);
 
+		setSupportActionBar(toolbar);
 
 		// Login page
 		WebSettings settings = webView.getSettings();
@@ -96,8 +104,10 @@ public class WebLoginActivity extends BaseActivity {
 
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
 			if (LoginApi.isUrlRedirected(url)) {
 				view.stopLoading();
+				Log.d(TAG, "shouldOverrideUrlLoading...");
 				handleRedirectedUrl(url);
 			} else {
 				view.loadUrl(url);
@@ -109,6 +119,7 @@ public class WebLoginActivity extends BaseActivity {
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 			if (!url.equals("about:blank") && LoginApi.isUrlRedirected(url)) {
 				view.stopLoading();
+				Log.d(TAG, "onPageStarted...");
 				handleRedirectedUrl(url);
 				return;
 			}
@@ -121,8 +132,9 @@ public class WebLoginActivity extends BaseActivity {
 
 
 
-
 	private void handleRedirectedUrl(String url) {
+		Log.d(TAG, "handleRedirectedUrl...");
+
 		if (!url.contains("error")) {
 			int tokenIndex = url.indexOf("access_token=");
 			int expiresIndex = url.indexOf("expires_in=");
@@ -135,7 +147,10 @@ public class WebLoginActivity extends BaseActivity {
 				Log.d(TAG, "expires_in = " + expiresIn);
 			}
 
-			new LoginTask().execute(token, expiresIn);
+			if (!isDoingLogin)
+				new LoginTask().execute(token, expiresIn);
+
+
 		} else {
 			showLoginFail();
 		}
@@ -149,8 +164,9 @@ public class WebLoginActivity extends BaseActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			isDoingLogin=true;
 			progDialog = new ProgressDialog(WebLoginActivity.this);
-			progDialog.setMessage(getResources().getString(R.string.plz_wait));
+			progDialog.setMessage(getResources().getString(R.string.loadding_user_data));
 			progDialog.setCancelable(false);
 			progDialog.show();
 		}
@@ -169,6 +185,7 @@ public class WebLoginActivity extends BaseActivity {
 		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
 			progDialog.dismiss();
+			isDoingLogin=false;
 
 			if ( mLogin.getAccessToken() != null) {
 				if (DEBUG) {
@@ -176,33 +193,19 @@ public class WebLoginActivity extends BaseActivity {
 					Log.d(TAG, "Expires in:" + mLogin.getExpireDate());
 				}
 				mLogin.cache();
-				BaseApi.setAccessToken(mLogin.getAccessToken());
+
 			} else if (mLogin.getAccessToken() == null) {
 				showLoginFail();
 				return;
 			}
-
-
-			// Expire date
 			String msg = String.format(getResources().getString(R.string.expires_in), Utility.expireTimeInDays(result));
-			new AlertDialog.Builder(WebLoginActivity.this)
-					.setMessage(msg)
-					.setCancelable(false)
-					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.dismiss();
-
-							Intent i = new Intent();
-							i.setAction(Intent.ACTION_MAIN);
-							i.setClass(WebLoginActivity.this, MainActivity.class);
-							startActivity(i);
-							finish();
-
-						}
-					})
-					.create()
-					.show();
+			// Expire date
+			Toast.makeText(WebLoginActivity.this, msg, Toast.LENGTH_LONG).show();
+			Intent i = new Intent();
+			i.setAction(Intent.ACTION_MAIN);
+			i.setClass(WebLoginActivity.this, MainActivity.class);
+			startActivity(i);
+			finish();
 		}
 
 	}

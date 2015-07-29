@@ -13,10 +13,54 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
-    android:paddingBottom="20dp"
+    android:paddingBottom="@dimen/tab_height"
     android:background="?attr/colorPrimary"
     >
-    <include layout="@layout/lst_user_headview_light"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ll_like"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            >
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:focusable="false"
+                android:src="@drawable/ic_moment_like_full"
+                android:tint="@color/white"
+                />
+            <TextView
+                android:id="@+id/tv_like_count"
+                style="@style/text_moment_btn"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:paddingBottom="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:singleLine="true"
+
+                />
+        </LinearLayout>
+
+        <include layout="@layout/lst_user_headview_light"
+              android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/ll_like"
+            ></include>
+    </RelativeLayout>
+
+
     <!-- 内容 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,44 +135,6 @@
         </RelativeLayout>
 
 
-        <LinearLayout
-            android:id="@+id/ll_like"
-
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/ll_comment"
-            android:layout_gravity="right"
-
-            >
-
-            <ImageView
-                android:id="@+id/iv_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:focusable="false"
-                android:src="@drawable/ic_moment_like_full"
-                android:tint="@color/white"
-                />
-
-            <TextView
-                android:id="@+id/tv_like_count"
-                style="@style/text_moment_btn"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:paddingBottom="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="15dp"
-                android:singleLine="true"
-
-
-                />
-        </LinearLayout>
 
 
     </LinearLayout>

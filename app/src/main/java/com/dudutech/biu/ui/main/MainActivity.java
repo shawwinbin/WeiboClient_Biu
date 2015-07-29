@@ -32,6 +32,7 @@ import com.dudutech.biu.model.UserModel;
 import com.dudutech.biu.ui.comments.CommentMeFragment;
 import com.dudutech.biu.ui.common.BaseActivity;
 import com.dudutech.biu.ui.post.NewPostActivity;
+import com.dudutech.biu.ui.setting.SettingsActivity;
 import com.dudutech.biu.ui.timeline.FavoTimelineFragment;
 import com.dudutech.biu.ui.timeline.HomeTimelineFragment;
 import com.dudutech.biu.ui.timeline.MentionMeFragment;
@@ -263,6 +264,7 @@ public class MainActivity extends BaseActivity implements
 		int id = item.getItemId();
 		switch (id ){
 			case R.id.action_settings :
+				startActivity(new Intent(this, SettingsActivity.class));
 				return true;
 			case R.id.action_new_post :
 				NewPostActivity.start(this);

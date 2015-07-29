@@ -67,7 +67,6 @@ public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
             String  source =   TextUtils.isEmpty(commentModel.source)?"": Utility.dealSourceString(commentModel.source);
             commentViewHolder.tv_time_source.setText(mTimeUtils.buildTimeString(commentModel.created_at)+" | "+source);
             commentViewHolder.tv_username.setText(commentModel.user.getName());
-            commentViewHolder.tv_username.setText(commentModel.user.getName());
             String url = commentModel.user.avatar_large;
             if (!url.equals(commentViewHolder.iv_avatar.getTag())) {
                 commentViewHolder.iv_avatar.setTag(url);

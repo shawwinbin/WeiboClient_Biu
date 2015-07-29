@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import com.dudutech.biu.api.AccountApi;
 import com.dudutech.biu.api.BaseApi;
 import com.dudutech.biu.dao.HttpClientUtils;
+import com.dudutech.biu.dao.relationship.GroupDao;
 
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class LoginDao
 {
 	private static final String TAG = LoginDao.class.getSimpleName();
 
-	private Context mContext;
+	private static Context mContext;
 
 	private SharedPreferences mPrefs;
 	private String mAccessToken;
@@ -50,6 +51,7 @@ public class LoginDao
 
 	public  static LoginDao getInstance(Context context){
 		if(mInstance==null){
+			mContext=context;
 			mInstance =new LoginDao(context);
 		}
 		return  mInstance;
@@ -72,8 +74,15 @@ public class LoginDao
 	public void login(String token, String expire) {
 		mAccessToken = token;
 		BaseApi.setAccessToken(mAccessToken);
+		HttpClientUtils.setAccessToken(mAccessToken);
 		mExpireDate = System.currentTimeMillis() + Long.valueOf(expire) * 1000;
 		mUid = AccountApi.getUid();
+		GroupDao groupDao=new GroupDao(mContext);
+		groupDao.getGroups();
+		groupDao.cache();
+
+
+
 	}
 
 	public void logout() {

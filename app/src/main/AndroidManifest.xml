@@ -26,6 +26,7 @@
         </activity>
         <activity
             android:name=".ui.login.WebLoginActivity"
+            android:label="@string/black_magic_login"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity android:name=".ui.picture.PicsActivity" >
@@ -44,12 +45,9 @@
         </activity>
         <activity
             android:name=".ui.timeline.UserHomeActivity"
-            android:theme="@style/UserHome"
-            >
+            android:theme="@style/UserHome" >
         </activity>
-        <activity android:name=".ui.timeline.WeiboDetailActivity"
-
-            >
+        <activity android:name=".ui.timeline.WeiboDetailActivity" >
         </activity>
         <activity
             android:name=".ui.post.NewPostActivity"
@@ -69,9 +67,13 @@
             android:name=".ui.friendship.FriendActivity"
             android:label="@string/title_activity_friend" >
         </activity>
-        <activity android:name=".ui.timeline.StatusDetailActivity"
-            android:label="@string/title_weibo_detail"
-            >
+        <activity
+            android:name=".ui.timeline.StatusDetailActivity"
+            android:label="@string/title_weibo_detail" >
+        </activity>
+        <activity
+            android:name=".ui.setting.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

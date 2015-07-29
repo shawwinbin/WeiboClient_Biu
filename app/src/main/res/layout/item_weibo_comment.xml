@@ -1,44 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
-    android:paddingRight="13dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_context_menu"
 
     >
 
-         <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/avatar_lst_item_small"
-            android:layout_height="@dimen/avatar_lst_item_small"
-            android:scaleType="centerInside"
-            android:layout_marginRight="8dp"
+    <include
+        layout="@layout/lst_user_headview"
 
-            />
-
-          <TextView
-          android:id="@+id/tv_time"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentRight="true"
-          style="@style/txt_remark"
-          />
-
-
-      <TextView
-          android:id="@+id/tv_username"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          style="@style/text_user_name"
-          android:layout_toRightOf="@+id/iv_avatar"
-          android:focusable="false"
-          android:singleLine="true"
-          android:layout_toLeftOf="@+id/tv_time"
-          />
+        ></include>
 
 
           <TextView
@@ -50,6 +28,15 @@
           android:gravity="center_vertical"
           style="@style/txt_main_content"
           android:paddingTop="3dp"
+              android:layout_marginLeft="50dp"
           />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_moment"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        />
 
-</RelativeLayout>
+
+</LinearLayout>

@@ -30,12 +30,16 @@
 
     <!-- Login -->
     <string name="login">登录</string>
+    <string name="black_magic_login">黑魔法授权登录</string>
     <string name="tail">尾巴</string>
     <string name="username">用户名</string>
     <string name="passwd">密码</string>
     <string name="toast_empty_username">请输入用户名</string>
     <string name="toast_empty_password">请输入密码</string>
 
+    <string name="loadding_user_data">载入用户数据...</string>
+    <string name="expires_in">授权%d天有效</string>
+    <string name="login_fail">登录失败</string>
 
 
 
