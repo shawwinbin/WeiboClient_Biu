@@ -9,19 +9,21 @@
 package com.dudutech.biu.ui.comments;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.comments.StatusComentAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
 import com.dudutech.biu.dao.comments.StatusCommentDao;
 import com.dudutech.biu.model.CommentListModel;
+import com.dudutech.biu.ui.common.ViewPagerTabRecyclerViewFragment;
 import com.dudutech.biu.ui.timeline.AbsTimeLineFragment;
 
 /**
  *  weibo detail comments
  * Created by shaw on 2015/7/11.
  */
-public class StatusCommentFragment extends AbsTimeLineFragment {
+public class StatusCommentFragment extends ViewPagerTabRecyclerViewFragment {
 
     private static final String ARG_STATUS_ID = "arg_status_id";
 
@@ -54,8 +56,9 @@ public class StatusCommentFragment extends AbsTimeLineFragment {
 
 
     @Override
-    protected BaseTimelinAdapter bindListAdapter() {
-        StatusComentAdapter adapter=new StatusComentAdapter(getActivity(),(CommentListModel) mDao.getList());
+    protected BaseTimelinAdapter bindListAdapter(View headView) {
+        StatusComentAdapter adapter=new StatusComentAdapter(getActivity(),(CommentListModel) mDao.getList(),headView);
+        adapter.setHeaderViewTouchListener((StatusComentAdapter.HeaderViewTouchListener) getActivity());
         adapter.setBottomCount(1);
         return adapter;
     }

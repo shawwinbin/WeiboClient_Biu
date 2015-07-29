@@ -95,7 +95,7 @@ public class HomeTimelineFragment extends AbsTimeLineFragment  implements Timeli
 
     @Override
     public void onTtemClick(View view, int position) {
-        WeiboDetailActivity.start(getActivity(), ((MessageListModel) mDao.getList()).get(position));
+        StatusDetailActivity.start(getActivity(), ((MessageListModel) mDao.getList()).get(position));
     }
 
     /**

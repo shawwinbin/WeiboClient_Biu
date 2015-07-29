@@ -14,9 +14,6 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
     android:paddingBottom="20dp"
-    android:paddingLeft="@dimen/MiddlePadding"
-    android:paddingRight="@dimen/MiddlePadding"
-    android:paddingTop="14dp"
     android:background="?attr/colorPrimary"
     >
     <include layout="@layout/lst_user_headview_light"></include>
@@ -24,7 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+
         android:orientation="vertical">
 
         <TextView

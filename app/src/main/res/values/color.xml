@@ -303,4 +303,6 @@
     <color name="btn_context_menu_pressed">#40000000</color>
 
     <color name="star_color">#FF5252</color>
+
+    <color name="accent">#eeff41</color>
 </resources>

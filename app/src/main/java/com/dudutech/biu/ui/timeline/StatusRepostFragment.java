@@ -9,18 +9,20 @@
 package com.dudutech.biu.ui.timeline;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.timeline.StatusRepostAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
 import com.dudutech.biu.dao.timeline.StatusRepostDao;
 import com.dudutech.biu.model.RepostListModel;
+import com.dudutech.biu.ui.common.ViewPagerTabRecyclerViewFragment;
 
 /**
  *  weibo detail comments
  * Created by shaw on 2015/7/11.
  */
-public class StatusRepostFragment extends AbsTimeLineFragment {
+public class StatusRepostFragment extends ViewPagerTabRecyclerViewFragment {
 
     private static final String ARG_STATUS_ID = "arg_status_id";
 
@@ -53,8 +55,8 @@ public class StatusRepostFragment extends AbsTimeLineFragment {
 
 
     @Override
-    protected BaseTimelinAdapter bindListAdapter() {
-        StatusRepostAdapter adapter=new StatusRepostAdapter(getActivity(),(RepostListModel) mDao.getList());
+    protected BaseTimelinAdapter bindListAdapter(View headView) {
+        StatusRepostAdapter adapter=new StatusRepostAdapter(getActivity(),(RepostListModel) mDao.getList(),headView);
         adapter.setBottomCount(1);
         return adapter;
     }

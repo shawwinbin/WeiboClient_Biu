@@ -11,6 +11,8 @@ package com.dudutech.biu.adapter.comments;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,9 +35,17 @@ import butterknife.InjectView;
 public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 
     private StatusTimeUtils mTimeUtils;
-    public StatusComentAdapter(Context context, CommentListModel listModel) {
+    private View mHeadView;
+
+   public HeaderViewTouchListener mHeaderViewTouchListener;
+    public StatusComentAdapter(Context context, CommentListModel listModel,View headView) {
         super(context, listModel);
         mTimeUtils = StatusTimeUtils.instance(context);
+
+        if(headView!=null){
+            mHeadView=headView;
+            setHeaderCount(1);
+        }
     }
 
 
@@ -49,6 +59,8 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
     }
 
 
+
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
@@ -56,13 +68,12 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
         if(holder instanceof  CommentViewHolder) {
 
 
-            CommentModel commentModel = mListModel.getList().get(position);
+            CommentModel commentModel = mListModel.getList().get(position-mHeaderCount);
 
             CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
 
             commentViewHolder.tv_content.setText(commentModel.span);
             commentViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
-//            commentViewHolder.tv_time.setText(commentModel.created_at);
             commentViewHolder.tv_time.setText(mTimeUtils.buildTimeString(commentModel.created_at));
             commentViewHolder.tv_username.setText(commentModel.user.getName());
             commentViewHolder.tv_username.setText(commentModel.user.getName());
@@ -75,6 +86,11 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 
     }
 
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
+
+        return  new HeaderViewHolder(mHeadView);
+    }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.tv_time)
@@ -101,7 +117,29 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
 
 
         }
-
-
     }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View view) {
+            super(view);
+           view.setOnTouchListener(new View.OnTouchListener() {
+               @Override
+               public boolean onTouch(View v, MotionEvent event) {
+
+                  return mHeaderViewTouchListener.onTouch(event);
+
+
+
+               }
+           });
+        }
+    }
+    public void setHeaderViewTouchListener(HeaderViewTouchListener listener){
+        mHeaderViewTouchListener=listener;
+    }
+
+    public interface HeaderViewTouchListener {
+        public boolean onTouch( MotionEvent event);
+    }
+
 }

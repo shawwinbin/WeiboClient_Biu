@@ -69,6 +69,10 @@
             android:name=".ui.friendship.FriendActivity"
             android:label="@string/title_activity_friend" >
         </activity>
+        <activity android:name=".ui.timeline.StatusDetailActivity"
+            android:label="@string/title_weibo_detail"
+            >
+        </activity>
     </application>
 
 </manifest>

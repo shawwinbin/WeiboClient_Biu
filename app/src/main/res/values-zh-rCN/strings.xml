@@ -142,5 +142,5 @@
     <string name="the_day_before_yesterday">2天前</string>
 
     <string name="title_activity_friend">好友</string>
-
+    <string name="title_weibo_detail">微博正文</string>
 </resources>

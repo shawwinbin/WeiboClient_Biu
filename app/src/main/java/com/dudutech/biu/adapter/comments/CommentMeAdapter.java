@@ -34,10 +34,14 @@ import butterknife.InjectView;
  */
 public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
     private StatusTimeUtils mTimeUtils;
+
+
     public CommentMeAdapter(Context context, CommentListModel commentListModel) {
         super(context, commentListModel);
         mTimeUtils = StatusTimeUtils.instance(context);
+
         setBottomCount(1);
+
     }
 
 
@@ -47,6 +51,8 @@ public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
         CommentMeViewHolder holder = new CommentMeViewHolder(view, mContext);
         return holder;
     }
+
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {

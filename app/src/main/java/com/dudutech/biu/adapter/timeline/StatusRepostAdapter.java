@@ -32,23 +32,24 @@ import butterknife.InjectView;
 public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
 
     private StatusTimeUtils mTimeUtils;
-    public StatusRepostAdapter(Context context, RepostListModel listModel) {
+    private View mHeadView;
+    public StatusRepostAdapter(Context context, RepostListModel listModel,View headView) {
         super(context, listModel);
         mTimeUtils = StatusTimeUtils.instance(context);
+        if(headView!=null){
+            mHeadView=headView;
+            setHeaderCount(1);
+        }
     }
 
 
-    public static enum ITEM_TYPE {
-        ITEM_TYPE_HEADER,
-        ITEM_TYPE_BOTTOM,
-        ITEM_TYPE_NORMAL,
-    }
+
 
 
 
     @Override
     public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
-        return null;
+        return new HeaderViewHolder(mHeadView);
     }
 
     @Override
@@ -61,6 +62,13 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
     }
 
 
+
+
+    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View view) {
+            super(view);
+        }
+    }
 
     @Override
     public int getContentItemCount() {
@@ -79,7 +87,7 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
         if(holder instanceof  CommentViewHolder) {
 
 
-            MessageModel commentModel = mListModel.getList().get(position);
+            MessageModel commentModel = mListModel.getList().get(position-mHeaderCount);
 
             CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
 

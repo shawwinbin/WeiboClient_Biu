@@ -162,8 +162,6 @@ public class WeiboDetailActivity extends BaseActivity implements AppBarLayout.On
 
     private void initWeibo() {
 
-
-
         tv_content.setText(mWeibo.span);
         tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         tv_username.setText(mWeibo.user.name);
@@ -202,8 +200,8 @@ public class WeiboDetailActivity extends BaseActivity implements AppBarLayout.On
             mWeibo.origSpan=SpannableStringUtils.getOrigSpan(this,mWeibo.retweeted_status,true);
             tv_orignal_content .setText(mWeibo.origSpan);
             tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
+            dealImageLayout(fl_images_repost, imageMaxWidth, mWeibo.retweeted_status);
         }
-
 
     }
 
@@ -235,12 +233,12 @@ public class WeiboDetailActivity extends BaseActivity implements AppBarLayout.On
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
 
-        boolean enable = i == 0;
-        if (mViewPager.getCurrentItem() == 0) {
-            mStatusCommentFragment.setSwipeRefreshEnable(enable);
-        } else {
-            mStatusRepostFragment.setSwipeRefreshEnable(enable);
-        }
+//        boolean enable = i == 0;
+//        if (mViewPager.getCurrentItem() == 0) {
+//            mStatusCommentFragment.setSwipeRefreshEnable(enable);
+//        } else {
+//            mStatusRepostFragment.setSwipeRefreshEnable(enable);
+//        }
 
     }
 

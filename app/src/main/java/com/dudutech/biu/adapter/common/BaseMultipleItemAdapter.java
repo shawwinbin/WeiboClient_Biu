@@ -31,6 +31,7 @@ public abstract class BaseMultipleItemAdapter extends RecyclerView.Adapter<Recyc
         this.mHeaderCount = headerCount;
     }
 
+
     public void setBottomCount(int bottomCount) {
         this.mBottomCount = bottomCount;
     }

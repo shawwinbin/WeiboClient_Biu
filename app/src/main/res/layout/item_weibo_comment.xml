@@ -35,7 +35,6 @@
           android:layout_height="wrap_content"
           style="@style/text_user_name"
           android:layout_toRightOf="@+id/iv_avatar"
-          android:onClick="showUserProfile"
           android:focusable="false"
           android:singleLine="true"
           android:layout_toLeftOf="@+id/tv_time"
