@@ -395,7 +395,7 @@ public class WeiboDetailActivity extends BaseActivity implements AppBarLayout.On
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PicsActivity.launch(WeiboDetailActivity.this, msg, index);
+                        PicsActivity.start(WeiboDetailActivity.this, msg, index);
                     }
                 });
 

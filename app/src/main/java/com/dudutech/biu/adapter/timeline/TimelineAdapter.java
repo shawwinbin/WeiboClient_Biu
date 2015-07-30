@@ -285,7 +285,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                     @Override
                     public void onClick(View v) {
 
-                        PicsActivity.launch((Activity) mContext, msg, index);
+                        PicsActivity.start((Activity) mContext, msg, index);
                     }
                 });
 

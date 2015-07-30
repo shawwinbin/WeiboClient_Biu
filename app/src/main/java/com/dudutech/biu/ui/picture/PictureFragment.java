@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.DeviceUtil;
+import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.model.PicSize;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,7 +30,12 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListe
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
@@ -71,8 +78,10 @@ import uk.co.senab.photoview.PhotoView;
 	
 	private MessageModel.PictureUrl image;
 
-
     private PicSize pictureSize;
+
+	String  mImagUrl;
+
 
     public enum PictureStatus {
         wait, downloading, success, faild
@@ -92,21 +101,55 @@ import uk.co.senab.photoview.PhotoView;
 
 		image = savedInstanceState == null ? (MessageModel.PictureUrl) getArguments().getParcelable("url")
 										  : (MessageModel.PictureUrl) savedInstanceState.getSerializable("url");
-		loadImage();
-		return mView;
-	}
 
-	private  void loadImage(){
-
-		String imageUrl=image.getMedium();
+		mImagUrl=image.getMedium();
 
 		File origPic= ImageLoader.getInstance().getDiskCache().get(image.getLarge());
 
 		if(origPic.exists()){
-			imageUrl=image.getLarge();
+			mImagUrl=image.getLarge();
 		}
+		loadImage(mImagUrl);
+		return mView;
+	}
 
 
+	public   void loadOrigImage(){
+		mImagUrl=image.getLarge();
+		loadImage(mImagUrl);
+
+	}
+
+	public   void savePic(){
+
+		File imagFileCache= ImageLoader.getInstance().getDiskCache().get(mImagUrl);
+
+		File imagFileToSave = Utility.getOutputImageFile();
+
+		try {
+		   OutputStream myOutput = new FileOutputStream(imagFileToSave);
+			InputStream	myInput = new FileInputStream(imagFileCache);
+			byte[] buffer = new byte[1024];
+			int length = myInput.read(buffer);
+			while (length > 0) {
+				myOutput.write(buffer, 0, length);
+				length = myInput.read(buffer);
+			}
+			myOutput.flush();
+			myInput.close();
+			myOutput.close();
+	}
+	 catch (IOException e) {
+			e.printStackTrace();
+		 Toast.makeText(getActivity(),R.string.fail,Toast.LENGTH_LONG).show();
+		 return;
+		}
+		Toast.makeText(getActivity(), getString(R.string.success)+imagFileToSave.getPath(), Toast.LENGTH_LONG).show();
+
+
+	}
+
+	private  void loadImage(String imageUrl){
 
 		ImageLoader.getInstance().loadImage(imageUrl,null, options, new ImageLoadingListener() {
 			@Override

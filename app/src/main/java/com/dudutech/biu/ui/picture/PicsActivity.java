@@ -16,24 +16,52 @@ import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.SystemBarUtils;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.ui.common.BaseActivity;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 
-	public static void launch(Activity from, MessageModel bean, int index) {
+	public static void start(Activity from, MessageModel bean, int index) {
 		Intent intent  = new Intent(from, PicsActivity.class);
 		intent.putExtra("bean", bean);
 		intent.putExtra("index", index);
 		from.startActivity(intent);
 	}
 	
-	@InjectView(R.id.viewPager)
+	@InjectView(R.id.viewPager_pics)
     ViewPager viewPager;
     @InjectView( R.id.toolbar)
 	Toolbar toolbar;
+	@InjectView( R.id.multiple_actions)
+	FloatingActionsMenu mFloatingMenu;
+
+	@OnClick( R.id.action_ori_photo)
+	void viewOrigPic(){
+
+		mFloatingMenu.collapse();
+		int current=viewPager.getCurrentItem();
+		PictureFragment picFgm= (PictureFragment) myViewPagerAdapter.getItem(current);
+		if(picFgm!=null)
+			picFgm.loadOrigImage();
+	}
+
+	@OnClick( R.id.action_save)
+	void savePic(){
+
+		mFloatingMenu.collapse();
+		int current=viewPager.getCurrentItem();
+		PictureFragment picFgm= (PictureFragment) myViewPagerAdapter.getItem(current);
+		if(picFgm!=null)
+			picFgm.savePic();
+	}
+
+
+
+
 	
 	private MessageModel mBean;
 	private int index;
@@ -65,14 +93,6 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 		else if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(String.format("%d/%d", 1, 1));
 
-//		getSupportActionBar()().setBackgroundColor(Color.TRANSPARENT);
-
-//        if (Build.VERSION.SDK_INT >= 19) {
-//            layToolbar.setPadding(layToolbar.getPaddingLeft(),
-//                                        layToolbar.getPaddingTop() + SystemBarUtils.getStatusBarHeight(this),
-//                                        layToolbar.getPaddingRight(),
-//                                        layToolbar.getPaddingBottom());
-//        }
 	}
 
 
@@ -153,14 +173,14 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 			
 //			Fragment fragment = getFragmentManager().findFragmentByTag(makeFragmentName(position));
 //			if (fragment != null)
-//				mCurTransaction.remove(fragment);
+//				.remove(fragment);
+		}
+
+		private String  makeFragmentName(long id) {
+			return "android:switcher:" + R.id.viewPager_pics+ ":" + id;
 		}
 
 
-		protected String makeFragmentName(int position) {
-			return getPicture(position).getThumbnail();
-//			return KeyGenerator.generateMD5(getPicture(position).getThumbnail_pic());
-		}
 
 	}
 

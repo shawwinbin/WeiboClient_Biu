@@ -597,7 +597,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PicsActivity.launch(StatusDetailActivity.this, msg, index);
+                        PicsActivity.start(StatusDetailActivity.this, msg, index);
                     }
                 });
 
