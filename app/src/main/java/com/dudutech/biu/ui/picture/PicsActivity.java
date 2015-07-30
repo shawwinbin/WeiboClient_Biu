@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
 import com.dudutech.biu.R;
+import com.dudutech.biu.Utils.SystemBarUtils;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.ui.common.BaseActivity;
 
@@ -29,8 +32,8 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 	
 	@InjectView(R.id.viewPager)
     ViewPager viewPager;
-//    @InjectView( R.id.layToolbar)
-//    ViewGroup layToolbar;
+    @InjectView( R.id.toolbar)
+	Toolbar toolbar;
 	
 	private MessageModel mBean;
 	private int index;
@@ -43,10 +46,11 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pics);
 		ButterKnife.inject(this);
-		
-//        getSupportActionBar().setDisplayShowHomeEnabled(false);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+		setSupportActionBar(toolbar);
+//		initStatusBar();
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		mBean = savedInstanceState == null ? (MessageModel) getIntent().getParcelableExtra("bean")
 										   : (MessageModel) savedInstanceState.getParcelable("bean");
 		index = savedInstanceState == null ? getIntent().getIntExtra("index", 0)
@@ -56,10 +60,10 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 		viewPager.setAdapter(myViewPagerAdapter);
 		viewPager.addOnPageChangeListener(this);
 		viewPager.setCurrentItem(index);
-//		if (size() > 1 && getSupportActionBar() != null)
-//            getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
-//		else if (getSupportActionBar() != null)
-//            getSupportActionBar().setTitle(String.format("%d/%d", 1, 1));
+		if (size() > 1 && getSupportActionBar() != null)
+            getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
+		else if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(String.format("%d/%d", 1, 1));
 
 //		getSupportActionBar()().setBackgroundColor(Color.TRANSPARENT);
 
@@ -70,7 +74,26 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 //                                        layToolbar.getPaddingBottom());
 //        }
 	}
-	
+
+
+	private void initStatusBar(){
+		if (Build.VERSION.SDK_INT >= 19) {
+			ViewGroup drawerRoot = (ViewGroup) findViewById(R.id.rl_root);
+			drawerRoot.setPadding(drawerRoot.getPaddingLeft(),
+					SystemBarUtils.getStatusBarHeight(this),
+					drawerRoot.getPaddingRight(),
+					drawerRoot.getBottom());
+		}
+		if (Build.VERSION.SDK_INT >= 19) {
+			ViewGroup rootMain = (ViewGroup) findViewById(R.id.rl_root);
+			rootMain.setPadding(rootMain.getPaddingLeft(),
+					rootMain.getPaddingTop(),
+					rootMain.getPaddingRight(),
+					rootMain.getBottom() + SystemBarUtils.getNavigationBarHeight(this));
+		}
+
+	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -155,7 +178,7 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 	public void onPageSelected(int index) {
 		this.index = index;
 		
-//        getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
+        getSupportActionBar().setTitle(String.format("%d/%d", index + 1, size()));
 
         PictureFragment fragment = (PictureFragment) myViewPagerAdapter.getItem(index);
 //        if (fragment != null)

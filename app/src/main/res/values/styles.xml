@@ -10,6 +10,10 @@
         <item name="fits_windows">false</item>
     </style>
 
+    <style name="AppBaseTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+
+    </style>
+
     <style name="ThemeToolbar" parent="ThemeOverlay.AppCompat.Dark">
         <!-- navigation icon color -->
         <item name="colorControlNormal">@color/white</item>
@@ -52,6 +56,12 @@
         <item name="android:paddingRight">15dp</item>
         <item name="android:orientation">horizontal</item>
     </style>
+
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 
     <style name="txt_remark">

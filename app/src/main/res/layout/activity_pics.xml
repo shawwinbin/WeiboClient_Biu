@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"
-                android:background="#3b3b3b" android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:id="@+id/rl_root"
+
+    >
     <!-- #3b3b3b -->
     <uk.co.senab.photoview.HackyViewPager
-        android:id="@+id/viewPager" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
-
-    <View
-        android:id="@+id/viewStatus"
-        android:layout_width="match_parent" android:layout_height="300dip"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"/>
-
-    <LinearLayout
-        android:id="@+id/layStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-        android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone">
-
-        <TextView
-            android:id="@+id/txtStatus" android:layout_width="0dip" android:layout_height="wrap_content" android:layout_weight="1" android:ellipsize="end"
-            android:gravity="center_vertical" android:maxLines="3" android:minHeight="70dip" android:paddingLeft="8dip" android:paddingRight="8dip"
-            android:textColor="@color/white" android:textSize="16sp"/>
-    </LinearLayout>
+        android:id="@+id/viewPager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
 
-
-<!--
-
- <View
-        android:layout_width="match_parent" android:layout_height="150dip"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/transparent"
+        app:theme="@style/ThemeToolbar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:fitsSystemWindows="true"
         />
-    <LinearLayout android:id="@+id/layToolbar"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/comm_lay_toolbar" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    </LinearLayout>
-    !-->
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorNormal="@color/transparent_1"
+        fab:fab_addButtonColorPressed="@color/half_transparent"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@mipmap/ic_ori_img"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@mipmap/ic_save"
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 </RelativeLayout>

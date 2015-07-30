@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:focusable="false"
-                    android:src="@drawable/ic_comment_full"
+                    android:src="@mipmap/ic_comment_full"
 
                     />
 
@@ -98,7 +98,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:focusable="false"
-                    android:src="@drawable/ic_moment_like_full"
+                    android:src="@mipmap/ic_moment_like_full"
 
                     />
 
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:focusable="false"
-                    android:src="@drawable/ic_moment_repost_full" />
+                    android:src="@mipmap/ic_moment_repost_full" />
 
                 <TextView
                     android:id="@+id/tv_repost_count"

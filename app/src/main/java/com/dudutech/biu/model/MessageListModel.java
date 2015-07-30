@@ -60,24 +60,18 @@ public class MessageListModel extends BaseListModel<MessageModel, MessageListMod
 	
 	public void spanAll(Context context) {
 		for (MessageModel msg : getList()) {
+
+			if(msg.user==null){
+				getList().remove(msg);
+				break;
+			}
 			msg.span = SpannableStringUtils.getSpan(context, msg);
-			
 			if (msg.retweeted_status != null) {
 				msg.retweeted_status.origSpan = SpannableStringUtils.getOrigSpan(context, msg.retweeted_status);
 			}
 		}
 	}
 
-//	public void timestampAll(Context context) {
-//		StatusTimeUtils utils = StatusTimeUtils.instance(context);
-//		for (MessageModel msg : getList()) {
-//			msg.millis = utils.parseTimeString(msg.created_at);
-//
-//			if (msg.retweeted_status != null) {
-//				msg.retweeted_status.millis = utils.parseTimeString(msg.retweeted_status.created_at);
-//			}
-//		}
-//	}
 	
 	@Override
 	public int getSize() {
@@ -98,7 +92,7 @@ public class MessageListModel extends BaseListModel<MessageModel, MessageListMod
 	public void addAll(boolean toTop, MessageListModel values) {
 		if (values != null && values.getSize() > 0) {
 			for (MessageModel msg : values.getList()) {
-				if (!statuses.contains(msg) && !values.ad.contains(msg.id)) {
+				if (!statuses.contains(msg) && !values.ad.contains(msg.id)&&msg.user!=null) {
 					statuses.add(toTop ? values.getList().indexOf(msg) : statuses.size(), msg);
 				}
 			}

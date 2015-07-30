@@ -102,7 +102,7 @@ import uk.co.senab.photoview.PhotoView;
 
 		File origPic= ImageLoader.getInstance().getDiskCache().get(image.getLarge());
 
-		if(origPic.exists()||DeviceUtil.getNetworkType(getActivity())== DeviceUtil.NetWorkType.wifi){
+		if(origPic.exists()){
 			imageUrl=image.getLarge();
 		}
 

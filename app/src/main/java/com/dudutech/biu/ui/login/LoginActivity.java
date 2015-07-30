@@ -183,7 +183,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progDialog = new ProgressDialog(LoginActivity.this);
-			progDialog.setMessage(getResources().getString(R.string.plz_wait));
+			progDialog.setMessage(getResources().getString(R.string.login));
 			progDialog.setCancelable(false);
 			progDialog.show();
 		}

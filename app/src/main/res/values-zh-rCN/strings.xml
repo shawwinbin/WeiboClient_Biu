@@ -42,8 +42,6 @@
     <string name="login_fail">登录失败</string>
 
 
-
-
     <!-- Statuses -->
     <string name="timeline">时间线</string>
     <string name="attitudes">赞</string>
@@ -114,18 +112,7 @@
     <string name="hundred_million">null</string>
     <string name="billion">B</string>
 
-    <string-array name="email_auto_complete_tips" translatable="false">
-        <item>\@sina.com</item>
-        <item>\@163.com</item>
-        <item>\@qq.com</item>
-        <item>\@gmail.com</item>
-        <item>\@hotmail.com</item>
-        <item>\@126.com</item>
-        <item>\@sohu.com</item>
-        <item>\@vip.sina.com</item>
-        <item>\@vip.qq.com</item>
-        <item>\@yeah.net</item>
-    </string-array>
+
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -144,7 +131,6 @@
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
     <string name="the_day_before_yesterday">2天前</string>
-
     <string name="title_activity_friend">好友</string>
     <string name="title_weibo_detail">微博正文</string>
 </resources>

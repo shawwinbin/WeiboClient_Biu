@@ -150,7 +150,7 @@
               <ImageButton
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:src="@drawable/ic_edit_image"
+                  android:src="@mipmap/ic_edit_image"
                   android:id="@+id/btn_inser_img"
                   android:background="@null"
                   android:layout_marginRight="10dp"
@@ -159,7 +159,7 @@
               <ImageButton
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:src="@drawable/ic_editor_at"
+                  android:src="@mipmap/ic_editor_at"
                   android:id="@+id/btn_at_friend"
                   android:background="@null"
                   android:layout_marginRight="10dp"
@@ -168,7 +168,7 @@
               <ImageButton
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:src="@drawable/ic_edit_emoticon"
+                  android:src="@mipmap/ic_edit_emoticon"
                   android:id="@+id/btn_inser_emoji"
                   android:background="@null"
                   android:padding="5dp"
@@ -179,7 +179,7 @@
           <ImageButton
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:src="@drawable/ic_edit_send"
+              android:src="@mipmap/ic_edit_send"
               android:id="@+id/btn_send"
               android:background="@null"
               android:layout_alignParentRight="true"

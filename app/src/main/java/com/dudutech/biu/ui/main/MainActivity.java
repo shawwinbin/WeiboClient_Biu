@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity implements
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		mDrawerLayout.setDrawerListener(new MyDrawerListener());
-		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+		mDrawerLayout.setDrawerShadow(R.mipmap.drawer_shadow,
 				GravityCompat.START);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this,

@@ -51,7 +51,7 @@ public class TagImageVIew extends ImageView {
 			int h = getHeight();
 
 			if (gifTag == null || gifTag.isRecycled()) {
-				gifTag = BitmapFactory.decodeResource(getResources(), R.drawable.ic_gif);
+				gifTag = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_gif);
 			}
 			canvas.drawBitmap(gifTag, w - gifTag.getWidth(), h - gifTag.getHeight(), null);
 		} catch (OutOfMemoryError e) {

@@ -154,7 +154,7 @@
         android:layout_width="wrap_content"
         app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_star"
+        android:src="@mipmap/ic_star"
         app:elevation="0dp"
         android:layout_margin="16dp"
         android:clickable="true"

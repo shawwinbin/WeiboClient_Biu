@@ -40,8 +40,8 @@ public class UserDao
 
 		if (mVipDrawable == null) {
 			mVipDrawable = new BitmapDrawable[]{
-					(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_personal_vip),
-					(BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_enterprise_vip)
+					(BitmapDrawable) context.getResources().getDrawable(R.mipmap.ic_personal_vip),
+					(BitmapDrawable) context.getResources().getDrawable(R.mipmap.ic_enterprise_vip)
 			};
 		}
 	}

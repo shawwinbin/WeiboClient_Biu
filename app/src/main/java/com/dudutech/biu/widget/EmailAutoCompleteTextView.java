@@ -38,48 +38,25 @@ public class EmailAutoCompleteTextView extends AutoCompleteTextView {
 
 	public EmailAutoCompleteTextView(Context context) {
 		super(context);
-		init(context);
+
 	}
 
 	public EmailAutoCompleteTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+
 	}
 
 	public EmailAutoCompleteTextView(Context context, AttributeSet attrs,
                                      int defStyle) {
 		super(context, attrs, defStyle);
-		init(context);
+
 	}
 
 	public void setAdapterString(String[] es) {
 		if (es != null && es.length > 0) this.emailSufixs = es;
 	}
 
-	private void init(final Context context) {
-		emailSufixs = context.getResources().getStringArray(R.array.email_auto_complete_tips);
 
-		this.setAdapter(new EmailAutoCompleteAdapter(
-						context,
-						R.layout.email_autocomplete_dropdown_item,
-						emailSufixs)
-		);
-
-		this.setThreshold(1);
-
-		this.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					String text = EmailAutoCompleteTextView.this.getText().toString();
-					if (!"".equals(text))
-						performFiltering(text, 0);
-				}
-			}
-
-		});
-	}
 
 	@Override
 	protected void replaceText(CharSequence text) {

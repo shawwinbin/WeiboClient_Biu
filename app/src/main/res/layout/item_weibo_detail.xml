@@ -35,7 +35,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:focusable="false"
-                android:src="@drawable/ic_moment_like_full"
+                android:src="@mipmap/ic_moment_like_full"
                 android:tint="@color/white"
                 />
             <TextView

@@ -118,7 +118,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         final MessageModel msg = mListModel.get(position);
         holder.tv_content.setText(msg.span);
         holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
-        holder.tv_username.setText(msg.user.name);
+        holder.tv_username.setText(msg.user.getName());
         String url = msg.user.avatar_large;
 
         if (!url.equals(holder.iv_avatar.getTag())) {
