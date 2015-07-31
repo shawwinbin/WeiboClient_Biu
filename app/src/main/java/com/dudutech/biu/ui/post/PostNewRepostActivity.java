@@ -55,7 +55,7 @@ public class PostNewRepostActivity extends AbPostActivity {
 
         rl_stauts_info.setVisibility(View.VISIBLE);
         ck_extra.setVisibility(View.VISIBLE);
-
+        iv_image_to_send.setVisibility(View.GONE);
         ck_extra.setText(R.string.comment_meanwhile);
         String statusImgUrl= mWeibo.thumbnail_pic;
         if(TextUtils.isEmpty(statusImgUrl)&&mWeibo.retweeted_status!=null){

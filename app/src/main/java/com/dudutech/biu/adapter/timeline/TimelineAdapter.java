@@ -20,6 +20,7 @@ import com.dudutech.biu.Utils.DeviceUtil;
 import com.dudutech.biu.Utils.StatusTimeUtils;
 import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.dao.favo.FavoDao;
+import com.dudutech.biu.dao.favo.LikeDao;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.global.MyApplication;
 import com.dudutech.biu.model.MessageListModel;
@@ -85,6 +86,16 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
             case R.id.btn_more:
                 StatusContextMenuManager.getInstance().toggleContextMenuFromView(v, postion, this);
+                break;
+
+            case R.id.ll_like:
+                LikeDao likeDao=new LikeDao(msg.id,mContext);
+                if(!msg.liked) {
+                    likeDao.like();
+                }
+                else{
+                    likeDao.unLike();
+                }
                 break;
 
 
@@ -163,9 +174,13 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.ll_comment.setTag(position);
         holder.ll_repost.setOnClickListener(this);
         holder.ll_repost.setTag(position);
+        holder.ll_like.setOnClickListener(this);
+        holder.ll_like.setTag(position);
         holder.btn_more.setVisibility(View.VISIBLE);
         holder.btn_more.setOnClickListener(this);
         holder.btn_more.setTag(position);
+
+
 
 
         String source = TextUtils.isEmpty(msg.source) ? "" : Utility.dealSourceString(msg.source);
@@ -412,6 +427,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         public TextView tv_repost_count;
         @InjectView(R.id.tv_like_count)
         public TextView tv_like_count;
+        @InjectView(R.id.iv_like)
+        public ImageView iv_like;
 
         @InjectView(R.id.btn_more)
         public ImageButton btn_more;

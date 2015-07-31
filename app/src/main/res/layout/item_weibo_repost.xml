@@ -23,7 +23,6 @@
             style="@style/txt_main_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/lst_default_null_item_selector"
             android:lineSpacingMultiplier="1.2"
             android:paddingTop="@dimen/SmallMargin" />
 

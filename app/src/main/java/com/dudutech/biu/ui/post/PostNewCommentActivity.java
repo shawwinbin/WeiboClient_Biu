@@ -60,6 +60,7 @@ public class PostNewCommentActivity extends AbPostActivity {
 
         rl_stauts_info.setVisibility(View.VISIBLE);
         ck_extra.setVisibility(View.VISIBLE);
+        iv_image_to_send.setVisibility(View.GONE);
 
         ck_extra.setText(R.string.repost_meanwhile);
         String statusImgUrl= mWeibo.thumbnail_pic;
