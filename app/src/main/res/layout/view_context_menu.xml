@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/btn_favo"
+        style="@style/ContextMenuButton"
+        android:text="@string/favo"
+        />
+
+    <Button
+        android:id="@+id/btn_copy"
+        style="@style/ContextMenuButton"
+        android:text="@string/copy" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee" />
+
+    <Button
+        android:id="@+id/btn_cancle"
+        style="@style/ContextMenuButton"
+        android:text="@string/btn_cancle" />
+
+</merge>

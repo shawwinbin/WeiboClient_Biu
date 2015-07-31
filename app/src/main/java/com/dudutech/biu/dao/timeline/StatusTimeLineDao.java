@@ -57,7 +57,7 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 	public void cache() {
 		SQLiteDatabase db = mHelper.getWritableDatabase();
 		db.beginTransaction();
-		db.delete(HomeTimeLineTable.NAME, HomeTimeLineTable.ID + "=?", new String[]{mGroupId});
+		db.delete(HomeTimeLineTable.NAME, HomeTimeLineTable.GROUP_ID + " =? ", new String[]{mGroupId});
 		ContentValues values = new ContentValues();
 		values.put(HomeTimeLineTable.GROUP_ID, mGroupId);
 		values.put(HomeTimeLineTable.JSON, new Gson().toJson(mListModel));
@@ -68,7 +68,7 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 
 	@Override
 	public Cursor query() {
-		return mHelper.getReadableDatabase().query(HomeTimeLineTable.NAME, null, HomeTimeLineTable.GROUP_ID+ "=?", new String[]{mGroupId}, null, null, null);
+		return mHelper.getReadableDatabase().query(HomeTimeLineTable.NAME, null, HomeTimeLineTable.GROUP_ID+ " = ?", new String[]{mGroupId}, null, null, null);
 	}
 
 

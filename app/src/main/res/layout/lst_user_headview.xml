@@ -32,12 +32,16 @@
         android:singleLine="true"
         />
 
-    <ImageView
-        android:id="@+id/iv_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/btn_more"
+        android:layout_width="@dimen/btn_normal_size"
+        android:layout_height="@dimen/btn_normal_size"
+        android:background="@drawable/btn_status_action"
+        android:src="@mipmap/ic_more_grey"
         android:layout_alignParentRight="true"
-        android:padding="5dp"
-        android:src="@drawable/btn_moment_delete_selector"
-        android:visibility="gone" />
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+
+        />
+
 </RelativeLayout>

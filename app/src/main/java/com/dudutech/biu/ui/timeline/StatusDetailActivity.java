@@ -269,7 +269,8 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
         int id = item.getItemId();
         switch (id) {
             case R.id.action_favo:
-                new FavoTask().execute();
+                FavoDao dao = new FavoDao(mWeibo.id,StatusDetailActivity.this);
+                dao.favo();
                 break;
             case R.id.action_copy:
                 ClipboardManager c= (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
@@ -476,37 +477,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
         }
     }
 
-    private class FavoTask extends AsyncTask<Void, Void, Boolean> {
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            FavoDao dao = new FavoDao(mWeibo.id);
-            FavoModel model = dao.favo();
-            return model != null;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-
-            if (result) {
-                Toast.makeText(StatusDetailActivity.this, R.string.success, Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(StatusDetailActivity.this, R.string.fail, Toast.LENGTH_LONG).show();
-            }
-
-        }
-
-    }
 
 
     private void dealImageLayout(FlowLayout flowLayout, float maxWidth ,final MessageModel msg) {

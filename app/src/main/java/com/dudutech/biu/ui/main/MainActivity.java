@@ -116,12 +116,18 @@ public class MainActivity extends BaseActivity implements
 					drawerRoot.getBottom());
 		}
 		if (Build.VERSION.SDK_INT >= 19) {
-			ViewGroup rootMain = (ViewGroup) findViewById(R.id.rl_main_root);
-			rootMain.setPadding(rootMain.getPaddingLeft(),
-					rootMain.getPaddingTop(),
-					rootMain.getPaddingRight(),
-					rootMain.getBottom() + SystemBarUtils.getNavigationBarHeight(this));
+
+		    ViewGroup.MarginLayoutParams margin= (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
+			margin.bottomMargin=margin.bottomMargin+SystemBarUtils.getNavigationBarHeight(this);
+
 		}
+//		if (Build.VERSION.SDK_INT >= 19) {
+//			ViewGroup rootMain = (ViewGroup) findViewById(R.id.rl_main_root);
+//			rootMain.setPadding(rootMain.getPaddingLeft(),
+//					rootMain.getPaddingTop(),
+//					rootMain.getPaddingRight(),
+//					rootMain.getBottom() + SystemBarUtils.getNavigationBarHeight(this));
+//		}
 
 	}
 

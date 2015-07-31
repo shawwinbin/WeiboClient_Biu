@@ -1,8 +1,12 @@
 package com.dudutech.biu.dao.favo;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.dudutech.biu.R;
 import com.dudutech.biu.api.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.model.FavoModel;
@@ -20,36 +24,57 @@ public class FavoDao {
 
     public  final String TAG = FavoDao.class.getSimpleName();
     public long id;
+    private Context mContext;
 
-    public FavoDao(long id){
+    public FavoDao(long id,Context context){
         this.id=id;
+        mContext=context;
     }
 
     // Add to favorite
-    public  FavoModel favo() {
-        return executeTask(UrlConstants.FAVORITES_CREATE);
+    public  void favo() {
+       executeTask(UrlConstants.FAVORITES_CREATE);
     }
 
     // Remove from favorite
-    public FavoModel unfav(long id) {
-        return executeTask(UrlConstants.FAVORITES_DESTROY);
+    public void unfav(long id) {
+
+        executeTask(UrlConstants.FAVORITES_DESTROY);
     }
 
-    private FavoModel executeTask(String url) {
-        WeiboParameters param=new WeiboParameters();
-        param.put("id", id);
-        try {
-            String jsonData = HttpClientUtils.doPostRequstWithWithAceesToken(url,param);
-            FavoModel value = new Gson().fromJson(jsonData, FavoModel.class);
-            if (value != null) {
-                return value;
+    private void executeTask(final String url) {
+        AsyncTask<Void, Void, Boolean> task=new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                WeiboParameters param=new WeiboParameters();
+                param.put("id", id);
+                try {
+                    String jsonData = HttpClientUtils.doPostRequstWithWithAceesToken(url,param);
+                    FavoModel value = new Gson().fromJson(jsonData, FavoModel.class);
+                    if (value != null) {
+                        return true;
+                    }
+                } catch (JsonSyntaxException e) {
+
+                    Log.e(TAG,e.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return false;
             }
-        } catch (JsonSyntaxException e) {
 
-            Log.e(TAG,e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+            @Override
+            protected void onPostExecute(Boolean result) {
+                super.onPostExecute(result);
+                if (result) {
+                    Toast.makeText(mContext, R.string.success, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(mContext, R.string.fail, Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+        task.execute();
+
     }
+
 }

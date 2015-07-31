@@ -21,6 +21,7 @@ package com.dudutech.biu.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -48,6 +49,9 @@ public class Utility
 {
 	private static final String TAG = Utility.class.getSimpleName();
 
+	public static int dpToPx(int dp) {
+		return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+	}
 
 	public static int expireTimeInDays(long time) {
 		return (int) TimeUnit.MILLISECONDS.toDays(time - System.currentTimeMillis());

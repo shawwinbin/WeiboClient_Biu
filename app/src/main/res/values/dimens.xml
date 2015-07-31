@@ -46,4 +46,6 @@
 
     <dimen name="tab_height">48dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+
+    <dimen name="btn_normal_size">48dp</dimen>
 </resources>

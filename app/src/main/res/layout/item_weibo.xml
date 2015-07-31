@@ -10,6 +10,8 @@
     android:paddingRight="@dimen/MiddlePadding"
     android:paddingTop="14dp">
 
+
+
     <include layout="@layout/lst_user_headview"></include>
     <!-- 内容 -->
     <LinearLayout

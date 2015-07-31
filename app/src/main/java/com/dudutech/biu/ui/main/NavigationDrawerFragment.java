@@ -3,6 +3,7 @@ package com.dudutech.biu.ui.main;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dudutech.biu.R;
+import com.dudutech.biu.Utils.SystemBarUtils;
 import com.dudutech.biu.adapter.common.GroupAdapter;
 import com.dudutech.biu.dao.relationship.GroupDao;
 import com.dudutech.biu.dao.timeline.StatusTimeLineDao;
@@ -107,6 +109,13 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 					}
 				});
 
+
+		if (Build.VERSION.SDK_INT >= 19) {
+
+			ViewGroup.MarginLayoutParams margin= (ViewGroup.MarginLayoutParams) mDrawerListView.getLayoutParams();
+			margin.bottomMargin=margin.bottomMargin+ SystemBarUtils.getNavigationBarHeight(getActivity());
+
+		}
 
 		mGroupAdapter=new GroupAdapter(getActivity(),mGroupDao.mListModel);
 		mDrawerListView.setAdapter(mGroupAdapter);

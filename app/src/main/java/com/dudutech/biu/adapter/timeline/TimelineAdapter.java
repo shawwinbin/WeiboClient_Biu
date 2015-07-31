@@ -1,28 +1,26 @@
 package com.dudutech.biu.adapter.timeline;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.DeviceUtil;
 import com.dudutech.biu.Utils.StatusTimeUtils;
 import com.dudutech.biu.Utils.Utility;
+import com.dudutech.biu.dao.favo.FavoDao;
 import com.dudutech.biu.global.Constants;
-import com.dudutech.biu.global.LruMemoryCache;
 import com.dudutech.biu.global.MyApplication;
 import com.dudutech.biu.model.MessageListModel;
 import com.dudutech.biu.model.MessageModel;
@@ -31,6 +29,8 @@ import com.dudutech.biu.ui.picture.PicsActivity;
 import com.dudutech.biu.ui.post.PostNewCommentActivity;
 import com.dudutech.biu.ui.post.PostNewRepostActivity;
 import com.dudutech.biu.ui.timeline.UserHomeActivity;
+import com.dudutech.biu.ui.common.StatusContextMenu;
+import com.dudutech.biu.ui.common.StatusContextMenuManager;
 import com.dudutech.biu.widget.FlowLayout;
 import com.dudutech.biu.widget.TagImageVIew;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,7 +46,7 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2014.12.29.
  */
-public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implements View.OnClickListener {
+public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implements View.OnClickListener, StatusContextMenu.OnStatusContextMenuItemClickListener {
 
     private StatusTimeUtils mTimeUtils;
     private int photoMargin;
@@ -83,9 +83,35 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                 PostNewRepostActivity.start(mContext, msg);
                 break;
 
+            case R.id.btn_more:
+                StatusContextMenuManager.getInstance().toggleContextMenuFromView(v, postion, this);
+                break;
+
 
         }
 
+    }
+
+    @Override
+    public void onFavoClick(int feedItem) {
+        StatusContextMenuManager.getInstance().hideContextMenu();
+        FavoDao dao = new FavoDao(mListModel.get(feedItem).id,mContext);
+        dao.favo();
+    }
+
+    @Override
+    public void onCopyClick(int feedItem) {
+        StatusContextMenuManager.getInstance().hideContextMenu();
+        ClipboardManager c= (ClipboardManager)mContext.getSystemService(mContext.CLIPBOARD_SERVICE);
+        c.setText(mListModel.get(feedItem).text);
+
+    }
+
+
+
+    @Override
+    public void onCancelClick(int feedItem) {
+        StatusContextMenuManager.getInstance().hideContextMenu();
     }
 
 
@@ -137,6 +163,9 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.ll_comment.setTag(position);
         holder.ll_repost.setOnClickListener(this);
         holder.ll_repost.setTag(position);
+        holder.btn_more.setVisibility(View.VISIBLE);
+        holder.btn_more.setOnClickListener(this);
+        holder.btn_more.setTag(position);
 
 
         String source = TextUtils.isEmpty(msg.source) ? "" : Utility.dealSourceString(msg.source);
@@ -383,6 +412,9 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         public TextView tv_repost_count;
         @InjectView(R.id.tv_like_count)
         public TextView tv_like_count;
+
+        @InjectView(R.id.btn_more)
+        public ImageButton btn_more;
 
         public List<TagImageVIew> listImageView = new ArrayList<TagImageVIew>();
 

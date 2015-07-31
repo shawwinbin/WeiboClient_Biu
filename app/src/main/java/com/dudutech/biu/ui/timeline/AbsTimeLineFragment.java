@@ -9,7 +9,6 @@
 package com.dudutech.biu.ui.timeline;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +25,7 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
 import com.dudutech.biu.ui.common.BaseFragment;
 import com.dudutech.biu.ui.main.MainActivity;
+import com.dudutech.biu.ui.common.StatusContextMenuManager;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -95,6 +95,11 @@ public abstract class AbsTimeLineFragment extends BaseFragment implements
                 }
 
             }
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                StatusContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
+            }
+
         });
 
 

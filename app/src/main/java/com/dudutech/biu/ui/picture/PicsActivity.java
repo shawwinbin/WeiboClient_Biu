@@ -10,6 +10,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.dudutech.biu.R;
@@ -60,7 +61,15 @@ public class PicsActivity extends BaseActivity implements OnPageChangeListener {
 	}
 
 
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		switch (id) {
+			case android.R.id.home:
+				onBackPressed();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	
 	private MessageModel mBean;

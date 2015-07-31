@@ -56,7 +56,6 @@ import uk.co.senab.photoview.PhotoView;
 
 	public static PictureFragment newInstance(MessageModel.PictureUrl url) {
 		PictureFragment fragment = new PictureFragment();
-		
 		Bundle args = new Bundle();
 		args.putParcelable("url", url);
 		fragment.setArguments(args);
