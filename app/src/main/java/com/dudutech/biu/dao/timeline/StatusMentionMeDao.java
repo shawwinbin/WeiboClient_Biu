@@ -12,18 +12,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.dudutech.biu.api.StatusMentiomMeApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.db.tables.MentionsTimeLineTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.MessageListModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
+
+import static com.dudutech.biu.BuildConfig.DEBUG;
 
 /**
  * Created by shaw on 2015/7/13.
  */
 public class StatusMentionMeDao extends  StatusTimeLineDao{
-
+    private static final String TAG = StatusMentionMeDao.class.getSimpleName();
     public  StatusMentionMeDao(Context context){
         super(context,"");
     }
@@ -48,9 +53,21 @@ public class StatusMentionMeDao extends  StatusTimeLineDao{
 
     @Override
     public MessageListModel load() {
-        return  StatusMentiomMeApi.fetchMentionsTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
-    }
+        WeiboParameters params = new WeiboParameters();
+        params.put("count", Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("page",  ++mCurrentPage);
 
+        try {
+            String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.MENTIONS, params);
+            return new Gson().fromJson(json, MessageListModel.class);
+        } catch (Exception e) {
+            if (DEBUG) {
+                Log.d(TAG, "Cannot fetch home timeline, " + e.getClass().getSimpleName());
+            }
+            return null;
+        }
+
+    }
 
 
 }

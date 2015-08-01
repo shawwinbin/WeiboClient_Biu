@@ -17,7 +17,7 @@
  * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.dudutech.biu.network;
+package com.dudutech.biu.dao;
 
 import android.graphics.Bitmap;
 import android.util.Log;

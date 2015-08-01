@@ -34,12 +34,11 @@
 
     <ImageButton
         android:id="@+id/btn_more"
-        android:layout_width="@dimen/btn_normal_size"
-        android:layout_height="@dimen/btn_normal_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/btn_status_action"
         android:src="@mipmap/ic_more_grey"
         android:layout_alignParentRight="true"
-        android:tint="@color/ic_tint_nor"
         android:visibility="gone"
 
         />

@@ -4,12 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
 
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.BaseListModel;
 import com.dudutech.biu.model.UserListModel;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import java.io.IOException;

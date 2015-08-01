@@ -20,7 +20,7 @@ public class Constants
 	
 
 	// Statuses
-	public static final int HOME_TIMELINE_PAGE_SIZE = 20;
+	public static final int HOME_TIMELINE_PAGE_SIZE = 25;
 	
 	// SQL
 	public static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS ";

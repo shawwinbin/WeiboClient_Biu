@@ -6,10 +6,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.dudutech.biu.R;
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.model.FavoModel;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 

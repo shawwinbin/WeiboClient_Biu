@@ -16,11 +16,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.Utility;
-import com.dudutech.biu.api.UserApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.db.DataBaseHelper;
 import com.dudutech.biu.db.tables.UsersTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.UserModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import static com.dudutech.biu.BuildConfig.DEBUG;
@@ -50,7 +52,7 @@ public class UserDao
 	public UserModel getUser(String uid) {
 		UserModel model;
 		
-		model = UserApi.getUser(uid);
+		model = getUserFromApi(uid);
 
 		if (model == null) {
 			Cursor cursor = mHelper.getReadableDatabase().query(UsersTable.NAME, new String[] {
@@ -98,7 +100,7 @@ public class UserDao
 
 	public UserModel getUserByName(String name) {
 		UserModel model;
-		model = UserApi.getUserByName(name);
+		model = getUserByNameFromAPi(name);
 		if (model == null) {
 			Cursor cursor = mHelper.getReadableDatabase().query(UsersTable.NAME, new String[] {
 				UsersTable.UID,
@@ -143,5 +145,36 @@ public class UserDao
 		return model;
 	}
 
-	
+
+	public static UserModel getUserFromApi(String uid) {
+		WeiboParameters params = new WeiboParameters();
+		params.put("uid", uid);
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.USER_SHOW, params);
+			UserModel user = new Gson().fromJson(json.replaceAll("-Weibo", ""), UserModel.class);
+			return user;
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.e(TAG, "Failed to fetch user info from net: " + e.getClass().getSimpleName());
+			}
+			return null;
+		}
+	}
+
+	public static UserModel getUserByNameFromAPi(String name) {
+		WeiboParameters params = new WeiboParameters();
+		params.put("screen_name", name);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.USER_SHOW, params);
+			UserModel user = new Gson().fromJson(json.replaceAll("-Weibo", ""), UserModel.class);
+			return user;
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.e(TAG, "Failed to fetch user info from net: " + e.getClass().getSimpleName());
+			}
+			return null;
+		}
+	}
+
 }

@@ -1,14 +1,12 @@
 package com.dudutech.biu.dao.post;
 
-import com.dudutech.biu.api.BaseApi;
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.model.CommentModel;
-import com.dudutech.biu.network.HttpUtility;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
-import org.json.JSONObject;
+import java.io.IOException;
 
 /**
  * Created by shaw on 2015/7/20.
@@ -23,20 +21,15 @@ public class CommentStatusDao {
         params.put("comment", comment);
         params.put("comment_ori", comment_ori);
 
-        JSONObject jsonData = new JSONObject();
+        CommentModel value = null;
         try {
-            jsonData = BaseApi.request(url, params, HttpUtility.POST);
-        } catch (Exception e) {
+            String  jsonData = HttpClientUtils.doPostRequstWithWithAceesToken(url, params);
+            value =  new Gson().fromJson(jsonData.toString(), CommentModel.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Gson gson = new Gson();
-        CommentModel value = null;
-        try {
-            value = gson.fromJson(jsonData.toString(), CommentModel.class);
-        } catch (JsonSyntaxException e) {
-           e.printStackTrace();
-        }
+
 
         return value;
     }

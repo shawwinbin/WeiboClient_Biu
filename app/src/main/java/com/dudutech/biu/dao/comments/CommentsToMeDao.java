@@ -13,14 +13,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.dao.timeline.BaseTimelineDao;
 import com.dudutech.biu.db.DataBaseHelper;
 import com.dudutech.biu.db.tables.CommentsToMeTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.CommentListModel;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import java.io.IOException;

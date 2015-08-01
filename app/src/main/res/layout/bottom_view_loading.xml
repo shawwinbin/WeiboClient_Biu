@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:id="@+id/main_content"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="30dp"
@@ -19,6 +23,6 @@
         android:textColor="@color/txt_remark"
         android:layout_centerInParent="true"
         />
-
+    </RelativeLayout>
 
 </RelativeLayout>

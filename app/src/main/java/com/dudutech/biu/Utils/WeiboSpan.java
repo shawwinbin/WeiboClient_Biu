@@ -99,7 +99,7 @@ public class WeiboSpan extends ClickableSpan {
 			ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.white));
 		}
 		else {
-			ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.base_actionbar));
+			ds.setColor(MyApplication.getInstance().getResources().getColor(R.color.base));
 		}
 
 		ds.setUnderlineText(false);

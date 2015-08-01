@@ -1,16 +1,18 @@
-package com.dudutech.biu.api;
+package com.dudutech.biu.dao.post;
+
 import android.util.Log;
 
-import com.dudutech.biu.network.HttpUtility;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.HttpUtility;
+import com.dudutech.biu.dao.WeiboParameters;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import static com.dudutech.biu.BuildConfig.DEBUG;
 
-public abstract class BaseApi
+public abstract class BasePostDao
 {
-	private static final String TAG = BaseApi.class.getSimpleName();
+	private static final String TAG = BasePostDao.class.getSimpleName();
 	
 	// Http Methods
 	protected static final String HTTP_GET = HttpUtility.GET;

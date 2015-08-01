@@ -23,236 +23,38 @@
     <color name="list_devider">#D1D1D1</color>
     <color name="list_signature">#a4a4a4</color>
     <color name="bg_gray">#ededed</color>
-    <!-- chat -->
-    <color name="chat_emoji_box">#f8f8f8</color>
-    <color name="chat_emoji_type_normal">#e6e7ec</color>
-    <color name="chat_emoji_type_pressed">#dcdee3</color>
-    <color name="chat_recent_msg_on_top">#eef1ff</color>
-    <color name="chat_newuser_content_bg">#F6F6F6</color>
-    <color name="chat_bg_color">#ebe6e2</color>
-    <color name="chat_txt_link">#99fff4</color>
-
-    <!-- nearby -->
-    <color name="nearby_add">#8D8AA5</color>
-    <color name="nearby_man">#34AADC</color>
-    <color name="nearby_name">#4F4E66</color>
-    <color name="nearby_purpose">#A4A4A4</color>
-
-
-
-    <!-- background -->
-    <color name="tab_bar_bg">#F5F5F7</color>
-    <color name="title_bg_gray">#F6F6F6</color>
-    <color name="slide_menu_bg">#1A1C24</color>
-    <color name="progressbar_bg">#bdc7f6</color>
 
     <!-- list view -->
     <color name="lst_divider_gray">#D1D1D1</color>
     <color name="lst_default_item_press">#F1F1F4</color>
-
-    <!-- button -->
-    <color name="btn_send_msg_normal">#626ADB</color>
-    <color name="btn_send_msg_pressed">#3a43bd</color>
-    <color name="btn_msg_center_delete">#354997</color>
-    <color name="btn_msg_center_delete_txt">#D0D9FA</color>
-    <color name="btn_click_blue">#4e53b4</color>
-    <color name="btn_click_black">#a4a4a4</color>
-    <color name="btn_click_orange_dark">#b65644</color>
-
-
-
-
-    <!-- login -->
-    <color name="login_txt_forgot_pwd">#626adb</color>
-
-    <!-- regist -->
-    <color name="regist_phone_country">#4f4e66</color>
-    <color name="regist_phone_txt_prompt">#acaabc</color>
-    <color name="regist_select_country_search_bg">#c9c9ce</color>
-    <color name="regist_select_country_zone_code">#8e8e93</color>
-    <color name="regist_pwd_txt_limit">#8d8aa5</color>
-
-    <!-- setting -->
-    <color name="setting_txt_normal">#8d8aa5</color>
-    <color name="setting_txt_space">#ededed</color>
-
-    <!-- profile hobby type -->
-    <color name="profile_hobby_type_text_normal">#4f4e66</color>
-    <color name="profile_hobby_type_text_selecetd">#000000</color>
-    <color name="profile_hobby_type_bg_normal">#e5e5e5</color>
-    <color name="profile_hobby_type_bg_selecetd">#F5F5F7</color>
-
-    <!-- profile -->
-    <color name="profile_bg">#f5f5f5</color>
-    <color name="profile_edit_top_bar_bg">#677BE5</color>
-    <color name="profile_edit_info_type_color">#a4a4a4</color>
-    <color name="profile_edit_info_key_color">#4f4e66</color>
-    <color name="profile_edit_info_value_color">#8D8AA5</color>
-    <color name="profile_edit_sign_color">#4f4e66</color>
-    <color name="profile_edit_name_color">#9f9db3</color>
-    <color name="profile_edit_line_color">#d9d9db</color>
-    <color name="profile_edit_hobby_type_selected_bg">#4E56CA</color>
-    <color name="profile_edit_hobby_type_unselected_bg">#e5e5e5</color>
-    <color name="profile_btn_color_blue">#4d54b6</color>
-    <color name="profile_btn_blue_color_inavailable">#99cccc</color>
-    <color name="profile_btn_red_color_inavailable">#ff9999</color>
-    <color name="profile_btn_color_red">#dd4b39</color>
-    <color name="profile_edit_item_pressed">#007aff</color>
-    <color name="profile_info_count">#c3caff</color>
-
-    <!-- group profile -->
-    <color name="group_profile_btn_pressed">#202760</color>
-    <color name="group_profile_btn_unenable">#cccccc</color>
-    <color name="group_profile_btn_normal">#3e4478</color>
-
-    <!-- nearby setting -->
-    <color name="nearby_setting_txt_color_blue">#646ddc</color>
-    <color name="nearby_setting_txt_unselected_color">#a4a4a4</color>
-    <color name="nearby_setting_bg_color">#f5f5f5</color>
-    <color name="nearby_setting_visible_color">#4ed664</color>
-
-    <!-- contact -->
-    <color name="contact_index_btn_selected">#626adb</color>
-    <color name="my_view_indicator_unselected">#525abe</color>
-    <color name="my_view_indicator_selected">#7c93f3</color>
-    <color name="my_view_indicator_txt_unselected">#c3caff</color>
-
-    <!-- group member -->
-    <color name="group_member_name_color">#4f4e66</color>
-    <color name="group_member_address_color">#8D8AA5</color>
-    <color name="group_type_art">#eb5f6f</color>
-    <color name="group_type_brands">#f079ab</color>
-    <color name="group_type_campus">#967cd7</color>
-    <color name="group_type_food">#596bb9</color>
-    <color name="group_type_games">#3e8cd5</color>
-    <color name="group_type_justfun">#3088ff</color>
-    <color name="group_type_lifestyle">#28ba8f</color>
-    <color name="group_type_love">#3db2ab</color>
-    <color name="group_type_network">#3fadc1</color>
-    <color name="group_type_news">#e8ba4d</color>
-    <color name="group_type_sprorts">#ff9a41</color>
-    <color name="group_type_web">#ff6f41</color>
-    <color name="group_name">#4f4e66</color>
-    <color name="group_create_select">#eb5f6f</color>
-
-    <!-- dynamic -->
-    <color name="dynamic_send_bg">#f5f5f5</color>
-    <color name="dynamic_bg">#fcfcfc</color>
-    <color name="dynamic_input_column_bg">#f5f5f7</color>
-    <color name="dynamic_line">#b5b5b5</color>
-    <color name="dynamic_album_border">#eeeeee</color>
-    <color name="select_photo_done">#4D54B6</color>
-    <color name="select_photo_bg">#3e4478</color>
-    <!-- sticker shop -->
     <color name="background_tab_pressed">#d2d2d5</color>
     <color name="bg_progress">#c3caff</color>
-    <color name="bg_fore_progress">#646ddc</color>
     <color name="background_tab_selected">#d2d2d5</color>
 
-    <!-- tab -->
 
-    <color name="bottom_tab_line">#b8b8b8</color>
-    <color name="bottom_tab_bg">#f9f9f9</color>
-
-    <!-- moment -->
-    <color name="timeline_bottom_tab_bg">#e0626adb</color>
-    <color name="text_moment_btn">#a2a2a2</color>
-    <color name="clickable_text_color">#646ddc</color>
-    <color name="moment_photo_bg">#f1f1f4</color>
-    <color name="line_moment">#e8e8e8</color>
-    <color name="moment_location">#646edc</color>
-    <color name="bg_moment_add_bar">#fefefe</color>
-    <color name="selected_img_bg">#f8f8f8</color>
-
-    <!-- group bulletin -->
-    <color name="group_bulletin_normal">#4f4e66</color>
-    <color name="group_bulletin_title">#495ba2</color>
-    <color name="group_bulletin_detail">#646ddc</color>
-
-    <!-- top column -->
-    <color name="top_column_line">#636edc</color>
 
     <!-- base -->
     <color name="base">#2f5a81</color>
-    <!-- 基本色， 产品的主配色，，可用于可点击的按钮配色等 -->
     <color name="base_deep">#1c364d</color>
-    <!-- 基本色的加强色，作为前景色使用时，用于表示加强的文字颜色（浅色底色）；作为背景色使用时，用于正常按钮的背景色（如非默认选项的按钮） -->
-
-
-
     <!-- base word color -->
     <color name="txt_title">#333333</color>
-    <!-- 主标题默认颜色(黑色)，用于强调的文字颜色、如主标题 -->
-    <color name="txt_title_deep">#4d54b6</color>
-    <!-- 主标题加强颜色（蓝色），昵称、地点 -->
     <color name="txt_remark">#a6a6a6</color>
-    <!-- 文字减弱色(淡黑)，用于非突出信息，或需要弱化的文字颜色。如备注、时间等 -->
-    <color name="txt_remark_deep">#646ddc</color>
-    <!-- 备注加强色（蓝色），链接、@好友 -->
     <color name="txt_disable">#cbcbd2</color>
-    <!-- 灰色，用于表示不能使用、不可点击态、输入框在未输入内容时的默认提示颜色等 -->
     <color name="txt_disable_deep">#a6a6a6</color>
-    <color name="txt_warn">#ff524b</color>
-    <!-- 警示色，用于出错警告等 -->
-
     <color name="txt_btn_normal">#ffffff</color>
-    <!-- 白色，按钮默认的文字颜色 -->
     <color name="txt_btn_fade">#c3caff</color>
-    <!-- 淡蓝色，按钮弱化文字颜色，按钮未选中的颜色 -->
 
-
-    <!-- base background -->
     <color name="background">#ededed</color>
-    <!-- 背景默认颜色 -->
     <color name="bg_list">#ffffff</color>
-    <!-- 列表背景色，用于列表的背景色 -->
     <color name="bg_list_press">#f5f5f5</color>
-    <!-- 列表点击颜色， -->
-    <!-- 对应的drawable -> bg_list_click -->
     <color name="bg_fade">#f6f6f6</color>
-    <!-- 背景色浅色， 用于分栏标签的背景色 -->
     <color name="bg_deep">#dcdce2</color>
-    <!-- 背景色深色， 用于搜索栏的背景色 -->
-
     <color name="list_item_gray">#fafafa</color>
-    <!-- button background -->
-    <color name="bg_btn_normal">#646ddc</color>
-    <!-- 蓝色， 按钮默认背景颜色 ，按钮常态颜色 -->
-    <color name="bg_btn_press">#3f46a5</color>
-    <!-- 点击/选中 时的颜色 -->
-    <color name="bg_btn_important">#4d54b6</color>
-    <!-- 深蓝色，按钮强化背景颜色 -->
-
     <color name="bg_search">#ebeced</color>
-
-    <!-- line -->
     <color name="list_line">#e8e8e8</color>
-    <color name="line_orange">#f6c0b5</color>
-    <!-- 列表的分隔线颜色 -->
-
-    <color name="safe_talk_orange">#e36c55</color>
-    <color name="pink_light">#fff1ee</color>
-    <color name="base_actionbar">#2f5a81</color>
-    <color name="base_status_bar">#1c364d</color>
-    <color name="base_blue_light">#c0c7ff</color>
-    <color name="base_status_orange_bar">#b65644</color>
-    <color name="base_warning_color">#fdf1c7</color>
-    <!-- 黄色警告 -->
-    <color name="base_error_color">#e6ded8</color>
-    <!-- 浅红错误 -->
-    <color name="base_orange_light">#ffc5ba</color>
     <color name="base_gray_deep">#666666</color>
     <color name="chat_notify">#666666</color>
     <color name="line_gray">#bcbcbc</color>
-
-
-
-    <!-- sticker panel -->
-
-
-     <color name="pager_tab_indicate_color">#646ddc</color>
-
-
 
 
     <!-- browser more function bg -->

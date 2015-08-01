@@ -3,11 +3,14 @@ package com.dudutech.biu.dao.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.dudutech.biu.api.AccountApi;
-import com.dudutech.biu.api.BaseApi;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
+import com.dudutech.biu.dao.post.BasePostDao;
 import com.dudutech.biu.dao.relationship.GroupDao;
+import com.dudutech.biu.dao.WeiboParameters;
 
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -46,7 +49,7 @@ public class LoginDao
 		mExpireDate = mPrefs.getLong("expires_in", Long.MIN_VALUE);
 
 		if (mAccessToken != null) {
-			BaseApi.setAccessToken(mAccessToken);
+			BasePostDao.setAccessToken(mAccessToken);
 			HttpClientUtils.setAccessToken(mAccessToken);
 		}
 		parseMultiUser();
@@ -54,10 +57,10 @@ public class LoginDao
 
 	public void login(String token, String expire) {
 		mAccessToken = token;
-		BaseApi.setAccessToken(mAccessToken);
+		BasePostDao.setAccessToken(mAccessToken);
 		HttpClientUtils.setAccessToken(mAccessToken);
 		mExpireDate = System.currentTimeMillis() + Long.valueOf(expire) * 1000;
-		mUid = AccountApi.getUid();
+		mUid = getUidByToken();
 		GroupDao groupDao=new GroupDao(mContext);
 		groupDao.getGroups();
 		groupDao.cache();
@@ -95,12 +98,6 @@ public class LoginDao
 		return mNames.toArray(new String[mNames.size()]);
 	}
 
-	public void reloadMultiUser() {
-		mNames.clear();
-		mTokens.clear();
-		mExpireDates.clear();
-		parseMultiUser();
-	}
 
 	private void parseMultiUser() {
 		String str = mPrefs.getString("names", "");
@@ -133,90 +130,16 @@ public class LoginDao
 		}
 	}
 
-	private void writeMultiUser() {
-		StringBuilder b = new StringBuilder();
-		for (int i = 0; i < mNames.size(); i++) {
-			b.append(mNames.get(i));
 
-			if (i < mNames.size() - 1) {
-				b.append(",");
-			}
+	public static String getUidByToken() {
+		try {
+
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.GET_UID, new WeiboParameters());
+			return new JSONObject(json).optString("uid");
+		} catch (Exception e) {
+			return null;
 		}
-		mPrefs.edit().putString("names", b.toString()).commit();
-
-		b = new StringBuilder();
-		for (int i = 0; i < mTokens.size(); i++) {
-			b.append(mTokens.get(i));
-
-			if (i < mTokens.size() - 1) {
-				b.append(",");
-			}
-		}
-		mPrefs.edit().putString("tokens", b.toString()).commit();
-
-		b = new StringBuilder();
-		for (int i = 0; i < mExpireDates.size(); i++) {
-			b.append(mExpireDates.get(i));
-
-			if (i < mExpireDates.size() - 1) {
-				b.append(",");
-			}
-		}
-		mPrefs.edit().putString("expires", b.toString()).commit();
 	}
 
-//	public long addUser(String token, String expire) {
-//		// Temporarily switch to the new user
-//		BaseApi.setAccessToken(token);
-//
-//		// Fetch the new user info
-//		UserModel user = new UserDao(mContext).getUser(AccountApi.getUid());
-//
-//		long exp = System.currentTimeMillis() + Long.valueOf(expire) * 1000;
-//		if (user != null && !mNames.contains(user.getNameNoRemark())) {
-//			// Add it to list
-//			mNames.add(user.getNameNoRemark());
-//			mTokens.add(token);
-//			mExpireDates.add(exp);
-//		}
-//
-//		// Set Token back
-//		BaseApi.setAccessToken(mAccessToken);
-//
-//		writeMultiUser();
-//
-//		return exp;
-//	}
-//
-//	public void switchToUser(int position) {
-//		UserDao c = new UserDao(mContext);
-//		UserModel current = c.getUser(mUid);
-//		if (current == null)
-//			return;
-//
-//		String newToken = mTokens.get(position);
-//
-//		// Get new user
-//		BaseApi.setAccessToken(newToken);
-//		UserModel next = c.getUser(AccountApi.getUid());
-//		if (next == null)
-//			return;
-//
-//		long newExpires = mExpireDates.get(position);
-//		mNames.remove(position);
-//		mTokens.remove(position);
-//		mExpireDates.remove(position);
-//
-//		mNames.add(current.getNameNoRemark());
-//		mTokens.add(mAccessToken);
-//		mExpireDates.add(mExpireDate);
-//		writeMultiUser();
-//
-//		mExpireDate = newExpires;
-//		mAccessToken = newToken;
-//		mUid = next.id;
-//
-//		cache();
-//	}
 
 }

@@ -13,12 +13,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dudutech.biu.api.UserTimeLineApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.db.tables.UserTimeLineTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.MessageListModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
-
 
 
 /* Cache api for exact user timeline */
@@ -55,7 +56,17 @@ public class FriendTimeLineDao extends StatusTimeLineDao
 
 	@Override
 	public MessageListModel load() {
-		MessageListModel model= UserTimeLineApi.fetchUserTimeLine(mUid, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
-		return model;
+		WeiboParameters params = new WeiboParameters();
+		params.put("uid", mUid);
+		params.put("count",  Constants.HOME_TIMELINE_PAGE_SIZE);
+		params.put("page", ++mCurrentPage);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.USER_TIMELINE, params);
+			return new Gson().fromJson(json, MessageListModel.class);
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 }

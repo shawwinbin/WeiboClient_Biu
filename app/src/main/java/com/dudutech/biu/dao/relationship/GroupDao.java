@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
 import com.dudutech.biu.db.DataBaseHelper;
@@ -13,7 +13,7 @@ import com.dudutech.biu.db.tables.GroupTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.BaseListModel;
 import com.dudutech.biu.model.GroupListModel;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import static com.dudutech.biu.BuildConfig.DEBUG;

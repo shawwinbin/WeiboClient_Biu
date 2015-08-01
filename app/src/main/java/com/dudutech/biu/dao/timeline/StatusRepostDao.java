@@ -13,11 +13,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dudutech.biu.api.RepostTimeLineApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.db.tables.RepostTimeLineTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.RepostListModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 /**
  * Created by shaw on 2015/7/13.
@@ -53,7 +57,19 @@ public class StatusRepostDao extends  StatusTimeLineDao{
 
     @Override
     public RepostListModel load() {
-        return RepostTimeLineApi.fetchRepostTimeLine(mId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+
+        WeiboParameters params = new WeiboParameters();
+        params.put("id", mId);
+        params.put("count", Constants.HOME_TIMELINE_PAGE_SIZE);
+        params.put("page",  ++mCurrentPage);
+        RepostListModel listModel=null;
+        try {
+            String jsonStr= HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.REPOST_TIMELINE, params);
+            listModel = new Gson().fromJson(jsonStr,RepostListModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listModel;
     }
 
     @Override

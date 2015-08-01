@@ -5,20 +5,26 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.dudutech.biu.api.HomeTimeLineApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.db.DataBaseHelper;
 import com.dudutech.biu.db.tables.HomeTimeLineTable;
 import com.dudutech.biu.model.MessageListModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import com.dudutech.biu.global.Constants;
 
+import static com.dudutech.biu.BuildConfig.DEBUG;
 
 
 /* Time Line of me and my friends */
 public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 {
+
+	private static final String TAG = StatusTimeLineDao.class.getSimpleName();
 	public static final String GROUP_BILATERAL = "groups_bilateral";
 	public static final String GROUP_ALL = "groups_all";
 	protected DataBaseHelper mHelper;
@@ -61,13 +67,13 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 	public MessageListModel load() {
 		 MessageListModel model;
 		 if(mGroupId.equals(GROUP_ALL)){
-			 model =HomeTimeLineApi.fetchHomeTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+			 model =getHomeTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 		 else if(mGroupId.equals(GROUP_BILATERAL)){
-			 model= HomeTimeLineApi.fetchBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+			 model= getBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 		 else{
-			 model= HomeTimeLineApi.fetchGroupTimeLine(mGroupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+			 model= getGroupTimelines(mGroupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 
 		return model;
@@ -76,6 +82,59 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 	@Override
 	protected Class<? extends MessageListModel> getListClass() {
 		return MessageListModel.class ;
+	}
+
+
+	public static MessageListModel getHomeTimeLine(int count, int page) {
+		WeiboParameters params = new WeiboParameters();
+		params.put("count", count);
+		params.put("page", page);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.HOME_TIMELINE, params);
+			return new Gson().fromJson(json, MessageListModel.class);
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.d(TAG, "Can't get  home timeline, " + e.getClass().getSimpleName());
+				Log.d(TAG, Log.getStackTraceString(e));
+			}
+			return null;
+		}
+	}
+
+	public static MessageListModel getGroupTimelines(String groupId, int count, int page) {
+		WeiboParameters params = new WeiboParameters();
+		params.put("list_id", groupId);
+		params.put("count", count);
+		params.put("page", page);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.FRIENDSHIPS_GROUPS_TIMELINE, params);
+			return new Gson().fromJson(json, MessageListModel.class);
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.e(TAG, "Cannot get group timeline");
+				Log.e(TAG, Log.getStackTraceString(e));
+			}
+		}
+
+		return null;
+	}
+	public static MessageListModel getBilateralTimeLine(int count, int page) {
+		WeiboParameters params = new WeiboParameters();
+		params.put("count", count);
+		params.put("page", page);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.BILATERAL_TIMELINE, params);
+			return new Gson().fromJson(json, MessageListModel.class);
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.d(TAG, "Cannot get bilateral timeline, " + e.getClass().getSimpleName());
+				Log.d(TAG, Log.getStackTraceString(e));
+			}
+			return null;
+		}
 	}
 
 }

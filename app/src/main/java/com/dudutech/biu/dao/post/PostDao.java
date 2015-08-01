@@ -10,22 +10,17 @@ package com.dudutech.biu.dao.post;
 
 import android.graphics.Bitmap;
 
-import com.dudutech.biu.api.BaseApi;
-import com.dudutech.biu.api.UrlConstants;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.model.MessageModel;
-import com.dudutech.biu.network.WeiboParameters;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
 
-public class PostDao extends BaseApi
+public class PostDao extends BasePostDao
 {
-	public static final int EXTRA_NONE = 0;
-	public static final int EXTRA_COMMENT = 1;
-	public static final int EXTRA_COMMENT_ORIG = 2;
-	public static final int EXTRA_ALL = 3;
-	
+
 	public static boolean newPost(String status) {
 		WeiboParameters params = new WeiboParameters();
 		params.put("status", status);

@@ -21,12 +21,12 @@ package com.dudutech.biu.ui.login;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
@@ -36,9 +36,7 @@ import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.Utility;
-import com.dudutech.biu.api.BaseApi;
-import com.dudutech.biu.api.LoginApi;
-import com.dudutech.biu.dao.HttpClientUtils;
+import com.dudutech.biu.dao.UrlConstants;
 import com.dudutech.biu.dao.login.LoginDao;
 import com.dudutech.biu.ui.common.BaseActivity;
 import com.dudutech.biu.ui.main.MainActivity;
@@ -52,6 +50,12 @@ import static com.dudutech.biu.BuildConfig.DEBUG;
 /* BlackMagic Login Activity */
 public class WebLoginActivity extends BaseActivity {
 	private static final String TAG = WebLoginActivity.class.getSimpleName();
+
+	public static final String WEICO_SCOPE = "email,direct_messages_read,direct_messages_write,friendships_groups_read,friendships_groups_write,statuses_to_me_read,follow_app_official_microblog,invitation_write";
+	public static final String WEICO_CLIENT_ID = "211160679";
+	public static final String WEICO_REDIRCT_URL = "http://oauth.weico.cc";
+	public static final String WEICO_APP_KEY = "1e6e33db08f9192306c4afa0a61ad56c";
+	public static final String WEICO_PACKNAME = "com.eico.weico";
 
     @InjectView(R.id.wb_login)
 	WebView webView;
@@ -91,7 +95,7 @@ public class WebLoginActivity extends BaseActivity {
 
 		webView.setWebViewClient(new MyWebViewClient());
 
-		webView.loadUrl(LoginApi.getOauthLoginPage());
+		webView.loadUrl(getOauthLoginPage());
 
 
 
@@ -105,7 +109,7 @@ public class WebLoginActivity extends BaseActivity {
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-			if (LoginApi.isUrlRedirected(url)) {
+			if (isUrlRedirected(url)) {
 				view.stopLoading();
 				Log.d(TAG, "shouldOverrideUrlLoading...");
 				handleRedirectedUrl(url);
@@ -117,7 +121,7 @@ public class WebLoginActivity extends BaseActivity {
 
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			if (!url.equals("about:blank") && LoginApi.isUrlRedirected(url)) {
+			if (!url.equals("about:blank") && isUrlRedirected(url)) {
 				view.stopLoading();
 				Log.d(TAG, "onPageStarted...");
 				handleRedirectedUrl(url);
@@ -217,6 +221,18 @@ public class WebLoginActivity extends BaseActivity {
 				.setCancelable(true)
 				.create()
 				.show();
+	}
+
+
+	public static String getOauthLoginPage() {
+		return UrlConstants.OAUTH2_ACCESS_AUTHORIZE + "?" + "client_id=" + WEICO_CLIENT_ID
+				+ "&response_type=token&redirect_uri=" + WEICO_REDIRCT_URL
+				+ "&key_hash=" + WEICO_APP_KEY + (TextUtils.isEmpty(WEICO_PACKNAME) ? "" : "&packagename=" + WEICO_PACKNAME)
+				+ "&display=mobile" + "&scope=" + WEICO_SCOPE;
+	}
+
+	public static boolean isUrlRedirected(String url) {
+		return url.startsWith(WEICO_REDIRCT_URL);
 	}
 
 }

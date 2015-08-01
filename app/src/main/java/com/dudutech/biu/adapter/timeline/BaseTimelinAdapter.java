@@ -9,6 +9,7 @@
 package com.dudutech.biu.adapter.timeline;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dudutech.biu.R;
+import com.dudutech.biu.Utils.SystemBarUtils;
 import com.dudutech.biu.adapter.common.BaseMultipleItemAdapter;
 import com.dudutech.biu.model.BaseListModel;
 
@@ -104,6 +106,11 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
     @Override
     public RecyclerView.ViewHolder onCreateBottomView(ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.bottom_view_loading, parent, false);
+        if (Build.VERSION.SDK_INT >= 19) {view.setPadding(view.getPaddingLeft(),
+           view.getPaddingTop(),
+           view.getPaddingRight(), view.getBottom() + SystemBarUtils.getNavigationBarHeight(mContext));
+
+        }
         BottomViewHolder bottomViewHolder = new BottomViewHolder(view, mContext);
         return bottomViewHolder;
     }

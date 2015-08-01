@@ -85,7 +85,7 @@
           <View
               android:layout_width="match_parent"
               android:layout_height="1dp"
-              android:background="@color/line_moment"
+              android:background="@color/line_gray"
               android:layout_marginLeft="20dp"
               android:layout_marginRight="20dp"
               android:layout_marginBottom="10dp"

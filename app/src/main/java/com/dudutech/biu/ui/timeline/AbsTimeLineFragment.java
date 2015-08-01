@@ -12,6 +12,7 @@ package com.dudutech.biu.ui.timeline;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
 import com.dudutech.biu.ui.common.BaseFragment;
 import com.dudutech.biu.ui.main.MainActivity;
 import com.dudutech.biu.ui.common.StatusContextMenuManager;
+
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -67,7 +69,12 @@ public abstract class AbsTimeLineFragment extends BaseFragment implements
         // Swipe To Refresh
         bindSwipeToRefresh(getActivity(),(ViewGroup) v);
         if (isFirstCreate) {
-            new Refresher().execute(true);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onRefresh();
+                }
+            }, 500);
         }
 
 
@@ -115,6 +122,7 @@ public abstract class AbsTimeLineFragment extends BaseFragment implements
         mList.post(new Runnable() {
             @Override
             public void run() {
+
                 onRefresh();
             }
         });

@@ -12,17 +12,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.dudutech.biu.api.WeiboCommentApi;
+import com.dudutech.biu.dao.UrlConstants;
+import com.dudutech.biu.dao.HttpClientUtils;
 import com.dudutech.biu.dao.timeline.BaseTimelineDao;
 import com.dudutech.biu.db.DataBaseHelper;
 import com.dudutech.biu.db.tables.StatusCommentTable;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.CommentListModel;
+import com.dudutech.biu.dao.WeiboParameters;
 import com.google.gson.Gson;
+
+import static com.dudutech.biu.BuildConfig.DEBUG;
 
 public class StatusCommentDao extends BaseTimelineDao<CommentListModel>
 {
+	private static String TAG = StatusCommentDao.class.getSimpleName();
 	private long mId;
 	private Context mContext;
 	protected DataBaseHelper mHelper;
@@ -61,8 +67,22 @@ public class StatusCommentDao extends BaseTimelineDao<CommentListModel>
 
 	@Override
 	public CommentListModel load() {
-		CommentListModel model =WeiboCommentApi.fetchCommentOfStatus(mId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
-		return model;
+		WeiboParameters params = new WeiboParameters();
+		params.put("id", mId);
+		params.put("count",  Constants.HOME_TIMELINE_PAGE_SIZE);
+		params.put("page",  ++mCurrentPage);
+
+		try {
+			String json = HttpClientUtils.doGetRequstWithAceesToken(UrlConstants.COMMENTS_SHOW, params);
+
+			return new Gson().fromJson(json, CommentListModel.class);
+		} catch (Exception e) {
+			if (DEBUG) {
+				Log.d(TAG, "Cannot fetch comments timeline, " + e.getClass().getSimpleName());
+			}
+			return null;
+		}
+
 	}
 	@Override
 	protected Class<? extends CommentListModel> getListClass() {

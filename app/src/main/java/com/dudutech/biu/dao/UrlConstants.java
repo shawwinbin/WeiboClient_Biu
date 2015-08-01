@@ -1,4 +1,4 @@
-package com.dudutech.biu.api;
+package com.dudutech.biu.dao;
 
 /* UrlConstants for weibo api */
 

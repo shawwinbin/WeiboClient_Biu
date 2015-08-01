@@ -479,7 +479,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
             for (int i = 0; i < 9; i++) {
                 TagImageVIew imageView = new TagImageVIew(context);
-                imageView.setBackgroundColor(context.getResources().getColor(R.color.bg_list_press));
+                imageView.setBackgroundColor(context.getResources().getColor(R.color.list_line));
                 imageView.setVisibility(View.GONE);
                 imageView.setAdjustViewBounds(true);
                 listImageView.add(imageView);
@@ -504,5 +504,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     public interface OnClickListener {
         public void onTtemClick(View view, int position);
     }
+
+
 
 }

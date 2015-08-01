@@ -2,8 +2,6 @@ package com.dudutech.biu.dao;
 
 import android.util.Log;
 
-import com.dudutech.biu.network.WeiboParameters;
-import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
