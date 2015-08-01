@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
     <application
         android:name=".global.MyApplication"
         android:allowBackup="true"
@@ -37,6 +38,10 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <meta-data android:value="55bb13be67e58ea16c0013d1" android:name="UMENG_APPKEY"></meta-data>
+        <meta-data android:value="aphatest" android:name="UMENG_CHANNEL"/>
+
 
         <activity android:name=".ui.login.LoadingActivity" >
             <intent-filter>
@@ -72,8 +77,8 @@
             android:label="@string/title_weibo_detail" >
         </activity>
         <activity
-            android:name=".ui.setting.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:name=".ui.setting.SettingsActivity2"
+            android:label="@string/title_activity_setting" >
         </activity>
     </application>
 

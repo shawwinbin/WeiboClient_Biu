@@ -63,6 +63,11 @@ public class SettingsActivity extends PreferenceActivity {
         loadHeadersFromResource(R.xml.pref_headers, target);
     }
 
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return GeneralPreferenceFragment.class.getName().equals(fragmentName);
+    }
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -154,6 +159,7 @@ public class SettingsActivity extends PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
         }
+
     }
 
     /**

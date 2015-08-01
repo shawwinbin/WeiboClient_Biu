@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    android:layout="@layout/preference_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/title_activity_setting">
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="基础设置">
+
+        <CheckBoxPreference
+            android:layout="@layout/preference_item"
+            android:title="高清头像"
+            android:summaryOn="高清"
+            android:summaryOff="正常"
+            android:defaultValue="false"/>
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="图片质量"
+            android:summary="中等"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:layout="@layout/preference_item"
+            android:title="通知栏消息字体颜色"
+            android:summaryOff="当前为黑色"
+            android:summaryOn="当前为白色"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="帮助">
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="关于">
+        </Preference>
+
+
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="用户反馈">
+
+        </Preference>
+
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="手动检查更新">
+
+        </Preference>
+
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="喜欢"
+            android:summary="若你觉得Biu很赞的话，麻烦点击此处到应用商店给个好评，非常感谢">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.dudutech.biu"/>
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="联系我"
+        >
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="我的邮箱：shawwin86@gmail.com"
+            android:title="作者：萧大虾"/>
+
+        <Preference
+            android:layout="@layout/preference_item"
+            android:title="退出登录"/>
+    </PreferenceCategory>
+</PreferenceScreen>

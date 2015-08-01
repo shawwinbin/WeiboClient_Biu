@@ -58,6 +58,6 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
     compile 'com.getbase:floatingactionbutton:1.10.0'
-
+    compile 'com.umeng.analytics:analytics:latest.integration'
 
 }

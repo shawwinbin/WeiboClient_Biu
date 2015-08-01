@@ -39,7 +39,7 @@
         android:background="@drawable/btn_status_action"
         android:src="@mipmap/ic_more_grey"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:tint="@color/ic_tint_nor"
         android:visibility="gone"
 
         />

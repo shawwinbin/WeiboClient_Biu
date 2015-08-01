@@ -1,21 +1,3 @@
-/* 
- * Copyright (C) 2014 Peter Cai
- *
- * This file is part of BlackLight
- *
- * BlackLight is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * BlackLight is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with BlackLight.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 package com.dudutech.biu.dao.timeline;
 
@@ -24,8 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dudutech.biu.api.BilateralTimeLineApi;
-import com.dudutech.biu.api.GroupsApi;
 import com.dudutech.biu.api.HomeTimeLineApi;
 import com.dudutech.biu.db.DataBaseHelper;
 import com.dudutech.biu.db.tables.HomeTimeLineTable;
@@ -84,10 +64,10 @@ public class StatusTimeLineDao  extends  BaseTimelineDao <MessageListModel>
 			 model =HomeTimeLineApi.fetchHomeTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 		 else if(mGroupId.equals(GROUP_BILATERAL)){
-			 model= BilateralTimeLineApi.fetchBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+			 model= HomeTimeLineApi.fetchBilateralTimeLine(Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 		 else{
-			 model= GroupsApi.fetchGroupTimeLine(mGroupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
+			 model= HomeTimeLineApi.fetchGroupTimeLine(mGroupId, Constants.HOME_TIMELINE_PAGE_SIZE, ++mCurrentPage);
 		 }
 
 		return model;

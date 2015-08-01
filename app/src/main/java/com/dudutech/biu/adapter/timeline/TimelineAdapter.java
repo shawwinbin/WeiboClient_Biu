@@ -10,6 +10,8 @@ import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +39,8 @@ import com.dudutech.biu.widget.TagImageVIew;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,9 +96,25 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                 LikeDao likeDao=new LikeDao(msg.id,mContext);
                 if(!msg.liked) {
                     likeDao.like();
+                    mListModel.get(postion).attitudes_count++;
+                    mListModel.get(postion).liked=true;
+                    ImageView iv_like = (ImageView) v.findViewById(R.id.iv_like);
+                    TextView  tv_like_count= (TextView) v.findViewById(R.id.tv_like_count);
+                    setLikeBtn(iv_like,tv_like_count,postion);
+                    ScaleAnimation myAnimation_Scale = new ScaleAnimation(1.0f, 1.3f, 1.0f,
+                            1.3f, Animation.RELATIVE_TO_SELF, 0.5f,
+                            Animation.RELATIVE_TO_SELF, 0.5f);
+                    myAnimation_Scale.setDuration(300);
+                    iv_like.startAnimation(myAnimation_Scale);
+
                 }
                 else{
                     likeDao.unLike();
+                    mListModel.get(postion).attitudes_count--;
+                    mListModel.get(postion).liked=false;
+                    ImageView iv_like = (ImageView) v.findViewById(R.id.iv_like);
+                    TextView  tv_like_count= (TextView) v.findViewById(R.id.tv_like_count);
+                    setLikeBtn(iv_like, tv_like_count, postion);
                 }
                 break;
 
@@ -180,16 +200,23 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.btn_more.setOnClickListener(this);
         holder.btn_more.setTag(position);
 
-
-
-
+        setLikeBtn(holder.iv_like,holder.tv_like_count,position);
         String source = TextUtils.isEmpty(msg.source) ? "" : Utility.dealSourceString(msg.source);
         holder.tv_time_source.setText(mTimeUtils.buildTimeString(msg.created_at) + " | " + source);
         holder.tv_comment_count.setText(Utility.getCountString(msg.comments_count));
-        holder.tv_like_count.setText("  " + Utility.getCountString(msg.attitudes_count));
+
         holder.tv_repost_count.setText(Utility.getCountString(msg.reposts_count));
+    }
 
+    private void setLikeBtn(ImageView iv_like,TextView tv_like_count,int position){
 
+        if(mListModel.get(position).liked){
+            iv_like.setImageResource(R.mipmap.ic_like_red);
+        }
+        else{
+          iv_like.setImageResource(R.mipmap.ic_like_full);
+        }
+        tv_like_count.setText("  " + Utility.getCountString(mListModel.get(position).attitudes_count));
     }
 
     public void onBindRepostWeiboViewHolder(RepostWeiboViewHolder holder, int position) {
