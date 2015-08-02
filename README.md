@@ -1,8 +1,8 @@
 新浪微博第三方开源客户端 Biu 
 ---
 由于新浪微博已经不再接受新的第三方客户端申请，因此Biu使用“黑魔法”的方式登录微博。<br>
-app 采用了weico的APP key。遵循material design 原则.
-
+app 采用了weico的APP key。遵循material design 原则.<br>
+[内测版下载](http://pan.baidu.com/s/1pJ7RUr)
 界面
 -------
 ![](https://raw.githubusercontent.com/shawwinbin/WeiboClient_Biu/master/sreenshots/drawer.png)
@@ -14,7 +14,7 @@ app 采用了weico的APP key。遵循material design 原则.
 感谢
 -------
 优秀的第三方开源库<br>
-     [butterknife](https://github.com/JakeWharton/butterknife)  view注解<br>
+     [butterknife](https://github.com/JakeWharton/butterknife)  依赖注入<br>
      [universalimageloader](https://github.com/nostra13/Android-Universal-Image-Loader) 图片下载缓存管理<br>
      [android-gif-drawable](https://github.com/koral--/android-gif-drawable) GIF图<br>
      [observablescrollview](https://github.com/ksoichiro/Android-ObservableScrollView)<br>
