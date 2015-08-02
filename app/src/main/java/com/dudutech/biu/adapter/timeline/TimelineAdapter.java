@@ -15,6 +15,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dudutech.biu.R;
@@ -31,6 +32,7 @@ import com.dudutech.biu.model.PicSize;
 import com.dudutech.biu.ui.picture.PicsActivity;
 import com.dudutech.biu.ui.post.PostNewCommentActivity;
 import com.dudutech.biu.ui.post.PostNewRepostActivity;
+import com.dudutech.biu.ui.timeline.StatusDetailActivity;
 import com.dudutech.biu.ui.timeline.UserHomeActivity;
 import com.dudutech.biu.ui.common.StatusContextMenu;
 import com.dudutech.biu.ui.common.StatusContextMenuManager;
@@ -91,6 +93,13 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
             case R.id.btn_more:
                 StatusContextMenuManager.getInstance().toggleContextMenuFromView(v, postion, this);
                 break;
+            case R.id.tv_orignal_content:
+            case R.id.rl_repost:
+                StatusDetailActivity.start(mContext, mListModel.get(postion).retweeted_status);
+                break;
+
+
+
 
             case R.id.ll_like:
                 LikeDao likeDao=new LikeDao(msg.id,mContext);
@@ -223,6 +232,10 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         MessageModel msg = mListModel.getList().get(position).retweeted_status;
         holder.tv_orignal_content.setText(msg.origSpan);
         holder.tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.rl_repost.setTag(position);
+        holder.tv_orignal_content.setTag(position);
+        holder.tv_orignal_content.setOnClickListener(this);
+        holder.rl_repost.setOnClickListener(this);
     }
 
 
@@ -293,7 +306,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                 imageView.setMinimumWidth(smallSize);
                 FlowLayout.LayoutParams param = new FlowLayout.LayoutParams(smallSize, smallSize);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                boolean isSizeSaved = false;
                 PicSize picSize = null;
                 switch (count) {
                     case 1:
@@ -502,6 +514,8 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
         @InjectView(R.id.tv_orignal_content)
         public TextView tv_orignal_content;
+        @InjectView(R.id.rl_repost)
+        public View  rl_repost;
 
         public RepostWeiboViewHolder(View itemView, Context context) {
             super(itemView, context);

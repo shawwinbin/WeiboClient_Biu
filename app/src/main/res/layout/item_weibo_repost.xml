@@ -28,9 +28,10 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_repost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_weibo_repost"
+            android:background="@drawable/bg_weibo_repost"
             android:layout_marginTop="5dp"
             android:paddingLeft="@dimen/SmallPadding"
             android:paddingRight="@dimen/SmallPadding"

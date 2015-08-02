@@ -67,11 +67,7 @@ public class LikeDao {
             @Override
             protected void onPostExecute(Boolean result) {
                 super.onPostExecute(result);
-                if (result) {
-                    Toast.makeText(mContext, R.string.success, Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(mContext, R.string.fail, Toast.LENGTH_LONG).show();
-                }
+
             }
         };
         task.execute();

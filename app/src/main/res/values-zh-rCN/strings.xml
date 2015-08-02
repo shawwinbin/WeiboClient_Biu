@@ -15,17 +15,13 @@
     <string name="action_settings">设置</string>
 
 
-
     <!-- commom -->
-
     <string name="btn_commfire">确认</string>
     <string name="btn_cancle">取消</string>
     <string name="exit_comfire">确认退出吗？</string>
     <string name="tips">提示</string>
-
     <string name="success">成功</string>
     <string name="fail">失败</string>
-
     <string name="ten_thousand">万</string>
 
     <!-- Login -->
@@ -40,6 +36,8 @@
     <string name="loadding_user_data">载入用户数据...</string>
     <string name="expires_in">授权%d天有效</string>
     <string name="login_fail">登录失败</string>
+
+    <string name="log_out">退出登录</string>
 
 
     <!-- Statuses -->
@@ -59,7 +57,7 @@
     <string name="comments_by_me">我发出的</string>
 
 
-  <!--post-->
+    <!--post-->
     <string name="new_post">发微博</string>
     <string name="comment_on">评论微博</string>
     <string name="repost">转发</string>
@@ -92,17 +90,13 @@
     <string name="loading_fail">加载失败 </string>
     <string name="groups_all">全部</string>
     <string name="groups_bilateral">相互关注</string>
-
     <string name="weibo_length_error">微博不能超过140字</string>
-
 
     <!-- user home-->
     <string name="follow_user_comfire">确定关注他？</string>
     <string name="unfollow_user_comfire">确定取消对他的关注？</string>
-
     <string name="following">关注</string>
     <string name="followers">粉丝</string>
-
     <string name="male">男</string>
 
     <string name="female">女</string>
@@ -114,7 +108,7 @@
 
 
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_loading">Loading</string>
 
@@ -134,4 +128,15 @@
     <string name="title_activity_friend">好友</string>
     <string name="title_weibo_detail">微博正文</string>
     <string name="title_activity_setting">设置</string>
+    <string name="setting_about">关于</string>
+
+    <string name="base_setting">基础设置</string>
+    <string name="setting_help">帮助</string>
+    <string name="authour">作者：萧大虾</string>
+    <string name="authour_email">我的邮箱：shawwin86@gmail.com</string>
+
+
+    <string name="setting_rate">评分</string>
+    <string name="setting_rate_hint">若你觉得Biu很赞的话，麻烦点击此处到应用商店给个好评，非常感谢"</string>
+
 </resources>

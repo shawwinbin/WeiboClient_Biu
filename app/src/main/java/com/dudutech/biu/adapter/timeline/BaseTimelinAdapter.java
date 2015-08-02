@@ -156,7 +156,7 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
                 .getBoolean("avatar_hd", false);
         String strPicQuantity= PreferenceManager
                 .getDefaultSharedPreferences(context)
-                .getString("pic_quantity", "");
+                .getString("pic_quantity", "1");
 //        ListPreference listPreference = (ListPreference) preference;
 //        int index = listPreference.findIndexOfValue(stringValue);
         picQuantity=Integer.parseInt(strPicQuantity);

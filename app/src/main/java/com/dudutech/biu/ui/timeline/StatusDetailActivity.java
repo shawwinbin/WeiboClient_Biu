@@ -90,7 +90,7 @@ import butterknife.InjectView;
  * SlidingTabLayout and SlidingTabStrip are from google/iosched:
  * https://github.com/google/iosched
  */
-public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRecyclerViewFragment.HeaderViewObserve ,StatusComentAdapter.HeaderViewTouchListener {
+public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRecyclerViewFragment.HeaderViewObserve ,StatusComentAdapter.HeaderViewTouchListener, View.OnClickListener {
 
     public static final String EXT_WEIBO = "eta_weibo";
 
@@ -387,7 +387,9 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
             mWeibo.origSpan=SpannableStringUtils.getOrigSpan(this,mWeibo.retweeted_status,true);
             tv_orignal_content .setText(mWeibo.origSpan);
             tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
-            dealImageLayout(fl_images_repost,imageMaxWidth,mWeibo.retweeted_status);
+            dealImageLayout(fl_images_repost, imageMaxWidth, mWeibo.retweeted_status);
+            rl_repost.setOnClickListener(this);
+            tv_orignal_content.setOnClickListener(this);
         }
 
     }
@@ -408,6 +410,19 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     @Override
     public boolean onTouch(MotionEvent event) {
       return mToolbarView.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.rl_repost:
+            case R.id.tv_orignal_content:
+                StatusDetailActivity.start(this,mWeibo.retweeted_status);
+
+                break;
+
+        }
+
     }
 
     /**

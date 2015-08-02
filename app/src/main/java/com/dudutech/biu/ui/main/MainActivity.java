@@ -34,7 +34,6 @@ import com.dudutech.biu.ui.common.BaseActivity;
 import com.dudutech.biu.ui.login.WebLoginActivity;
 import com.dudutech.biu.ui.post.NewPostActivity;
 import com.dudutech.biu.ui.setting.SettingsActivity;
-import com.dudutech.biu.ui.setting.SettingsActivity2;
 import com.dudutech.biu.ui.timeline.FavoTimelineFragment;
 import com.dudutech.biu.ui.timeline.HomeTimelineFragment;
 import com.dudutech.biu.ui.timeline.MentionMeFragment;
@@ -272,7 +271,7 @@ public class MainActivity extends BaseActivity implements
 		int id = item.getItemId();
 		switch (id ){
 			case R.id.action_settings :
-				Intent intent=new Intent(this, SettingsActivity2.class);
+				Intent intent=new Intent(this, SettingsActivity.class);
 				startActivityForResult(intent,SETTING);
 				return true;
 			case R.id.action_new_post :
@@ -328,7 +327,7 @@ public class MainActivity extends BaseActivity implements
 			switch (requestCode) {
 				case SETTING:
 					int opt = data.getIntExtra("opt", 0);
-					if(opt==SettingsActivity2.SETTING_LOG_OUT){
+					if(opt== SettingsActivity.SETTING_LOG_OUT){
 						mLoginCache.logout();
 						Intent i = new Intent();
 						i.setAction(Intent.ACTION_MAIN);
