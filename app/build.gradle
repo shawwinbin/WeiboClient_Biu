@@ -60,4 +60,5 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
 
+
 }

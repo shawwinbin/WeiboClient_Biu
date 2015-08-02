@@ -185,11 +185,13 @@ public abstract class AbsTimeLineFragment extends BaseFragment implements
 //                mList.smoothScrollToPosition(0);
 //            }
             mAdapter.setBottomStatus(mDao.getStatus());
-            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChangedAfeterReadSetting();
             mRefreshing = false;
             if (mSwipeRefresh != null) {
                 mSwipeRefresh.setRefreshing(false);
             }
+
+
         }
 
     }

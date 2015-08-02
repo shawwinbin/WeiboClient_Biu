@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
-        android:textColor="?attr/colorAccent"
+        android:textColor="?attr/colorPrimary"
         android:textSize="14sp"
         android:text="indroduce"/>
 

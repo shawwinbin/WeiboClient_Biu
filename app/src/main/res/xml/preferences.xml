@@ -5,72 +5,59 @@
     android:title="@string/title_activity_setting">
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
-        android:title="基础设置">
+        android:title="@string/base_setting">
 
         <CheckBoxPreference
+            android:key="avatar_hd"
             android:layout="@layout/preference_item"
-            android:title="高清头像"
-            android:summaryOn="高清"
-            android:summaryOff="正常"
+            android:title="@string/pref_title_avatar_hd"
             android:defaultValue="false"/>
-        <Preference
+        <ListPreference
+            android:key="pic_quantity"
             android:layout="@layout/preference_item"
-            android:title="图片质量"
-            android:summary="中等"
-            android:defaultValue="false"/>
+            android:title="@string/pref_title_pic_quantity"
+            android:defaultValue="1"
+            android:entries="@array/pref_pic_quantity_list_titles"
+            android:entryValues="@array/pref_pic_quantity_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            />
 
-        <CheckBoxPreference
-            android:layout="@layout/preference_item"
-            android:title="通知栏消息字体颜色"
-            android:summaryOff="当前为黑色"
-            android:summaryOn="当前为白色"
-            android:defaultValue="true"/>
+
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
-        android:title="帮助">
+        android:title="@string/setting_help">
         <Preference
+            android:key="about"
             android:layout="@layout/preference_item"
-            android:title="关于">
+            android:title="@string/setting_about">
         </Preference>
 
 
+
+
+    </PreferenceCategory>
         <Preference
             android:layout="@layout/preference_item"
-            android:title="用户反馈">
-
-        </Preference>
-
-        <Preference
-            android:layout="@layout/preference_item"
-            android:title="手动检查更新">
-
-        </Preference>
-
-        <Preference
-            android:layout="@layout/preference_item"
-            android:title="喜欢"
-            android:summary="若你觉得Biu很赞的话，麻烦点击此处到应用商店给个好评，非常感谢">
+            android:title="@string/setting_rate"
+            android:summary="@string/setting_rate_hint">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="market://details?id=com.dudutech.biu"/>
         </Preference>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:layout="@layout/preference_category_widget"
-        android:title="联系我"
-        >
-        <Preference
-            android:layout="@layout/preference_item"
-            android:summary="我的邮箱：shawwin86@gmail.com"
-            android:title="作者：萧大虾"/>
 
         <Preference
             android:layout="@layout/preference_item"
-            android:title="退出登录"/>
-    </PreferenceCategory>
+            android:summary="@string/authour_email"
+            android:title="@string/authour">
+            </Preference>
+        <Preference
+            android:key="logout"
+            android:layout="@layout/preference_item"
+            android:title="@string/log_out"/>
+
 </PreferenceScreen>

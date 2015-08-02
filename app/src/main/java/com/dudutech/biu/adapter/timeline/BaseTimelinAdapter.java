@@ -10,6 +10,8 @@ package com.dudutech.biu.adapter.timeline;
 
 import android.content.Context;
 import android.os.Build;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dudutech.biu.R;
+import com.dudutech.biu.Utils.DeviceUtil;
 import com.dudutech.biu.Utils.SystemBarUtils;
 import com.dudutech.biu.adapter.common.BaseMultipleItemAdapter;
 import com.dudutech.biu.model.BaseListModel;
@@ -40,6 +43,9 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
 
     protected LOADING_STATUS mBottomStatus;
 
+    protected boolean  avartarHd ;
+    protected int  picQuantity ;
+    protected DeviceUtil.NetWorkType netWorkType;
 
 
     public  BaseTimelinAdapter(Context context ,T t){
@@ -47,6 +53,8 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
         mListModel=t;
         mLayoutInflater = LayoutInflater.from(context);
         mBottomStatus= NORMAL;
+        getSetting(context);
+
     }
 
     @Override
@@ -134,6 +142,25 @@ public abstract class BaseTimelinAdapter< T extends BaseListModel> extends BaseM
     @Override
     public int getContentItemViewType(int position) {
         return ITEM_TYPE.values().length+1;
+    }
+
+    public void notifyDataSetChangedAfeterReadSetting(){
+        getSetting(mContext);
+        this.notifyDataSetChanged();
+
+    }
+
+    private void getSetting(Context context){
+        avartarHd= PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getBoolean("avatar_hd", false);
+        String strPicQuantity= PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getString("pic_quantity", "");
+//        ListPreference listPreference = (ListPreference) preference;
+//        int index = listPreference.findIndexOfValue(stringValue);
+        picQuantity=Integer.parseInt(strPicQuantity);
+        netWorkType = DeviceUtil.getNetworkType(mContext);
     }
 
 

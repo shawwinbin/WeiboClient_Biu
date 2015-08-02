@@ -80,7 +80,7 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
             commentViewHolder.tv_time_source.setText(mTimeUtils.buildTimeString(commentModel.created_at) + " | " + source);
             commentViewHolder.tv_username.setText(commentModel.user.getName());
 
-            String url = commentModel.user.avatar_large;
+            String url = avartarHd?commentModel.user.avatar_large:commentModel.user.profile_image_url;
             if (!url.equals(commentViewHolder.iv_avatar.getTag())) {
                 commentViewHolder.iv_avatar.setTag(url);
                 ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.getAvatarOptions(commentModel.user.getName().substring(0,1)));

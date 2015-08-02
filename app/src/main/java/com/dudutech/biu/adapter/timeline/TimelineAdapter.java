@@ -58,7 +58,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     private float imageMaxWidth;
     private float repostImageMaxWidth;
     float avatarSize;
-    private DeviceUtil.NetWorkType netWorkType;
+
     public OnClickListener mListenner;
 
     public TimelineAdapter(Context context, MessageListModel messageListModel) {
@@ -71,7 +71,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         imageMaxWidth = metrics.widthPixels - 4 * padding - avatarSize;
         float smallPadding = context.getResources().getDimension(R.dimen.SmallPadding);
         repostImageMaxWidth = imageMaxWidth - 2 * smallPadding;
-        netWorkType = DeviceUtil.getNetworkType(mContext);
+
     }
 
     @Override
@@ -176,7 +176,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.tv_content.setText(msg.span);
         holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.getName());
-        String url = msg.user.avatar_large;
+        String url = avartarHd?msg.user.avatar_large:msg.user.profile_image_url;
 
         if (!url.equals(holder.iv_avatar.getTag())) {
             holder.iv_avatar.setTag(url);
@@ -199,7 +199,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.btn_more.setVisibility(View.VISIBLE);
         holder.btn_more.setOnClickListener(this);
         holder.btn_more.setTag(position);
-
         setLikeBtn(holder.iv_like,holder.tv_like_count,position);
         String source = TextUtils.isEmpty(msg.source) ? "" : Utility.dealSourceString(msg.source);
         holder.tv_time_source.setText(mTimeUtils.buildTimeString(msg.created_at) + " | " + source);
@@ -283,7 +282,12 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                     break;
                 }
                 final MessageModel.PictureUrl pictureUrl = medias.get(i);
+
                 String imgUrl = pictureUrl.getThumbnail();
+                if (netWorkType == DeviceUtil.NetWorkType.wifi && !pictureUrl.isGif()&&picQuantity==2) {
+                    imgUrl = pictureUrl.getMedium();
+                }
+
                 TagImageVIew imageView = holder.listImageView.get(i);
                 imageView.setMinimumHeight(smallSize);
                 imageView.setMinimumWidth(smallSize);
@@ -293,7 +297,12 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                 PicSize picSize = null;
                 switch (count) {
                     case 1:
-                        imgUrl = pictureUrl.getMedium();
+                        if(picQuantity!=0) {
+                            imgUrl = pictureUrl.getMedium();
+                        }
+                        else{
+                            imgUrl = pictureUrl.getThumbnail();
+                        }
 
                         picSize = MyApplication.picSizeCache.get(imgUrl);
                         if (picSize != null) {
@@ -347,9 +356,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
 
                 final int index = i;
 
-                if (netWorkType == DeviceUtil.NetWorkType.wifi && !pictureUrl.isGif()) {
-                    imgUrl = pictureUrl.getMedium();
-                }
+
 
 
                 imageView.setOnClickListener(new View.OnClickListener() {

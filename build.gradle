@@ -18,7 +18,8 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
-//        jcenter()
+        jcenter()
+//        maven { url "https://raw.githubusercontent.com/umeng/mvn-repo-umeng/master/repository" }
 
     }
 }

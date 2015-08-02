@@ -31,6 +31,7 @@ import com.dudutech.biu.dao.user.UserDao;
 import com.dudutech.biu.model.UserModel;
 import com.dudutech.biu.ui.comments.CommentMeFragment;
 import com.dudutech.biu.ui.common.BaseActivity;
+import com.dudutech.biu.ui.login.WebLoginActivity;
 import com.dudutech.biu.ui.post.NewPostActivity;
 import com.dudutech.biu.ui.setting.SettingsActivity;
 import com.dudutech.biu.ui.setting.SettingsActivity2;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity implements
 	public final static  String FRG_TAG_COMMENT = FRG_TAG_PRE_SUFIX+"comment";
 	public final static  String FRG_TAG_FAVO = FRG_TAG_PRE_SUFIX+"favo";
 	public   String mCurrentPositon = "";
-
+	public static final int SETTING = 1;
 
 	@Override
 	public void onClick(View v) {
@@ -271,7 +272,8 @@ public class MainActivity extends BaseActivity implements
 		int id = item.getItemId();
 		switch (id ){
 			case R.id.action_settings :
-				startActivity(new Intent(this, SettingsActivity2.class));
+				Intent intent=new Intent(this, SettingsActivity2.class);
+				startActivityForResult(intent,SETTING);
 				return true;
 			case R.id.action_new_post :
 				NewPostActivity.start(this);
@@ -288,6 +290,8 @@ public class MainActivity extends BaseActivity implements
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
+
+
 
 
 
@@ -314,6 +318,29 @@ public class MainActivity extends BaseActivity implements
 			mDrawerToggle.onDrawerStateChanged(newState);
 		}
 	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+				case SETTING:
+					int opt = data.getIntExtra("opt", 0);
+					if(opt==SettingsActivity2.SETTING_LOG_OUT){
+						mLoginCache.logout();
+						Intent i = new Intent();
+						i.setAction(Intent.ACTION_MAIN);
+						i.setClass(this, WebLoginActivity.class);
+						startActivity(i);
+						finish();
+					}
+
+					break;
+			}
+		}
+}
 
 	private class ActionBarHelper {
 		private final ActionBar mActionBar;
