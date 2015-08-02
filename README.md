@@ -3,6 +3,7 @@
 由于新浪微博已经不再接受新的第三方客户端申请，因此Biu使用“黑魔法”的方式登录微博。<br>
 app 采用了weico的APP key。遵循material design 原则.<br>
 [内测版下载](http://pan.baidu.com/s/1pJ7RUr)
+-------
 界面
 -------
 ![](https://raw.githubusercontent.com/shawwinbin/WeiboClient_Biu/master/sreenshots/drawer.png)
