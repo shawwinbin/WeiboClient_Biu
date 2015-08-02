@@ -14,16 +14,16 @@
 感谢
 -------
 优秀的第三方开源库<br>
-    compile 'com.marshalchen.ultimaterecyclerview:library:0.3.4'<br>
-    compile 'com.jakewharton:butterknife:6.1.0'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'<br>
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'<br>
-    compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'<br>
-    compile 'com.getbase:floatingactionbutton:1.10.0'<br>
+     [butterknife](https://github.com/JakeWharton/butterknife)  view注解<br>
+     [universalimageloader](https://github.com/nostra13/Android-Universal-Image-Loader) 图片下载缓存管理<br>
+     [android-gif-drawable](https://github.com/koral--/android-gif-drawable) GIF图<br>
+     [observablescrollview](https://github.com/ksoichiro/Android-ObservableScrollView)<br>
+     [PhotoView](https://github.com/chrisbanes/PhotoView)<br>
+
   
 第三方开源微博客户端<br>
-四次元(qii)<br>
-BlackLight(PeterCxy)<br>
+[四次元](https://github.com/shawnlinboy/siciyuan)(@qii)<br>
+[BlackLight](https://github.com/PaperAirplane-Dev-Team/BlackLight)(@PeterCxy)<br>
 
 另
 -------
