@@ -13,6 +13,8 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.UserListModel;
 import com.dudutech.biu.model.UserModel;
+import com.dudutech.biu.ui.timeline.StatusDetailActivity;
+import com.dudutech.biu.ui.timeline.UserHomeActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -46,8 +48,9 @@ public class UserAdapter extends BaseTimelinAdapter<UserListModel> {
             String url = user.avatar_large;
             if (!url.equals(vh.iv_avatar.getTag())) {
                 vh.iv_avatar.setTag(url);
-                ImageLoader.getInstance().displayImage(url, vh.iv_avatar, Constants.avatarOptions);
+                ImageLoader.getInstance().displayImage(url, vh.iv_avatar,Constants.getAvatarOptions(user.name.substring(0, 1)));
             }
+
             vh.tv_username.setText(user.getName());
             vh.tv_dest.setText(!TextUtils.isEmpty(user.verified_reason)?user.verified_reason:user.description);
         }

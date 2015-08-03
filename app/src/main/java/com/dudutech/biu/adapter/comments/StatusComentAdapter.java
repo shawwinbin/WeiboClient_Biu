@@ -12,7 +12,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.CommentListModel;
 import com.dudutech.biu.model.CommentModel;
+import com.dudutech.biu.ui.timeline.UserHomeActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -34,7 +34,7 @@ import butterknife.InjectView;
 /**
  * Created by shaw on 2015/7/11.
  */
-public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
+public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> implements View.OnClickListener{
 
     private StatusTimeUtils mTimeUtils;
     private View mHeadView;
@@ -70,7 +70,9 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
         if(holder instanceof  CommentViewHolder) {
 
 
-            CommentModel commentModel = mListModel.getList().get(position-mHeaderCount);
+            int realPostion=position-mHeaderCount;
+
+            CommentModel commentModel = mListModel.getList().get(realPostion);
 
             CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
 
@@ -85,6 +87,9 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
                 commentViewHolder.iv_avatar.setTag(url);
                 ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.getAvatarOptions(commentModel.user.getName().substring(0,1)));
         }
+            commentViewHolder.iv_avatar.setTag(realPostion);
+            commentViewHolder.iv_avatar.setOnClickListener(this);
+
         }
 
     }
@@ -93,6 +98,19 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> {
     public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
 
         return  new HeaderViewHolder(mHeadView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        int postion = (int) v.getTag();
+        CommentModel msg = mListModel.get(postion);
+        switch (viewId) {
+            case R.id.iv_avatar:
+                UserHomeActivity.start(mContext, msg.user);
+                break;
+
+        }
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {

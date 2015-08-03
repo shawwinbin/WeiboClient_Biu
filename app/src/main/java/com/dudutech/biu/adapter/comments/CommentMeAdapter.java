@@ -24,6 +24,8 @@ import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.CommentListModel;
 import com.dudutech.biu.model.CommentModel;
+import com.dudutech.biu.ui.timeline.StatusDetailActivity;
+import com.dudutech.biu.ui.timeline.UserHomeActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -32,7 +34,7 @@ import butterknife.InjectView;
 /**
  * Created by Administrator on 2015-7-16.
  */
-public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
+public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> implements View.OnClickListener {
     private StatusTimeUtils mTimeUtils;
 
 
@@ -71,8 +73,10 @@ public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
 
             if (!url.equals(commentViewHolder.iv_avatar.getTag())) {
                 commentViewHolder.iv_avatar.setTag(url);
-                ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.avatarOptions);
+                ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar,  Constants.getAvatarOptions(commentModel.user.name.substring(0, 1)));
             }
+            commentViewHolder.iv_avatar.setTag(position);
+            commentViewHolder.iv_avatar.setOnClickListener(this);
             String statusImgUrl= commentModel.status.thumbnail_pic;
             if(TextUtils.isEmpty(statusImgUrl)&&commentModel.status.retweeted_status!=null){
                 statusImgUrl=commentModel.status.retweeted_status.thumbnail_pic;
@@ -86,11 +90,26 @@ public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
             }
             commentViewHolder.tv_status_author.setText(commentModel.status.user.getName());
             commentViewHolder.tv_status_content.setText(commentModel.status.text);
+            commentViewHolder.status_source.setTag(position);
+            commentViewHolder.status_source.setOnClickListener(this);
         }
 
     }
 
-
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        int postion = (int) v.getTag();
+        CommentModel msg = mListModel.get(postion);
+        switch (viewId) {
+            case R.id.iv_avatar:
+                UserHomeActivity.start(mContext, msg.user);
+                break;
+            case R.id.status_source:
+                StatusDetailActivity.start(mContext, msg.status);
+                break;
+        }
+    }
 
 
     public class CommentMeViewHolder extends RecyclerView.ViewHolder {
@@ -108,6 +127,8 @@ public class CommentMeAdapter  extends BaseTimelinAdapter<CommentListModel> {
         public TextView tv_status_author;
         @InjectView(R.id.tv_status_content)
         public TextView tv_status_content;
+        @InjectView(R.id.status_source)
+        View status_source;
 
         public CommentMeViewHolder(View itemView, Context context) {
             super(itemView);

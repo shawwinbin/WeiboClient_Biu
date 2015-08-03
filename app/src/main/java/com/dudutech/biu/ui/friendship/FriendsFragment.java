@@ -1,7 +1,5 @@
 package com.dudutech.biu.ui.friendship;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -68,7 +66,7 @@ public class FriendsFragment extends AbUserListFragment implements UserAdapter.O
 
     @Override
     public void onTtemClick(View view, int position) {
-        UserHomeActivity.startUserHomeActivity(getActivity(), (UserModel) mDao.getList().get(position));
+        UserHomeActivity.start(getActivity(), (UserModel) mDao.getList().get(position));
     }
 
 }

@@ -20,30 +20,23 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.DeviceUtil;
@@ -54,7 +47,6 @@ import com.dudutech.biu.adapter.comments.StatusComentAdapter;
 import com.dudutech.biu.dao.favo.FavoDao;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.global.MyApplication;
-import com.dudutech.biu.model.FavoModel;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.model.PicSize;
 import com.dudutech.biu.ui.comments.StatusCommentFragment;
@@ -64,11 +56,8 @@ import com.dudutech.biu.ui.picture.PicsActivity;
 import com.dudutech.biu.ui.post.PostNewCommentActivity;
 import com.dudutech.biu.ui.post.PostNewRepostActivity;
 import com.dudutech.biu.widget.FlowLayout;
-import com.dudutech.biu.widget.SlidingTabLayout;
 import com.dudutech.biu.widget.TagImageVIew;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
 
@@ -356,14 +345,14 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
 
         if (!url.equals(iv_avatar.getTag())) {
             iv_avatar.setTag(url);
-            ImageLoader.getInstance().displayImage(url, iv_avatar, Constants.avatarOptions);
+            ImageLoader.getInstance().displayImage(url, iv_avatar, Constants.getAvatarOptions(mWeibo.user.getName().substring(0, 1)));
         }
 
         iv_avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                UserHomeActivity.startUserHomeActivity(StatusDetailActivity.this
+                UserHomeActivity.start(StatusDetailActivity.this
                         , mWeibo.user);
             }
         });

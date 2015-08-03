@@ -15,7 +15,6 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dudutech.biu.R;
@@ -41,8 +40,6 @@ import com.dudutech.biu.widget.TagImageVIew;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +85,9 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
                 break;
             case R.id.ll_repost:
                 PostNewRepostActivity.start(mContext, msg);
+                break;
+            case    R.id.iv_avatar:
+                UserHomeActivity.start(mContext, msg.user);
                 break;
 
             case R.id.btn_more:
@@ -195,10 +195,11 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         holder.iv_avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserHomeActivity.startUserHomeActivity(mContext, msg.user);
+
             }
         });
-
+        holder.iv_avatar.setTag(position);
+        holder.iv_avatar.setOnClickListener(this);
         holder.ll_comment.setOnClickListener(this);
         holder.ll_comment.setTag(position);
         holder.ll_repost.setOnClickListener(this);

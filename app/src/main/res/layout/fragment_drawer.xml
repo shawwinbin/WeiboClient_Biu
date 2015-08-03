@@ -69,7 +69,7 @@
 			<ImageView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:src="@mipmap/ic_dashboard"
+				android:src="@mipmap/ic_editor_at"
 				android:layout_gravity="center_vertical"
 				android:tint="?attr/MenuIconTint"
 				/>

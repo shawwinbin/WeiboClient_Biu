@@ -1,7 +1,5 @@
 package com.dudutech.biu.ui.friendship;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,7 +7,6 @@ import com.dudutech.biu.adapter.friends.UserAdapter;
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.dao.relationship.AbUserListDao;
 import com.dudutech.biu.dao.relationship.FollowerListDao;
-import com.dudutech.biu.dao.relationship.FriendListDao;
 import com.dudutech.biu.model.UserListModel;
 import com.dudutech.biu.model.UserModel;
 import com.dudutech.biu.ui.timeline.UserHomeActivity;
@@ -69,6 +66,6 @@ public class FollowersFragment extends AbUserListFragment implements UserAdapter
 
     @Override
     public void onTtemClick(View view, int position) {
-        UserHomeActivity.startUserHomeActivity(getActivity(),(UserModel)mDao.getList().get(position));
+        UserHomeActivity.start(getActivity(), (UserModel) mDao.getList().get(position));
     }
 }

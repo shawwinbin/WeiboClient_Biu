@@ -124,7 +124,7 @@ public class WeiboSpan extends ClickableSpan {
 
 			if (usr != null && usr.id != null & !usr.id.trim().equals("")) {
 
-				UserHomeActivity.startUserHomeActivity(context, usr);
+				UserHomeActivity.start(context, usr);
 			}
 		}
 	}

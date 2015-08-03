@@ -23,6 +23,7 @@ import com.dudutech.biu.Utils.Utility;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.model.RepostListModel;
+import com.dudutech.biu.ui.timeline.UserHomeActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ import butterknife.InjectView;
 /**
  * Created by shaw on 2015/7/11.
  */
-public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
+public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> implements View.OnClickListener {
 
     private StatusTimeUtils mTimeUtils;
     private View mHeadView;
@@ -63,7 +64,18 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        int postion = (int) v.getTag();
+        MessageModel msg = mListModel.get(postion);
+        switch (viewId) {
+            case R.id.iv_avatar:
+                UserHomeActivity.start(mContext, msg.user);
+                break;
 
+        }
+    }
 
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -88,8 +100,8 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
         super.onBindViewHolder(holder,position);
         if(holder instanceof  CommentViewHolder) {
 
-
-            MessageModel commentModel = mListModel.getList().get(position-mHeaderCount);
+            int realPostion=position-mHeaderCount;
+            MessageModel commentModel = mListModel.getList().get(realPostion);
 
             CommentViewHolder commentViewHolder = (CommentViewHolder) holder;
 
@@ -106,6 +118,9 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> {
                 commentViewHolder.iv_avatar.setTag(url);
                 ImageLoader.getInstance().displayImage(url, commentViewHolder.iv_avatar, Constants.getAvatarOptions(commentModel.user.getName().substring(0,1)));
             }
+            commentViewHolder.iv_avatar.setTag(realPostion);
+            commentViewHolder.iv_avatar.setOnClickListener(this);
+
         }
 
     }

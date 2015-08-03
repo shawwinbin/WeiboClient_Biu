@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.View;
 
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.timeline.TimelineAdapter;
@@ -27,7 +28,7 @@ import com.dudutech.biu.model.MessageListModel;
  * Use the {@link StatusMentionMeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatusMentionMeFragment extends AbsTimeLineFragment {
+public class StatusMentionMeFragment extends AbsTimeLineFragment  implements TimelineAdapter.OnClickListener  {
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -95,6 +96,10 @@ public class StatusMentionMeFragment extends AbsTimeLineFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+    @Override
+    public void onTtemClick(View view, int position) {
+        StatusDetailActivity.start(getActivity(), ((MessageListModel) mDao.getList()).get(position));
     }
 
 }

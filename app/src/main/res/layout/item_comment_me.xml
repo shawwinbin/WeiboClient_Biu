@@ -30,10 +30,12 @@
             android:background="@drawable/lst_default_null_item_selector"
             android:lineSpacingMultiplier="1.2"
            />
-              <RelativeLayout
+        <RelativeLayout
+            android:id="@+id/status_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bg_fade"
+            android:padding="3dp"
             android:layout_marginTop="10dp"
             >
             <ImageView

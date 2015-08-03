@@ -45,7 +45,7 @@ public class UserHomeActivity extends BaseActivity implements AppBarLayout.OnOff
     private UserModel mUser;
 
 
-    public static void startUserHomeActivity(Context context, UserModel userModel) {
+    public static void start(Context context, UserModel userModel) {
 
         Intent intent = new Intent(context, UserHomeActivity.class);
         intent.putExtra(ETA_USER, userModel);
