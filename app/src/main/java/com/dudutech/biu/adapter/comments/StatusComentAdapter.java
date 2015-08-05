@@ -150,7 +150,6 @@ public class StatusComentAdapter extends BaseTimelinAdapter<CommentListModel> im
                   return mHeaderViewTouchListener.onTouch(event);
 
 
-
                }
            });
         }

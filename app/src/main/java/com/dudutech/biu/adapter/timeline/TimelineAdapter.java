@@ -37,6 +37,7 @@ import com.dudutech.biu.ui.common.StatusContextMenu;
 import com.dudutech.biu.ui.common.StatusContextMenuManager;
 import com.dudutech.biu.widget.FlowLayout;
 import com.dudutech.biu.widget.TagImageVIew;
+import com.dudutech.biu.widget.TextViewFixTouchConsume;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -93,7 +94,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
             case R.id.btn_more:
                 StatusContextMenuManager.getInstance().toggleContextMenuFromView(v, postion, this);
                 break;
-            case R.id.tv_orignal_content:
+//            case R.id.tv_orignal_content:
             case R.id.rl_repost:
                 StatusDetailActivity.start(mContext, mListModel.get(postion).retweeted_status);
                 break;
@@ -183,7 +184,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         resetViewHolder(holder);
         final MessageModel msg = mListModel.get(position);
         holder.tv_content.setText(msg.span);
-        holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.tv_content.setMovementMethod(TextViewFixTouchConsume.LocalLinkMovementMethod.getInstance());
         holder.tv_username.setText(msg.user.getName());
         String url = avartarHd?msg.user.avatar_large:msg.user.profile_image_url;
 
@@ -192,12 +193,6 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
             ImageLoader.getInstance().displayImage(url, holder.iv_avatar, Constants.getAvatarOptions(msg.user.name.substring(0, 1)));
         }
 
-        holder.iv_avatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         holder.iv_avatar.setTag(position);
         holder.iv_avatar.setOnClickListener(this);
         holder.ll_comment.setOnClickListener(this);
@@ -232,10 +227,9 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         onBindBaseWeiboViewHolder(holder, position);
         MessageModel msg = mListModel.getList().get(position).retweeted_status;
         holder.tv_orignal_content.setText(msg.origSpan);
-        holder.tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.tv_orignal_content.setMovementMethod(TextViewFixTouchConsume.LocalLinkMovementMethod.getInstance());
         holder.rl_repost.setTag(position);
         holder.tv_orignal_content.setTag(position);
-        holder.tv_orignal_content.setOnClickListener(this);
         holder.rl_repost.setOnClickListener(this);
     }
 
@@ -456,7 +450,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
         @InjectView(R.id.tv_username)
         public TextView tv_username;
         @InjectView(R.id.tv_content)
-        public TextView tv_content;
+        public TextViewFixTouchConsume tv_content;
 
         @InjectView(R.id.ll_comment)
         public LinearLayout ll_comment;
@@ -514,7 +508,7 @@ public class TimelineAdapter extends BaseTimelinAdapter<MessageListModel> implem
     public class RepostWeiboViewHolder extends BaseWeiboViewHolder {
 
         @InjectView(R.id.tv_orignal_content)
-        public TextView tv_orignal_content;
+        public TextViewFixTouchConsume tv_orignal_content;
         @InjectView(R.id.rl_repost)
         public View  rl_repost;
 

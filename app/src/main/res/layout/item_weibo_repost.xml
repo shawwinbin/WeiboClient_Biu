@@ -18,7 +18,7 @@
         android:layout_marginLeft="50dp"
         android:orientation="vertical">
 
-        <TextView
+        <com.dudutech.biu.widget.TextViewFixTouchConsume
             android:id="@+id/tv_content"
             style="@style/txt_main_content"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:paddingTop="@dimen/SmallPadding"
             android:paddingBottom="@dimen/SmallPadding"
             >
-            <TextView
+            <com.dudutech.biu.widget.TextViewFixTouchConsume
                 android:id="@+id/tv_orignal_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

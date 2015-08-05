@@ -35,9 +35,8 @@ public class TextViewFixTouchConsume extends TextView {
 	    linkHit = false;
 	    boolean res = super.onTouchEvent(event);
 
-//	    if (dontConsumeNonUrlClicks)
-//	    	
-//	        return linkHit;
+	    if (dontConsumeNonUrlClicks)
+	        return linkHit;
 	    return res;
 
 	}

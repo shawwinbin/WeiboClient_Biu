@@ -11,6 +11,7 @@ package com.dudutech.biu.ui.timeline;
 import android.os.Bundle;
 import android.view.View;
 
+import com.dudutech.biu.adapter.comments.StatusComentAdapter;
 import com.dudutech.biu.adapter.timeline.BaseTimelinAdapter;
 import com.dudutech.biu.adapter.timeline.StatusRepostAdapter;
 import com.dudutech.biu.dao.timeline.ITimelineBaseDao;
@@ -57,6 +58,7 @@ public class StatusRepostFragment extends ViewPagerTabRecyclerViewFragment {
     @Override
     protected BaseTimelinAdapter bindListAdapter(View headView) {
         StatusRepostAdapter adapter=new StatusRepostAdapter(getActivity(),(RepostListModel) mDao.getList(),headView);
+        adapter.setHeaderViewTouchListener((StatusComentAdapter.HeaderViewTouchListener) getActivity());
         adapter.setBottomCount(1);
         return adapter;
     }

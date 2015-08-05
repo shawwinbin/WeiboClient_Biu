@@ -57,6 +57,7 @@ import com.dudutech.biu.ui.post.PostNewCommentActivity;
 import com.dudutech.biu.ui.post.PostNewRepostActivity;
 import com.dudutech.biu.widget.FlowLayout;
 import com.dudutech.biu.widget.TagImageVIew;
+import com.dudutech.biu.widget.TextViewFixTouchConsume;
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.github.ksoichiro.android.observablescrollview.Scrollable;
@@ -88,7 +89,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     @InjectView(R.id.tv_username)
     public TextView tv_username;
     @InjectView(R.id.tv_content)
-    public TextView tv_content;
+    public TextViewFixTouchConsume tv_content;
     @InjectView(R.id.ll_like)
     public LinearLayout ll_like;
     @InjectView(R.id.fl_images)
@@ -118,7 +119,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     TabLayout mSlidingTabLayout;
 
     @InjectView(R.id.tv_orignal_content)
-    public TextView tv_orignal_content;
+    public TextViewFixTouchConsume tv_orignal_content;
 
     private NavigationAdapter mPagerAdapter;
     public MessageModel mWeibo;
@@ -339,7 +340,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     private void initWeibo() {
 
         tv_content.setText(mWeibo.span);
-        tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+        tv_content.setMovementMethod(TextViewFixTouchConsume.LocalLinkMovementMethod.getInstance());
         tv_username.setText(mWeibo.user.name);
         String url = mWeibo.user.avatar_large;
 
@@ -375,10 +376,10 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
             fl_images.setVisibility(View.GONE);
             mWeibo.origSpan=SpannableStringUtils.getOrigSpan(this,mWeibo.retweeted_status,true);
             tv_orignal_content .setText(mWeibo.origSpan);
-            tv_orignal_content.setMovementMethod(LinkMovementMethod.getInstance());
+            tv_orignal_content.setMovementMethod(TextViewFixTouchConsume.LocalLinkMovementMethod.getInstance());
             dealImageLayout(fl_images_repost, imageMaxWidth, mWeibo.retweeted_status);
             rl_repost.setOnClickListener(this);
-            tv_orignal_content.setOnClickListener(this);
+
         }
 
     }
@@ -405,9 +406,7 @@ public class StatusDetailActivity extends BaseActivity implements ViewPagerTabRe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.rl_repost:
-            case R.id.tv_orignal_content:
                 StatusDetailActivity.start(this,mWeibo.retweeted_status);
-
                 break;
 
         }

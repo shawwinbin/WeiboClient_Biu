@@ -12,6 +12,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.dudutech.biu.R;
 import com.dudutech.biu.Utils.StatusTimeUtils;
 import com.dudutech.biu.Utils.Utility;
+import com.dudutech.biu.adapter.comments.StatusComentAdapter;
 import com.dudutech.biu.global.Constants;
 import com.dudutech.biu.model.MessageModel;
 import com.dudutech.biu.model.RepostListModel;
@@ -36,6 +38,7 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> imp
 
     private StatusTimeUtils mTimeUtils;
     private View mHeadView;
+    public StatusComentAdapter.HeaderViewTouchListener mHeaderViewTouchListener;
     public StatusRepostAdapter(Context context, RepostListModel listModel,View headView) {
         super(context, listModel);
         mTimeUtils = StatusTimeUtils.instance(context);
@@ -78,9 +81,18 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> imp
     }
 
 
-    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+     class HeaderViewHolder extends RecyclerView.ViewHolder {
         public HeaderViewHolder(View view) {
             super(view);
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    return mHeaderViewTouchListener.onTouch(event);
+
+
+                }
+            });
         }
     }
 
@@ -147,19 +159,15 @@ public class StatusRepostAdapter extends BaseTimelinAdapter<RepostListModel> imp
         public CommentViewHolder(View itemView, Context context) {
             super(itemView);
             ButterKnife.inject(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    if (mListenner != null) {
-//
-//                        mListenner.onTtemClick(v, getAdapterPosition());
-//                    }
-                }
-            });
+
+
+
 
 
         }
-
-
     }
+    public void setHeaderViewTouchListener(StatusComentAdapter.HeaderViewTouchListener listener){
+        mHeaderViewTouchListener=listener;
+    }
+
 }

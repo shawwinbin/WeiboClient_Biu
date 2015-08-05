@@ -37,8 +37,6 @@ public abstract class BaseTimelineDao< T extends BaseListModel> implements ITime
     public void loadFromCache() {
         Cursor cursor = query();
 
-
-
         if (cursor.getCount() == 1) {
             cursor.moveToFirst();
             mListModel = (T) new Gson().fromJson(cursor.getString(cursor.getColumnIndex(HomeTimeLineTable.JSON)),getListClass());
