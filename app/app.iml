@@ -104,7 +104,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.marshalchen.ultimaterecyclerview/library/0.3.4/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.timehop.stickyheadersrecyclerview/library/0.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/in.srain.cube/ultra-ptr/1.0.9/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/pl.droidsonroids.gif/android-gif-drawable/1.1.8/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/pl.droidsonroids.gif/android-gif-drawable/1.1.7/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -156,7 +156,7 @@
     <orderEntry type="library" exported="" name="play-services-nearby-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="android-gif-drawable-1.1.8" level="project" />
+    <orderEntry type="library" exported="" name="android-gif-drawable-1.1.7" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="library-0.4.0" level="project" />
     <orderEntry type="library" exported="" name="floatingactionbutton-1.10.0" level="project" />
