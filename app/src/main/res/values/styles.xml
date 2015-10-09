@@ -43,7 +43,6 @@
 
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/txt_remark</item>
-
     </style>
     <style name="AppTheme" parent="AppBaseTheme">
 

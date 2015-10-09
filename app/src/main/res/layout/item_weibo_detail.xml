@@ -68,7 +68,7 @@
 
         android:orientation="vertical">
 
-        <com.dudutech.biu.widget.TextViewFixTouchConsume
+        <com.shaweibo.biu.widget.TextViewFixTouchConsume
             android:id="@+id/tv_content"
             style="@style/txt_main_content_white"
             android:layout_width="match_parent"
@@ -77,7 +77,7 @@
             android:paddingTop="@dimen/SmallMargin" />
 
 
-        <com.dudutech.biu.widget.FlowLayout
+        <com.shaweibo.biu.widget.FlowLayout
             android:id="@+id/fl_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             app:orientation="horizontal"
             app:verticalSpacing="@dimen/moment_photo_margin">
 
-        </com.dudutech.biu.widget.FlowLayout>
+        </com.shaweibo.biu.widget.FlowLayout>
 
 
 
@@ -106,7 +106,7 @@
                 android:layout_marginTop="@dimen/SmallMargin"
                 />
 
-            <com.dudutech.biu.widget.TextViewFixTouchConsume
+            <com.shaweibo.biu.widget.TextViewFixTouchConsume
                 android:id="@+id/tv_orignal_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:layout_marginTop="@dimen/SmallMargin"
                 />
 
-            <com.dudutech.biu.widget.FlowLayout
+            <com.shaweibo.biu.widget.FlowLayout
                 android:id="@+id/fl_images_repost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
 
                 >
 
-            </com.dudutech.biu.widget.FlowLayout>
+            </com.shaweibo.biu.widget.FlowLayout>
 
 
 

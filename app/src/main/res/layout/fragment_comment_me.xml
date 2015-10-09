@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dudutech.biu.ui.timeline.MentionMeFragment">
+    tools:context="com.shaweibo.biu.ui.timeline.MentionMeFragment">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"

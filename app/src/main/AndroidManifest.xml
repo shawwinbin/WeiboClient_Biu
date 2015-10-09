@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dudutech.biu" >
+    package="com.shaweibo.biu" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
-        android:name=".global.MyApplication"
+        android:name="com.shaweibo.biu.global.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.shaweibo.biu.ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Main" >
         </activity>
         <activity
-            android:name=".ui.login.WebLoginActivity"
+            android:name="com.shaweibo.biu.ui.login.WebLoginActivity"
             android:label="@string/black_magic_login"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
-        <activity android:name=".ui.picture.PicsActivity"
+        <activity android:name="com.shaweibo.biu.ui.picture.PicsActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             >
         </activity>
 
         <meta-data android:value="55bb13be67e58ea16c0013d1" android:name="UMENG_APPKEY" ></meta-data>
-        <meta-data android:value= "aphatest" android:name= "UMENG_CHANNEL" />
         <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
 
 
 
-        <activity android:name=".ui.login.LoadingActivity" >
+
+        <activity android:name="com.shaweibo.biu.ui.login.LoadingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,33 +45,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.timeline.UserHomeActivity"
+            android:name="com.shaweibo.biu.ui.timeline.UserHomeActivity"
             android:theme="@style/UserHome" >
         </activity>
         <activity
-            android:name=".ui.post.NewPostActivity"
+            android:name="com.shaweibo.biu.ui.post.NewPostActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".ui.post.PostNewCommentActivity"
+            android:name="com.shaweibo.biu.ui.post.PostNewCommentActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".ui.post.PostNewRepostActivity"
+            android:name="com.shaweibo.biu.ui.post.PostNewRepostActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        <activity android:name=".ui.friendship.FriendsAtActivity" >
+        <activity android:name="com.shaweibo.biu.ui.friendship.FriendsAtActivity" >
         </activity>
         <activity
-            android:name=".ui.friendship.FriendActivity"
+            android:name="com.shaweibo.biu.ui.friendship.FriendActivity"
             android:label="@string/title_activity_friend" >
         </activity>
         <activity
-            android:name=".ui.timeline.StatusDetailActivity"
+            android:name="com.shaweibo.biu.ui.timeline.StatusDetailActivity"
             android:label="@string/title_weibo_detail" >
         </activity>
         <activity
-            android:name=".ui.setting.SettingsActivity"
+            android:name="com.shaweibo.biu.ui.setting.SettingsActivity"
             android:label="@string/title_activity_setting" >
         </activity>
     </application>

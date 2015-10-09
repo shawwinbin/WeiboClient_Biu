@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_context_menu"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
     android:paddingBottom="20dp"
     android:paddingLeft="@dimen/MiddlePadding"
     android:paddingRight="@dimen/MiddlePadding"
-    android:paddingTop="14dp">
+    android:paddingTop="14dp"
 
+    >
 
 
     <include layout="@layout/lst_user_headview"></include>
@@ -20,7 +22,7 @@
         android:layout_marginLeft="50dp"
         android:orientation="vertical">
 
-        <com.dudutech.biu.widget.TextViewFixTouchConsume
+        <com.shaweibo.biu.widget.TextViewFixTouchConsume
             android:id="@+id/tv_content"
             style="@style/txt_main_content"
             android:layout_width="match_parent"
@@ -31,7 +33,7 @@
             />
 
 
-        <com.dudutech.biu.widget.FlowLayout
+        <com.shaweibo.biu.widget.FlowLayout
             android:id="@+id/fl_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,8 +42,7 @@
             app:orientation="horizontal"
             app:verticalSpacing="@dimen/moment_photo_margin">
 
-        </com.dudutech.biu.widget.FlowLayout>
-
+        </com.shaweibo.biu.widget.FlowLayout>
 
 
         <RelativeLayout

@@ -4,12 +4,13 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+
     defaultConfig {
-        applicationId "com.dudutech.weibo"
+        applicationId "com.shaweibo.weibo"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1.1"
     }
     signingConfigs {
         debug {
@@ -31,10 +32,35 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs .debug
+//            signingConfig signingConfigs .debug
             signingConfig signingConfigs .release
-            proguardFiles getDefaultProguardFile ( 'proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "weibo_biu_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
+    }
+
+
+    // 友盟多渠道打包
+    productFlavors {
+        wandoujia {}
+
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
 }
@@ -52,7 +78,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
-    compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.4'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'

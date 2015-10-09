@@ -9,7 +9,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.dudutech.biu.ui.timeline.WeiboDetailActivity">
+    tools:context="com.shaweibo.biu.ui.timeline.WeiboDetailActivity">
     <item android:id="@+id/action_favo" android:title="@string/favo"
     android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_comment" android:title="@string/comment"
